@@ -1,6 +1,6 @@
 ﻿@page
 @model IndexModel
-@using VINES.Models
+@using VINES.Processes
 @{
     ViewData["Title"] = "Home page";
 }
@@ -9,8 +9,8 @@
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
     @{ 
-        UserModel user = new UserModel();
-        user.Test();
+        Process user = new Process();
+        user.getNews();
     }
 
 </div>
