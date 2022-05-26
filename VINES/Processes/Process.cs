@@ -27,10 +27,10 @@ namespace VINES.Processes
 
              */
 
-            GetHtmlAsync();
+            GetPNA();
             
         }
-        public static async void GetHtmlAsync()
+        public static async void GetPNA()
         {
             var url = "https://www.pna.gov.ph/articles/search?q=vaccine";
             var httpClient = new HttpClient();
