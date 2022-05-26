@@ -49,19 +49,19 @@ namespace VINES.Processes
             
             foreach(var article in articles)
             {
-                Debug.WriteLine(article.Descendants("h3")
+                var title = article.Descendants("h3")
                     .Where(node => node.GetAttributeValue("class", "")
-                    .Equals("media-heading")).FirstOrDefault().InnerText
-                    );
-                Debug.WriteLine(article.Descendants("p")
+                    .Equals("media-heading")).FirstOrDefault().InnerText;
+                var date = article.Descendants("p")
                     .Where(node => node.GetAttributeValue("class", "")
-                    .Equals("byline")).FirstOrDefault().InnerText
-                    );
-                Debug.WriteLine(article.Descendants("p")
+                    .Equals("byline")).FirstOrDefault().InnerText;
+                date = date.Trim();
+                var text = article.Descendants("p")
                     .Where(node => node.GetAttributeValue("class", "")
-                    .Equals("excerpt")).FirstOrDefault().InnerText
-                    );
-                Debug.WriteLine("\n");
+                    .Equals("excerpt")).FirstOrDefault().InnerText;
+                text = text.Replace("&ndash;", ":");
+
+                Debug.WriteLine(title+ "\n"+ date + "\n" + text + "\n");
             }
 
         }
