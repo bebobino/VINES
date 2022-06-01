@@ -11,6 +11,7 @@ namespace VINES.Processes
 {
     public class Process
     {
+
         public void getNews()
         {
             /*
@@ -49,19 +50,21 @@ namespace VINES.Processes
             
             foreach(var article in articles)
             {
-                var title = article.Descendants("h3")
-                    .Where(node => node.GetAttributeValue("class", "")
-                    .Equals("media-heading")).FirstOrDefault().InnerText;
-                var date = article.Descendants("p")
+                var uploadDate = article.Descendants("p")
                     .Where(node => node.GetAttributeValue("class", "")
                     .Equals("byline")).FirstOrDefault().InnerText;
-                date = date.Trim();
-                var text = article.Descendants("p")
+                uploadDate = uploadDate.Trim();
+
+                var pageTitle = article.Descendants("h3")
+                    .Where(node => node.GetAttributeValue("class", "")
+                    .Equals("media-heading")).FirstOrDefault().InnerText;
+                
+                var summary = article.Descendants("p")
                     .Where(node => node.GetAttributeValue("class", "")
                     .Equals("excerpt")).FirstOrDefault().InnerText;
-                text = text.Replace("&ndash;", ":");
+                summary = summary.Replace("&ndash;", ":");
 
-                Debug.WriteLine(title+ "\n"+ date + "\n" + text + "\n");
+                Debug.WriteLine(pageTitle + "\n"+ uploadDate + "\n" + summary + "\n");
             }
 
         }
