@@ -11,7 +11,7 @@ namespace VINES.Models
         public void Test()
         {
             //Test
-            Debug.Write("Testing lang lmfao");
+            Debug.Write("test push");
         }
     }
 }
