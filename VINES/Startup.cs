@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -8,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using VINES.Data;
 
 namespace VINES
 {
@@ -24,6 +26,14 @@ namespace VINES
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages();
+
+            services.AddAuthentication()
+                .AddGoogle(googleOptions =>
+                {
+                    googleOptions.ClientId = "593782616247-434jk70is2tbcmt66gfior3c8gkg5ktn.apps.googleusercontent.com";
+                    googleOptions.ClientSecret = "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";
+                });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -52,6 +62,7 @@ namespace VINES
             {
                 endpoints.MapRazorPages();
             });
+
         }
     }
 }
