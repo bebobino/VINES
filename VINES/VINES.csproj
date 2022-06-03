@@ -27,4 +27,6 @@
     <None Remove="Microsoft.AspNetCore.Authentication.Google" />
     <None Remove="Pomelo.EntityFrameworkCore.MySql" />
   </ItemGroup>
+
+  <ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JsonSchema="https://json.schemastore.org/asmdef.json" /></VisualStudio></ProjectExtensions>
 </Project>
