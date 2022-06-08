@@ -37,6 +37,13 @@ namespace VINES
                     googleOptions.ClientSecret = "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";
                 });
 
+            services.AddAuthentication()
+                .AddFacebook(facebookOptions =>
+                {
+                    facebookOptions.AppId = "373590274836054";
+                    facebookOptions.AppSecret = "5f5db72331e0b7308c7d3ae7d4c80428";
+                });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
