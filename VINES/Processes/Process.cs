@@ -3,7 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
+using System.Net.Mail;
 using System.Threading.Tasks;
 
 
@@ -82,6 +84,37 @@ namespace VINES.Processes
             }
              
             */
+        }
+
+        public void sendEmail()
+        {
+            var from = ""; //VINES Gmail
+            var password = ""; //VINES Gmail password 
+            var to = ""; //User email
+
+            using SmtpClient email = new SmtpClient
+            {
+                DeliveryMethod = SmtpDeliveryMethod.Network,
+                UseDefaultCredentials = false,
+                EnableSsl = true,
+                Host = "smtp.gmail.com",
+                Port = 587,
+                Credentials = new NetworkCredential(from, password)
+            };
+
+            string subject = ""; //email subject
+            string body = ""; //email body
+            try
+            {
+                Debug.WriteLine("sending email lol ***********");
+                email.Send(from, to, subject, body);
+                Debug.WriteLine("email sent lol ***********");
+            }
+            catch (SmtpException e)
+            {
+                Debug.WriteLine("email sending failed lmfao bobo ***********");
+            }
+
         }
     }
 }
