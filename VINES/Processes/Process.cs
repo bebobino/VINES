@@ -86,24 +86,21 @@ namespace VINES.Processes
             */
         }
 
-        public void sendEmail()
+        public void sendEmail(string to, string subject, string body)
         {
-            var from = ""; //VINES Gmail
-            var password = ""; //VINES Gmail password 
-            var to = ""; //User email
+            var from = "vinessystems@outlook.com"; //VINES email
+            var password = "v4Cc!n3$"; //VINES email password 
 
             using SmtpClient email = new SmtpClient
             {
                 DeliveryMethod = SmtpDeliveryMethod.Network,
                 UseDefaultCredentials = false,
                 EnableSsl = true,
-                Host = "smtp.gmail.com",
+                Host = "smtp-mail.outlook.com",
                 Port = 587,
                 Credentials = new NetworkCredential(from, password)
             };
 
-            string subject = ""; //email subject
-            string body = ""; //email body
             try
             {
                 Debug.WriteLine("sending email lol ***********");
