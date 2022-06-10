@@ -10,6 +10,12 @@ namespace VINES.Areas.Identity.Data
 {
     public class VINESUser : IdentityUser
     {
-
+        [PersonalData]
+        public string ? Name { get; set; }
+        [PersonalData]
+        public DateTime DOB { get; set; }
+        [PersonalData]
+        public string Gender { get; set; }
+        
     }
 }
