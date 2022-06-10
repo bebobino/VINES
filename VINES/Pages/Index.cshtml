@@ -4,14 +4,45 @@
 @{
     ViewData["Title"] = "Home page";
 }
+<br/>
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+    <li class="nav-item">
+        <a class="nav-link active" id="news-tab" data-toggle="tab" href="#news" aria-controls="news" aria-selected="true">News</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="forum-tab" data-toggle="tab" href="#forum" aria-controls="forum" aria-selected="false">Forums</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="community-tab" data-toggle="tab" href="#community" aria-controls="community" aria-selected="false">Community Posts</a>
+    </li>
+</ul>
+<div class="tab-content p-3 border-right border-left">
+    <div class="tab-pane fade show active" id="news" role="tabpanel" aria-labelledby="news-tab">
+        <h3>Latest News and Updates</h3>
+        <p>This is where the scraped news and updates are placed</p>
+    </div>
+    <div class="tab-pane fade" id="forum" role="tabpanel" aria-labelledby="forum-tab">
+        <h3>Forum</h3>
+        <p>Forums are created in a separate class</p>
+    </div>
+    <div class="tab-pane fade" id="community" role="tabpanel" aria-labelledby="community-tab">
+        <h3>Community Posts</h3>
+        <p>Posts must be created in a separate class</p>
+    </div>
+</div>
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-
-    @{
+        @{
         Process user = new Process();
         user.sendEmail("johncueto20@gmail.com", "Welcome to VINES", "HAHAHAHA BOBO");
 
     }
+    <script>
+            var x = 3;
+            if (x == 1) {
+                //testing shit up pa
+                
+            }
+
+
+    </script>
 </div>
