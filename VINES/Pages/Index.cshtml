@@ -1,6 +1,7 @@
 ﻿@page
 @model IndexModel
 @using VINES.Processes
+@using CommunityPosts
 @{
     ViewData["Title"] = "Home page";
 }
@@ -27,7 +28,19 @@
     </div>
     <div class="tab-pane fade" id="community" role="tabpanel" aria-labelledby="community-tab">
         <h3>Community Posts</h3>
-        <p>Posts must be created in a separate class</p>
+        <table>
+           @foreach(var item in Model.getRecords)
+        {
+            <tr>
+                <td>@item.communityPostID</td>
+                <td>@item.communityPostTitle</td>
+                <td>@item.communityPostCategory</td>
+                <td>@item.communityPostContent</td>
+                <td>@item.dateAdded</td>
+                <td>@item.lastModified</td>
+            </tr>
+        }
+        </table>
     </div>
 </div>
 

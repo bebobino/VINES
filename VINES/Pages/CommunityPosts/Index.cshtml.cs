@@ -1,32 +1,21 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using VINES.Models;
-using System.Data.SqlClient;
 using System.Data.Sql;
-using VINES.Pages.CommunityPosts;
+using System.Data.SqlClient;
+using VINES.Models;
 
-namespace VINES.Pages
+namespace VINES.Pages.CommunityPosts
 {
     public class IndexModel : PageModel
     {
-
         public IEnumerable<CommunityPost> getRecords { get; set; }
-
-        private readonly ILogger<IndexModel> _logger;
-
-        public IndexModel(ILogger<IndexModel> logger)
-        {
-            _logger = logger;
-        }
-
         public void OnGet()
         {
             getRecords = DisplayRecords();
+
         }
 
         public static List<CommunityPost> DisplayRecords()
@@ -59,5 +48,21 @@ namespace VINES.Pages
             }
         }
 
+        public IActionResult OnPostAsync(CommunityPost cpinsert)
+        {
+            string connection = "Data Source=DESKTOP-6731HIA\\SQLEXPRESS;Initial Catalog=Vines;Integrated Security=True";
+
+            using (SqlConnection con = new SqlConnection(connection))
+            {
+                string insertData = "INSERT into dbo.CommunityPost (communityPostID, communityPostTitle, communityPostCategory, communityPostContent, dateAdded, lastModified) VALUES('"+cpinsert.communityPostID+ "','" + cpinsert.communityPostTitle + "','" + cpinsert.communityPostCategory + "','" + cpinsert.communityPostContent + "','" + cpinsert.dateAdded + "','" + cpinsert.lastModified + "')";
+                using (SqlCommand com = new SqlCommand(insertData, con))
+                {
+                    con.Open();
+                    com.ExecuteNonQuery();
+                }
+            }
+
+            return RedirectToPage("Index");
+        }
     }
 }
