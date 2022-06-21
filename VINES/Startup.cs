@@ -11,24 +11,27 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using VINES.Data;
+using VINES.Models;
 
 namespace VINES
 {
     public class Startup
     {
+
+        public IConfiguration Configuration { get; }
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
 
-        public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages();
 
-            services.AddDbContext<AuthDBContext>(options => options.UseSqlServer(Configuration.GetConnectionString("AuthDbContextConnection")));
+            var connection = Configuration.GetConnectionString("DefaultConnection");
+            services.AddDbContext<DatabaseContext>(options => options.UseSqlServer(connection));
 
             services.AddAuthentication()
                 .AddGoogle(googleOptions =>

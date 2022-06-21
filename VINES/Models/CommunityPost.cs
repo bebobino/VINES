@@ -1,9 +1,13 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace VINES.Models
 {
+    [Table("CommunityPost")]
     public class CommunityPost
     {
+        [Key]
         public int communityPostID { get; set; }
 
         public string communityPostTitle { get; set; }

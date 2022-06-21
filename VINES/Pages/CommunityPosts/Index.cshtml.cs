@@ -5,63 +5,65 @@ using System;
 using System.Collections.Generic;
 using System.Data.Sql;
 using System.Data.SqlClient;
+using System.Linq;
 using VINES.Models;
 
 namespace VINES.Pages.CommunityPosts
 {
     public class IndexModel : PageModel
     {
-        public IEnumerable<CommunityPost> getRecords { get; set; }
+        public List<CommunityPost> CommunityPosts { get; set; }
+
+        private DatabaseContext db;
+        public IndexModel(DatabaseContext _db)
+        {
+            db = _db;
+        }
         public void OnGet()
         {
-            getRecords = DisplayRecords();
-
+            CommunityPosts = db.CommunityPosts.ToList();
         }
 
-        public static List<CommunityPost> DisplayRecords()
+        public IActionResult OnPostCreate(string title, int category, string content)
         {
-            List<CommunityPost> ListObj = new List<CommunityPost>();
-            string connection = "Data Source=DESKTOP-6731HIA\\SQLEXPRESS;Initial Catalog=Vines;Integrated Security=True";
-
-            using (SqlConnection con = new SqlConnection(connection))
+            var communitypost = new CommunityPost
             {
-                using (SqlCommand com = new SqlCommand("SELECT * from dbo.CommunityPost", con))
-                {
-                    con.Open();
-                    using (SqlDataReader sdr = com.ExecuteReader())
-                    {
-                        while (sdr.Read())
-                        {
-                            CommunityPost cp = new CommunityPost();
-                            cp.communityPostID = Convert.ToInt32(sdr["communityPostID"]);
-                            cp.communityPostTitle = Convert.ToString(sdr["communityPostTitle"]);
-                            cp.communityPostCategory = Convert.ToInt32(sdr["communityPostCategory"]);
-                            cp.communityPostContent = Convert.ToString(sdr["communityPostContent"]);
-                            cp.dateAdded = Convert.ToDateTime(sdr["dateAdded"]);
-                            cp.lastModified = Convert.ToDateTime(sdr["lastModified"]);
-                            ListObj.Add(cp);
+                communityPostTitle = title,
+                communityPostCategory = category,
+                communityPostContent = content,
+                dateAdded = DateTime.Now,
+                lastModified = DateTime.Now
 
-                        }
-                    }
-                    return ListObj;
-                }
-            }
+
+            };
+            db.CommunityPosts.Add(communitypost);
+            db.SaveChanges();
+            return RedirectToPage("Index");
         }
 
-        public IActionResult OnPostAsync(CommunityPost cpinsert)
+        public IActionResult OnPostDelete(int id)
         {
-            string connection = "Data Source=DESKTOP-6731HIA\\SQLEXPRESS;Initial Catalog=Vines;Integrated Security=True";
+            var communitypost = db.CommunityPosts.Find(id);
+            db.CommunityPosts.Remove(communitypost);
+            db.SaveChanges();
 
-            using (SqlConnection con = new SqlConnection(connection))
-            {
-                string insertData = "INSERT into dbo.CommunityPost (communityPostID, communityPostTitle, communityPostCategory, communityPostContent, dateAdded, lastModified) VALUES('"+cpinsert.communityPostID+ "','" + cpinsert.communityPostTitle + "','" + cpinsert.communityPostCategory + "','" + cpinsert.communityPostContent + "','" + cpinsert.dateAdded + "','" + cpinsert.lastModified + "')";
-                using (SqlCommand com = new SqlCommand(insertData, con))
-                {
-                    con.Open();
-                    com.ExecuteNonQuery();
-                }
-            }
+            return RedirectToPage("Index");
+        }
 
+        public IActionResult OnGetFind(int id)
+        {
+            var communitypost = db.CommunityPosts.Find(id);
+            return new JsonResult(communitypost);
+        }
+
+        public IActionResult OnPostUpdate(int id, string title, int category, string content)
+        {
+            var communitypost = db.CommunityPosts.Find(id);
+            communitypost.communityPostTitle = title;
+            communitypost.communityPostCategory = category;
+            communitypost.communityPostContent = content;
+            communitypost.lastModified = DateTime.Now;
+            db.SaveChanges();
             return RedirectToPage("Index");
         }
     }
