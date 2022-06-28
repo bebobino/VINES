@@ -1,17 +1,37 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace VINES.Models
 {
     public class UserModel
     {
-        public void Test()
-        {
-            //Test
-            Debug.Write("Testing lang lmfao");
-        }
+        [Key]
+        [Required]
+        public int userID { get; set; }
+        [Required]
+        public int roleID { get; set; }
+        [Required]
+        public string firstName { get; set; }
+        [Required]
+        public string middleName { get; set; }
+        [Required]
+        public string lastName { get; set; }
+        [Required]
+        public string contactNumber { get; set; }
+        [Required]
+        public int genderID { get; set; }
+        [Required]
+        public string email { get; set; }
+        [Required]
+        public string password { get; set; }
+        [Required]
+        public DateTime dateOfBirth { get; set; }
+        [Required]
+        public bool emailAuth { get; set; }
+        [Required]
+        public bool isBlocked { get; set; }
+        [Required]
+        public bool isLocked { get; set; }
     }
 }
