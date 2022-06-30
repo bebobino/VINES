@@ -1,10 +1,11 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace VINES.Models
 {
-    public class UserModel
+    public class UserModel : IdentityUser
     {
         [Key]
         [Required]
