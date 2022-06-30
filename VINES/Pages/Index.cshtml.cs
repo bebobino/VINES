@@ -13,14 +13,17 @@ namespace VINES.Pages
     {
         private readonly ILogger<IndexModel> _logger;
 
-        public IndexModel(ILogger<IndexModel> logger)
+        public List<CommunityPost> CommunityPosts { get; set; }
+
+        private DatabaseContext db;
+        public IndexModel(ILogger<IndexModel> logger, DatabaseContext _db)
         {
             _logger = logger;
+            db = _db;
         }
-
         public void OnGet()
         {
-
+            CommunityPosts = db.CommunityPosts.ToList();
         }
         
     }
