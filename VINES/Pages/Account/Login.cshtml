@@ -1,4 +1,5 @@
 ﻿@page
+@model VINES.Pages.Account.LoginModel
 @using VINES.Models
 @{
     ViewData["Title"] = "Login";
@@ -43,18 +44,19 @@
               <div class="form-block">
                   <div class="mb-4">
                   <h3>Sign In to <strong>VINES</strong></h3>
-                  <p class="mb-4">We would like to thank google for making our lives easier having provided this template for logins.</p>
+                  <p class="mb-4">Use a local account to log in.</p>
                 </div>
-                <form action="#" method="post">
+                <form id="account" method="post">
                   <div class="form-group first">
-                    <label for="username">Email</label>
-                    <input type="text" class="form-control" id="username">
+                    <label asp-for="Input.email"></label>
+                    <input type="text" asp-for="Input.email" class="form-control">
+                    <span asp-validation-for="Input.email" class="text-danger"></span>
 
                   </div>
                   <div class="form-group last mb-4">
-                    <label for="password">Password</label>
-                    <input type="password" class="form-control" id="password">
-                    
+                    <label asp-for="Input.password"></label>
+                    <input type="password" asp-for="Input.password" class="form-control" id="password">
+                    <span asp-validation-for="Input.password" class="text-danger"></span>
                   </div>
                   
                   <div class="d-flex mb-5 align-items-center">
@@ -94,4 +96,7 @@
     <script src="~/loginAssets/js/main.js"></script>
   </body>
 </html> 
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
 <!-- end of login template -->

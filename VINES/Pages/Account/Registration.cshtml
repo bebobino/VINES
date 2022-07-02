@@ -1,6 +1,5 @@
 ﻿@page
-@using VINES.Models
-@model UserModel
+@model VINES.Pages.Account.RegistrationModel
 @{
     ViewData["Title"] = "Registration";
     Layout = null;
@@ -46,46 +45,56 @@
                   <h3><strong>Sign Up</strong></h3>
                   <p class="mb-4">It's quick and easy.</p>
                 </div>
-                <form action="" method="post">
+                <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
                   <div class="form-group first">
-                    <label for="username">Email</label>
-                    <input type="text" class="form-control" id="username">
+                    <label asp-for="Input.email"></label>
+                    <input type="text" class="form-control" asp-for="Input.email">
+                    <span asp-validation-for="Input.email" class="text-danger"></span>
 
                   </div>
                   <div class="form-group last mb-4">
-                    <label for="password">Password</label>
-                    <input type="password" class="form-control" id="password">
+                    <label asp-for="Input.password"></label>
+                    <input type="password" class="form-control" asp-for="Input.password">
+                    <span asp-validation-for="Input.password" class="text-danger"></span>
                
                   </div>
 
                   <div class="form-group last mb-4">
-                    <label for="firstName">First Name</label>
-                    <input type="text" class="form-control" id="firstName">
+                    <label asp-for="Input.firstName"></label>
+                    <input type="text" class="form-control" asp-for="Input.firstName">
+                    <span asp-validation-for="Input.firstName" class="text-danger"></span>
                
                   </div>
 
                   <div class="form-group last mb-4">
-                    <label for="middleName">Middle Name</label>
-                    <input type="text" class="form-control" id="middleName">
+                    <label asp-for="Input.middleName"></label>
+                    <input type="text" class="form-control" asp-for="Input.middleName">
                
                   </div>
 
                   <div class="form-group last mb-4">
-                    <label for="lastName">Last Name</label>
-                    <input type="text" class="form-control" id="lastName">
+                    <label asp-for="Input.lastName"></label>
+                    <input type="text" class="form-control" asp-for="Input.lastName">
                
                   </div>
+
+                  <div class="form-group last mb-4">
+                    <label asp-for="Input.contactNumber"></label>
+                    <input type="number" class="form-control" asp-for="Input.contactNumber">
+               
+                  </div>
+                  
 
                   <!--  ===== ADD Gender Drop down ==== -->
                   <div class="form-group last mb-4">
-                    <label for="Gender">Gender</label>
-                    <input type="text" class="form-control" id="Gender">
+                    <label asp-for="Input.gender"></label>
+                    <input type="number" class="form-control" asp-for="Input.gender" min="1" max="3">
                
                   </div>
                   <!-- ======= HELP FIX DOB ====== -->
                   <div class="form-group last mb-4">
-                    <label for="dateOfBirth">Date of Birth</label>
-                    <input type="date" class="form-control" id="dateOfBirth" placeholder="02/28/1990">
+                    <label asp-for="Input.dateOfBirth"></label>
+                    <input type="date" class="form-control" asp-for="Input.dateOfBirth">
                
                   </div>
 
@@ -108,4 +117,8 @@
     <script src="~/loginAssets/js/main.js"></script>
   </body>
 </html> <!-- end of login template -->
+
+@section Scripts {
+    <partial name ="_ValidationScriptsPartial" />
+}
 

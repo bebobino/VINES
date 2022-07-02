@@ -5,6 +5,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.Google;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,6 +31,17 @@ namespace VINES
 
             var connection = Configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<DatabaseContext>(option => option.UseSqlServer(connection));
+
+            services.AddMvc();
+
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                    .AddCookie("Cookies", options =>
+                    {
+                        options.LoginPath = "/Accounr/Login";
+                        options.LogoutPath = "/Account/Logout";
+                        options.AccessDeniedPath = "/Account/AccessDenied";
+                        options.ReturnUrlParameter = "ReturnUrl";
+                    });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -50,6 +63,7 @@ namespace VINES
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

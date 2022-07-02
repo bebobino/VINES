@@ -1,4 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using VINES.Data;
+
 namespace VINES.Models
 {
     public class DatabaseContext : DbContext
@@ -10,5 +12,6 @@ namespace VINES.Models
 
         public DbSet<CommunityPost> CommunityPosts { get; set; }
 
+        public DbSet<User> Users { get; set; }
     }
 }
