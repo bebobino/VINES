@@ -1,12 +1,36 @@
 ﻿@page
 @model IndexModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @using VINES.Models
 @using CommunityPosts
+@using Microsoft.AspNetCore.Http.Features
 @{
     ViewData["Title"] = "Home page";
-    <!-- Layout = "_Layout"; -->
+    Layout = "_LayoutLanding";
+
+   var consentFeature = HttpContext.Features.Get<ITrackingConsentFeature>();
+   var showBanner = !(consentFeature?.CanTrack ?? false);
+   var cookieString = consentFeature?.CreateConsentCookie();
 }
 
+@if (showBanner)
+{
+    <div id="ck" sstyle="border:2px solid black;padding:12px;">
+        <span>This site uses cookies</span>
+        <button>Accept</button>
+    </div>
+
+    <script type="text/javascript">
+(function() {
+    var button = document.querySelector("#ck button");
+    button.addEventListener("click", function(evt) {
+        document.cookie = "@cookieString";
+
+        ck.style.display = "none";
+    }, false);
+})();
+        </script>
+}
 
   <!-- ======= Blog Page ======= -->
     <div class="blog-page area-padding">

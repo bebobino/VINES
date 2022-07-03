@@ -42,6 +42,12 @@ namespace VINES
                         options.AccessDeniedPath = "/Account/AccessDenied";
                         options.ReturnUrlParameter = "ReturnUrl";
                     });
+
+            services.Configure<CookiePolicyOptions>(options =>
+            {
+                options.CheckConsentNeeded = (context => true);
+                options.MinimumSameSitePolicy = Microsoft.AspNetCore.Http.SameSiteMode.None;
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -62,6 +68,8 @@ namespace VINES
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseCookiePolicy();
 
             app.UseAuthentication();
             app.UseAuthorization();
