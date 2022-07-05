@@ -80,11 +80,19 @@
                     <input type="text" class="form-control" id="Gender">
                
                   </div>
-                  <!-- ======= HELP SOMEONE FIX DOB ====== -->
+                  <!-- ======= FIX DOB ====== -->
                   <div class="form-group last mb-4">
                     <label for="dateOfBirth">Date of Birth</label>
-                    <input type="date" class="form-control" id="dateOfBirth" placeholder="02/28/1990">
-               
+                    
+                    <input type="date" class="form-control" id="dateOfBirth" onchange="changeColor()">
+                    <script>
+                        function changeColor() { 
+                            document.getElementById("dateOfBirth").style.color = "transparent";
+                            document.getElementById("dateOfBirth").style.backgroundColor = "transparent";
+                            document.getElementById("dateOfBirth").style.outlineColor = "transparent";
+                            document.getElementById("dateOfBirth").style.userSelect.color = "transparent";
+                        }
+                    </script>
                   </div>
 
                   <input type="submit" value="Create New Account" class="btn btn-pill text-white btn-block btn-primary">
