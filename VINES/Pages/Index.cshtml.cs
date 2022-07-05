@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using System;
@@ -16,6 +17,7 @@ namespace VINES.Pages
         public List<CommunityPost> CommunityPosts { get; set; }
 
         private DatabaseContext db;
+
         public IndexModel(ILogger<IndexModel> logger, DatabaseContext _db)
         {
             _logger = logger;

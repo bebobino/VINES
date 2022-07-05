@@ -88,11 +88,13 @@
 
 
   <!-- ==BODY GOES IN HERE. WHATEVER PAGE CALLS THIS LAYOUT. -->
-    <div>
-        @RenderBody() 
-        <hr/>
+    <div class="container">
+        <partial name="_CookieConsentPartial" />
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
     </div>
-
+     
   <!-- ======= Footer ======= -->
   <footer>
     <div class="footer-area">

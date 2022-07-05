@@ -8,12 +8,12 @@
     ViewData["Title"] = "Home page";
     Layout = "_LayoutLanding";
 
-   var consentFeature = HttpContext.Features.Get<ITrackingConsentFeature>();
+   @*var consentFeature = HttpContext.Features.Get<ITrackingConsentFeature>();
    var showBanner = !(consentFeature?.CanTrack ?? false);
-   var cookieString = consentFeature?.CreateConsentCookie();
+   var cookieString = consentFeature?.CreateConsentCookie();*@
 }
 
-@if (showBanner)
+@* @if (showBanner)
 {
     <div id="ck" sstyle="border:2px solid black;padding:12px;">
         <span>This site uses cookies</span>
@@ -30,7 +30,7 @@
     }, false);
 })();
         </script>
-}
+}*@
 
   <!-- ======= Blog Page ======= -->
     <div class="blog-page area-padding">
