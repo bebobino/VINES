@@ -62,6 +62,11 @@ namespace VINES.Pages.Account
             [Display(Name = "Password")]
             public string password { get; set; }
 
+            [DataType(DataType.Password)]
+            [Display(Name = "Confirm Password")]
+            [Compare("Password", ErrorMessage = "Your password does not match")]
+            public string confirmPassword { get; set; }
+
             [Required]
             public DateTime dateRegistered { get; set; }
             [Required]
