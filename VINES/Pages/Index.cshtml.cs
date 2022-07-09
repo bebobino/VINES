@@ -23,7 +23,7 @@ namespace VINES.Pages
         }
         public void OnGet()
         {
-            CommunityPosts = db.CommunityPosts.ToList();
+          //  CommunityPosts = db.CommunityPosts.ToList();
         }
         
     }
