@@ -33,7 +33,7 @@
         $('table .edit').on('click', function() {
             var id = $(this).parent().find('#id').val();
             $.ajax({
-                type: 'POST',
+                type: "GET",
                 data: {id: id},
                 url: '@Url.Page("Index", "Find")',
                 success: function (result) {

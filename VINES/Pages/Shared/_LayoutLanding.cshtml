@@ -35,6 +35,7 @@
       crossorigin=""></script>
 
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 </head> <!-- end of Head -->
 
@@ -88,11 +89,12 @@
 
 
   <!-- ==BODY GOES IN HERE. WHATEVER PAGE CALLS THIS LAYOUT. -->
-    <div>
-        @RenderBody() 
-        <hr/>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
     </div>
-
+     
   <!-- ======= Footer ======= -->
   <footer>
     <div class="footer-area">

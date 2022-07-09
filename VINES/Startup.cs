@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.Google;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,19 +35,29 @@ namespace VINES
 
             services.AddMvc();
 
-            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+            services.AddAuthentication(
+                options =>
+                {
+                    options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                })
                     .AddCookie("Cookies", options =>
                     {
-                        options.LoginPath = "/Accounr/Login";
+                        options.LoginPath = "/Account/Login";
                         options.LogoutPath = "/Account/Logout";
                         options.AccessDeniedPath = "/Account/AccessDenied";
                         options.ReturnUrlParameter = "ReturnUrl";
+                    })
+                    .AddGoogle(GoogleDefaults.AuthenticationScheme, options =>
+                    {
+                        options.ClientId = Configuration["Authentication:Google:ClientId"];
+                        options.ClientSecret = Configuration["Authentication:Google:ClientSecret"];
+                        options.SaveTokens = true;
                     });
 
             services.Configure<CookiePolicyOptions>(options =>
             {
-                options.CheckConsentNeeded = (context => true);
-                options.MinimumSameSitePolicy = Microsoft.AspNetCore.Http.SameSiteMode.None;
+                options.CheckConsentNeeded = context => true;
+                options.MinimumSameSitePolicy = SameSiteMode.None;
             });
         }
 

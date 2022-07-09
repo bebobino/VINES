@@ -1,26 +1,29 @@
 ﻿@using Microsoft.AspNetCore.Http.Features
 
 @{
-   var consentFeature = Context.Features.Get<ITrackingConsentFeature>();
-   var showBanner = !consentFeature?.CanTrack ?? false;
-   var cookieString = consentFeature?.CreateConsentCookie();
+    var consentFeatureFlag = Context.Features.Get<ITrackingConsentFeature>();
+    var showBannerFlag = !consentFeatureFlag?.CanTrack ?? false;
+    var cookieStr = consentFeatureFlag?.CreateConsentCookie();
+
 }
 
-@if (showBanner)
+@if (showBannerFlag)
 {
-   <div id="cookieConsent">
-       <!---->
-      <p>Help us provide a better experience for users by accepting to track cookies.<a asp-page="/Privacy">Learn More.</a></p>
-      <button type="button" data-dismiss="alert" data-cookie-string="@cookieString">
-         <span aria-hidden="true">Accept</span>
-      </button>
-   </div>
-   <script>
-   (function () {
-      var button = document.querySelector("#cookieConsent button[data-cookie-string]");
-      button.addEventListener("click", function (event) {
-         document.cookie = button.dataset.cookieString;
-      }, false);
-   })();
-   </script>
-} 
+    <div id="cookieConsentdiv">
+        <h3 class="display-6">Cookie Policy</h3>
+        <p>Please Accept Our <a asp-page="/Privacy">Cookie Policy</a>.     </p>
+        <button type="button" data-cookie-string="@cookieStr">
+            <span aria-hidden="true">Accept</span>
+        </button>
+    </div>
+
+    <script type="text/javascript">
+        $(document).ready(function() 
+        {
+            $("#cookieConsentdiv button[data-cookie-string]").bind("click", function() {
+                document.cookie = $("#cookieConsentdiv button").attr("data-cookie-string");
+                $("#cookieConsentdiv").hide();
+            });
+        });
+        </script>
+}

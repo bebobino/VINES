@@ -36,6 +36,7 @@
 
   
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head> <!-- end of dependencies-->
 
 <body>
@@ -57,6 +58,8 @@
           <li><a class="nav-link scrollto" href="#portfolio">Privacy</a></li>
           <li class="dropdown"><a href="#"><span>Account Settings</span> <i class="bi bi-chevron-right"></i></a>
             <ul>
+                <!--must have an if statement for subscription-->
+              <li><a class="nav-link scrollto" asp-page="/Account/Subscription">Logout</a></li> 
               <li><a class="nav-link scrollto" asp-page="/Account/Logout">Logout</a></li>
               <li><a class="nav-link scrollto" href="#contact">Update Account</a></li>
               <li><a class="nav-link scrollto" href="#contact">Account Help</a></li>
@@ -93,9 +96,10 @@
 
     
   <!-- ==BODY GOES IN HERE. WHATEVER PAGE CALLS THIS LAYOUT.== -->
-    <div>
-        @RenderBody() 
-        <hr/>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
     </div>
 
 
