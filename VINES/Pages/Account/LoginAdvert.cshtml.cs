@@ -1,23 +1,23 @@
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using VINES.Models;
+using System.ComponentModel.DataAnnotations;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication;
+using System.Linq;
+using System.Collections.Generic;
+using System.Security.Claims;
 
 namespace VINES.Pages.Account
 {
     [AllowAnonymous]
-    public class LoginAdminModel : PageModel
+    public class LoginAdvertModel : PageModel
     {
         private readonly DatabaseContext Db;
 
-        public LoginAdminModel(DatabaseContext Db)
+        public LoginAdvertModel(DatabaseContext Db)
         {
             this.Db = Db;
         }
@@ -48,7 +48,7 @@ namespace VINES.Pages.Account
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
-            returnUrl ??= Url.Content("~/adminLanding");
+            returnUrl ??= Url.Content("~/advertiserLanding");
 
             if (ModelState.IsValid)
             {
@@ -58,9 +58,9 @@ namespace VINES.Pages.Account
                     ModelState.AddModelError(string.Empty, "Invalid Email or Password");
                     return Page();
                 }
-                else if (user.roleID != 1)
+                else if (user.roleID != 2)
                 {
-                    ModelState.AddModelError(string.Empty, "You are not a registered administrator");
+                    ModelState.AddModelError(string.Empty, "You are not a registered advertiser");
                     return Page();
                 }
 

@@ -152,7 +152,6 @@
 
   
   <ItemGroup>
-    <Folder Include="Pages\Admin\" />
     <Folder Include="Pages\Advertiser\" />
     <Folder Include="Pages\Patient\" />
   </ItemGroup>

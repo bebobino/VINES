@@ -1,12 +1,10 @@
 ﻿@page
-@model VINES.Pages.Account.LoginModel
-@using VINES.Models
+@model VINES.Pages.Account.LoginAdvertModel
 @{
-    ViewData["Title"] = "Login";
+    ViewData["Title"] = "Advertiser Login";
     Layout = null;
 }
 
-<!-- == Start of LOGIN TEMPLATE == -->
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -30,8 +28,6 @@
   </head>
   <body>
   
-
-  
   <div class="content">
     <div class="container">
       <div class="row justify-content-center">
@@ -44,9 +40,9 @@
               <div class="form-block">
                   <div class="mb-4">
                   <h3>Sign In to <strong>VINES</strong></h3>
-                  <p class="mb-4">Use a local account to log in.</p>
+                  <p class="mb-4">Please Use Your Advertiser Account</p>
                 </div>
-                <form id="account" method="post">
+                <form id="admin" method="post">
                   <div class="form-group first">
                     <label asp-for="Input.email"></label>
                     <input type="text" asp-for="Input.email" class="form-control">
@@ -64,26 +60,10 @@
                       <input type="checkbox" checked="checked"/>
                       <div class="control__indicator"></div>
                     </label>
-                    <span class="ml-auto"><a class="" asp-page="/Account/Registration">Create New Account</a></span> 
+                      <span class="ml-auto"><a class="" asp-page="/Account/ForgotPassword">Forgot Password</a></span> 
                   </div>
 
                   <input type="submit" value="Log In" class="btn btn-pill text-white btn-block btn-primary">
-
-                  <span class="d-block text-center my-4 text-muted"> or sign in with</span>
-                  
-                  <div class="social-login text-center">
-                    <a href="#" class="facebook">
-                      <span class="icon-facebook mr-2"></span> 
-                    </a>
-                    <a href="#" class="google">
-                      <span class="icon-google mr-2"></span> 
-                    </a>
-                  </div>
-                  
-                  <div class="other-login">
-                  <span class="ml-auto"><a class="" asp-page="/Account/LoginAdmin">Login as an Administrator</a></span>
-                  <span class="ml-auto"><a class="" asp-page="/Account/LoginAdvert">Login as an Advertiser</a></span>
-                  </div>
                 </form>
               </div>
             </div>
@@ -104,4 +84,3 @@
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
 }
-<!-- end of login template -->
