@@ -8,7 +8,7 @@
     ViewData["Title"] = "Home page";
     Layout = "_LayoutLanding";
 
-   @*var consentFeature = HttpContext.Features.Get<ITrackingConsentFeature>();
+    @*var consentFeature = HttpContext.Features.Get<ITrackingConsentFeature>();
    var showBanner = !(consentFeature?.CanTrack ?? false);
    var cookieString = consentFeature?.CreateConsentCookie();*@
 }
@@ -108,7 +108,7 @@
               <div class="single-blog-page">
                 <div class="left-blog">
                   <h4>Community Posts</h4>
-                  @*@foreach (var communitypost in Model.CommunityPosts)
+                  @* @foreach (var communitypost in Model.CommunityPosts)
                     {
                   <ul>
                     <li>
@@ -117,7 +117,6 @@
                     </li>
                   </ul>
                      }
-                     *@
                 </div>
               </div>
             </div>
@@ -288,4 +287,30 @@
         </div>
       </div>
     </div><!-- End Blog Page -->
+
+    <script>
+        function showNotification() {
+            const notification = new Notification("New message from Admin", {
+                body: "Thank you for allowing notifications",
+                icon: "favicon-32x32.png"
+            });
+
+            notification.onclick = (e) => {
+                window.location.href = "https://google.com"
+            }
+        }
+
+        console.log(Notification.permission);
+
+if (Notification.permission === "granted") {
+    showNotification();
+} else if (Notification.permission !== "denied")
+{
+    Notification.requestPermission().then(permission => {
+        if (permission === "granted") {
+            showNotification();
+        }
+    });
+}
+    </script>
 
