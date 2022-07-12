@@ -3,23 +3,16 @@
   ViewData["Title"] = "advertiserLanding";
   Layout = "_LayoutAdvertiser";
 }
-@*
  <!-- ======= Blog Page ======= -->
     <div class="blog-page area-padding">
       <div class="container">
         <div class="row">
           <div class="col-lg-4 col-md-4">
             <div class="page-head-blog">
-              <br>
-              <h5><b>Institutions Near You</b></h5>
-              <div id="vaxMap"></div>
-              <a href="#">Institutions for you</a>
-              <br>
-              <br>
               <div class="single-blog-page">
-                <!-- recent start -->
+                <!-- recent Ads -->
                 <div class="left-blog">
-                  <h4>recent news</h4>
+                  <h4>Recently Added Advertisements</h4>
                   <div class="recent-post">
                     <!-- start single post -->
                     <div class="recent-single-post">
@@ -57,40 +50,22 @@
                       </div>
                     </div>
                     <!-- End single post -->
-                    <!-- start single post -->
-                    <div class="recent-single-post">
-                      <div class="post-img">
-                        <a href="#">
-                          <img src="assets/img/blog/4.jpg" alt="">
-                        </a>
-                      </div>
-                      <div class="pst-content">
-                        <p><a href="#"> Redug Lerse dolor sit amet consect adipis elit.</a></p>
-                      </div>
-                    </div>
-                    <!-- End single post -->
                   </div>
                 </div>
                 <!-- recent end -->
               </div>
               <div class="single-blog-page">
                 <div class="left-blog">
-                  <h4>archive</h4>
+                  <h4>Monthly Billing Statement Archive</h4>
                   <ul>
                     <li>
-                      <a href="#">07 July 2016</a>
+                      <a href="#">May 2022</a>
                     </li>
                     <li>
-                      <a href="#">29 June 2016</a>
+                      <a href="#">June 2022</a>
                     </li>
                     <li>
-                      <a href="#">13 May 2016</a>
-                    </li>
-                    <li>
-                      <a href="#">20 March 2016</a>
-                    </li>
-                    <li>
-                      <a href="#">09 Fabruary 2016</a>
+                      <a href="#">July 2022</a>
                     </li>
                   </ul>
                 </div>
@@ -98,42 +73,42 @@
             </div>
           </div>
           <!-- End left sidebar -->
+
+
           <!-- Start single blog -->
           <div class="col-md-8 col-sm-8 col-xs-12">
-            <h1 style="font-size: x-large;"><b>Dashboard</b></h1>
-
-
+            <h1 style="font-size: x-large;"><b>Top Level Summary</b></h1>
 
             <section id="counts" class="counts section-bg">
               <div class="container">
         
                 <div class="row justify-content-end">
 
-                  <div class="card col-lg-3 col-md-5 col-6 d-md-flex align-items-center text-center" id="showSources">
+                  <div class="card col-lg-3 col-md-5 col-6 d-md-flex align-items-center text-center" id="showAdvertisements">
                       <br>
                       <h1>7</h1>
-                      <h5>News Sources</h5>
+                      <h5>Advertisements Active</h5>
 
                   </div>
                   
-                  <div class="card col-lg-3 col-md-5 col-6 d-md-flex align-items-center text-center" id = "showInstitutions">
+                  <div class="card col-lg-3 col-md-5 col-6 d-md-flex align-items-center text-center" id = "showInteractions">
                       <br>
-                      <h1>16</h1>
-                      <h5>Institutions in database</h5>
+                      <h1>160</h1>
+                      <h5>Interactions per Day</h5>
 
                   </div>
 
-                  <div class="card col-lg-3 col-md-5 col-6 d-md-flex align-items-center text-center" id = "showVaccines">
+                  <div class="card col-lg-3 col-md-5 col-6 d-md-flex align-items-center text-center" id = "showMCost">
                       <br>
-                      <h1>8</h1>
-                      <h5>Vaccines in database</h5>
+                      <h1>&#8369;1,000</h1>
+                      <h5>Monthly cost on ads</h5>
 
                   </div>
 
-                  <div class="card col-lg-3 col-md-5 col-6 d-md-flex align-items-center text-center">
+                  <div class="card col-lg-3 col-md-5 col-6 d-md-flex align-items-center text-center" id="showTCost">
                       <br>
-                      <h1>87</h1>
-                      <h5>Recommendations generated</h5>
+                      <h1>&#8369;7,500</h1>
+                      <h5>Total Expenses spent on Ads</h5>
 
                   </div>
                   
@@ -142,31 +117,36 @@
         
               </div>
             </section>
+            <br />
+            <br />
 
-            <h1 style="font-size: x-large;"><b>Vaccines</b></h1>
+            <h1 style="font-size: x-large;"><b>Advertising Information</b></h1>
             <div class="row">
               <!-- End single blog -->
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="single-blog">
                   <div class="blog-text">
                     <h5>
-                      <a href="#">Vaccine History</a>
+                      <a href="#">Active Advertisements</a>
                     </h5>
                     <table style="width:100%">
                       <tr>
-                        <th colspan="2">Vaccine Name</th>
-                        <th colspan="2">Date</th> 
-                        <th colspan="2">Institution</th>
+                        <th colspan="2">Advertisement Title</th>
+                        <th colspan="2">Subscription Start Date</th> 
+                        <th colspan="2">Subscription Duration</th>
+                        <th colspan="2">Total Subscription Cost</th>
                       </tr>
                       <tr>
-                        <td colspan="2">Oxford-AstraZeneca</td>
-                        <td colspan="2">05-20-2021</td>
-                        <td colspan="2">Hospital X</td>
+                        <td colspan="2">Shopee Ad</td>
+                        <td colspan="2">07-11-2022</td>
+                        <td colspan="2">2 Months</td>
+                        <td colspan="2">&#8369;1,000</td>
                       </tr>
                       <tr>
-                        <td colspan="2">Oxford-AstraZeneca</td>
-                        <td colspan="2">06-20-2021</td>
-                        <td colspan="2">Hospital X</td>
+                        <td colspan="2">Lazada Ad</td>
+                        <td colspan="2">07-11-2022</td>
+                        <td colspan="2">10 Months</td>
+                        <td colspan="2">&#8369;5,000</td>
                       </tr>
                     </table>
                   </div>
@@ -177,25 +157,32 @@
                 <div class="single-blog">
                   <div class="blog-text">
                     <h5>
-                      <a href="#">Vaccine Preferences</a>
+                      <a href="#">Manage Advertisements</a>
                     </h5>
                     <table style="width:100%">
                       <tr>
-                        <th colspan="2">Vaccine For</th>
-                        <th colspan="2">Vaccine Name</th>
-                        <th colspan="2">Budget</th>
+                        <th colspan="2">Advertisement Title</th>
+                        <th colspan="2">Description</th>
+                        <th colspan="2">Monthly Budget</th>
                         <th colspan="2">Settings</th>
                       </tr>
                       <tr>
-                        <td colspan="2">COVID-19</td>
-                        <td colspan="2">Oxford-AstraZeneca</td>
-                        <td colspan="2">&#8369;2,500</td>
+                        <td colspan="2">Shopee</td>
+                        <td colspan="2">Shopee Monthly Sale Ads</td>
+                        <td colspan="2">&#8369;500</td>
+                        <td colspan="2"><a href="#">Update</a>/<a href="#">Delete</a></td>
+                      </tr>
+                      <tr>
+                        <td colspan="2">Lazada</td>
+                        <td colspan="2">Lazada Monthly Sale Ads</td>
+                        <td colspan="2">&#8369;500</td>
                         <td colspan="2"><a href="#">Update</a>/<a href="#">Delete</a></td>
                       </tr>
                     </table>
                   </div>
+                  <br />
                   <span>
-                    <a href="#" class="ready-btn">Add new</a>
+                    <a href="#" class="ready-btn">Add New Advertisement</a>
                   </span>
                 </div>
               </div>
@@ -203,81 +190,56 @@
           </div>
         </div>
       </div>
-    </div><!-- End Blog Page --> *@
+    </div><!-- End Blog Page -->
 
 
     <!-- dashboard modals -->
 
-<div class="modal fade" id="newsSources">
+<div class="modal fade" id="showAdvertisements">
   <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
           <div class="modal-header">
-              <h4 class="modal-title">News Sources</h4>
+              <h4 class="modal-title">Advertisements Active</h4>
           </div>
           <div class="modal-body">
 
-            <p>https://www.fda.gov.ph/advisories/</p>
-            <p>https://doh.gov.ph/press-releases</p>
-            <p>https://www.who.int/news-room/headlines</p>
-            <p>https://manila.gov.ph/news-and-events/</p>
-            <p>https://quezoncity.gov.ph/news-and-media/</p>
-            <p>https://www.makati.gov.ph/content/news</p>
-            <p>https://www.pasigcity.gov.ph/news-events</p>
+            <p>Shopee</p>
+            <p>Lazada</p>
             <br>
-            <input type="button" class="btn btn-secondary" id="hideSources" value="Hide" />
+            <input type="button" class="btn btn-secondary" id="hideAdvertisements" value="Hide" />
           </div>
       </div>
   </div>
 </div>
 
-<div class="modal fade" id="institutions">
+<div class="modal fade" id="showInteractions">
   <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
           <div class="modal-header">
-              <h4 class="modal-title">Institutions in database</h4>
+              <h4 class="modal-title">Interactions per Day</h4>
           </div>
           <div class="modal-body">
-            <p>Adela Serra Ty Memorial Medical Center</p>
-            <p>Adventist Hospital-Cebu, Inc.</p>
-            <p>Adventist Hospital-Davao, Inc.</p>
-            <p>Adventist Hospital-Palawan, Inc.</p>
-            <p>Adventist Hospital-Santiago City, Inc.</p>
-            <p>Adventist Medical Center Manila</p>
-            <p>Adventist Medical Center-Bacolod, Inc.</p>
-            <p>Adventist Medical Center-Iligan City, Inc.</p>
-            <p>Adventist Medical Center-Valencia City, Inc.</p>
-            <p>Ago General Hospital</p>
-            <p>Air Force General Hospital</p>
-            <p>Alabang Medical Center</p>
-            <p>Albay Doctors Hospital</p>
-            <p>Allah Valley Medical Specialists Center, Inc.</p>
-            <p>Allied Care Experts (ACE) Medical Center - Baypointe, Inc.</p>
-            <p>Allied Care Experts (ACE) Medical Center - Pateros, Inc.</p>
+            <p><b>Shopee</b> :25</p>
+            <p><b>Lazada</b> :25</p>
             <br>
-            <input type="button" class="btn btn-secondary" id="hideInstitutions" value="Hide" />
+            <input type="button" class="btn btn-secondary" id="hideInteractions" value="Hide" />
           </div>
       </div>
   </div>
 </div>
 
-<div class="modal fade" id="vaccines">
+<div class="modal fade" id="showMCost">
   <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
           <div class="modal-header">
-              <h4 class="modal-title">Vaccines in database</h4>
+              <h4 class="modal-title">Monthly cost on Ads</h4>
           </div>
           <div class="modal-body">
             
-            <p>Covaxin</p>
-            <p>Moderna</p>
-            <p>Janssen</p>
-            <p>Oxford-AstraZeneca</p>
-            <p>Pfizer-BioNTech</p>
-            <p>Sinovac</p>
-            <p>Sinopharm</p>
-            <p>Sputnik V</p>
+            <p>Shopee &#8369;5,000</p>
+            <p>Lazada &#8369;5,000</p>
             <br>
-            <input type="button" class="btn btn-secondary" id="hideVaccines" value="Hide" />
+            <input type="button" class="btn btn-secondary" id="hideMCost" value="Hide" />
           </div>
       </div>
   </div>

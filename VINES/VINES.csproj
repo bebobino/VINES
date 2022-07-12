@@ -149,4 +149,11 @@
     <PackageReference Include="System.Security.Permissions" Version="6.0.0" />
   </ItemGroup>
 
+  
+  <ItemGroup>
+    <Folder Include="Pages\Admin\" />
+    <Folder Include="Pages\Advertiser\" />
+    <Folder Include="Pages\Patient\" />
+  </ItemGroup>
+
 </Project>

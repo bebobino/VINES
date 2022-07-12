@@ -57,30 +57,28 @@
         <ul>
           <li><a class="nav-link scrollto " href="#hero">Home</a></li>
           <li><a class="nav-link scrollto" href="#about">About VINES</a></li>
-          <li class="dropdown"><a href="#"><span>Advertiser Settings</span> <i class="bi bi-chevron-right"></i></a>
+          <li class="dropdown"><a href="#"><span>Manage Advertisements</span> <i class="bi bi-chevron-right"></i></a>
             <ul>
-              <li><a class="nav-link scrollto" href="#services">Disease List</a></li>
-              <li><a class="nav-link scrollto" href="#services">Institution List</a></li>
-              <li><a class="nav-link scrollto" href="#services">Vaccine List</a></li>
-              <li><a class="nav-link scrollto" asp-area="" asp-page="/CommunityPosts/Index">Community Posts</a></li>
+              <li><a class="nav-link scrollto" href="#services">Add Advertisements</a></li>
+              <li><a class="nav-link scrollto" href="#services">Update Advertisements</a></li>
+              <li><a class="nav-link scrollto" href="#services">Delete Advertisements</a></li>
+              @*<li><a class="nav-link scrollto" asp-area="" asp-page="/CommunityPosts/Index">Community Posts</a></li>*@
             </ul>
           </li>
           
-          <li class="dropdown"><a href="#"><span>User Settings</span> <i class="bi bi-chevron-right"></i></a>
+          <li class="dropdown"><a href="#"><span>Advertiser Settings</span> <i class="bi bi-chevron-right"></i></a>
             <ul>
-              <li><a class="nav-link scrollto" href="#portfolio">User Status</a></li>
-              <li><a class="nav-link scrollto" href="#portfolio">User Logs</a></li>
+              <li><a class="nav-link scrollto" href="#portfolio">Check Advertisement Status</a></li>
+              <li><a class="nav-link scrollto" href="#portfolio">View Logs</a></li>
             </ul>
           </li>
 
           <li class="dropdown"><a href="#"><span>Account Settings</span> <i class="bi bi-chevron-right"></i></a>
             <ul>
               <li><a class="nav-link scrollto" asp-page="/Account/Logout">Logout</a></li>
-              <li><a class="nav-link scrollto" href="#contact">Update Account</a></li>
               <li><a class="nav-link scrollto" href="#contact">Account Help</a></li>
             </ul>
           </li>
-
           
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
@@ -97,7 +95,7 @@
             <div class="slider-content text-center">
               <div class="header-bottom">
                 <div class="layer2">
-                  <h1>Welcome Advertiser! @User.Identity.Name</h1>
+                  <h1>Welcome @User.Identity.Name!</h1>
                 </div>
               </div>
             </div>
