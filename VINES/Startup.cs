@@ -39,6 +39,7 @@ namespace VINES
             services.AddMvc();
 
             services.AddTransient<IEmailSender, EmailSender>();
+           
 
             services.AddAuthentication(
                 options =>

@@ -1,9 +1,10 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using VINES.Models;
 
 namespace VINES.Data
 {
-    public class User
+    public class User : CommonProperties
     {
         [Key]
         [Required]
@@ -20,7 +21,9 @@ namespace VINES.Data
         public string contactNumber { get; set; }
         [Required]
         public int genderID { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Email address is required")]
+        [EmailAddress(ErrorMessage ="Invalid Email Address")]
+        
         public string email { get; set; }
         [Required]
         public string password { get; set; }
