@@ -56,11 +56,10 @@
 
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a class="nav-link scrollto " href="#hero">Home</a></li>
-          <li><a class="nav-link scrollto" href="#about">About VINES</a></li>
+          <li><a class="nav-link scrollto" asp-page="/adminLanding">Home</a></li>
           <li class="dropdown"><a href="#"><span>Admin Settings</span> <i class="bi bi-chevron-right"></i></a>
             <ul>
-              <li><a class="nav-link scrollto" href="#services">Disease List</a></li>
+              <li><a class="nav-link scrollto" asp-page="/DiseaseList">Disease List</a></li>
               <li><a class="nav-link scrollto" href="#services">Institution List</a></li>
               <li><a class="nav-link scrollto" href="#services">Vaccine List</a></li>
               <li><a class="nav-link scrollto" asp-area="" asp-page="/CommunityPosts/Index">Community Posts</a></li>
@@ -197,9 +196,6 @@
 
   <!-- Template Main JS File -->
   <script type="text/javascript" src="~/assets/js/main.js"></script>
-  <script>
-    document.getElementById("budgetLabel").innerHTML = "testing";
-  </script>
 
     @await RenderSectionAsync("Scripts", required: false)
 

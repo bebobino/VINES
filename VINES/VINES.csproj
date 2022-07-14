@@ -13,6 +13,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\assets\css\Privacy.css" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\assets\css\privacy.css" />
     <None Include="wwwroot\assets\css\style.css" />
     <None Include="wwwroot\assets\img\about\1.jpg" />
     <None Include="wwwroot\assets\img\about\2.jpg" />
