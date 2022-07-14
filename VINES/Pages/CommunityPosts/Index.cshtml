@@ -84,7 +84,7 @@
                         <tr>
                             <td>@i</td>
                             <td>@communitypost.communityPostTitle</td>
-                            <td>@communitypost.communityPostCategory>
+                            <td>@communitypost.communityPostCategory</td>
                             <td>@communitypost.communityPostContent</td>
                             <td>@communitypost.dateAdded</td>
                             <td>@communitypost.lastModified</td>
@@ -122,10 +122,10 @@
                            </div>
                            <div class="form-group">
                                <label>Category</label>
-                               <select id="category" name="category" required="required">
-                                   <option value="1">1</option>
-                                   <option value="2">2</option>
-                                   <option value="3">3</option>
+                              <select id="category" name="category" required="required">
+                               @foreach (var communityPostCategories in Model.CommunityPostCategories){
+                                   <option value="@communityPostCategories.communityPostCategoryID">@communityPostCategories.communityPostCategory</option>
+                               }
                                </select>
                            </div>
                            <div class="form-group">

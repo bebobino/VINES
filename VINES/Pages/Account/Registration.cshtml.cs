@@ -18,6 +18,8 @@ namespace VINES.Pages.Account
     {
         private readonly DatabaseContext Db;
 
+        public List<Gender> genders { get; set; }
+
         public RegistrationModel(DatabaseContext Db)
         {
             this.Db = Db;
@@ -64,7 +66,7 @@ namespace VINES.Pages.Account
 
             [DataType(DataType.Password)]
             [Display(Name = "Confirm Password")]
-            [Compare("Password", ErrorMessage = "Your password does not match")]
+            [Compare("password", ErrorMessage = "Your password does not match")]
             public string confirmPassword { get; set; }
 
             [Required]
@@ -79,6 +81,8 @@ namespace VINES.Pages.Account
         public async Task OnGetAsync(string returnUrl = null)
         {
             ReturnUrl = returnUrl;
+
+            genders = Db.genders.ToList();
         }
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)

@@ -12,6 +12,7 @@ namespace VINES.Pages.CommunityPosts
     public class IndexModel : PageModel
     {
         public List<CommunityPost> CommunityPosts { get; set; }
+        public List<CommunityPostCategoriesModel> CommunityPostCategories { get; set; }
 
         private DatabaseContext db;
         public IndexModel(DatabaseContext _db)
@@ -21,6 +22,7 @@ namespace VINES.Pages.CommunityPosts
         public void OnGet()
         {
             CommunityPosts = db.CommunityPosts.ToList();
+            CommunityPostCategories = db.CommunityPostCategories.ToList();
         }
 
         public IActionResult OnPostCreate(string title, int category, string content)
