@@ -31,6 +31,12 @@
 })();
         </script>
 }*@
+<select>
+    @foreach (var communitypostcategories in Model.CommunityPostCategories)
+    {
+        <option value=@communitypostcategories.communityPostCategoryID> @communitypostcategories.communityPostCategory</option>
+    }
+</select>
 
 <partial name="_CookieConsentPartial" />
   <!-- ======= Blog Page ======= -->

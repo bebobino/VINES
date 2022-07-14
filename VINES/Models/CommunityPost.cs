@@ -11,7 +11,7 @@ namespace VINES.Models
 
         public string communityPostTitle { get; set; }
 
-        public int communityPostCategory { get; set; }
+        public int communityPostCategoryID { get; set; }
 
         public string communityPostContent { get; set; }
 

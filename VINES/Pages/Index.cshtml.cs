@@ -15,6 +15,7 @@ namespace VINES.Pages
         private readonly ILogger<IndexModel> _logger;
 
         public List<CommunityPost> CommunityPosts { get; set; }
+        public List<CommunityPostCategories> CommunityPostCategories { get; set; }
 
         private DatabaseContext db;
 
@@ -25,6 +26,7 @@ namespace VINES.Pages
         }
         public void OnGet()
         {
+            CommunityPostCategories = db.CommunityPostCategories.ToList();
             CommunityPosts = db.CommunityPosts.ToList();
         }
         
