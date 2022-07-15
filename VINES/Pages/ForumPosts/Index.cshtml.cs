@@ -5,46 +5,44 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Authorization;
 using VINES.Models;
-using System.Diagnostics;
+using System.Threading.Tasks;
 
-namespace VINES.Pages.CommunityPosts
+namespace VINES.Pages.ForumPosts
 {
-    [Authorize(AuthenticationSchemes = "Cookies")]
     public class IndexModel : PageModel
     {
-        public List<CommunityPost> CommunityPosts { get; set; }
-
+        public List<ForumPost> ForumPosts { get; set; }
         private DatabaseContext db;
         public IndexModel(DatabaseContext _db)
         {
             db = _db;
         }
+
         public void OnGet()
         {
-            CommunityPosts = db.CommunityPosts.ToList();
+            ForumPosts = db.ForumPosts.ToList();
         }
 
         public IActionResult OnPostCreate(string title, int category, string content)
         {
-            var communitypost = new CommunityPost
+            var forumpost = new ForumPost
             {
-                communityPostTitle = title,
-                communityPostCategory = category,
-                communityPostContent = content,
+                forumPostTitle = title,
+                forumPostCategory = category,
+                forumPostContent = content,
                 dateAdded = DateTime.Now,
                 lastModified = DateTime.Now
 
 
             };
-            db.CommunityPosts.Add(communitypost);
+            db.ForumPosts.Add(forumpost);
             db.SaveChanges();
             return RedirectToPage("Index");
         }
-
         public IActionResult OnPostDelete(int id)
         {
-            var communitypost = db.CommunityPosts.Find(id);
-            db.CommunityPosts.Remove(communitypost);
+            var forumpost = db.ForumPosts.Find(id);
+            db.ForumPosts.Remove(forumpost);
             db.SaveChanges();
 
             return RedirectToPage("Index");
@@ -52,21 +50,30 @@ namespace VINES.Pages.CommunityPosts
 
         public IActionResult OnGetFind(int id)
         {
-            var communitypost = db.CommunityPosts.Find(id);
-            return new JsonResult(communitypost);
+            var forumpost = db.ForumPosts.Find(id);
+            return new JsonResult(forumpost);
         }
+        
+        public IActionResult OnPostDetails(int id, int fid)
+        {
+            
+            return RedirectToPage("Content");
+            
 
+        }
         public IActionResult OnPostUpdate(int id, string title, int category, string content)
         {
-            Debug.WriteLine("test");
-
-            var communitypost = db.CommunityPosts.Find(id);
-            communitypost.communityPostTitle = title;
-            communitypost.communityPostCategory = category;
-            communitypost.communityPostContent = content;
-            communitypost.lastModified = DateTime.Now;
+            var forumPost = db.ForumPosts.Find(id);
+            forumPost.forumPostTitle = title;
+            forumPost.forumPostCategory = category;
+            forumPost.forumPostContent = content;
+            forumPost.lastModified = DateTime.Now;
             db.SaveChanges();
             return RedirectToPage("Index");
         }
     }
+
+    
+
 }
+
