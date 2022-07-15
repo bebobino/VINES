@@ -8,7 +8,7 @@ using VINES.Models;
 
 namespace VINES.Pages.CommunityPosts
 {
-    [Authorize(AuthenticationSchemes = "Cookies")]
+    [Authorize(Roles = "Admin")]
     public class IndexModel : PageModel
     {
         public List<CommunityPost> CommunityPosts { get; set; }

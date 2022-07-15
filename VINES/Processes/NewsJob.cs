@@ -30,7 +30,7 @@ namespace VINES.Processes
              */
 
             //getPNA();
-            getDOH();
+            //getDOH();
 
 
         }

@@ -33,5 +33,12 @@ namespace VINES.Pages.Account
                 return RedirectToPage();
             }
         }
+
+        public async Task<IActionResult> OnPostLogoutAsync()
+        {
+            // using Microsoft.AspNetCore.Authentication;
+            await HttpContext.SignOutAsync();
+            return RedirectToPage();
+        }
     }
 }

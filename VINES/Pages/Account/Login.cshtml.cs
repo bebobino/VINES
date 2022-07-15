@@ -63,7 +63,7 @@ namespace VINES.Pages.Account
                 {
                     new Claim(ClaimTypes.NameIdentifier, user.userID.ToString()),
                     new Claim(ClaimTypes.Name, user.email),
-                    new Claim("UserDefined", "Whatever"),
+                    new Claim(ClaimTypes.Role, "Patient"),
                 };
 
                 var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);

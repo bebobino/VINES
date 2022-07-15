@@ -19,7 +19,7 @@ namespace VINES.Pages.Account
         private readonly DatabaseContext Db;
 
         public List<Gender> genders { get; set; }
-
+       
         public RegistrationModel(DatabaseContext Db)
         {
             this.Db = Db;

@@ -4,7 +4,7 @@ using VINES.Models;
 
 namespace VINES.Data
 {
-    public class User : CommonProperties
+    public class User
     {
         [Key]
         [Required]

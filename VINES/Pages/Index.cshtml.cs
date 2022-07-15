@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
@@ -27,6 +28,13 @@ namespace VINES.Pages
         {
             CommunityPosts = db.CommunityPosts.ToList();
         }
-        
+
+        public async Task<IActionResult> OnPostLogoutAsync()
+        {
+     
+            await HttpContext.SignOutAsync();
+            return RedirectToPage();
+        }
+
     }
 }

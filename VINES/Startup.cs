@@ -40,12 +40,17 @@ namespace VINES
             services.AddMvc();
 
             services.AddTransient<IEmailSender, EmailSender>();
-           
+
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("AdminOnly", policy => policy.RequireClaim("Admin"));
+            });
 
             services.AddAuthentication(
                 options =>
                 {
                     options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                    options.DefaultChallengeScheme = GoogleDefaults.AuthenticationScheme;
                 })
                     .AddCookie("Cookies", options =>
                     {
@@ -54,7 +59,7 @@ namespace VINES
                         options.AccessDeniedPath = "/Account/AccessDenied";
                         options.ReturnUrlParameter = "ReturnUrl";
                     })
-                    .AddGoogle(GoogleDefaults.AuthenticationScheme, options =>
+                    .AddGoogle(options =>
                     {
                         options.ClientId = Configuration["Authentication:Google:ClientId"];
                         options.ClientSecret = Configuration["Authentication:Google:ClientSecret"];

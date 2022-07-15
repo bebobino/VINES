@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
@@ -8,6 +9,7 @@ using VINES.Models;
 
 namespace VINES.Pages
 {
+    [Authorize(Roles = "Admin")]
     public class UserStatusModel : PageModel
     {
         private readonly DatabaseContext Db;
