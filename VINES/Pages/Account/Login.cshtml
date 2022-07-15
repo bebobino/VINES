@@ -1,6 +1,7 @@
 ﻿@page
 @model VINES.Pages.Account.LoginModel
 @using VINES.Models
+
 @{
     ViewData["Title"] = "Login";
     Layout = null;
@@ -79,8 +80,11 @@
                       <span class="icon-google mr-2"></span> 
                     </a>
                   </div>
-
+                  
+                  <div class="other-login">
                   <span class="ml-auto"><a class="" asp-page="/Account/LoginAdmin">Login as an Administrator</a></span>
+                  <span class="ml-auto"><a class="" asp-page="/Account/LoginAdvert">Login as an Advertiser</a></span>
+                  </div>
                 </form>
               </div>
             </div>

@@ -1,11 +1,10 @@
 ﻿@page
-@using VINES.Models
+@model VINES.Pages.Account.LoginAdvertModel
 @{
-    ViewData["Title"] = "Login";
+    ViewData["Title"] = "Advertiser Login";
     Layout = null;
 }
 
-<!-- == Start of LOGIN TEMPLATE == -->
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -29,8 +28,6 @@
   </head>
   <body>
   
-
-  
   <div class="content">
     <div class="container">
       <div class="row justify-content-center">
@@ -43,18 +40,19 @@
               <div class="form-block">
                   <div class="mb-4">
                   <h3>Sign In to <strong>VINES</strong></h3>
-                  <p class="mb-4">We would like to thank google for making our lives easier having provided this template for logins.</p>
+                  <p class="mb-4">Please Use Your Advertiser Account</p>
                 </div>
-                <form action="#" method="post">
+                <form id="admin" method="post">
                   <div class="form-group first">
-                    <label for="username">Email</label>
-                    <input type="text" class="form-control" id="username">
+                    <label asp-for="Input.email"></label>
+                    <input type="text" asp-for="Input.email" class="form-control">
+                    <span asp-validation-for="Input.email" class="text-danger"></span>
 
                   </div>
                   <div class="form-group last mb-4">
-                    <label for="password">Password</label>
-                    <input type="password" class="form-control" id="password">
-                    
+                    <label asp-for="Input.password"></label>
+                    <input type="password" asp-for="Input.password" class="form-control" id="password">
+                    <span asp-validation-for="Input.password" class="text-danger"></span>
                   </div>
                   
                   <div class="d-flex mb-5 align-items-center">
@@ -62,21 +60,10 @@
                       <input type="checkbox" checked="checked"/>
                       <div class="control__indicator"></div>
                     </label>
-                    <span class="ml-auto"><a class="" asp-page="/Account/Registration">Create New Account</a></span> 
+                      <span class="ml-auto"><a class="" asp-page="/Account/ForgotPassword">Forgot Password</a></span> 
                   </div>
 
                   <input type="submit" value="Log In" class="btn btn-pill text-white btn-block btn-primary">
-
-                  <span class="d-block text-center my-4 text-muted"> or sign in with</span>
-                  
-                  <div class="social-login text-center">
-                    <a href="#" class="facebook">
-                      <span class="icon-facebook mr-2"></span> 
-                    </a>
-                    <a href="#" class="google">
-                      <span class="icon-google mr-2"></span> 
-                    </a>
-                  </div>
                 </form>
               </div>
             </div>
@@ -94,4 +81,6 @@
     <script src="~/loginAssets/js/main.js"></script>
   </body>
 </html> 
-<!-- end of login template -->
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

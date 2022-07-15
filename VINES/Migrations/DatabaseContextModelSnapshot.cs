@@ -74,7 +74,7 @@ namespace VINES.Migrations
 
                     b.HasKey("userID");
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", (string)null);
                 });
 
             modelBuilder.Entity("VINES.Models.CommunityPost", b =>
@@ -102,7 +102,7 @@ namespace VINES.Migrations
 
                     b.HasKey("communityPostID");
 
-                    b.ToTable("CommunityPost");
+                    b.ToTable("CommunityPost", (string)null);
                 });
 #pragma warning restore 612, 618
         }

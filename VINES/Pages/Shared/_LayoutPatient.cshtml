@@ -6,7 +6,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>VINES - User</title>
+  <title>VINES - Patient</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -56,10 +56,11 @@
           <li><a class="nav-link scrollto" href="#about">About VINES</a></li>
           <li><a class="nav-link scrollto" href="#services">Vaccine Logs</a></li>
           <li><a class="nav-link scrollto" href="#portfolio">Privacy</a></li>
-          <li class="dropdown"><a href="#"><span>Account Settings</span> <i class="bi bi-chevron-right"></i></a>
+          
+          <li class="dropdown"><a href="#"><span>@User.Identity.Name</span> <i class="bi bi-chevron-right"></i></a>
             <ul>
-                <!--must have an if statement for subscription-->
-              <li><a class="nav-link scrollto" asp-page="/Account/Subscription">Logout</a></li> 
+                <!--must have an if statement for subscription---
+              <li><a class="nav-link scrollto" asp-page="/Account/Subscription">Subscription</a></li> 
               <li><a class="nav-link scrollto" asp-page="/Account/Logout">Logout</a></li>
               <li><a class="nav-link scrollto" href="#contact">Update Account</a></li>
               <li><a class="nav-link scrollto" href="#contact">Account Help</a></li>
@@ -71,8 +72,6 @@
     </div>
   </header><!-- End Header -->
 
-  @if (User.Identity.IsAuthenticated)
-    {
         <div class="header-bg page-area">
             <div class="container position-relative">
         <div class="row">
@@ -80,7 +79,6 @@
             <div class="slider-content text-center">
               <div class="header-bottom">
                 <div class="layer2">
-                  <h1>Hello! @User.Identity.Name</h1>
                 </div>
               </div>
             </div>
@@ -88,11 +86,6 @@
         </div>
       </div>
         </div><!-- End Blog Header -->
-    }
-    else
-    {
-        
-    }
 
     
   <!-- ==BODY GOES IN HERE. WHATEVER PAGE CALLS THIS LAYOUT.== -->

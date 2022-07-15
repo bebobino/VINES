@@ -13,6 +13,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using VINES.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using VINES.Services;
+using VINES.Common;
 
 namespace VINES
 {
@@ -34,6 +38,9 @@ namespace VINES
             services.AddDbContext<DatabaseContext>(option => option.UseSqlServer(connection));
 
             services.AddMvc();
+
+            services.AddTransient<IEmailSender, EmailSender>();
+           
 
             services.AddAuthentication(
                 options =>
@@ -58,6 +65,16 @@ namespace VINES
             {
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
+            });
+
+            services.Configure<IdentityOptions>(options =>
+            {
+                options.Password.RequireDigit = true;
+                options.Password.RequireNonAlphanumeric = true;
+                options.Password.RequireLowercase = true;
+                options.Password.RequireUppercase = true;
+                options.Password.RequiredLength = 0;
+                options.Password.RequiredUniqueChars = 1;
             });
         }
 
