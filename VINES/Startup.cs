@@ -14,6 +14,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using VINES.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using VINES.Services;
+using VINES.Common;
 
 namespace VINES
 {
@@ -35,6 +38,9 @@ namespace VINES
             services.AddDbContext<DatabaseContext>(option => option.UseSqlServer(connection));
 
             services.AddMvc();
+
+            services.AddTransient<IEmailSender, EmailSender>();
+           
 
             services.AddAuthentication(
                 options =>

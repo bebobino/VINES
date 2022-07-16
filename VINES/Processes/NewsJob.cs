@@ -68,6 +68,8 @@ namespace VINES.Processes
                 summary = summary.Replace("&ndash;", ":");
 
                 Debug.WriteLine(pageTitle + "\n" + uploadDate + "\n" + summary + "\n");
+
+
             }
 
         }

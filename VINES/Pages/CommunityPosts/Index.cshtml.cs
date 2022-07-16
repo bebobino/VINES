@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Authorization;
 using VINES.Models;
+using System.Diagnostics;
 
 namespace VINES.Pages.CommunityPosts
 {
@@ -12,6 +13,7 @@ namespace VINES.Pages.CommunityPosts
     public class IndexModel : PageModel
     {
         public List<CommunityPost> CommunityPosts { get; set; }
+        public List<CommunityPostCategoriesModel> CommunityPostCategories { get; set; }
 
         private DatabaseContext db;
         public IndexModel(DatabaseContext _db)
@@ -21,6 +23,7 @@ namespace VINES.Pages.CommunityPosts
         public void OnGet()
         {
             CommunityPosts = db.CommunityPosts.ToList();
+            CommunityPostCategories = db.CommunityPostCategories.ToList();
         }
 
         public IActionResult OnPostCreate(string title, int category, string content)
@@ -57,6 +60,8 @@ namespace VINES.Pages.CommunityPosts
 
         public IActionResult OnPostUpdate(int id, string title, int category, string content)
         {
+            Debug.WriteLine("test");
+
             var communitypost = db.CommunityPosts.Find(id);
             communitypost.communityPostTitle = title;
             communitypost.communityPostCategory = category;

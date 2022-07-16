@@ -46,24 +46,6 @@
                   <p class="mb-4">It's quick and easy.</p>
                 </div>
                 <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
-                  <div class="form-group first">
-                    <label asp-for="Input.email"></label>
-                    <input type="text" class="form-control" asp-for="Input.email">
-                    <span asp-validation-for="Input.email" class="text-danger"></span>
-
-                  </div>
-                  <div class="form-group last mb-4">
-                    <label asp-for="Input.password"></label>
-                    <input type="password" class="form-control" asp-for="Input.password">
-                    <span asp-validation-for="Input.password" class="text-danger"></span>
-               
-                  </div>
-                  <div class="form-group last mb-4">
-                      <label asp-for="Input.confirmPassword"></label>
-                      <input type="password" class="form-control" asp-for="Input.confirmPassword" />
-                      <span asp-validation-for="Input.confirmPassword" class="text-danger"></span>
-                  </div>
-
                   <div class="form-group last mb-4">
                     <label asp-for="Input.firstName"></label>
                     <input type="text" class="form-control" asp-for="Input.firstName">
@@ -93,7 +75,13 @@
                   <!--  ===== ADD Gender Drop down ==== -->
                   <div class="form-group last mb-4">
                     <label asp-for="Input.gender"></label>
-                    <input type="number" class="form-control" asp-for="Input.gender" min="1" max="3">
+                    <select asp-for="Input.gender">
+                        @foreach (var genders in Model.genders)
+                                            {
+                                                <option value="@genders.genderID">@genders.gender</option>
+                                            }
+
+                    </select>
                
                   </div>
                   <!-- ======= HELP FIX DOB ====== -->
@@ -101,6 +89,23 @@
                     <label asp-for="Input.dateOfBirth"></label>
                     <input type="date" class="form-control" asp-for="Input.dateOfBirth">
                
+                  </div>
+                  <div class="form-group first">
+                    <label asp-for="Input.email"></label>
+                    <input type="text" class="form-control" asp-for="Input.email">
+                    <span asp-validation-for="Input.email" class="text-danger"></span>
+
+                  </div>
+                  <div class="form-group last mb-4">
+                    <label asp-for="Input.password"></label>
+                    <input type="password" class="form-control" asp-for="Input.password">
+                    <span asp-validation-for="Input.password" class="text-danger"></span>
+               
+                  </div>
+                  <div class="form-group last mb-4">
+                      <label asp-for="Input.confirmPassword"></label>
+                      <input type="password" class="form-control" asp-for="Input.confirmPassword" />
+                      <span asp-validation-for="Input.confirmPassword" class="text-danger"></span>
                   </div>
 
                   <input type="submit" value="Create New Account" class="btn btn-pill text-white btn-block btn-primary">
