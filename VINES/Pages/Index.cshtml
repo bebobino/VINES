@@ -2,7 +2,6 @@
 @model IndexModel
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @using VINES.Models
-@using CommunityPosts
 @using Microsoft.AspNetCore.Http.Features
 @{
     ViewData["Title"] = "Home page";
@@ -31,6 +30,7 @@
 })();
         </script>
 }*@
+<script type="text/javascript" src="~/assets/js/main.js?v=2"></script> 
 
 <partial name="_CookieConsentPartial" />
   <!-- ======= Blog Page ======= -->
@@ -49,61 +49,6 @@
               <br>
               <br>
               <div class="single-blog-page">
-                <!-- recent start -->
-                <div class="left-blog">
-                  <h4>recent news</h4>
-                  <div class="recent-post">
-                    <!-- start single post -->
-                    <div class="recent-single-post">
-                      <div class="post-img">
-                        <a href="#">
-                          <img src="assets/img/blog/1.jpg" alt="">
-                        </a>
-                      </div>
-                      <div class="pst-content">
-                        <p><a href="#"> Redug Lerse dolor sit amet consect adipis elit.</a></p>
-                      </div>
-                    </div>
-                    <!-- End single post -->
-                    <!-- start single post -->
-                    <div class="recent-single-post">
-                      <div class="post-img">
-                        <a href="#">
-                          <img src="assets/img/blog/2.jpg" alt="">
-                        </a>
-                      </div>
-                      <div class="pst-content">
-                        <p><a href="#"> Redug Lerse dolor sit amet consect adipis elit.</a></p>
-                      </div>
-                    </div>
-                    <!-- End single post -->
-                    <!-- start single post -->
-                    <div class="recent-single-post">
-                      <div class="post-img">
-                        <a href="#">
-                          <img src="assets/img/blog/3.jpg" alt="">
-                        </a>
-                      </div>
-                      <div class="pst-content">
-                        <p><a href="#"> Redug Lerse dolor sit amet consect adipis elit.</a></p>
-                      </div>
-                    </div>
-                    <!-- End single post -->
-                    <!-- start single post -->
-                    <div class="recent-single-post">
-                      <div class="post-img">
-                        <a href="#">
-                          <img src="assets/img/blog/4.jpg" alt="">
-                        </a>
-                      </div>
-                      <div class="pst-content">
-                        <p><a href="#"> Redug Lerse dolor sit amet consect adipis elit.</a></p>
-                      </div>
-                    </div>
-                    <!-- End single post -->
-                  </div>
-                </div>
-                <!-- recent end -->
               </div>
               <div class="single-blog-page">
                 <div class="left-blog">
@@ -147,7 +92,7 @@
 
                   <div class="card col-lg-3 col-md-5 col-6 d-md-flex align-items-center text-center" id = "showVaccines">
                       <br>
-                      <h1>8</h1>
+                      <h1>@Model.Vaccines.Count</h1>
                       <h5>Vaccines in database</h5>
 
                   </div>
@@ -166,113 +111,26 @@
             <br />
             <h1 style="font-size: x-large;"><b>News and Updates</b></h1>
             <div class="row">
-              <div class="col-md-12 col-sm-12 col-xs-12">
-                <div class="single-blog">
-                  <div class="single-blog-img">
-                  </div>
-                  <div class="blog-text">
-                    <h5>
-                      <a href="#">Post my imagine Items</a>
-                    </h5>
-                    <div class="blog-meta">
-                      <span class="date-type">
-                        <i class="bi bi-calendar"></i>2016-03-05 / 09:10:16
-                      </span>
-                    </div>
-                    <p>
-                      Etiam sit amet orci eget eros faucibus tincidunt. Duis leo. Sed fringilla mauris sit amet nibh. Donec sodales sagittis magna. Sed consequat, leo eget bibendum sodales, augue velit.
-                    </p>
-                  </div>
-                  <span>
-                    <a href="blog-details.html" class="ready-btn">Read more</a>
-                  </span>
-                </div>
-              </div>
-              <!-- End single blog -->
-              <div class="col-md-12 col-sm-12 col-xs-12">
+              @foreach(var webpage in Model.WebPages)
+              {
+                    <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="single-blog">
                   <div class="blog-text">
                     <h5>
-                      <a href="#">Post my imagine Items</a>
+                      <a href="@webpage.webURL">@webpage.pageTitle</a>
                     </h5>
                     <div class="blog-meta">
                       <span class="date-type">
-                        <i class="bi bi-calendar"></i>2016-03-05 / 09:10:16
+                        <i class="bi bi-calendar"></i>@webpage.uploadDate
                       </span>
                     </div>
                     <p>
-                      Etiam sit amet orci eget eros faucibus tincidunt. Duis leo. Sed fringilla mauris sit amet nibh. Donec sodales sagittis magna. Sed consequat, leo eget bibendum sodales, augue velit.
+                      @webpage.summary
                     </p>
                   </div>
-                  <span>
-                    <a href="blog-details.html" class="ready-btn">Read more</a>
-                  </span>
                 </div>
               </div>
-              <!-- Start single blog -->
-              <div class="col-md-12 col-sm-12 col-xs-12">
-                <div class="single-blog">
-                  <div class="blog-text">
-                    <h5>
-                      <a href="#">Post my imagine Items</a>
-                    </h5>
-                    <div class="blog-meta">
-                      <span class="date-type">
-                        <i class="bi bi-calendar"></i>2016-03-05 / 09:10:16
-                      </span>
-                    </div>
-                    <p>
-                      Etiam sit amet orci eget eros faucibus tincidunt. Duis leo. Sed fringilla mauris sit amet nibh. Donec sodales sagittis magna. Sed consequat, leo eget bibendum sodales, augue velit.
-                    </p>
-                  </div>
-                  <span>
-                    <a href="blog-details.html" class="ready-btn">Read more</a>
-                  </span>
-                </div>
-              </div>
-              <!-- End single blog -->
-              <div class="col-md-12 col-sm-12 col-xs-12">
-                <div class="single-blog">
-                  <div class="blog-text">
-                    <h5>
-                      <a href="#">Post my imagine Items</a>
-                    </h5>
-                    <div class="blog-meta">
-                      <span class="date-type">
-                        <i class="bi bi-calendar"></i>2016-03-05 / 09:10:16
-                      </span>
-                    </div>
-                    <p>
-                      Etiam sit amet orci eget eros faucibus tincidunt. Duis leo. Sed fringilla mauris sit amet nibh. Donec sodales sagittis magna. Sed consequat, leo eget bibendum sodales, augue velit.
-                    </p>
-                  </div>
-                  <span>
-                    <a href="blog-details.html" class="ready-btn">Read more</a>
-                  </span>
-                </div>
-              </div>
-              <!-- Start single blog -->
-              <div class="col-md-12 col-sm-12 col-xs-12">
-                <div class="single-blog">
-                  <div class="blog-text">
-                    <h5>
-                      <a href="#">Post my imagine Items</a>
-                    </h5>
-                    <div class="blog-meta">
-                      <span class="date-type">
-                        <i class="bi bi-calendar"></i>2016-03-05 / 09:10:16
-                      </span>
-                    </div>
-                    <p>
-                      Etiam sit amet orci eget eros faucibus tincidunt. Duis leo. Sed fringilla mauris sit amet nibh. Donec sodales sagittis magna. Sed consequat, leo eget bibendum sodales, augue velit.
-                    </p>
-                  </div>
-                  <span>
-                    <a href="blog-details.html" class="ready-btn">Read more</a>
-                  </span>
-                </div>
-              </div>
-              <!-- End single blog -->
+              }
               <div class="blog-pagination">
                 <ul class="pagination">
                   <li class="page-item"><a href="#" class="page-link">&lt;</a></li>
@@ -286,31 +144,61 @@
           </div>
         </div>
       </div>
-    </div><!-- End Blog Page -->
+    </div>
+    <!-- End Blog Page -->
+
+
+    <!-- modal -->
+
+<div class="modal fade" id="vaccines">
+  <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h4 class="modal-title">Vaccines in database</h4>
+          </div>
+          <div class="modal-body">
+            <table>
+                <tr>
+                    <td >Vaccine</td>
+                    <td >Disease</td>
+                    <td >Description</td>
+                </tr>
+                @foreach(var vaccine in Model.Vaccines)
+                    {
+                        var diseases = Model.Diseases;
+                        <tr>
+                        <td>@vaccine.vaccineName</td>
+                        <td>@vaccine.diseases.diseaseName</td>
+                        <td>@vaccine.notes</td>
+                    </tr>
+                }
+            </table>
+            <br>
+            <input type="button" class="btn btn-secondary" id="hideVaccines" value="Hide" />
+          </div>
+      </div>
+  </div>
+</div>
+
+
+
+
+
 
     <script>
-        function showNotification() {
-            const notification = new Notification("New message from Admin", {
-                body: "Thank you for allowing notifications",
-                icon: "favicon-32x32.png"
-            });
-
-            notification.onclick = (e) => {
-                window.location.href = "https://google.com"
-            }
-        }
-
-        console.log(Notification.permission);
-
+        
 if (Notification.permission === "granted") {
-    showNotification();
-} else if (Notification.permission !== "denied")
-{
+    showNotification("Welcome to VINES!", "Hope you are having a nice day!");
+} else if (Notification.permission !== "denied") {
     Notification.requestPermission().then(permission => {
         if (permission === "granted") {
             showNotification();
         }
     });
 }
-    </script>
+</script>
+
+
+
+
 

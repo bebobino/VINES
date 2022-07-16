@@ -11,12 +11,17 @@ namespace VINES.Models
 
         public string communityPostTitle { get; set; }
 
-        public int communityPostCategory { get; set; }
+        public int communityPostCategoryID { get; set; }
 
         public string communityPostContent { get; set; }
 
         public DateTime dateAdded { get; set; }
 
         public DateTime lastModified { get; set; }
+        public int postID { get; set; }
+        [ForeignKey("postID")]
+        public Posts posts { get; set; }
+        [ForeignKey("communityPostCategoryID")]
+        public CommunityPostCategoriesModel communityPostCategory { get; set; }
     }
 }

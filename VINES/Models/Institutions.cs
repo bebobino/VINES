@@ -9,10 +9,10 @@ namespace VINES.Models
     {
         [Key]
         public int institutionID { get; set; }
-        public int institutionType { get; set; }
+        public int institutionTypeID { get; set; }
         public string institutionName { get; set; }
-        public decimal longitude { get; set;}
-        public decimal latitude { get; set;}
+        public decimal Long { get; set;}
+        public decimal lat { get; set;}
         public string notes { get; set; }
         public DateTime dateAdded { get; set; }
         public DateTime lastModified { get; set; }

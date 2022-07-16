@@ -1,10 +1,12 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using VINES.Models;
 
 namespace VINES.Data
 {
-    public class User : CommonProperties
+    [Table("Users")]
+    public class User 
     {
         [Key]
         [Required]

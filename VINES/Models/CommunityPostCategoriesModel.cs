@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace VINES.Models
 {
-    [Table("communityPostCategory")]
+    [Table("communityPostCategories")]
     public class CommunityPostCategoriesModel
     {
         [Key]

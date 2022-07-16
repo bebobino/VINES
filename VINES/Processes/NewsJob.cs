@@ -7,6 +7,8 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Mail;
+using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 
@@ -17,31 +19,25 @@ namespace VINES.Processes
 
         public void getNews()
         {
-            /*
-            
-            - WEB SCRAPER REQUIRED
-            - MUST BE CALLED EVERY 5 MINUTES SA SCHEDULER
-            Call system to fetch all sources in DBASE
-            
-            (for each source na makuha sa DBASE){
-                Get first 5 articles
-                Save sa DBASE
-            }
-             */
 
-            //getPNA();
+
+            getPNA();
             getDOH();
 
 
         }
         public static async void getPNA()
         {
+            HtmlWeb web = new HtmlWeb();
+
+            web.OverrideEncoding = Encoding.UTF8;
+            web.UserAgent = "Mozilla/5.0 (Windows NT 6.2; WOW64; rv:19.0) Gecko/20100101 Firefox/19.0";
+
             var url = "https://www.pna.gov.ph/articles/search?q=vaccine";
             var httpClient = new HttpClient();
-            var html = await httpClient.GetStringAsync(url);
 
             var htmlDocument = new HtmlDocument();
-            htmlDocument.LoadHtml(html);
+            htmlDocument = web.Load(url);
 
             var articleList = htmlDocument.DocumentNode.Descendants("div")
                 .Where(node => node.GetAttributeValue("class", "")
@@ -61,15 +57,21 @@ namespace VINES.Processes
                 var pageTitle = article.Descendants("h3")
                     .Where(node => node.GetAttributeValue("class", "")
                     .Equals("media-heading")).FirstOrDefault().InnerText;
-
+                var webURL = article.Descendants("h3")
+                    .Where(node => node.GetAttributeValue("class", "")
+                    .Equals("media-heading")).FirstOrDefault().InnerHtml;
+                var reg = new Regex("\".*?\"");
+                var matches = reg.Matches(webURL);
+                foreach (var item in matches)
+                    webURL = "https://www.pna.gov.ph" + item.ToString().Trim('"');
                 var summary = article.Descendants("p")
                     .Where(node => node.GetAttributeValue("class", "")
                     .Equals("excerpt")).FirstOrDefault().InnerText;
                 summary = summary.Replace("&ndash;", ":");
+                //createRecord(1, uploadDate, pageTitle, webURL, summary);
 
-                Debug.WriteLine(pageTitle + "\n" + uploadDate + "\n" + summary + "\n");
-
-
+                Help.test(1, uploadDate, pageTitle, webURL, summary);
+                //Debug.WriteLine(pageTitle + "\n" + uploadDate + "\n" + summary + "\n" + webURL);
             }
 
         }
@@ -104,7 +106,7 @@ namespace VINES.Processes
                     .Equals("search-snippet")).FirstOrDefault().InnerText;
                 summary = summary.Replace("&ndash;", ":");
 
-                Debug.WriteLine(pageTitle + "\n" + "\n" + summary + "\n");
+               // Debug.WriteLine(pageTitle + "\n" + "\n" + summary + "\n");
             }
 
         }

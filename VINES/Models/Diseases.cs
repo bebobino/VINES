@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 namespace VINES.Models
 {
     [Table("diseases")]
-    public class diseases
+    public class Diseases
     {
         [Key]
         public int diseaseID { get; set; }

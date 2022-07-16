@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace VINES.Models
 {
-    [Table("Gender")]
+    [Table("Genders")]
     public class Gender
     {
         [Key]

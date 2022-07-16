@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Authorization;
 using VINES.Models;
+using Microsoft.EntityFrameworkCore;
+using System.Diagnostics;
 
 namespace VINES.Pages.CommunityPosts
 {
@@ -21,19 +23,26 @@ namespace VINES.Pages.CommunityPosts
         }
         public void OnGet()
         {
-            CommunityPosts = db.CommunityPosts.ToList();
+            CommunityPosts = db.CommunityPosts.Include("communityPostCategory").Include("posts").ToList();
             CommunityPostCategories = db.CommunityPostCategories.ToList();
         }
 
         public IActionResult OnPostCreate(string title, int category, string content)
         {
+            var post = new Posts
+            {
+                isVisible = true
+            };
+            db.Post.Add(post);
+            db.SaveChanges();
             var communitypost = new CommunityPost
             {
                 communityPostTitle = title,
-                communityPostCategory = category,
+                communityPostCategoryID = category,
                 communityPostContent = content,
                 dateAdded = DateTime.Now,
-                lastModified = DateTime.Now
+                lastModified = DateTime.Now,
+                postID = post.postID
 
 
             };
@@ -53,15 +62,16 @@ namespace VINES.Pages.CommunityPosts
 
         public IActionResult OnGetFind(int id)
         {
-            var communitypost = db.CommunityPosts.Find(id);
-            return new JsonResult(communitypost);
+            var communitypostID = db.CommunityPosts.Find(id);
+            
+            return new JsonResult(communitypostID);
         }
 
         public IActionResult OnPostUpdate(int id, string title, int category, string content)
         {
             var communitypost = db.CommunityPosts.Find(id);
             communitypost.communityPostTitle = title;
-            communitypost.communityPostCategory = category;
+            communitypost.communityPostCategoryID = category;
             communitypost.communityPostContent = content;
             communitypost.lastModified = DateTime.Now;
             db.SaveChanges();

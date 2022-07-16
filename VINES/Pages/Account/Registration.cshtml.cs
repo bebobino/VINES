@@ -10,6 +10,7 @@ using System;
 using System.Threading.Tasks;
 using System.Linq;
 using VINES.Data;
+using VINES.Processes;
 
 namespace VINES.Pages.Account
 {
@@ -98,7 +99,7 @@ namespace VINES.Pages.Account
                 }
                 else
                 {
-                    user = new User { firstName = Input.firstName, middleName = Input.middleName, lastName = Input.lastName, genderID = Input.gender, dateOfBirth = Input.dateOfBirth, email = Input.email, password = Input.password, contactNumber = Input.contactNumber, roleID = 3, isBlocked = false, isLocked = false, emailAuth = false, dateRegistered = DateTime.Now, lastModified = DateTime.Now, failedAttempts = 0};
+                    user = new User { firstName = Input.firstName, middleName = Input.middleName, lastName = Input.lastName, genderID = Input.gender, dateOfBirth = Input.dateOfBirth, email = Input.email, password = Help.Hash(Input.password), contactNumber = Input.contactNumber, roleID = 3, isBlocked = false, isLocked = false, emailAuth = false, dateRegistered = DateTime.Now, lastModified = DateTime.Now, failedAttempts = 0};
                     Db.Users.Add(user);
                     await Db.SaveChangesAsync();
                     return RedirectToPage("RegisterConfirmation", new { email = Input.email });

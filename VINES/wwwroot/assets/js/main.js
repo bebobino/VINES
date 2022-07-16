@@ -20,7 +20,7 @@
       return document.querySelector(el)
     }
   }
-
+    
   /**
    * Easy event listener function
    */
@@ -254,13 +254,19 @@ function getLocation() {
 }
 function showPosition(position) {
     mymap.setView([position.coords.latitude, position.coords.longitude], 15)
-    var marker = L.marker([position.coords.latitude, position.coords.longitude]).addTo(mymap);
+    var marker = L.marker([position.coords.latitude, position.coords.longitude]).addTo(mymap).bindPopup("<center><p>You</p></center>");
+    marker.on('mouseover', function (e) {
+        this.openPopup();
+    });
+    marker.on('mouseout', function (e) {
+        this.closePopup();
+    });
 }
-
 function addMarker(x, y) {
     var marker = L.marker([y, x]).addTo(mymap);
     mymap.panTo(new L.LatLng(y, x));
 }
+
 
 function initializeMap() {
     mymap = L.map('vaxMap').setView([14.676208, 121.043861], 15);
@@ -269,14 +275,15 @@ function initializeMap() {
     getLocation();
 }
 
-function getBudget() {
-    if (document.getElementById("budget").value == 0) {
-        document.getElementById("budgetLabel").innerHTML = "Free";
+
+function showNotification(title, notifbody) {
+    const notification = new Notification(title, {
+        body: notifbody
+    });
+
+    notification.onclick = (e) => {
+        window.location.href = "https://google.com"
     }
-    else {
-        document.getElementById("budgetLabel").innerHTML = "&#8369; " + document.getElementById("budget").value;
-    }
-    
 }
 
 $(document).ready(function () {

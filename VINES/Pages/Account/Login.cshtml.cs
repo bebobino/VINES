@@ -9,6 +9,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using VINES.Models;
+using VINES.Processes;
 
 namespace VINES.Pages.Account
 {
@@ -52,7 +53,7 @@ namespace VINES.Pages.Account
 
             if (ModelState.IsValid)
             {
-                var user = Db.Users.Where(f => f.email == Input.email && f.password == Input.password && f.roleID == 3).FirstOrDefault();
+                var user = Db.Users.Where(f => f.email == Input.email && f.password == Help.Hash(Input.password) && f.roleID == 3).FirstOrDefault();
                 if (user == null)
                 {
                     ModelState.AddModelError(string.Empty, "Invalid Email or Password");
