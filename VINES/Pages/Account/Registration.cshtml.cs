@@ -57,7 +57,9 @@ namespace VINES.Pages.Account
             public string email { get; set; }
 
             [Required]
-            [Display(Name = "Contact Number")]
+            [Display(Name = "Contact Nunber")]
+            [DataType(DataType.PhoneNumber)]
+            [StringLength(11, ErrorMessage = "Invalid Phone Number", MinimumLength = 11)]
             public string contactNumber { get; set; }
 
             [Required]
@@ -125,7 +127,7 @@ namespace VINES.Pages.Account
                     };
                     Db.Patients.Add(patient);
                     await Db.SaveChangesAsync();
-                    return RedirectToPage("~/Index", new { email = Input.email });
+                    return RedirectToPage("/Account/RegisterConfirmation");
                 }
             }
 

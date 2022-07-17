@@ -16,6 +16,8 @@ using VINES.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using VINES.Services;
+using Microsoft.AspNetCore.Authentication.Facebook;
+
 namespace VINES
 {
     public class Startup
@@ -38,7 +40,7 @@ namespace VINES
             services.AddMvc();
 
             services.AddTransient<IEmailSender, EmailSender>();
-           
+
 
             services.AddAuthentication(
                 options =>
@@ -57,7 +59,38 @@ namespace VINES
                         options.ClientId = Configuration["Authentication:Google:ClientId"];
                         options.ClientSecret = Configuration["Authentication:Google:ClientSecret"];
                         options.SaveTokens = true;
+                        options.SignInScheme = "Cookies";
+                    })
+                    .AddFacebook(facebookOptions =>
+                    { 
+                        facebookOptions.AppId = Configuration["Authentication:Facebook:AppId"];
+                        facebookOptions.AppSecret = Configuration["Authentication:Facebook:AppSecret"];
+                        facebookOptions.SignInScheme = "Cookies";
+
                     });
+
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("Google", policy =>
+                {
+                    policy.AuthenticationSchemes.Add(GoogleDefaults.AuthenticationScheme);
+                    policy.RequireAuthenticatedUser();
+                });
+
+                options.AddPolicy("Facebook", policy =>
+                {
+                    policy.AuthenticationSchemes.Add(FacebookDefaults.AuthenticationScheme);
+                    policy.RequireAuthenticatedUser();
+                   
+                });
+
+                options.AddPolicy("AdminOnly", policy =>
+                {
+                    policy.AuthenticationSchemes.Add(CookieAuthenticationDefaults.AuthenticationScheme);
+                    policy.RequireAuthenticatedUser();
+                    policy.RequireRole("Admin");
+                });
+            });
 
             services.Configure<CookiePolicyOptions>(options =>
             {

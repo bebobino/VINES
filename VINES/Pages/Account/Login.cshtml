@@ -48,6 +48,7 @@
                   <p class="mb-4">Use a local account to log in.</p>
                 </div>
                 <form id="account" method="post">
+                    @Html.ValidationMessage("Error")
                   <div class="form-group first">
                     <label asp-for="Input.email"></label>
                     <input type="text" asp-for="Input.email" class="form-control">
@@ -73,10 +74,10 @@
                   <span class="d-block text-center my-4 text-muted"> or sign in with</span>
                   
                   <div class="social-login text-center">
-                    <a href="#" class="facebook">
+                    <a asp-page="/Account/extFacebook" class="facebook">
                       <span class="icon-facebook mr-2"></span> 
                     </a>
-                    <a href="#" class="google">
+                    <a href="/Account/extGoogle" class="google">
                       <span class="icon-google mr-2"></span> 
                     </a>
                   </div>

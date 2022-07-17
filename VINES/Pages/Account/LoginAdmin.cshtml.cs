@@ -68,7 +68,7 @@ namespace VINES.Pages.Account
                 {
                     new Claim(ClaimTypes.NameIdentifier, user.userID.ToString()),
                     new Claim(ClaimTypes.Name, user.email),
-                    new Claim("UserDefined", "Admin"),
+                    new Claim(ClaimTypes.Role, "Admin"),
                 };
 
                 var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
