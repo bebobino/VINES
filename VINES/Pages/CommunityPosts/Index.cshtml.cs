@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Authorization;
 using VINES.Models;
+using System.Diagnostics;
 
 namespace VINES.Pages.CommunityPosts
 {
@@ -59,6 +60,8 @@ namespace VINES.Pages.CommunityPosts
 
         public IActionResult OnPostUpdate(int id, string title, int category, string content)
         {
+            Debug.WriteLine("test");
+
             var communitypost = db.CommunityPosts.Find(id);
             communitypost.communityPostTitle = title;
             communitypost.communityPostCategory = category;

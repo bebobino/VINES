@@ -96,6 +96,7 @@ namespace VINES.Helper
             HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, "v1/payments/payment");
             request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", accessToken.access_token);
 
+
             var payment = JObject.FromObject(new
             {
                 intent = "sale",
@@ -117,6 +118,7 @@ namespace VINES.Helper
                     }
                 }
             })
+
             });
             request.Content = new StringContent(JsonConvert.SerializeObject(payment),
                 Encoding.UTF8, "application/json");
