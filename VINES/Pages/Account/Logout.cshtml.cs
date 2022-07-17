@@ -1,44 +1,30 @@
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.Extensions.Logging;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace VINES.Pages.Account
 {
-    [AllowAnonymous]
     public class LogoutModel : PageModel
     {
-        public LogoutModel(ILogger<LogoutModel> logger)
+        public async Task<IActionResult> OnPostAsync()
         {
-
-        }
-
-        public void OnGet()
-        {
-
-        }
-
-        public async Task<IActionResult> OnPost(string returnUrl = null)
-        {
-            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-            if (returnUrl != null)
+            if (HttpContext.Request.Cookies.Count > 0)
             {
-                return LocalRedirect(returnUrl);
+                var siteCookies = HttpContext.Request.Cookies.Where(c => c.Key.Contains(".AspNetCore.") || c.Key.Contains("Microsoft.Authentication"));
+                foreach (var cookie in siteCookies)
+                {
+                    Response.Cookies.Delete(cookie.Key);
+                }
             }
-            else
-            {
-                return RedirectToPage();
-            }
-        }
 
-        public async Task<IActionResult> OnPostLogoutAsync()
-        {
-            // using Microsoft.AspNetCore.Authentication;
-            await HttpContext.SignOutAsync();
-            return RedirectToPage();
+            await HttpContext.SignOutAsync(
+CookieAuthenticationDefaults.AuthenticationScheme);
+            HttpContext.Session.Clear();
+            return RedirectToPage("/Index");
+
         }
     }
 }

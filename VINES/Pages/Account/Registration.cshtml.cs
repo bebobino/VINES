@@ -23,6 +23,8 @@ namespace VINES.Pages.Account
         public RegistrationModel(DatabaseContext Db)
         {
             this.Db = Db;
+
+            genders = Db.genders.ToList();
         }
 
         [BindProperty]
@@ -56,6 +58,8 @@ namespace VINES.Pages.Account
 
             [Required]
             [Display(Name = "Contact Number")]
+            [DataType(DataType.PhoneNumber)]
+            [StringLength(11, ErrorMessage = "Invalid Phone Number", MinimumLength = 11)]
             public string contactNumber { get; set; }
 
             [Required]
@@ -81,8 +85,6 @@ namespace VINES.Pages.Account
         public async Task OnGetAsync(string returnUrl = null)
         {
             ReturnUrl = returnUrl;
-
-            genders = Db.genders.ToList();
         }
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
@@ -101,7 +103,7 @@ namespace VINES.Pages.Account
                     user = new User { firstName = Input.firstName, middleName = Input.middleName, lastName = Input.lastName, genderID = Input.gender, dateOfBirth = Input.dateOfBirth, email = Input.email, password = Input.password, contactNumber = Input.contactNumber, roleID = 3, isBlocked = false, isLocked = false, emailAuth = false, dateRegistered = DateTime.Now, lastModified = DateTime.Now, failedAttempts = 0};
                     Db.Users.Add(user);
                     await Db.SaveChangesAsync();
-                    return RedirectToPage("RegisterConfirmation", new { email = Input.email });
+                    return RedirectToPage("/Account/RegisterConfirmation", new { email = Input.email });
                 }
             }
 

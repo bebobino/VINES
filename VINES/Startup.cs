@@ -17,6 +17,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using VINES.Services;
 using VINES.Common;
+using Microsoft.AspNetCore.Authentication.Facebook;
 
 namespace VINES
 {
@@ -41,16 +42,11 @@ namespace VINES
 
             services.AddTransient<IEmailSender, EmailSender>();
 
-            services.AddAuthorization(options =>
-            {
-                options.AddPolicy("AdminOnly", policy => policy.RequireClaim("Admin"));
-            });
-
-            services.AddAuthentication(
-                options =>
+            services.AddAuthentication(options =>
                 {
                     options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
                     options.DefaultChallengeScheme = GoogleDefaults.AuthenticationScheme;
+                    options.DefaultChallengeScheme = FacebookDefaults.AuthenticationScheme;
                 })
                     .AddCookie("Cookies", options =>
                     {
@@ -63,8 +59,34 @@ namespace VINES
                     {
                         options.ClientId = Configuration["Authentication:Google:ClientId"];
                         options.ClientSecret = Configuration["Authentication:Google:ClientSecret"];
-                        options.SaveTokens = true;
+                    })
+                    .AddFacebook(facebookOptions =>
+                    {
+                        facebookOptions.AppId = Configuration["Authentication:Facebook:AppId"];
+                        facebookOptions.AppSecret = Configuration["Authentication:Facebook:AppSecret"];
                     });
+
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("Google", policy =>
+                {
+                    policy.AuthenticationSchemes.Add(GoogleDefaults.AuthenticationScheme);
+                    policy.RequireAuthenticatedUser();
+                });
+
+                options.AddPolicy("Facebook", policy =>
+                {
+                    policy.AuthenticationSchemes.Add(FacebookDefaults.AuthenticationScheme);
+                    policy.RequireAuthenticatedUser();
+                });
+
+                options.AddPolicy("AdminOnly", policy =>
+                {
+                    policy.AuthenticationSchemes.Add(CookieAuthenticationDefaults.AuthenticationScheme);
+                    policy.RequireAuthenticatedUser();
+                    policy.RequireClaim("Admin");
+                });
+            });
 
             services.Configure<CookiePolicyOptions>(options =>
             {

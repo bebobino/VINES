@@ -58,21 +58,28 @@ namespace VINES.Pages.Account
                     ModelState.AddModelError(string.Empty, "Invalid Email or Password");
                     return Page();
                 }
-
-                var claims = new List<Claim>
+                else if (user.roleID != 3)
                 {
-                    new Claim(ClaimTypes.NameIdentifier, user.userID.ToString()),
-                    new Claim(ClaimTypes.Name, user.email),
-                    new Claim(ClaimTypes.Role, "Patient"),
+                    ModelState.AddModelError(string.Empty, "You are not a registered patient");
+                }
+                else
+                {
+                        var claims = new List<Claim>
+                    {
+                        new Claim(ClaimTypes.NameIdentifier, user.userID.ToString()),
+                        new Claim(ClaimTypes.Name, user.email),
+                        new Claim(ClaimTypes.Role, "Patient"),
+                    };
+
+                        var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                        var principal = new ClaimsPrincipal(identity);
+
+                        await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal,
+                            new AuthenticationProperties { IsPersistent = true });
+
+                        return LocalRedirect(returnUrl);
                 };
 
-                var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
-                var principal = new ClaimsPrincipal(identity);
-
-                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal,
-                    new AuthenticationProperties { IsPersistent = true });
-
-                return LocalRedirect(returnUrl);
             }
 
             return Page();
