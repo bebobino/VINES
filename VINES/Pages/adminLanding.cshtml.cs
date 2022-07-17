@@ -8,7 +8,7 @@ using VINES.Models;
 
 namespace VINES.Pages
 {
-    [Authorize]
+    [Authorize("Admin")]
     public class adminLandingModel : PageModel
     {
 

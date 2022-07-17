@@ -1,10 +1,14 @@
 ﻿@page
 @using CommunityPosts
+@using Microsoft.AspNetCore.Authorization
+@inject IAuthorizationService AuthorizationService
 @{
     ViewData["Title"] = "adminLanding";
     Layout = "_LayoutAdmin";
 }
 
+@if ((await AuthorizationService.AuthorizeAsync(User, "AdminOnly")).Succeeded)
+{
     <!-- ======= Blog Page ======= -->
     <div class="blog-page area-padding">
       <div class="container">
@@ -377,3 +381,20 @@
       </div>
   </div>
 </div>
+}
+else {
+        <h1>Access Denied! </h1> <p> Click 
+        @if (User.Identity.IsAuthenticated && User.IsInRole("Patient"))
+        {
+            <a asp-page="/patientLanding">Here</a>
+        }
+        else if (User.Identity.IsAuthenticated && User.IsInRole("Advertiser"))
+        {
+            <a asp-page="/advertiserLanding">Here</a>
+        }
+        else
+        {
+            <a asp-page="/Index">Here</a>
+        }
+        to return.</p>
+}

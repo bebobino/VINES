@@ -54,6 +54,12 @@ namespace VINES
                         options.AccessDeniedPath = "/Account/AccessDenied";
                         options.ReturnUrlParameter = "ReturnUrl";
                     })
+                    .AddCookie("Admin", options =>
+                    {
+                        options.LoginPath = "/Account/LoginAdmin";
+                        options.LogoutPath = "/Account/Logout";
+                        options.AccessDeniedPath = "/Account/AccessDenied";
+                    })
                     .AddGoogle(GoogleDefaults.AuthenticationScheme, options =>
                     {
                         options.ClientId = Configuration["Authentication:Google:ClientId"];
@@ -89,6 +95,20 @@ namespace VINES
                     policy.AuthenticationSchemes.Add(CookieAuthenticationDefaults.AuthenticationScheme);
                     policy.RequireAuthenticatedUser();
                     policy.RequireRole("Admin");
+                });
+
+                options.AddPolicy("PatientOnly", policy =>
+                {
+                    policy.AuthenticationSchemes.Add(CookieAuthenticationDefaults.AuthenticationScheme);
+                    policy.RequireAuthenticatedUser();
+                    policy.RequireRole("Patient");
+                });
+
+                options.AddPolicy("AdvertiserOnly", policy =>
+                {
+                    policy.AuthenticationSchemes.Add(CookieAuthenticationDefaults.AuthenticationScheme);
+                    policy.RequireAuthenticatedUser();
+                    policy.RequireRole("Advertiser");
                 });
             });
 

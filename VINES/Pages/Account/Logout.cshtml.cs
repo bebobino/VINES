@@ -12,10 +12,11 @@ namespace VINES.Pages.Account
     [AllowAnonymous]
     public class LogoutModel : PageModel
     {
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnGetAsync()
         {
-            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             Response.Cookies.Delete(".AspNetCore.Cookies");
+
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return RedirectToPage("/Index");
         }
     }

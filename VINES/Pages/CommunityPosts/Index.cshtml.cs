@@ -10,7 +10,7 @@ using System.Diagnostics;
 
 namespace VINES.Pages.CommunityPosts
 {
-    [Authorize(AuthenticationSchemes = "Cookies")]
+    [Authorize]
     public class IndexModel : PageModel
     {
         public List<CommunityPost> CommunityPosts { get; set; }
