@@ -12,6 +12,8 @@ namespace VINES.Models
         public int forumPostID { get; set; }
         public int forumCategoryID { get; set; }
         public int userID { get; set; }
+
+        
         public string forumContent { get; set; }
         public DateTime dateAdded { get; set; }
         public DateTime lastModified { get; set; }
