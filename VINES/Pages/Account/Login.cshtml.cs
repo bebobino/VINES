@@ -56,7 +56,17 @@ namespace VINES.Pages.Account
                 var user = Db.Users.Where(f => f.email == Input.email && f.password == Help.Hash(Input.password) && f.roleID == 3).FirstOrDefault();
                 if (user == null)
                 {
-                    ModelState.AddModelError(string.Empty, "Invalid Email or Password");
+                    ModelState.AddModelError("Error", "Invalid Email or Password");
+                    return Page();
+                }
+                else if (user.roleID.Equals(2) || user.roleID.Equals(1))
+                {
+                    ModelState.AddModelError("Error1", "Invalid Credentials");
+                    return Page();
+                } 
+                else if (user.email != Input.email)
+                {
+                    ModelState.AddModelError("Error2", "You are not a registered user");
                     return Page();
                 }
 
@@ -64,7 +74,7 @@ namespace VINES.Pages.Account
                 {
                     new Claim(ClaimTypes.NameIdentifier, user.userID.ToString()),
                     new Claim(ClaimTypes.Name, user.email),
-                    new Claim("UserDefined", "Whatever"),
+                    new Claim(ClaimTypes.Role, "Patient"),
                 };
 
                 var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);

@@ -24,6 +24,7 @@ namespace VINES.Models
         public DbSet<User> Users { get; set; }
         public DbSet<CommunityPostCategoriesModel> CommunityPostCategories { get; set; }
         public DbSet<Gender> genders { get; set; }
+        public DbSet<Patients> Patients { get; set; }
 
     }
 }
