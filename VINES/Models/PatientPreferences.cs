@@ -14,6 +14,10 @@ namespace VINES.Models
         public decimal budget { get; set; }
         public DateTime dateAdded { get; set; }
         public DateTime lastModified { get; set; }
+        [ForeignKey("diseaseID")]
+        public Diseases disease { get; set; }
+        [ForeignKey("patientID")]
+        public Patients patient { get; set; }
 
     }
 }

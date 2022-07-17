@@ -11,7 +11,7 @@ namespace VINES.Models
         public int patientID { get; set; }
         public int postID { get; set; }
         [ForeignKey("patientID")]
-        public PatientModel patient { get; set; }
+        public Patients patient { get; set; }
         [ForeignKey("postID")]
         public Posts post { get; set; }
     }

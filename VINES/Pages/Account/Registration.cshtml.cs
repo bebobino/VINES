@@ -24,6 +24,7 @@ namespace VINES.Pages.Account
         public RegistrationModel(DatabaseContext Db)
         {
             this.Db = Db;
+            genders = Db.genders.ToList();
         }
 
         [BindProperty]
@@ -83,7 +84,7 @@ namespace VINES.Pages.Account
         {
             ReturnUrl = returnUrl;
 
-            genders = Db.genders.ToList();
+            
         }
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
@@ -99,10 +100,32 @@ namespace VINES.Pages.Account
                 }
                 else
                 {
-                    user = new User { firstName = Input.firstName, middleName = Input.middleName, lastName = Input.lastName, genderID = Input.gender, dateOfBirth = Input.dateOfBirth, email = Input.email, password = Help.Hash(Input.password), contactNumber = Input.contactNumber, roleID = 3, isBlocked = false, isLocked = false, emailAuth = false, dateRegistered = DateTime.Now, lastModified = DateTime.Now, failedAttempts = 0};
+                    user = new User { firstName = Input.firstName, 
+                        middleName = Input.middleName, 
+                        lastName = Input.lastName, 
+                        genderID = Input.gender, 
+                        dateOfBirth = Input.dateOfBirth, 
+                        email = Input.email, 
+                        password = Help.Hash(Input.password), 
+                        contactNumber = Input.contactNumber, 
+                        roleID = 3, isBlocked = false, 
+                        isLocked = false, emailAuth = false, 
+                        dateRegistered = DateTime.Now, 
+                        lastModified = DateTime.Now, 
+                        failedAttempts = 0};
                     Db.Users.Add(user);
                     await Db.SaveChangesAsync();
-                    return RedirectToPage("RegisterConfirmation", new { email = Input.email });
+                    var patient = new Patients
+                    {
+                        userID = user.userID,
+                        showAds = true,
+                        isSubscribed = false,
+                        subStart = DateTime.UtcNow,
+                        subEnd = DateTime.UtcNow
+                    };
+                    Db.Patients.Add(patient);
+                    await Db.SaveChangesAsync();
+                    return RedirectToPage("~/Index", new { email = Input.email });
                 }
             }
 
