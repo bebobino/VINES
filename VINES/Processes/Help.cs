@@ -5,6 +5,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Linq;
+using System.Net;
 using System.Security.Cryptography;
 using VINES.Models;
 
@@ -67,6 +68,12 @@ namespace VINES.Processes
 
 
 
+        }
+        public void logIP()
+        {
+            string hostName = Dns.GetHostName();
+            string IP = Dns.GetHostByName(hostName).AddressList[0].ToString();
+            Debug.WriteLine("IP Address is : " + IPAddress.Parse(IP));
         }
 
         public static void AddNewsRecord(int sourcesID, string uploadDate, string pageTitle, string webURL, string summary)

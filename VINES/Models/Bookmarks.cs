@@ -10,5 +10,9 @@ namespace VINES.Models
         public int bookmarkID { get; set; }
         public int patientID { get; set; }
         public int postID { get; set; }
+        [ForeignKey("patientID")]
+        public PatientModel patient { get; set; }
+        [ForeignKey("postID")]
+        public Posts post { get; set; }
     }
 }

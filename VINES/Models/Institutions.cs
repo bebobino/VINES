@@ -16,5 +16,7 @@ namespace VINES.Models
         public string notes { get; set; }
         public DateTime dateAdded { get; set; }
         public DateTime lastModified { get; set; }
+        [ForeignKey("institutionTypeID")]
+        public InstitutionTypes institutionType { get; set; }
     }
 }

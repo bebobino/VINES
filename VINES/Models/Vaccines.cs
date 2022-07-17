@@ -15,6 +15,6 @@ namespace VINES.Models
         public DateTime dateAdded { get; set; }
         public DateTime dateModified { get; set; }
         [ForeignKey("diseaseID")]
-        public Diseases diseases { get; set; }
+        public Diseases disease { get; set; }
     }
 }

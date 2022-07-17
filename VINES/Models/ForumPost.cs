@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using VINES.Data;
 
 namespace VINES.Models
 {
@@ -15,5 +16,11 @@ namespace VINES.Models
         public DateTime dateAdded { get; set; }
         public DateTime lastModified { get; set; }
         public int postID { get; set; }
+        [ForeignKey("postID")]
+        public Posts post { get; set; }
+        [ForeignKey("userID")]
+        public User user { get; set; }
+        [ForeignKey("forumCategoryID")]
+        public ForumCategory forumCategory { get; set; }
     }
 }

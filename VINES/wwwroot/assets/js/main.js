@@ -40,7 +40,9 @@
    */
   const onscroll = (el, listener) => {
     el.addEventListener('scroll', listener)
-  }
+    }
+
+
 
   /**
    * Navbar links active state on scroll
@@ -268,12 +270,15 @@ function addMarker(x, y) {
 }
 
 
+
+
 function initializeMap() {
     mymap = L.map('vaxMap').setView([14.676208, 121.043861], 15);
     L.tileLayer('https://api.maptiler.com/maps/streets/{z}/{x}/{y}.png?key=993xdhHU78iIxlykv1dm'
         , { attribution: '<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>', }).addTo(mymap);
     getLocation();
 }
+
 
 
 function showNotification(title, notifbody) {
