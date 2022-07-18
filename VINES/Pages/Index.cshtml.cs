@@ -31,6 +31,7 @@ namespace VINES.Pages
         public List<Vaccines> Vaccines { get; set; }
         public List<Diseases> Diseases { get; set; }
         public List<Institutions> Institutions { get; set; }
+        public List<Sources> Sources { get; set; }
         private DatabaseContext db;
         public int PageNo { get; set; }
 
@@ -41,6 +42,7 @@ namespace VINES.Pages
         }
         public void OnGet(int p = 1 , int s = 5)
         {
+            Sources = db.sources.ToList();
             CommunityPosts = db.CommunityPosts.ToList();
             WebPages = db.WebPages.OrderByDescending(webpage => webpage.uploadDate).Skip((p - 1) * s).Take(s).ToList();
             Count = db.WebPages.Count();
@@ -49,7 +51,6 @@ namespace VINES.Pages
             Vaccines = db.vaccines.Include("disease").ToList();
             Institutions = db.Institutions.ToList();
             Help help = new Help();
-            help.sendEmail("johncueto20@gmail.com","TestSubject","Register now!");
             help.checkIP();
 
         }

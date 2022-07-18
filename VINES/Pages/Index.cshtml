@@ -86,14 +86,14 @@
 
                   <div class="card col-lg-3 col-md-5 col-6 d-md-flex align-items-center text-center" id="showSources">
                       <br>
-                      <h1>7</h1>
+                      <h1>@Model.Sources.Count</h1>
                       <h5>News Sources</h5>
 
                   </div>
                   
                   <div class="card col-lg-3 col-md-5 col-6 d-md-flex align-items-center text-center" id = "showInstitutions">
                       <br>
-                      <h1>16</h1>
+                      <h1>@Model.Institutions.Count</h1>
                       <h5>Institutions in database</h5>
 
                   </div>
@@ -157,6 +157,32 @@
 
     <!-- modal -->
 
+
+
+
+
+<div class="modal fade" id="newsSources">
+  <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h4 class="modal-title">News Sources</h4>
+          </div>
+          <div class="modal-body">
+            @foreach(var source in Model.Sources)
+                    {
+                        <a href="@source.sourcesURI">@source.sourceName</a>
+                    }
+            <br>
+            <input type="button" class="btn btn-secondary" id="hideSources" value="Hide" />
+          </div>
+      </div>
+  </div>
+</div>
+
+
+
+
+
 <div class="modal fade" id="vaccines">
   <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
@@ -172,7 +198,6 @@
                 </tr>
                 @foreach(var vaccine in Model.Vaccines)
                     {
-                        var diseases = Model.Diseases;
                         <tr>
                         <td>@vaccine.vaccineName</td>
                         <td>@vaccine.disease.diseaseName</td>
@@ -187,6 +212,32 @@
   </div>
 </div>
 
+<div class="modal fade" id="institutions">
+  <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h4 class="modal-title">Institutions in database</h4>
+          </div>
+          <div class="modal-body">
+            <table>
+                <tr>
+                    <td >Institution Name</td>
+                    <td >Address</td>
+                </tr>
+                @foreach(var institution in Model.Institutions)
+                    {
+                    <tr>
+                        <td>@institution.institutionName</td>
+                        <td>@institution.notes</td>
+                    </tr>
+                }
+            </table>
+            <br>
+            <input type="button" class="btn btn-secondary" id="hideInstitutions" value="Hide" />
+          </div>
+      </div>
+  </div>
+</div>
 
 
 
