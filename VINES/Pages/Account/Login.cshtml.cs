@@ -54,7 +54,8 @@ namespace VINES.Pages.Account
 
             if (ModelState.IsValid)
             {
-                var user = Db.Users.Where(f => f.email == Input.email && f.password == Help.Hash(Input.password) && f.roleID == 3).FirstOrDefault();
+                var help = new Help();
+                var user = Db.Users.Where(f => f.email == Input.email && f.password == help.Hash(Input.password) && f.roleID == 3).FirstOrDefault();
                 if (user == null)
                 {
                     ModelState.AddModelError("Error", "Invalid Email or Password");

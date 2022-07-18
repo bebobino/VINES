@@ -48,8 +48,8 @@ namespace VINES.Pages
             PageNo = p;
             Vaccines = db.vaccines.Include("disease").ToList();
             Institutions = db.Institutions.ToList();
-            Help help = new Help(db);
-            help.logIP();
+            Help help = new Help();
+            help.checkIP();
 
         }
 

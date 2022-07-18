@@ -12,19 +12,21 @@ using System.Linq;
 using VINES.Data;
 using VINES.Processes;
 
-namespace VINES.Pages.Account
+namespace VINES.Pages.Ads
 {
     [AllowAnonymous]
-    public class RegistrationModel : PageModel
+    public class AddUserModel : PageModel
     {
         private readonly DatabaseContext Db;
 
         public List<Gender> genders { get; set; }
+        public List<Institutions> institutions { get; set; }
 
-        public RegistrationModel(DatabaseContext Db)
+        public AddUserModel(DatabaseContext Db)
         {
             this.Db = Db;
             genders = Db.genders.ToList();
+            institutions = Db.Institutions.ToList();
         }
 
         [BindProperty]
@@ -35,6 +37,9 @@ namespace VINES.Pages.Account
 
        public class InputModel
         {
+            [Required]
+            [Display(Name = "Institution")]
+            public int institution { get; set; }
             [Required]
             [Display(Name = "First Name")]
             public string firstName { get; set; }
@@ -111,13 +116,19 @@ namespace VINES.Pages.Account
                         email = Input.email, 
                         password = help.Hash(Input.password), 
                         contactNumber = Input.contactNumber, 
-                        roleID = 3, isBlocked = false, 
+                        roleID = 2, isBlocked = false, 
                         isLocked = false, emailAuth = false, 
                         dateRegistered = DateTime.Now, 
                         lastModified = DateTime.Now, 
                         failedAttempts = 0};
                     Db.Users.Add(user);
-
+                    await Db.SaveChangesAsync();
+                    var ad = new Advertisers
+                    {
+                        userID = user.userID,
+                        institutionID = Input.institution,
+                    };
+                    Db.advertisers.Add(ad);
                     await Db.SaveChangesAsync();
                     return RedirectToPage("/Account/RegisterCofirmation", new {email = Input.email});
                 }
