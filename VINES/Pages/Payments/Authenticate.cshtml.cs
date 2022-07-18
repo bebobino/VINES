@@ -23,7 +23,12 @@ namespace VINES.Pages.Payments
 
         public string payerID { get; set; }
 
-        public async Task OnGetAsync(string paymentId, string payerID)
+        public async Task OnPostAsync(string paymentId, string payerID)
+        {
+
+        }
+
+        public async Task<RedirectResult> OnGetAsync(string paymentId, string payerID)
         {
 
             this.paymentId = paymentId;
@@ -50,10 +55,11 @@ namespace VINES.Pages.Payments
                 Console.WriteLine("payer_info - street_address: " + result.payer.payer_info.shipping_address);
                 Console.WriteLine("payer_info - country_code: " + result.payer.payer_info.country_code);
                 Console.WriteLine("payer_info - payer_id: " + result.payer.payer_info.payer_id);
+                Console.WriteLine("amount:" + result.transactions[0].amount.total);
                 Console.WriteLine("state: " + result.state);
             }
 
-
+            return Redirect("/Index");
 
 
 
