@@ -38,5 +38,14 @@ namespace VINES.Pages.Disease
             Db.SaveChanges();
             return RedirectToPage("Index");
         }
+
+        public IActionResult OnPostDelete(int id)
+        {
+            var diseases = Db.Diseases.Where(x => x.diseaseID == id).FirstOrDefault();
+            Db.Diseases.Remove(diseases);
+            Db.SaveChanges();
+
+            return RedirectToPage("Index");
+        }
     }
 }
