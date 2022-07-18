@@ -158,6 +158,7 @@
   
   <ItemGroup>
     <Folder Include="Pages\Patient\" />
+    <Folder Include="wwwroot\Scripts\" />
   </ItemGroup>
 
 </Project>

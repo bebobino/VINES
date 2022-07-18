@@ -13,7 +13,7 @@ namespace VINES.Models
         public DbSet<CommunityPost> CommunityPosts { get; set; }
         public DbSet<Posts> Post { get; set; }
         public DbSet<WebPages> WebPages { get; set; }
-        public DbSet<Vaccines> Vaccines { get; set; }
+        public DbSet<Vaccines> vaccines { get; set; }
         public DbSet<Institutions> Institutions { get; set; }
         public DbSet<Diseases> Diseases { get; set; }
         public DbSet<InstitutionVaccines> InstitutionVaccines { get; set; }
@@ -27,6 +27,20 @@ namespace VINES.Models
         public DbSet<Patients> Patients { get; set; }
 
         public DbSet<Diseases> diseases { get; set; }
+
+        public DbSet<Advertisement> advertisements { get; set; }
+
+        public DbSet<AdvertisementType> advertisementTypes { get; set; }
+        public DbSet<Advertisers> advertisers {get;set;}
+        public DbSet<AuditCategories> auditCategories { get; set; }
+        public DbSet<Bookmarks> bookmarks { get; set; }
+        public DbSet<IPAddresses> iPAddresses { get; set; }
+        public DbSet<PatientPreferences> patientPreferences { get; set; }
+        public DbSet<Payment> payments { get; set; }
+        public DbSet<RecommendedInstitutions> recommendedInstitutions { get; set; }
+        public DbSet<Roles> roles { get; set; }
+        public DbSet<VaccinePreference> vaccinePreferences { get; set; }
+
 
     }
 }

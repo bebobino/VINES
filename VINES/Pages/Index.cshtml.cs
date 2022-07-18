@@ -46,7 +46,7 @@ namespace VINES.Pages
             Count = db.WebPages.Count();
             PageSize = s;
             PageNo = p;
-            Vaccines = db.Vaccines.Include("disease").ToList();
+            Vaccines = db.vaccines.Include("disease").ToList();
             Institutions = db.Institutions.ToList();
             Help help = new Help(db);
             help.logIP();

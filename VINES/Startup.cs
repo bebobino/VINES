@@ -37,6 +37,10 @@ namespace VINES
             var connection = Configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<DatabaseContext>(option => option.UseSqlServer(connection));
 
+            services.AddAntiforgery(options =>
+            options.HeaderName = "MY-XSRF-TOKEN"
+            );
+
             services.AddMvc();
 
             services.AddTransient<IEmailSender, EmailSender>();
