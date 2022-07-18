@@ -39,5 +39,14 @@ namespace VINES.Pages.Vaccine
             Db.SaveChanges();
             return RedirectToPage("Index");
         }
+
+        public IActionResult OnPostDelete(int id)
+        {
+            var vaccine = Db.vaccines.Where(x => x.vaccineID == id).FirstOrDefault();
+            Db.vaccines.Remove(vaccine);
+            Db.SaveChanges();
+
+            return RedirectToPage("Index");
+        }
     }
 }

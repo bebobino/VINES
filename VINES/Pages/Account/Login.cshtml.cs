@@ -82,7 +82,7 @@ namespace VINES.Pages.Account
                 var principal = new ClaimsPrincipal(identity);
 
                 await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal,
-                    new AuthenticationProperties { IsPersistent = true });
+                    new AuthenticationProperties { IsPersistent = false });
 
                 return LocalRedirect(returnUrl);
             }

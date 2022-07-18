@@ -1,8 +1,12 @@
 ﻿@page
 @model VINES.Pages.Vaccine.IndexModel
+@using Microsoft.AspNetCore.Authorization
+@inject IAuthorizationService AuthorizationService
 @{
 }
 
+@if ((await AuthorizationService.AuthorizeAsync(User, "AdminOnly")).Succeeded)
+{
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -19,15 +23,15 @@
 
         <link href="css/style.css" rel="stylesheet" />
         <script type="text/javascript">
-            $(document).ready(function() {
+$(document).ready(function() {
 
-            $('[data-toggle="tooltip"]').tooltip();
+    $('[data-toggle="tooltip"]').tooltip();
 
-            $('table .delete').on('click', function() {
-            var id = $(this).parent().find('#id').val();
-            $('#deleteVaccineModal #id').val(id);
-            });
-            }
+    $('table .delete').on('click', function() {
+        var id = $(this).parent().find('#id').val();
+        $('#deleteVaccineModal #id').val(id);
+    });
+});
 
         </script>
     </head>
@@ -72,7 +76,7 @@
                                 <td>@vaccine.dateAdded</td>
                                 <td>@vaccine.dateModified</td>
                                 <td>
-                                    <a href="#deleteDiseaseModal" class="delete" data-toggle="modal">
+                                    <a href="#deleteVaccineModal" class="delete" data-toggle="modal">
                                         <i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872</i>
                                     </a>
                                     <input type="hidden" name="id" id="id" value="@vaccine.vaccineID" />
@@ -122,12 +126,12 @@
                 </div>
             </div>
         </div>
-        <div id="deleteDiseaseModal" class="modal fade">
+        <div id="deleteVaccineModal" class="modal fade">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <form method="post" asp-page="Index" asp-page-handler="Delete">
                         <div class="modal-header">
-                            <h4 class="modal-title">Delete Disease Record</h4>
+                            <h4 class="modal-title">Delete Vaccine Record</h4>
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                         </div>
                         <div class="modal-body">
@@ -145,3 +149,17 @@
         </div>
     </body>
 </html>
+}
+else {
+        @if (User.Identity.IsAuthenticated && User.IsInRole("Patient")) {
+        
+        Response.Redirect("/patientLanding");
+    }
+        else if (User.Identity.IsAuthenticated && User.IsInRole("Advertiser")) {
+        
+        Response.Redirect("/advertiserLanding");
+    }
+        else{
+        Response.Redirect("/Index");
+    }
+}

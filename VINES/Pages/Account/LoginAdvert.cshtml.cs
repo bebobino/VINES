@@ -76,7 +76,7 @@ namespace VINES.Pages.Account
 
                 await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
                         principal,
-                        new AuthenticationProperties { IsPersistent = true });
+                        new AuthenticationProperties { IsPersistent = false });
 
 
 
