@@ -26,5 +26,7 @@ namespace VINES.Models
         public DbSet<Gender> genders { get; set; }
         public DbSet<Patients> Patients { get; set; }
 
+        public DbSet<Diseases> diseases { get; set; }
+
     }
 }

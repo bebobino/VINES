@@ -116,21 +116,11 @@ namespace VINES.Pages.Account
                         lastModified = DateTime.Now, 
                         failedAttempts = 0};
                     Db.Users.Add(user);
+
                     await Db.SaveChangesAsync();
-                    var patient = new Patients
-                    {
-                        userID = user.userID,
-                        showAds = true,
-                        isSubscribed = false,
-                        subStart = DateTime.UtcNow,
-                        subEnd = DateTime.UtcNow
-                    };
-                    Db.Patients.Add(patient);
-                    await Db.SaveChangesAsync();
-                    return RedirectToPage("/Account/RegisterConfirmation");
+                    return RedirectToPage("/Account/RegisterCofirmation", new {email = Input.email});
                 }
             }
-
             return Page();
         }
 

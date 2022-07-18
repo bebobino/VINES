@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -77,7 +78,6 @@ namespace VINES.Pages.Account
                 await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
                         principal,
                         new AuthenticationProperties { IsPersistent = true });
-
 
 
                 return LocalRedirect(returnUrl);

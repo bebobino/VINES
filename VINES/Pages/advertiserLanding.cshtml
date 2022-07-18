@@ -252,19 +252,16 @@
 }
 else 
 {
-  <h1>Access Denied! </h1> 
-  <p> Click 
         @if (User.Identity.IsAuthenticated && User.IsInRole("Patient"))
         {
-            <a asp-page="/patientLanding">Here</a>
-        }
+        Response.Redirect("/patientLanding");
+    }
         else if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
         {
-            <a asp-page="/adminLanding">Here</a>
-        }
+        Response.Redirect("/adminLanding");
+    }
         else
         {
-            <a asp-page="/Index">Here</a>
-        }
-        to return.</p>
+        Response.Redirect("/Index");
+    }
 }

@@ -72,7 +72,6 @@ namespace VINES
                         facebookOptions.AppId = Configuration["Authentication:Facebook:AppId"];
                         facebookOptions.AppSecret = Configuration["Authentication:Facebook:AppSecret"];
                         facebookOptions.SignInScheme = "Cookies";
-
                     });
 
             services.AddAuthorization(options =>

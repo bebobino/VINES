@@ -2,10 +2,10 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using VINES.Data;
 using VINES.Models;
-
 namespace VINES.Pages
 {
     [Authorize("Admin")]
@@ -23,7 +23,7 @@ namespace VINES.Pages
 
         public void OnGet()
         {
-          
+            
         }
     }
 }

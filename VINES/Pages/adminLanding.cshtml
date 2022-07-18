@@ -383,18 +383,16 @@
 </div>
 }
 else {
-        <h1>Access Denied! </h1> <p> Click 
-        @if (User.Identity.IsAuthenticated && User.IsInRole("Patient"))
-        {
-            <a asp-page="/patientLanding">Here</a>
-        }
-        else if (User.Identity.IsAuthenticated && User.IsInRole("Advertiser"))
-        {
-            <a asp-page="/advertiserLanding">Here</a>
-        }
-        else
-        {
-            <a asp-page="/Index">Here</a>
-        }
-        to return.</p>
+        @if (User.Identity.IsAuthenticated && User.IsInRole("Patient")) {
+        
+        Response.Redirect("/patientLanding");
+    }
+        else if (User.Identity.IsAuthenticated && User.IsInRole("Advertiser")) {
+        
+        Response.Redirect("/advertiserLanding");
+    }
+        else{
+        Response.Redirect("/Index");
+    }
+ 
 }

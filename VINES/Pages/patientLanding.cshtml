@@ -1,9 +1,15 @@
 ﻿@page
 @using Microsoft.AspNetCore.Authorization
+@using System.Security.Claims
+@using System.Diagnostics
 @inject IAuthorizationService AuthorizationService
 @{
   ViewData["Title"] = "patientLanding";
   Layout = "~/Pages/Shared/_LayoutPatient.cshtml";
+
+              var ID = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            Debug.WriteLine(ID);
+
 }
 
 
