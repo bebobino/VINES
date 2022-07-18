@@ -9,7 +9,6 @@
 }
 @if ((await AuthorizationService.AuthorizeAsync(User, "AdminOnly")).Succeeded)
 {
-    
 }
 else {
    <h1>Access Denied!</h1>

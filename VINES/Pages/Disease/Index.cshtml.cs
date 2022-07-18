@@ -1,4 +1,3 @@
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System;
@@ -8,10 +7,9 @@ using VINES.Models;
 
 namespace VINES.Pages.Disease
 {
-    [Authorize]
     public class IndexModel : PageModel
     {
-        public List<Diseases> diseases { get; set; }
+        public List<Diseases> disease { get; set; }
         private readonly DatabaseContext Db;
 
         public IndexModel(DatabaseContext _Db)
@@ -21,7 +19,7 @@ namespace VINES.Pages.Disease
 
         public void OnGet()
         {
-            diseases = Db.diseases.ToList();
+            disease = Db.Diseases.ToList();
         }
 
         public IActionResult OnPostCreate(string name, string notes)
@@ -34,15 +32,15 @@ namespace VINES.Pages.Disease
                 dateModified = DateTime.Now,
             };
 
-            Db.diseases.Add(diseases);
+            Db.Diseases.Add(diseases);
             Db.SaveChanges();
             return RedirectToPage("Index");
         }
 
         public IActionResult OnPostDelete(int id)
         {
-            var diseases = Db.Diseases.Where(x => x.diseaseID == id).FirstOrDefault();
-            Db.Diseases.Remove(diseases);
+            var disease = Db.Diseases.Where(x => x.diseaseID == id).FirstOrDefault();
+            Db.Diseases.Remove(disease);
             Db.SaveChanges();
 
             return RedirectToPage("Index");
