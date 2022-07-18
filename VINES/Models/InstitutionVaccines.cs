@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace VINES.Models
 {
-    [Table("institutionsVaccines")]
+    [Table("institutionVaccines")]
     public class InstitutionVaccines
     {
         [Key]

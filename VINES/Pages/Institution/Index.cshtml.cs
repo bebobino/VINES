@@ -1,47 +1,41 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.AspNetCore.Authorization;
-using VINES.Models;
 using Microsoft.EntityFrameworkCore;
-using System.Diagnostics;
+using System.Collections.Generic;
 using System.Threading.Tasks;
+using VINES.Models;
 
-namespace VINES.Pages.CommunityPosts
+namespace VINES.Pages.Institution
 {
-    [Authorize]
     public class IndexModel : PageModel
     {
         private readonly DatabaseContext _db;
+
         public IndexModel(DatabaseContext db)
         {
             _db = db;
         }
 
-        public List<CommunityPost> communityPosts { get; set; }
-        public List<CommunityPostCategoriesModel> categories { get; set; }
-
+        public List<Institutions> institutions { get; set; }
+        public List<InstitutionTypes> institutionTypes { get; set; }
         public async Task OnGet()
         {
-            communityPosts = await _db.CommunityPosts.ToListAsync();
-            categories = await _db.CommunityPostCategories.ToListAsync();
+            institutions = await _db.Institutions.ToListAsync();
+            institutionTypes = await _db.InstitutionTypes.ToListAsync();
         }
 
         public async Task<IActionResult> OnPostDelete(int id)
         {
-            var com = await _db.CommunityPosts.FindAsync(id);
+            var com = await _db.Institutions.FindAsync(id);
             if (com == null)
             {
                 return NotFound();
 
             }
-            _db.CommunityPosts.Remove(com);
+            _db.Institutions.Remove(com);
             await _db.SaveChangesAsync();
 
             return RedirectToPage("Index");
         }
-
     }
 }

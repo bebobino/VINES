@@ -16,7 +16,7 @@ namespace VINES.Processes
     {
 
 
-        static string constring = "Data Source=MSI\\SQLEXPRESS;Initial Catalog=Vines;Integrated Security=True";
+        static string constring = "Data Source=DESKTOP-6731HIA\\SQLEXPRESS;Initial Catalog=Vines;Integrated Security=True";
 
         public static void test(int sourcesID, string uploadDate, string pageTitle, string webURL, string summary)
         {

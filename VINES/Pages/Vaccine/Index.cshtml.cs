@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System;
@@ -7,6 +8,7 @@ using VINES.Models;
 
 namespace VINES.Pages.Vaccine
 {
+    [Authorize("AdminOnly")]
     public class IndexModel : PageModel
     {
         public List<Vaccines> vaccines { get; set; }

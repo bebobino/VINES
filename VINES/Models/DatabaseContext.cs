@@ -14,7 +14,6 @@ namespace VINES.Models
         public DbSet<Posts> Post { get; set; }
         public DbSet<WebPages> WebPages { get; set; }
         public DbSet<Vaccines> vaccines { get; set; }
-        public DbSet<Institutions> Institutions { get; set; }
         public DbSet<Diseases> Diseases { get; set; }
         public DbSet<InstitutionVaccines> InstitutionVaccines { get; set; }
         public DbSet<ForumCategory> ForumCategories { get; set; }
@@ -40,6 +39,8 @@ namespace VINES.Models
         public DbSet<RecommendedInstitutions> recommendedInstitutions { get; set; }
         public DbSet<Roles> roles { get; set; }
         public DbSet<VaccinePreference> vaccinePreferences { get; set; }
+
+        public DbSet<Institutions> Institutions { get; set; }
 
 
     }
