@@ -40,6 +40,7 @@ namespace VINES.Models
         public DbSet<RecommendedInstitutions> recommendedInstitutions { get; set; }
         public DbSet<Roles> roles { get; set; }
         public DbSet<VaccinePreference> vaccinePreferences { get; set; }
+        public DbSet<Sources> sources { get; set; }
 
 
     }
