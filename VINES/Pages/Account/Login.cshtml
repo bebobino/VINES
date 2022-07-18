@@ -48,7 +48,9 @@
                   <p class="mb-4">Use a local account to log in.</p>
                 </div>
                 <form id="account" method="post">
-                    @Html.ValidationMessage("Error")
+                    @Html.ValidationMessage("Error", new { @style="color:red" })
+                    @Html.ValidationMessage("Error2", new { @style="color:red" })
+                    @Html.ValidationMessage("Error1", new { @style="color:red" })
                   <div class="form-group first">
                     <label asp-for="Input.email"></label>
                     <input type="text" asp-for="Input.email" class="form-control">

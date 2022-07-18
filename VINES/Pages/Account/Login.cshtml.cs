@@ -55,22 +55,23 @@ namespace VINES.Pages.Account
             if (ModelState.IsValid)
             {
                 var help = new Help();
-                var user = Db.Users.Where(f => f.email == Input.email && f.password == help.Hash(Input.password) && f.roleID == 3).FirstOrDefault();
+                var user = Db.Users.Where(f => f.email == Input.email).FirstOrDefault();
                 if (user == null)
                 {
-                    ModelState.AddModelError("Error", "Invalid Email or Password");
+                    ModelState.AddModelError("Error", "You are not a registered user");
                     return Page();
                 }
-                else if (user.roleID.Equals(2) || user.roleID.Equals(1))
+                else if (user.password != help.Hash(Input.password))
                 {
-                    ModelState.AddModelError("Error1", "Invalid Credentials");
+                    ModelState.AddModelError("Error2", "Invalid Email/Password combination");
+                    return Page();
+                }
+                else if (user.roleID != 3)
+                {
+                    ModelState.AddModelError("Error1", "Invalid Role");
                     return Page();
                 } 
-                else if (user.email != Input.email)
-                {
-                    ModelState.AddModelError("Error2", "You are not a registered user");
-                    return Page();
-                }
+                
 
                 var claims = new List<Claim>
                 {

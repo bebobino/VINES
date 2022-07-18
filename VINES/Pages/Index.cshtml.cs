@@ -49,6 +49,7 @@ namespace VINES.Pages
             Vaccines = db.vaccines.Include("disease").ToList();
             Institutions = db.Institutions.ToList();
             Help help = new Help();
+            help.sendEmail("johncueto20@gmail.com","TestSubject","Register now!");
             help.checkIP();
 
         }

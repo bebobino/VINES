@@ -6,6 +6,7 @@ using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Linq;
 using System.Net;
+using System.Net.Mail;
 using System.Security.Cryptography;
 using VINES.Models;
 
@@ -64,6 +65,48 @@ namespace VINES.Processes
 
 
         }
+
+
+
+
+
+
+
+        public void sendEmail(string to, string subject, string body)
+        {
+            var from = "vinessystems@outlook.com"; //VINES email
+            var password = "v4Cc!n3$"; //VINES email password 
+
+            using SmtpClient email = new SmtpClient
+            {
+                DeliveryMethod = SmtpDeliveryMethod.Network,
+                UseDefaultCredentials = false,
+                EnableSsl = true,
+                Host = "smtp-mail.outlook.com",
+                Port = 587,
+                Credentials = new NetworkCredential(from, password)
+            };
+
+            try
+            {
+                Debug.WriteLine("Sending email");
+                email.Send(from, to, subject, body);
+                Debug.WriteLine("Email sent");
+            }
+            catch (SmtpException e)
+            {
+                Debug.WriteLine("Email not sent");
+                Debug.WriteLine(e);
+            }
+
+        }
+
+
+
+
+
+
+
 
 
         public string logIP()
