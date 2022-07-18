@@ -6,6 +6,7 @@ using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Linq;
 using System.Net;
+using System.Net.Mail;
 using System.Security.Cryptography;
 using VINES.Models;
 
@@ -13,17 +14,12 @@ namespace VINES.Processes
 {
     public class Help
     {
-        private static DatabaseContext db;
-        public Help(DatabaseContext _db)
-        {
-            db = _db;
-        }
 
-        static string constring = "Data Source=DESKTOP-6731HIA\\SQLEXPRESS;Initial Catalog=Vines;Integrated Security=True";
+
+        static string constring = "Data Source=MSI\\SQLEXPRESS;Initial Catalog=Vines;Integrated Security=True";
 
         public static void test(int sourcesID, string uploadDate, string pageTitle, string webURL, string summary)
         {
-            Boolean testing = false;
             SqlConnection con = new SqlConnection(constring);
             SqlDataReader SR = null;
             con.Open();
@@ -69,36 +65,105 @@ namespace VINES.Processes
 
 
         }
-        public void logIP()
+
+
+
+
+
+
+
+        public void sendEmail(string to, string subject, string body)
+        {
+            var from = "vinessystems@outlook.com"; //VINES email
+            var password = "v4Cc!n3$"; //VINES email password 
+
+            using SmtpClient email = new SmtpClient
+            {
+                DeliveryMethod = SmtpDeliveryMethod.Network,
+                UseDefaultCredentials = false,
+                EnableSsl = true,
+                Host = "smtp-mail.outlook.com",
+                Port = 587,
+                Credentials = new NetworkCredential(from, password)
+            };
+
+            try
+            {
+                Debug.WriteLine("Sending email");
+                email.Send(from, to, subject, body);
+                Debug.WriteLine("Email sent");
+            }
+            catch (SmtpException e)
+            {
+                Debug.WriteLine("Email not sent");
+                Debug.WriteLine(e);
+            }
+
+        }
+
+
+
+
+
+
+
+
+
+        public string logIP()
         {
             string hostName = Dns.GetHostName();
-            string IP = Dns.GetHostByName(hostName).AddressList[0].ToString();
-            Debug.WriteLine("IP Address is : " + IPAddress.Parse(IP));
+            string IP = Dns.GetHostEntry(hostName).AddressList[0].ToString();
+            return IP;
         }
-
-        public static void AddNewsRecord(int sourcesID, string uploadDate, string pageTitle, string webURL, string summary)
+        public bool checkIP()
         {
-            var postModel = new Posts
-            {
-                isVisible = true
-            };
-            db.Post.Add(postModel);
-            db.SaveChanges();
 
-            var webPage = new WebPages
+            var IP = logIP();
+            Debug.WriteLine(IP);
+            SqlConnection con = new SqlConnection(constring);
+            SqlDataReader SR = null;
+            con.Open();
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = con;
+            cmd.CommandText = "Select * From IPAddresses WHERE IPAddress = @IPAddress AND isBlocked = 1";
+            cmd.Parameters.Add("@IPAddress", SqlDbType.NVarChar).Value = IP;
+            SR = cmd.ExecuteReader();
+            if (SR.Read())
             {
-                sourcesID = sourcesID,
-                dateAdded = DateTime.Now,
-                uploadDate = Convert.ToDateTime(uploadDate),
-                pageTitle = pageTitle,
-                webURL = webURL,
-                summary = summary,
-                postID = postModel.postID
-            };
-            db.WebPages.Add(webPage);
-            db.SaveChanges();
+                Debug.WriteLine("IP Blocked");
+                con.Close();
+                con.Dispose();
+                return false;
+            }
+            else
+            {
+                
+                con.Close();
+                con.Open();
+                cmd.CommandText = "Select * From IPAddresses WHERE IPAddress = @IPAddress";
+                SR = cmd.ExecuteReader();
+                if (SR.Read())
+                {
+                    Debug.WriteLine("Existing IP in database");
+                }
+                else
+                {
+                    con.Close();
+                    con.Open();
+                    Debug.WriteLine("New IP address");
+                    cmd.CommandText = "INSERT INTO IPAddresses (IPAddress, violations, isBlocked, dateAdded) VALUES (@IPAddress, @violations, @isBlocked, @dateAdded)";
+                    cmd.Parameters.Add("@violations", SqlDbType.Int).Value = 0;
+                    cmd.Parameters.Add("@isBlocked", SqlDbType.Bit).Value = false; 
+                    cmd.Parameters.Add("@dateAdded", SqlDbType.DateTime).Value = DateTime.UtcNow;
+                    cmd.ExecuteNonQuery();
+
+                }
+                con.Close();
+                con.Dispose();
+            }
+            return true;
         }
-        public static string Hash(string phrase)
+        public string Hash(string phrase)
         {
             SHA512Managed HashTool = new SHA512Managed();
             Byte[] PhraseAsByte = System.Text.Encoding.UTF8.GetBytes(string.Concat(phrase));
