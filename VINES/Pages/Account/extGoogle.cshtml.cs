@@ -32,6 +32,8 @@ namespace VINES.Pages.Account
             var name = User.FindFirstValue(ClaimTypes.Name);
             var email = User.FindFirstValue(ClaimTypes.Email);
 
+            Debug.WriteLine(email);
+
             return RedirectToPage("/Account/RegisterConfirmation");
         }
     }

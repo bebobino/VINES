@@ -58,14 +58,16 @@
 
                 <nav id="navbar" class="navbar">
                     <ul>
-                        <li><a class="nav-link scrollto " href="#hero">Home</a></li>
+                        <li><a class="nav-link scrollto " asp-page="/adminLanding">Home</a></li>
                         <li><a class="nav-link scrollto" href="#about">About VINES</a></li>
                         <li class="dropdown"><a href="#"><span>Admin Settings</span> <i class="bi bi-chevron-right"></i></a>
                             <ul>
                                 <li><a class="nav-link scrollto" asp-page="/Disease/Index">Disease List</a></li>
                                 <li><a class="nav-link scrollto" asp-page="/Institution/Index">Institution List</a></li>
                                 <li><a class="nav-link scrollto" asp-page="/Vaccine/Index">Vaccine List</a></li>
-                                <li><a class="nav-link scrollto" asp-area="" asp-page="/CommunityPosts/Index">Community Posts</a></li>
+                                <li><a class="nav-link scrollto" asp-page="/InstitutionVaccine/Index">Vaccine List</a></li>
+                                <li><a class="nav-link scrollto" asp-page="/CommunityPosts/Index">Community Posts</a></li>
+                                <li><a class="nav-link scrollto" asp-page="/Source/Index">Sources List</a></li>
                             </ul>
                         </li>
 

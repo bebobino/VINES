@@ -3,157 +3,139 @@
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @using VINES.Models
 @using Microsoft.AspNetCore.Http.Features
+@using Microsoft.AspNetCore.Authorization
+@inject IAuthorizationService AuthorizationService
 @{
     ViewData["Title"] = "Home page";
     Layout = "_LayoutLanding";
-
-    @*var consentFeature = HttpContext.Features.Get<ITrackingConsentFeature>();
-   var showBanner = !(consentFeature?.CanTrack ?? false);
-   var cookieString = consentFeature?.CreateConsentCookie();*@
 }
 
-@* @if (showBanner)
+@if (@User.Identity.IsAuthenticated == false)
 {
-    <div id="ck" sstyle="border:2px solid black;padding:12px;">
-        <span>This site uses cookies</span>
-        <button>Accept</button>
-    </div>
-
-    <script type="text/javascript">
-(function() {
-    var button = document.querySelector("#ck button");
-    button.addEventListener("click", function(evt) {
-        document.cookie = "@cookieString";
-
-        ck.style.display = "none";
-    }, false);
-})();
-        </script>
-}*@
-<head>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <script type="text/javascript" src="~/assets/js/main.js">
+    <head>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <script type="text/javascript" src="~/assets/js/main.js">
         </script> 
-</head>
-    
+    </head>
 
 
 
 
-<partial name="_CookieConsentPartial" />
-  <!-- ======= Blog Page ======= -->
+
+    <partial name="_CookieConsentPartial" />
+    <!-- ======= Blog Page ======= -->
     <div class="blog-page area-padding">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-4 col-md-4">
-            <div class="page-head-blog">
-            <!--
-              <div class="single-blog-page">
-              </div>
-            -->
-              <h5><b>Institution Map</b></h5>
-              <div id="vaxMap"></div>
-              <a href="#">Institutions for you</a>
-              <br>
-              <br>
-              <div class="single-blog-page">
-              </div>
-              <div class="single-blog-page">
-                <div class="left-blog">
-                  <h4>Community Posts</h4>
-                   @foreach (var communitypost in Model.CommunityPosts)
-                    {
-                  <ul>
-                    <li>
-                      <a href="#">@communitypost.communityPostTitle</a>
-                      <p>@communitypost.communityPostContent</p>
-                    </li>
-                  </ul>
-                     }
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- End left sidebar -->
-          <!-- Start single blog -->
-          <div class="col-md-8 col-sm-8 col-xs-12">
-            <h1 style="font-size: x-large;"><b>Dashboard</b></h1>
-
-            <section id="counts" class="counts section-bg">
-              <div class="container">
-        
-                <div class="row justify-content-end">
-
-                  <div class="card col-lg-3 col-md-5 col-6 d-md-flex align-items-center text-center" id="showSources">
-                      <br>
-                      <h1>@Model.Sources.Count</h1>
-                      <h5>News Sources</h5>
-
-                  </div>
-                  
-                  <div class="card col-lg-3 col-md-5 col-6 d-md-flex align-items-center text-center" id = "showInstitutions">
-                      <br>
-                      <h1>@Model.Institutions.Count</h1>
-                      <h5>Institutions in database</h5>
-
-                  </div>
-
-                  <div class="card col-lg-3 col-md-5 col-6 d-md-flex align-items-center text-center" id = "showVaccines">
-                      <br>
-                      <h1>@Model.Vaccines.Count</h1>
-                      <h5>Vaccines in database</h5>
-
-                  </div>
-
-                  <div class="card col-lg-3 col-md-5 col-6 d-md-flex align-items-center text-center">
-                      <br>
-                      <h1>87</h1>
-                      <h5>Recommendations generated</h5>
-
-                  </div>
-
-                </div>
-        
-              </div>
-            </section>
-            <br />
-            <h1 style="font-size: x-large;"><b>News and Updates</b></h1>
+        <div class="container">
             <div class="row">
-                <div>
-                  <paging calss="pagination" total-records = "@Model.Count" show-total-pages = "false"
-                  show-total-records = "false" page-size="@Model.PageSize" page-no="@Model.PageNo"></paging>
-                </div>
-              @foreach(var webpage in Model.WebPages)
-              {
-                    <div class="col-md-12 col-sm-12 col-xs-12">
-                <div class="single-blog">
-                  <div class="blog-text">
-                    <h5>
-                      <a href="@webpage.webURL">@webpage.pageTitle</a>
-                    </h5>
-                    <div class="blog-meta">
-                      <span class="date-type">
-                        <i class="bi bi-calendar"></i>@webpage.uploadDate
-                      </span>
+                <div class="col-lg-4 col-md-4">
+                    <div class="page-head-blog">
+                        <!--
+                        <div class="single-blog-page">
+                        </div>
+                        -->
+                        <h5><b>Institution Map</b></h5>
+                        <div id="vaxMap"></div>
+                        <a href="#">Institutions for you</a>
+                        <br>
+                        <br>
+                        <div class="single-blog-page">
+                        </div>
+                        <div class="single-blog-page">
+                            <div class="left-blog">
+                                <h4>Community Posts</h4>
+                                @foreach (var communitypost in Model.CommunityPosts)
+                                {
+                                    <ul>
+                                        <li>
+                                            <a href="#">@communitypost.communityPostTitle</a>
+                                            <p>@communitypost.communityPostContent</p>
+                                        </li>
+                                    </ul>
+                                }
+                            </div>
+                        </div>
                     </div>
-                    <p>
-                      @webpage.summary
-                    </p>
-                  </div>
                 </div>
-              </div>
-              }
-              
+                <!-- End left sidebar -->
+                <!-- Start single blog -->
+                <div class="col-md-8 col-sm-8 col-xs-12">
+                    <h1 style="font-size: x-large;"><b>Dashboard</b></h1>
+
+                    <section id="counts" class="counts section-bg">
+                        <div class="container">
+
+                            <div class="row justify-content-end">
+
+                                <div class="card col-lg-3 col-md-5 col-6 d-md-flex align-items-center text-center" id="showSources">
+                                    <br>
+                                    <h1>@Model.Sources.Count</h1>
+                                    <h5>News Sources</h5>
+
+                                </div>
+
+                                <div class="card col-lg-3 col-md-5 col-6 d-md-flex align-items-center text-center" id = "showInstitutions">
+                                    <br>
+                                    <h1>@Model.Institutions.Count</h1>
+                                    <h5>Institutions in database</h5>
+
+                                </div>
+
+                                <div class="card col-lg-3 col-md-5 col-6 d-md-flex align-items-center text-center" id = "showVaccines">
+                                    <br>
+                                    <h1>@Model.Vaccines.Count</h1>
+                                    <h5>Vaccines in database</h5>
+
+                                </div>
+
+                                <div class="card col-lg-3 col-md-5 col-6 d-md-flex align-items-center text-center">
+                                    <br>
+                                    <h1>87</h1>
+                                    <h5>Recommendations generated</h5>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </section>
+                    <br />
+                    <h1 style="font-size: x-large;"><b>News and Updates</b></h1>
+                    <div class="row">
+                        <div>
+                            <paging calss="pagination" total-records = "@Model.Count" show-total-pages = "false"
+                  show-total-records = "false" page-size="@Model.PageSize" page-no="@Model.PageNo"></paging>
+                        </div>
+                        @foreach (var webpage in Model.WebPages)
+                        {
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="single-blog">
+                                    <div class="blog-text">
+                                        <h5>
+                                            <a href="@webpage.webURL">@webpage.pageTitle</a>
+                                        </h5>
+                                        <div class="blog-meta">
+                                            <span class="date-type">
+                                                <i class="bi bi-calendar"></i>@webpage.uploadDate
+                                            </span>
+                                        </div>
+                                        <p>
+                                            @webpage.summary
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
     </div>
     <!-- End Blog Page -->
 
-<script>
+    <script>
 
-</script>
+    </script>
 
     <!-- modal -->
 
@@ -161,101 +143,117 @@
 
 
 
-<div class="modal fade" id="newsSources">
-  <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-          <div class="modal-header">
-              <h4 class="modal-title">News Sources</h4>
-          </div>
-          <div class="modal-body">
-            @foreach(var source in Model.Sources)
+    <div class="modal fade" id="newsSources">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">News Sources</h4>
+                </div>
+                <div class="modal-body">
+                    @foreach (var source in Model.Sources)
                     {
                         <a href="@source.sourcesURI">@source.sourceName</a>
                     }
-            <br>
-            <input type="button" class="btn btn-secondary" id="hideSources" value="Hide" />
-          </div>
-      </div>
-  </div>
-</div>
+                    <br>
+                    <input type="button" class="btn btn-secondary" id="hideSources" value="Hide" />
+                </div>
+            </div>
+        </div>
+    </div>
 
 
 
 
 
-<div class="modal fade" id="vaccines">
-  <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-          <div class="modal-header">
-              <h4 class="modal-title">Vaccines in database</h4>
-          </div>
-          <div class="modal-body">
-            <table>
-                <tr>
-                    <td >Vaccine</td>
-                    <td >Disease</td>
-                    <td >Description</td>
-                </tr>
-                @foreach(var vaccine in Model.Vaccines)
-                    {
+    <div class="modal fade" id="vaccines">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Vaccines in database</h4>
+                </div>
+                <div class="modal-body">
+                    <table>
                         <tr>
-                        <td>@vaccine.vaccineName</td>
-                        <td>@vaccine.disease.diseaseName</td>
-                        <td>@vaccine.notes</td>
-                    </tr>
-                }
-            </table>
-            <br>
-            <input type="button" class="btn btn-secondary" id="hideVaccines" value="Hide" />
-          </div>
-      </div>
-  </div>
-</div>
+                            <td >Vaccine</td>
+                            <td >Disease</td>
+                            <td >Description</td>
+                        </tr>
+                        @foreach (var vaccine in Model.Vaccines)
+                        {
+                            <tr>
+                                <td>@vaccine.vaccineName</td>
+                                <td>@vaccine.disease.diseaseName</td>
+                                <td>@vaccine.notes</td>
+                            </tr>
+                        }
+                    </table>
+                    <br>
+                    <input type="button" class="btn btn-secondary" id="hideVaccines" value="Hide" />
+                </div>
+            </div>
+        </div>
+    </div>
 
-<div class="modal fade" id="institutions">
-  <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-          <div class="modal-header">
-              <h4 class="modal-title">Institutions in database</h4>
-          </div>
-          <div class="modal-body">
-            <table>
-                <tr>
-                    <td >Institution Name</td>
-                    <td >Address</td>
-                </tr>
-                @foreach(var institution in Model.Institutions)
-                    {
-                    <tr>
-                        <td>@institution.institutionName</td>
-                        <td>@institution.notes</td>
-                    </tr>
-                }
-            </table>
-            <br>
-            <input type="button" class="btn btn-secondary" id="hideInstitutions" value="Hide" />
-          </div>
-      </div>
-  </div>
-</div>
+    <div class="modal fade" id="institutions">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Institutions in database</h4>
+                </div>
+                <div class="modal-body">
+                    <table>
+                        <tr>
+                            <td >Institution Name</td>
+                            <td >Address</td>
+                        </tr>
+                        @foreach (var institution in Model.Institutions)
+                        {
+                            <tr>
+                                <td>@institution.institutionName</td>
+                                <td>@institution.notes</td>
+                            </tr>
+                        }
+                    </table>
+                    <br>
+                    <input type="button" class="btn btn-secondary" id="hideInstitutions" value="Hide" />
+                </div>
+            </div>
+        </div>
+    </div>
 
 
 
 
 
     <script>
-        
-if (Notification.permission === "granted") {
-   // showNotification("Welcome to VINES!", "Hope you are having a nice day!");
-} else if (Notification.permission !== "denied") {
-    Notification.requestPermission().then(permission => {
-        if (permission === "granted") {
-            showNotification();
-        }
-    });
-}
 
-</script>
+        if (Notification.permission === "granted") {
+        // showNotification("Welcome to VINES!", "Hope you are having a nice day!");
+        } else if (Notification.permission !== "denied") {
+        Notification.requestPermission().then(permission => {
+        if (permission === "granted") {
+        showNotification();
+        }
+        });
+        }
+
+    </script>
+}
+else 
+{
+     @if (User.Identity.IsAuthenticated && User.IsInRole("Patient")) {
+        
+        Response.Redirect("/patientLanding");
+    }
+        else if (User.Identity.IsAuthenticated && User.IsInRole("Advertiser")) {
+        
+        Response.Redirect("/advertiserLanding");
+    }
+        else if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+    {
+        Response.Redirect("/adminLanding");
+    }
+}
 
 
 

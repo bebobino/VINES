@@ -1,44 +1,37 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using VINES.Models;
 
-namespace VINES.Pages.InstitutionVaccine
+namespace VINES.Pages.Source
 {
     public class EditModel : PageModel
     {
-        
-        public List<Diseases> disease { get; set; }
-        public List<Institutions> institution { get; set; }
-        public List<Vaccines> vaccines { get; set; }
-
         private readonly DatabaseContext _context;
+
         public EditModel(DatabaseContext context)
         {
             _context = context;
         }
 
-        [BindProperty]
-        public InstitutionVaccines institutions { get; set; } = default;
+        public Sources source { get; set; } = default;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if ((id == null || _context.InstitutionVaccines == null))
+            if ((id == null || _context.sources == null))
             {
                 return NotFound();
             }
 
-            var cp = await _context.InstitutionVaccines.FirstOrDefaultAsync(m => m.institutionVaccineID == id);
+            var cp = await _context.sources.FirstOrDefaultAsync(m => m.sourcesID == id);
             if (cp == null)
             {
                 return NotFound();
             }
 
-            institutions = cp;
+            source = cp;
             return Page();
 
         }
@@ -47,24 +40,18 @@ namespace VINES.Pages.InstitutionVaccine
         {
             if (!ModelState.IsValid)
             {
-
                 return Page();
             }
 
-            _context.Attach(institutions).State = EntityState.Modified;
-
-
+            _context.Attach(source).State = EntityState.Modified;
 
             try
             {
-                institutions.lastModified = DateTime.Now;
-                institutions.dateAdded = DateTime.Now;
-
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!InstitutionsExists(institutions.institutionVaccineID))
+                if (!SourcesExists(source.sourcesID))
                 {
                     return NotFound();
                 }
@@ -73,12 +60,11 @@ namespace VINES.Pages.InstitutionVaccine
                     throw;
                 }
             }
-
             return RedirectToPage("Index");
         }
-        private bool InstitutionsExists(int id)
+        private bool SourcesExists(int id)
         {
-            return (_context.InstitutionVaccines?.Any(e => e.institutionVaccineID == id)).GetValueOrDefault();
+            return (_context.sources?.Any(e => e.sourcesID == id)).GetValueOrDefault();
         }
     }
 }

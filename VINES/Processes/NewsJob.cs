@@ -28,50 +28,56 @@ namespace VINES.Processes
         }
         public static async void getPNA()
         {
-            HtmlWeb web = new HtmlWeb();
-
-            web.OverrideEncoding = Encoding.UTF8;
-            web.UserAgent = "Mozilla/5.0 (Windows NT 6.2; WOW64; rv:19.0) Gecko/20100101 Firefox/19.0";
-
-            var url = "https://www.pna.gov.ph/articles/search?q=vaccine";
-            var httpClient = new HttpClient();
-
-            var htmlDocument = new HtmlDocument();
-            htmlDocument = web.Load(url);
-
-            var articleList = htmlDocument.DocumentNode.Descendants("div")
-                .Where(node => node.GetAttributeValue("class", "")
-                .Equals("articles")).ToList();
-
-            var articles = articleList[0].Descendants("div")
-                .Where(node => node.GetAttributeValue("class", "")
-                .Equals("article media")).ToList();
-
-            foreach (var article in articles)
+            try
             {
-                var uploadDate = article.Descendants("p")
-                    .Where(node => node.GetAttributeValue("class", "")
-                    .Equals("byline")).FirstOrDefault().InnerText;
-                uploadDate = uploadDate.Trim();
+                HtmlWeb web = new HtmlWeb();
 
-                var pageTitle = article.Descendants("h3")
-                    .Where(node => node.GetAttributeValue("class", "")
-                    .Equals("media-heading")).FirstOrDefault().InnerText;
-                var webURL = article.Descendants("h3")
-                    .Where(node => node.GetAttributeValue("class", "")
-                    .Equals("media-heading")).FirstOrDefault().InnerHtml;
-                var reg = new Regex("\".*?\"");
-                var matches = reg.Matches(webURL);
-                foreach (var item in matches)
-                    webURL = "https://www.pna.gov.ph" + item.ToString().Trim('"');
-                var summary = article.Descendants("p")
-                    .Where(node => node.GetAttributeValue("class", "")
-                    .Equals("excerpt")).FirstOrDefault().InnerText;
-                summary = summary.Replace("&ndash;", ":");
-                //createRecord(1, uploadDate, pageTitle, webURL, summary);
+                web.OverrideEncoding = Encoding.UTF8;
+                web.UserAgent = "Mozilla/5.0 (Windows NT 6.2; WOW64; rv:19.0) Gecko/20100101 Firefox/19.0";
 
-                Help.test(1, uploadDate, pageTitle, webURL, summary);
-                //Debug.WriteLine(pageTitle + "\n" + uploadDate + "\n" + summary + "\n" + webURL);
+                var url = "https://www.pna.gov.ph/articles/search?q=vaccine";
+                var httpClient = new HttpClient();
+
+                var htmlDocument = new HtmlDocument();
+                htmlDocument = web.Load(url);
+
+                var articleList = htmlDocument.DocumentNode.Descendants("div")
+                    .Where(node => node.GetAttributeValue("class", "")
+                    .Equals("articles")).ToList();
+
+                var articles = articleList[0].Descendants("div")
+                    .Where(node => node.GetAttributeValue("class", "")
+                    .Equals("article media")).ToList();
+
+                foreach (var article in articles)
+                {
+                    var uploadDate = article.Descendants("p")
+                        .Where(node => node.GetAttributeValue("class", "")
+                        .Equals("byline")).FirstOrDefault().InnerText;
+                    uploadDate = uploadDate.Trim();
+
+                    var pageTitle = article.Descendants("h3")
+                        .Where(node => node.GetAttributeValue("class", "")
+                        .Equals("media-heading")).FirstOrDefault().InnerText;
+                    var webURL = article.Descendants("h3")
+                        .Where(node => node.GetAttributeValue("class", "")
+                        .Equals("media-heading")).FirstOrDefault().InnerHtml;
+                    var reg = new Regex("\".*?\"");
+                    var matches = reg.Matches(webURL);
+                    foreach (var item in matches)
+                        webURL = "https://www.pna.gov.ph" + item.ToString().Trim('"');
+                    var summary = article.Descendants("p")
+                        .Where(node => node.GetAttributeValue("class", "")
+                        .Equals("excerpt")).FirstOrDefault().InnerText;
+                    summary = summary.Replace("&ndash;", ":");
+                    //createRecord(1, uploadDate, pageTitle, webURL, summary);
+
+                    Help.test(1, uploadDate, pageTitle, webURL, summary);
+                    //Debug.WriteLine(pageTitle + "\n" + uploadDate + "\n" + summary + "\n" + webURL);
+                }
+            } catch(Exception e)
+            {
+
             }
 
         }

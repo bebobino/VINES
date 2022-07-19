@@ -1,0 +1,61 @@
+﻿@page
+@model VINES.Pages.Source.IndexModel
+@{
+    Layout = "_LayoutAdmin";
+}
+
+<div class="container row p-0 m-0">  
+        <div class="col-10">  
+        <h2 class="text-info">Sources</h2>  
+    </div>  
+    <div class="col-2">  
+        <a asp-page="Create" class="btn btn-info form-control text-white">Add An Institution</a>  
+    </div>  
+    <div class="col-12 border p-3 mt-3">  
+        <form method="post">  
+            @if(Model.source.Count()>0)  
+                {
+                    <table class="table table-striped border">  
+                        <tr class="table-secondary">  
+                        <th>  
+                           No.  
+                        </th>  
+                        <th>  
+                           Name
+                        </th>  
+                        <th>  
+                           URI
+                        </th>
+                    </tr>  
+                    @{ var i = 1;}
+                    @foreach(var sources in Model.source)  
+                    {  
+                        <tr>  
+                            <td>
+                                @i
+                            </td>
+                            <td>  
+                                @Html.DisplayFor(m => sources.sourceName)  
+                            </td>  
+                            <td>  
+                                @Html.DisplayFor(m => sources.sourcesURI)
+                            </td>
+                            <td>  
+                               <button asp-page-handler="Delete" asp-route-id="@sources.sourcesID" onclick="return confirm('Are you sure you want to delete?')" 
+                               class="btn btn-danger btn-sm">Delete</button>  
+                                <a asp-page="Edit" asp-route-id="@sources.sourcesID" class="btn btn-success btn-sm text-white">Edit</a>  
+                            </td>  
+                        </tr>  
+                        i++;
+                    }  
+                </table>   
+            }  
+            else  
+            {  
+                <p>No sources yet</p>  
+            }  
+        </form>  
+    </div>  
+</div>  
+
+

@@ -4,11 +4,12 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Threading.Tasks;
 using VINES.Data;
 using VINES.Models;
 namespace VINES.Pages
 {
-    [Authorize("Admin")]
+    [Authorize("AdminOnly")]
     public class adminLandingModel : PageModel
     {
 
@@ -21,7 +22,7 @@ namespace VINES.Pages
             db = _db;
         }
 
-        public void OnGet()
+        public async Task OnGetAsync()
         {
             
         }
