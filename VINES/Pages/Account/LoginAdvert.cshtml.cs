@@ -54,7 +54,7 @@ namespace VINES.Pages.Account
             if (ModelState.IsValid)
             {
                 var help = new Help();
-                var user = Db.Users.Where(f => f.email == Input.email && f.password == help.Hash(Input.password)).FirstOrDefault();
+                var user = Db.Users.Where(f => f.email == Input.email ).FirstOrDefault();
                 if (user == null)
                 {
                     ModelState.AddModelError("Error", "ERROR: You are not a registered user.");
