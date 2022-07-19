@@ -4,11 +4,9 @@
 @{
     Layout = null;
 
-    var email = User.FindFirstValue(ClaimTypes.Email);
-    var name = User.FindFirstValue(ClaimTypes.Name);
+
 }
 
 <div>
-    <p>Hey, @name! You have signed in with Google!</p>
     <p>We might require you to input a few more details to complete user registration.</p>
 </div>

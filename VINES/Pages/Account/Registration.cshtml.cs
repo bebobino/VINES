@@ -85,8 +85,6 @@ namespace VINES.Pages.Account
         public async Task OnGetAsync(string returnUrl = null)
         {
             ReturnUrl = returnUrl;
-
-            
         }
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
@@ -135,6 +133,10 @@ namespace VINES.Pages.Account
             }
             return Page();
         }
+        public async Task<IActionResult> OnPostBookmark()
+        {
 
+            return Page();
+        }
     }
 }

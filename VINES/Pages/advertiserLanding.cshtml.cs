@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace VINES.Pages
 {
-    [Authorize]
+    [Authorize("AdvertiserOnly")]
     public class advertiserLandingModel : PageModel
     {
         public void OnGet()

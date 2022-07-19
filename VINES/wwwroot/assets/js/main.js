@@ -209,7 +209,6 @@
         });
       }, true);
     }
-
   });
 
   /**
@@ -237,10 +236,11 @@
     }
   });
 
-    initializeMap();
     $(window).on('load', function() {
       $('#cookies').modal('show');
-  });
+    });
+
+
 })()
 
 
@@ -257,26 +257,33 @@ function getLocation() {
 function showPosition(position) {
     mymap.setView([position.coords.latitude, position.coords.longitude], 15)
     var marker = L.marker([position.coords.latitude, position.coords.longitude]).addTo(mymap).bindPopup("<center><p>You</p></center>");
-    marker.on('mouseover', function (e) {
-        this.openPopup();
-    });
-    marker.on('mouseout', function (e) {
-        this.closePopup();
-    });
+
 }
-function addMarker(x, y) {
-    var marker = L.marker([y, x]).addTo(mymap);
-    mymap.panTo(new L.LatLng(y, x));
+
+function addMarker(x, y, z, i) {
+    var greenIcon = new L.Icon({
+        iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png',
+        shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+        iconSize: [25, 41],
+        iconAnchor: [12, 41],
+        popupAnchor: [1, -34],
+        shadowSize: [41, 41]
+    });
+    var url = "https://maps.google.com?q="+y+","+x;
+    var marker = L.marker([y, x], { icon: greenIcon }).addTo(mymap).bindPopup("<center><p>" + z + '</p></center><p></p><center><a href="'+url+'">'+i+"</p></center>");
+
 }
 
 
 
 
 function initializeMap() {
-    mymap = L.map('vaxMap').setView([14.676208, 121.043861], 15);
+
+    
+    mymap = L.map('vaxMap').setView([0, 0], 15);
     L.tileLayer('https://api.maptiler.com/maps/streets/{z}/{x}/{y}.png?key=993xdhHU78iIxlykv1dm'
         , { attribution: '<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>', }).addTo(mymap);
-    getLocation();
+    
 }
 
 

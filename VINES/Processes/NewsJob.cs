@@ -75,7 +75,7 @@ namespace VINES.Processes
                     Help.test(1, uploadDate, pageTitle, webURL, summary);
                     //Debug.WriteLine(pageTitle + "\n" + uploadDate + "\n" + summary + "\n" + webURL);
                 }
-            } catch(Exception e)
+            }catch(Exception e)
             {
 
             }
