@@ -71,8 +71,8 @@ namespace VINES.Processes
                         .Equals("excerpt")).FirstOrDefault().InnerText;
                     summary = summary.Replace("&ndash;", ":");
                     //createRecord(1, uploadDate, pageTitle, webURL, summary);
-
-                    Help.test(1, uploadDate, pageTitle, webURL, summary);
+                    Help help = new Help();
+                    help.saveNews(1, uploadDate, pageTitle, webURL, summary);
                     //Debug.WriteLine(pageTitle + "\n" + uploadDate + "\n" + summary + "\n" + webURL);
                 }
             }catch(Exception e)

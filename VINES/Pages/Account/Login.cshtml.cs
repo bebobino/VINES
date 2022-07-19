@@ -58,20 +58,26 @@ namespace VINES.Pages.Account
                 var user = Db.Users.Where(f => f.email == Input.email).FirstOrDefault();
                 if (user == null)
                 {
-                    ModelState.AddModelError("Error", "You are not a registered user");
+                    ModelState.AddModelError("Error", "ERROR: You are not a registered user.");
                     return Page();
                 }
                 else if (user.password != help.Hash(Input.password))
                 {
-                    ModelState.AddModelError("Error2", "Invalid Email/Password combination");
+                    ModelState.AddModelError("Error", "ERROR: Invalid Email/Password combination.");
+                    return Page();
+                }
+                else if (!user.emailAuth)
+                {
+                    ModelState.AddModelError("Error", "ERROR: Email not yet authenticated.");
                     return Page();
                 }
                 else if (user.roleID != 3)
                 {
-                    ModelState.AddModelError("Error1", "Invalid Role");
+                    ModelState.AddModelError("Error", "ERROR: Not a Patient.");
                     return Page();
-                } 
+                }
                 
+
 
                 var claims = new List<Claim>
                 {

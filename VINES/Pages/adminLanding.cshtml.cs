@@ -23,7 +23,7 @@ namespace VINES.Pages
             db = _db;
         }
 
-        public async Task OnGetAsync()
+        public void OnGet()
         {
             Debug.WriteLine("test");
         }

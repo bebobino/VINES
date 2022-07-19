@@ -11,17 +11,42 @@ using System.Text;
 using System.Threading.Tasks;
 using VINES.Data;
 using VINES.Models;
+using VINES.Processes;
 
 namespace VINES.Pages.Account
 {
     [AllowAnonymous]
     public class RegisterConfirmationModel : PageModel
     {
-        public async Task OnGetAsync()
+        private DatabaseContext db;
+        public RegisterConfirmationModel(DatabaseContext db)
         {
-            var email = User.FindFirstValue(ClaimTypes.Email);
+            this.db = db;
+        }
 
-            Debug.WriteLine(email);
+        public void OnGet(int key1, string key2)
+        {
+            Help help = new Help();
+            var user = db.Users.Find(key1);
+            if(user == null)
+            {
+                Debug.WriteLine("does not exist");
+            }
+            else
+            {
+                var email = help.Hash(user.email);
+                if(email.Equals(key2))
+                {
+                    user.emailAuth = true;
+                    db.SaveChanges();
+                    Debug.WriteLine("Success!");
+                }
+                else
+                {
+                    Debug.WriteLine("Failure");
+                }
+            }
+
         }
 
     }

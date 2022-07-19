@@ -35,6 +35,7 @@ namespace VINES
             services.AddRazorPages();
 
             var connection = Configuration.GetConnectionString("DefaultConnection");
+            Configuration.Get<AppSettings>();
             services.AddDbContext<DatabaseContext>(option => option.UseSqlServer(connection));
 
             services.AddAntiforgery(options =>

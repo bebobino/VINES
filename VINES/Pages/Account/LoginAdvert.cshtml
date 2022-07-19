@@ -43,6 +43,7 @@
                   <p class="mb-4">Please Use Your Advertiser Account</p>
                 </div>
                 <form id="admin" method="post">
+                    @Html.ValidationMessage("Error", new { @style="color:red" })
                   <div class="form-group first">
                     <label asp-for="Input.email"></label>
                     <input type="text" asp-for="Input.email" class="form-control">
