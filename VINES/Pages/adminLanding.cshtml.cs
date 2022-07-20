@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -22,9 +23,9 @@ namespace VINES.Pages
             db = _db;
         }
 
-        public async Task OnGetAsync()
+        public void OnGet()
         {
-            
+            Debug.WriteLine("test");
         }
     }
 }

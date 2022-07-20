@@ -15,4 +15,6 @@ namespace VINES.Models
         [ForeignKey("postID")]
         public Posts post { get; set; }
     }
+
+
 }

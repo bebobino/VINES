@@ -10,6 +10,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using VINES.Models;
+using VINES.Processes;
 
 namespace VINES.Pages.Account
 {
@@ -53,15 +54,21 @@ namespace VINES.Pages.Account
 
             if (ModelState.IsValid)
             {
-                var user = Db.Users.Where(f => f.email == Input.email && f.password == Input.password).FirstOrDefault();
+                var help = new Help();
+                var user = Db.Users.Where(f => f.email == Input.email ).FirstOrDefault();
                 if (user == null)
                 {
-                    ModelState.AddModelError(string.Empty, "Invalid Email or Password");
+                    ModelState.AddModelError("Error", "ERROR: You are not a registered user.");
+                    return Page();
+                }
+                else if (user.password != help.Hash(Input.password))
+                {
+                    ModelState.AddModelError("Error", "ERROR: Invalid Email/Password combination.");
                     return Page();
                 }
                 else if (user.roleID != 1)
                 {
-                    ModelState.AddModelError(string.Empty, "You are not a registered administrator");
+                    ModelState.AddModelError("Error", "ERROR: Invalid Role.");
                     return Page();
                 }
 

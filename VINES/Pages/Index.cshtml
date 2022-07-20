@@ -1,6 +1,7 @@
 ﻿@page
-@model IndexModel
+@model VINES.Pages.IndexModel
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@using System.Diagnostics
 @using VINES.Models
 @using Microsoft.AspNetCore.Http.Features
 @using Microsoft.AspNetCore.Authorization
@@ -104,37 +105,68 @@
                         <div>
                             <paging calss="pagination" total-records = "@Model.Count" show-total-pages = "false"
                   show-total-records = "false" page-size="@Model.PageSize" page-no="@Model.PageNo"></paging>
-                        </div>
-                        @foreach (var webpage in Model.WebPages)
-                        {
-                            <div class="col-md-12 col-sm-12 col-xs-12">
-                                <div class="single-blog">
-                                    <div class="blog-text">
-                                        <h5>
-                                            <a href="@webpage.webURL">@webpage.pageTitle</a>
-                                        </h5>
-                                        <div class="blog-meta">
-                                            <span class="date-type">
-                                                <i class="bi bi-calendar"></i>@webpage.uploadDate
-                                            </span>
-                                        </div>
-                                        <p>
-                                            @webpage.summary
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        }
-
-                    </div>
                 </div>
+                <!-- Pagination -->
+
+                <ul class="pagination">
+
+                @for(var i = 1; i <= Model.TotalPages; i++)
+                    {
+                        <li class="page-item @(i == Model.PageNo ? "active" : "")">
+                            <a asp-page="/Index" asp-route-p="@i" class="page-link">@i</a>
+                        </li>
+                    }
+
+                </ul>
+
+                <!-- Pagination -->
+              @foreach(var webpage in Model.WebPages)
+              {
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="single-blog">
+                  <div class="blog-text">
+                    <h5>
+                      <a href="@webpage.webURL">@webpage.pageTitle</a>
+                    </h5>
+                    <div class="blog-meta">
+                      <span class="date-type">
+                        <i class="bi bi-calendar"></i>@webpage.uploadDate
+                      </span>
+                    </div>
+                    <p>
+                      @webpage.summary
+                    </p>
+                  </div>
+                </div>
+              </div>
+              }
+                    
             </div>
+          </div>
         </div>
+      </div>
     </div>
     <!-- End Blog Page -->
 
-    <script>
+<script>
 
+    
+    initializeMap();
+</script>
+    @foreach(var inst in Model.Institutions)
+    {
+        
+        Debug.WriteLine(inst.Long+ "," +inst.lat);
+    <script>
+var z = "@inst.institutionName".replace('&#xD;&#xA;', '');
+var i = "@inst.notes";
+        addMarker(@inst.lat, @inst.Long, z, i);
+    </script>
+    }
+<script>
+    getLocation();
+    
+    //var marker = L.marker([14.60824, 121.02170]).addTo(mymap).bindPopup("<center><p>You</p></center>");
     </script>
 
     <!-- modal -->

@@ -21,10 +21,7 @@ namespace VINES.Pages
 
 
         [BindProperty(SupportsGet = true)]
-        public int CurrentPage { get; set; } = 1;
-        public int Count { get; set; }
-        public int PageSize { get; set; }
-
+        
 
         public List<CommunityPost> CommunityPosts { get; set; }
         public List<WebPages> WebPages { get; set; }
@@ -33,7 +30,16 @@ namespace VINES.Pages
         public List<Institutions> Institutions { get; set; }
         public List<Sources> Sources { get; set; }
         private DatabaseContext db;
+
+        //pagination
         public int PageNo { get; set; }
+        public bool ShowPrevious { get; set; }
+        public bool ShowNext { get; set; }
+        public int Count { get; set; }
+        public int PageSize { get; set; }
+        public int TotalPages { get; set; }
+        
+
 
         public IndexModel(ILogger<IndexModel> logger, DatabaseContext _db)
         {
@@ -47,10 +53,14 @@ namespace VINES.Pages
             WebPages = db.WebPages.OrderByDescending(webpage => webpage.uploadDate).Skip((p - 1) * s).Take(s).ToList();
             Count = db.WebPages.Count();
             PageSize = s;
+            TotalPages = (int)Math.Ceiling(decimal.Divide(Count, PageSize));
             PageNo = p;
+            ShowPrevious = (PageNo > 1) ? true : false;
+            ShowNext = (PageNo < TotalPages) ? true : false;
             Vaccines = db.vaccines.Include("disease").ToList();
             Institutions = db.Institutions.ToList();
             Help help = new Help();
+            Debug.WriteLine("test");
             help.checkIP();
 
         }

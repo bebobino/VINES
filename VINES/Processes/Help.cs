@@ -16,9 +16,9 @@ namespace VINES.Processes
     {
 
 
-        static string constring = "Data Source=DESKTOP-6731HIA\\SQLEXPRESS;Initial Catalog=Vines;Integrated Security=True";
+        static string constring = AppSettings.ConnectionStrings.DefaultConnection;
 
-        public static void test(int sourcesID, string uploadDate, string pageTitle, string webURL, string summary)
+        public void saveNews(int sourcesID, string uploadDate, string pageTitle, string webURL, string summary)
         {
             SqlConnection con = new SqlConnection(constring);
             SqlDataReader SR = null;
@@ -74,16 +74,16 @@ namespace VINES.Processes
 
         public void sendEmail(string to, string subject, string body)
         {
-            var from = "vinessystems@outlook.com"; //VINES email
-            var password = "v4Cc!n3$"; //VINES email password 
+            var from = AppSettings.Smtp.FromAddress;
+            var password = AppSettings.Smtp.Password;   
 
             using SmtpClient email = new SmtpClient
             {
                 DeliveryMethod = SmtpDeliveryMethod.Network,
                 UseDefaultCredentials = false,
                 EnableSsl = true,
-                Host = "smtp-mail.outlook.com",
-                Port = 587,
+                Host = AppSettings.Smtp.Server,
+                Port = AppSettings.Smtp.Port,
                 Credentials = new NetworkCredential(from, password)
             };
 

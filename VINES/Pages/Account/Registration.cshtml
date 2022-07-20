@@ -46,6 +46,8 @@
                   <p class="mb-4">It's quick and easy.</p>
                 </div>
                 <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                    @Html.ValidationMessage("Error", new { @style="color:red" })
+                    @Html.ValidationMessage("Success", new { @style="color:green" })
                   <div class="form-group last mb-4">
                     <label asp-for="Input.firstName"></label>
                     <input type="text" class="form-control" asp-for="Input.firstName">

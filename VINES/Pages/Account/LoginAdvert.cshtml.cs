@@ -54,15 +54,25 @@ namespace VINES.Pages.Account
             if (ModelState.IsValid)
             {
                 var help = new Help();
-                var user = Db.Users.Where(f => f.email == Input.email && f.password == help.Hash(Input.password)).FirstOrDefault();
+                var user = Db.Users.Where(f => f.email == Input.email ).FirstOrDefault();
                 if (user == null)
                 {
-                    ModelState.AddModelError(string.Empty, "Invalid Email or Password");
+                    ModelState.AddModelError("Error", "ERROR: You are not a registered user.");
+                    return Page();
+                }
+                else if (user.password != help.Hash(Input.password))
+                {
+                    ModelState.AddModelError("Error", "ERROR: Invalid Email/Password combination.");
+                    return Page();
+                }
+                else if (!user.emailAuth)
+                {
+                    ModelState.AddModelError("Error", "ERROR: Email not yet authenticated.");
                     return Page();
                 }
                 else if (user.roleID != 2)
                 {
-                    ModelState.AddModelError(string.Empty, "You are not a registered advertiser");
+                    ModelState.AddModelError("Error", "ERROR: Not an Advertiser.");
                     return Page();
                 }
 

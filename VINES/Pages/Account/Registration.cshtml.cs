@@ -85,8 +85,6 @@ namespace VINES.Pages.Account
         public async Task OnGetAsync(string returnUrl = null)
         {
             ReturnUrl = returnUrl;
-
-            
         }
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
@@ -130,11 +128,16 @@ namespace VINES.Pages.Account
                     Db.Patients.Add(patient);
                     await Db.SaveChangesAsync();
 
-                    return RedirectToPage("/Account/RegisterCofirmation", new {email = Input.email});
+                    help.sendEmail(Input.email, "Account Confirmation", "Here is your authentication link: "+AppSettings.Site.Url+"Account/RegisterConfirmation/?key1="+user.userID+"&key2="+help.Hash(user.email));
+
                 }
             }
             return Page();
         }
+        public async Task<IActionResult> OnPostBookmark()
+        {
 
+            return Page();
+        }
     }
 }
