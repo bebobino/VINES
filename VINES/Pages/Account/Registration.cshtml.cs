@@ -96,10 +96,11 @@ namespace VINES.Pages.Account
                 var user = Db.Users.Where(f => f.email == Input.email).FirstOrDefault();
                 if (user != null)
                 {
-                    ModelState.AddModelError(string.Empty, Input.email + "Already Exists");
+                    ModelState.AddModelError("Error", "ERROR: Email already being used.");
                 }
                 else
                 {
+                    ModelState.AddModelError("Success", "SUCCESS: User created.");
                     var help = new Help();
                     user = new User { firstName = Input.firstName, 
                         middleName = Input.middleName, 
