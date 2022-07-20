@@ -7,11 +7,13 @@ namespace VINES.Models
     public class AdvertisementType
     {
         [Key]
-        public int advertisementID { get; set; }
+        public int advertisementTypeID { get; set; }
 
-        public int userID { get; set; }
+        public int advertisementType { get; set; }
 
-        public int institutionID { get; set; }
+        public decimal price { get; set; }
+        public int clickLimit { get; set; }
+        public int Duration { get; set; }
 
 
     }
