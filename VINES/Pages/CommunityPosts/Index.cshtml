@@ -4,7 +4,6 @@
 @inject IAuthorizationService AuthorizationService
 @{
     ViewData["Title"] = "Community Post";
-    Layout = "_LayoutAdmin";
 
 }
 @if ((await AuthorizationService.AuthorizeAsync(User, "AdminOnly")).Succeeded)

@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Threading.Tasks;
@@ -5,6 +6,7 @@ using VINES.Models;
 
 namespace VINES.Pages.Source
 {
+    [Authorize("AdminOnly")]
     public class CreateModel : PageModel
     {
         private readonly DatabaseContext _Db;

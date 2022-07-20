@@ -8,7 +8,6 @@
 @inject IAuthorizationService AuthorizationService
 @{
     ViewData["Title"] = "Home page";
-    Layout = "_LayoutLanding";
 }
 
 @if (@User.Identity.IsAuthenticated == false)

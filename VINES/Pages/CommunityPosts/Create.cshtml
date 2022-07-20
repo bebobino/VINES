@@ -3,11 +3,11 @@
 @using Microsoft.AspNetCore.Authorization
 @inject IAuthorizationService AuthorizationService
 @{
-    Layout = "_LayoutAdmin";
 }
 
 @if ((await AuthorizationService.AuthorizeAsync(User, "AdminOnly")).Succeeded)
 {
+
 <br />  
 <h2 class="text-info">Create New Community Post</h2>  
 <br />  

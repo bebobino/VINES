@@ -4,7 +4,6 @@
 @inject IAuthorizationService AuthorizationService
 @{
   ViewData["Title"] = "advertiserLanding";
-  Layout = "_LayoutAdvertiser";
 }
 
 @if ((await AuthorizationService.AuthorizeAsync(User, "AdvertiserOnly")).Succeeded)
