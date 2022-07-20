@@ -17,5 +17,6 @@ namespace VINES.Pages.Account
 
             return RedirectToPage("/patientLanding");
         }
+
     }
 }

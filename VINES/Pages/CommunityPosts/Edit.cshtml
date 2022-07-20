@@ -5,6 +5,7 @@
 @using VINES.Models
 @{
     ViewData["Title"] = "Edit";
+    Layout = "_LayoutAdmin";
 }
 @if ((await AuthorizationService.AuthorizeAsync(User, "AdminOnly")).Succeeded)
 {
