@@ -61,21 +61,41 @@ namespace VINES.Pages.Account
                     ModelState.AddModelError("Error", "ERROR: You are not a registered user.");
                     return Page();
                 }
-                else if (user.password != help.Hash(Input.password))
+                else if(user.isLocked)
                 {
-                    ModelState.AddModelError("Error", "ERROR: Invalid Email/Password combination.");
+                    ModelState.AddModelError("Error", "ERROR: Your account has been locked. Please check your Email to unlock");
                     return Page();
+                    
                 }
-                else if (!user.emailAuth)
+                else
                 {
-                    ModelState.AddModelError("Error", "ERROR: Email not yet authenticated.");
-                    return Page();
+                    if (user.password != help.Hash(Input.password))
+                    {
+                        
+                        user.failedAttempts++;
+                        if (user.failedAttempts >= 3)
+                        {
+                            user.isLocked = true;
+                            ModelState.AddModelError("Error", "ERROR: Your account has been locked. Please check your Email to unlock.");
+                            help.sendEmail(user.email, "Account Recovery", "To access your account, click the link provided. " + AppSettings.Site.Url + "Account/Recovery?key1=" + user.userID + "&key2=" + help.Hash(user.email) + "&key3=" + help.Hash(user.password));
+                        }
+                        await Db.SaveChangesAsync();
+                        ModelState.AddModelError("Error", "ERROR: Invalid Email/Password combination.");
+                        return Page();
+                    }
+                    else if (!user.emailAuth)
+                    {
+                        ModelState.AddModelError("Error", "ERROR: Email not yet authenticated.");
+                        return Page();
+                    }
+                    else if (user.roleID != 3)
+                    {
+                        ModelState.AddModelError("Error", "ERROR: Not a Patient.");
+                        return Page();
+                    }
                 }
-                else if (user.roleID != 3)
-                {
-                    ModelState.AddModelError("Error", "ERROR: Not a Patient.");
-                    return Page();
-                }
+                user.failedAttempts = 0;
+                await Db.SaveChangesAsync();
                 
 
 

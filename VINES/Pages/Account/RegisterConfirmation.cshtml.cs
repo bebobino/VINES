@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
+using System;
 using System.Diagnostics;
 using System.Linq;
 using System.Security.Claims;
@@ -27,24 +28,32 @@ namespace VINES.Pages.Account
         public void OnGet(int key1, string key2)
         {
             Help help = new Help();
-            var user = db.Users.Find(key1);
-            if(user == null)
+            try
             {
-                Debug.WriteLine("does not exist");
-            }
-            else
-            {
-                var email = help.Hash(user.email);
-                if(email.Equals(key2))
+                var user = db.Users.Find(key1);
+                if (user == null)
                 {
-                    user.emailAuth = true;
-                    db.SaveChanges();
-                    Debug.WriteLine("Success!");
+                    Debug.WriteLine("does not exist");
                 }
                 else
                 {
-                    Debug.WriteLine("Failure");
+                    var email = help.Hash(user.email);
+                    key2 = key2.Replace(" ", "+");
+                    if (email.Equals(key2))
+                    {
+                        user.emailAuth = true;
+                        db.SaveChanges();
+                        Debug.WriteLine("Success!");
+                    }
+                    else
+                    {
+                        Debug.WriteLine("Failure");
+                    }
                 }
+            }
+            catch(Exception e)
+            {
+
             }
 
         }
