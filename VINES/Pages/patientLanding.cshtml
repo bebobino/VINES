@@ -6,10 +6,6 @@
 @inject IAuthorizationService AuthorizationService
 @{
   ViewData["Title"] = "patientLanding";
-
-              
-  
-
 }
 
 
@@ -28,56 +24,23 @@
               <div class="single-blog-page">
                 <!-- recent start -->
                 <div class="left-blog">
-                  <h4>recent news</h4>
+                  <h4>COMMUNITY POSTS</h4>
                   <div class="recent-post">
-                    <!-- start single post -->
-                    <div class="recent-single-post">
+                    @foreach(var com in Model.CommunityPosts)
+                     {
+                     <div class="recent-single-post">
                       <div class="post-img">
-                        <a href="#">
-                          <img src="assets/img/blog/1.jpg" alt="">
-                        </a>
+
+                          <img src="assets/img/VINESii.png" alt="">
                       </div>
                       <div class="pst-content">
-                        <p><a href="#"> Redug Lerse dolor sit amet consect adipis elit.</a></p>
+                          
+                        <p>@com.communityPostTitle</p>
+                        <br />
+                        <p>@com.communityPostContent</p>
                       </div>
                     </div>
-                    <!-- End single post -->
-                    <!-- start single post -->
-                    <div class="recent-single-post">
-                      <div class="post-img">
-                        <a href="#">
-                          <img src="assets/img/blog/2.jpg" alt="">
-                        </a>
-                      </div>
-                      <div class="pst-content">
-                        <p><a href="#"> Redug Lerse dolor sit amet consect adipis elit.</a></p>
-                      </div>
-                    </div>
-                    <!-- End single post -->
-                    <!-- start single post -->
-                    <div class="recent-single-post">
-                      <div class="post-img">
-                        <a href="#">
-                          <img src="assets/img/blog/3.jpg" alt="">
-                        </a>
-                      </div>
-                      <div class="pst-content">
-                        <p><a href="#"> Redug Lerse dolor sit amet consect adipis elit.</a></p>
-                      </div>
-                    </div>
-                    <!-- End single post -->
-                    <!-- start single post -->
-                    <div class="recent-single-post">
-                      <div class="post-img">
-                        <a href="#">
-                          <img src="assets/img/blog/4.jpg" alt="">
-                        </a>
-                      </div>
-                      <div class="pst-content">
-                        <p><a href="#"> Redug Lerse dolor sit amet consect adipis elit.</a></p>
-                      </div>
-                    </div>
-                    <!-- End single post -->
+                    }
                   </div>
                 </div>
                 <!-- recent end -->

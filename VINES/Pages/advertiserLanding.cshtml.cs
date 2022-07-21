@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using VINES.Helper;
 using VINES.Models;
@@ -31,22 +32,37 @@ namespace VINES.Pages
         public IFormFile Photo { get; set; }
         [BindProperty]
         public Advertisement ad { get; set; }
-        public List<AdvertisementType> types { get; set; }
+        public List<AdvertisementType> adTypes { get; set; }
         public List<Advertisement> ads { get; set; }
-        public int id;
 
          
 
 
         public async Task OnPost()
         {
-            var file = Path.Combine(_environment.ContentRootPath, "Pages\\Ads\\Img", Photo.FileName);
+            string newFileName = Photo.FileName +"_"+DateTime.UtcNow;
+            var file = Path.Combine(_environment.ContentRootPath, "Pages\\Ads\\Img", newFileName);
             Debug.WriteLine("file is in: "+file);
             using (var fileStream = new FileStream(file, FileMode.Create))
             {
                 await Photo.CopyToAsync(fileStream);
             }
-            ad.url = file;
+
+            var aid = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var uid = int.Parse(aid);
+            var adver = _db.advertisers.Where(a => a.userID == uid).FirstOrDefault();
+            
+
+            ad.imgsrc = file;
+            ad.advertiserID = adver.advertiserID;
+            ad.lastModified = DateTime.UtcNow;
+            ad.advertisementTypeID = 1;
+            ad.dateAdded = DateTime.UtcNow;
+            ad.clicks = 0;
+
+            ad.endDate = DateTime.UtcNow;
+            _db.advertisements.Add(ad);
+            await _db.SaveChangesAsync();
         }
 
         public async Task<IActionResult> OnPostCheckout(double total)
@@ -62,15 +78,8 @@ namespace VINES.Pages
 
         public void OnGet()
         {
-            try
-            {
 
-            }catch(Exception e)
-            {
-
-            }
-            
-            types = _db.advertisementTypes.ToList();
+            adTypes = _db.advertisementTypes.ToList();
             ads = _db.advertisements.ToList();
         }
     }

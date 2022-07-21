@@ -60,20 +60,6 @@
                             <!-- recent end -->
                         </div>
                         <div class="single-blog-page">
-                            <div class="left-blog">
-                                <h4>Monthly Billing Statement Archive</h4>
-                                <ul>
-                                    <li>
-                                        <a href="#">May 2022</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">June 2022</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">July 2022</a>
-                                    </li>
-                                </ul>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -93,7 +79,7 @@
 
                                 <div class="card col-lg-3 col-md-5 col-6 d-md-flex align-items-center text-center" id="showAdvertisements">
                                     <br>
-                                    <h1>7</h1>
+                                    <h1></h1>
                                     <h5>Advertisements Active</h5>
 
                                 </div>
@@ -139,12 +125,21 @@
                                         <a href="#">Add Advertisement</a>
                                     </h5>
                                     <form method="post" enctype="multipart/form-data">
+                                        <label>Advertisment Name</label>
+                                        <br />
+                                        <input type="text" asp-for="ad.advertisementTitle" />
+                                        <br />
+                                        <label>URL Destination</label>
+                                        <br />
+                                        <input type="text" asp-for="ad.url" />
+                                        <br />
                                         <input type="file" accept="image/png, image/gif, image/jpeg" asp-for="Photo" />
+                                        <br />
                                         <input type="submit" />
                                     </form>
                                 </div>
 
-
+                                
 
 
 
@@ -156,28 +151,12 @@
 
                                 <div class="blog-text">
                                     <h5>
-                                        <a href="#">Active Advertisements</a>
+                                        <p>Unpaid Advertisements</p>
                                     </h5>
-                                    <table style="width:100%">
-                                        <tr>
-                                            <th colspan="2">Advertisement Title</th>
-                                            <th colspan="2">Subscription Start Date</th> 
-                                            <th colspan="2">Subscription Duration</th>
-                                            <th colspan="2">Total Subscription Cost</th>
-                                        </tr>
-                                        <tr>
-                                            <td colspan="2">Shopee Ad</td>
-                                            <td colspan="2">07-11-2022</td>
-                                            <td colspan="2">2 Months</td>
-                                            <td colspan="2">&#8369;1,000</td>
-                                        </tr>
-                                        <tr>
-                                            <td colspan="2">Lazada Ad</td>
-                                            <td colspan="2">07-11-2022</td>
-                                            <td colspan="2">10 Months</td>
-                                            <td colspan="2">&#8369;5,000</td>
-                                        </tr>
-                                    </table>
+                                    @foreach(var advert in Model.ads)
+                                    {
+                                        @advert.advertisementTitle
+                                    }
                                 </div>
                             </div>
                         </div>
