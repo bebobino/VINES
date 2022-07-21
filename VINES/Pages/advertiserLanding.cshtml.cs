@@ -21,29 +21,32 @@ namespace VINES.Pages
     {
         private IWebHostEnvironment _environment;
         public IConfiguration _configuration { get; }
-        private DatabaseContext _db;
+        private readonly DatabaseContext _db;
         public advertiserLandingModel(IWebHostEnvironment environment, IConfiguration configuration, DatabaseContext db)
         {
             _environment = environment;
             _configuration = configuration;
             _db = db;
         }
+
+        public List<AdvertisementType> AdTypes { get; set; }
+        public List<Advertisement> Ads { get; set; }
         [BindProperty]
         public IFormFile Photo { get; set; }
         [BindProperty]
-        public Advertisement ad { get; set; }
-        public List<AdvertisementType> adTypes { get; set; }
-        public List<Advertisement> ads { get; set; }
+        public Advertisement Ad { get; set; }
+        
 
          
 
 
-        public async Task OnPost()
+        public async Task<IActionResult> OnPost()
         {
-            string newFileName = Photo.FileName +"_"+DateTime.UtcNow;
-            var file = Path.Combine(_environment.ContentRootPath, "Pages\\Ads\\Img", newFileName);
-            Debug.WriteLine("file is in: "+file);
-            using (var fileStream = new FileStream(file, FileMode.Create))
+            string uploadsFolder = Path.Combine(_environment.WebRootPath, "images");
+            string uniqueFileName = Guid.NewGuid().ToString() + "_" + Photo.FileName;
+            string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+            Debug.WriteLine("file is in: "+filePath);
+            using (var fileStream = new FileStream(filePath, FileMode.Create))
             {
                 await Photo.CopyToAsync(fileStream);
             }
@@ -51,18 +54,17 @@ namespace VINES.Pages
             var aid = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var uid = int.Parse(aid);
             var adver = _db.advertisers.Where(a => a.userID == uid).FirstOrDefault();
-            
 
-            ad.imgsrc = file;
-            ad.advertiserID = adver.advertiserID;
-            ad.lastModified = DateTime.UtcNow;
-            ad.advertisementTypeID = 1;
-            ad.dateAdded = DateTime.UtcNow;
-            ad.clicks = 0;
-
-            ad.endDate = DateTime.UtcNow;
-            _db.advertisements.Add(ad);
+            Ad.imgsrc = uniqueFileName;
+            Ad.advertiserID = adver.advertiserID;
+            Ad.lastModified = DateTime.UtcNow;
+            Ad.advertisementTypeID = 1;
+            Ad.dateAdded = DateTime.UtcNow;
+            Ad.clicks = 0;
+            Ad.endDate = DateTime.UtcNow;
+            _db.advertisements.Add(Ad);
             await _db.SaveChangesAsync();
+            return RedirectToPage("/Index");
         }
 
         public async Task<IActionResult> OnPostCheckout(double total)
@@ -79,8 +81,8 @@ namespace VINES.Pages
         public void OnGet()
         {
 
-            adTypes = _db.advertisementTypes.ToList();
-            ads = _db.advertisements.ToList();
+            AdTypes = _db.advertisementTypes.ToList();
+            Ads = _db.advertisements.ToList();
         }
     }
 }

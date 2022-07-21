@@ -1,5 +1,5 @@
 ﻿@page
-@model advertiserLandingModel
+@model VINES.Pages.advertiserLandingModel
 @using Microsoft.AspNetCore.Authorization
 @inject IAuthorizationService AuthorizationService
 @{
@@ -127,16 +127,31 @@
                                     <form method="post" enctype="multipart/form-data">
                                         <label>Advertisment Name</label>
                                         <br />
-                                        <input type="text" asp-for="ad.advertisementTitle" />
+                                        <input type="text" asp-for="Ad.advertisementTitle" required/>
                                         <br />
                                         <label>URL Destination</label>
                                         <br />
-                                        <input type="text" asp-for="ad.url" />
+                                        <input type="text" asp-for="Ad.url" required/>
+                                        <label>Ad Type</label>
                                         <br />
-                                        <input type="file" accept="image/png, image/gif, image/jpeg" asp-for="Photo" />
+                                        <select asp-for="Ad.advertisementTypeID" required>
+                                        @foreach (var adcat in Model.AdTypes)
+                                            {
+                                                <option value="@adcat.advertisementTypeID">@adcat.advertisementType</option>
+                                            }
+
+                                        </select>
+                                        <br />
+                                        <label>Image</label>
+                                        <br />
+                                        <input type="file" accept="image/png, image/gif, image/jpeg" asp-for="Photo" required/>
+                                        <br />
                                         <br />
                                         <input type="submit" />
+
                                     </form>
+                                    <br />
+                                    <br />
                                 </div>
 
                                 
@@ -151,11 +166,15 @@
 
                                 <div class="blog-text">
                                     <h5>
-                                        <p>Unpaid Advertisements</p>
+                                        <p>Advertisements</p>
                                     </h5>
-                                    @foreach(var advert in Model.ads)
+                                    @foreach(var advert in Model.Ads)
                                     {
-                                        @advert.advertisementTitle
+                                        
+                                            <h1>@advert.advertisementTitle</h1>
+                                            <img src="/images/@advert.imgsrc" width="500" height="300">
+                                            <p>Price: @advert.advertisementType.price</p>
+                                        
                                     }
                                 </div>
                             </div>
