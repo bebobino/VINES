@@ -8,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using System.Diagnostics;
 using VINES.Models;
 using VINES.Helper;
+using System.Security.Claims;
 
 namespace VINES.Pages.Payments
 {
@@ -15,9 +16,11 @@ namespace VINES.Pages.Payments
     {
 
         public IConfiguration configuration { get; }
-        public SuccessModel(IConfiguration _configuration)
+        private DatabaseContext db;
+        public SuccessModel(IConfiguration _configuration, DatabaseContext _db)
         {
             configuration = _configuration;
+            db = _db;
         }
         public string paymentId { get; set; }
 
@@ -28,35 +31,61 @@ namespace VINES.Pages.Payments
 
         }
 
+
         public async Task<RedirectResult> OnGetAsync(string paymentId, string payerID)
         {
 
             this.paymentId = paymentId;
             this.payerID = payerID;
-            Console.WriteLine(paymentId);
+            var name = User.FindFirstValue(ClaimTypes.Role);
+            Debug.WriteLine(paymentId);
+            Debug.WriteLine(name);
+            if (!name.Equals("Patient"))
+            {
+                return Redirect("/Index");
+            }
             if (paymentId != null && payerID != null)
             {
+                var id = User.FindFirstValue(ClaimTypes.NameIdentifier);
+                var uid = int.Parse(id);
 
                 var payPalAPI = new PayPalAPI(configuration);
                 PayPalPaymentExcecutedResponse result = await payPalAPI.executedPayment(paymentId, payerID);
+                Debug.WriteLine(payPalAPI.paypalID);
+                Debug.WriteLine("Transaction Details");
+                Debug.WriteLine("cart: " + result.cart);
+                Debug.WriteLine("payment method: " + result.payer.payment_method);
+                Debug.WriteLine("create_time: " + result.create_time.ToLongDateString());
+                Debug.WriteLine("id: " + result.id);
+                Debug.WriteLine("intent: " + result.intent);
+                Debug.WriteLine("link 0 - href: " + result.links[0].href);
+                Debug.WriteLine("link 0 - method: " + result.links[0].method);
+                Debug.WriteLine("link 0 - rel: " + result.links[0].rel);
+                Debug.WriteLine("payer_info - first_name: " + result.payer.payer_info.first_name);
+                Debug.WriteLine("payer_info - last_name: " + result.payer.payer_info.last_name);
+                Debug.WriteLine("payer_info - email: " + result.payer.payer_info.email);
+                Debug.WriteLine("payer_info - street_address: " + result.payer.payer_info.shipping_address);
+                Debug.WriteLine("payer_info - country_code: " + result.payer.payer_info.country_code);
+                Debug.WriteLine("payer_info - payer_id: " + result.payer.payer_info.payer_id);
+                Debug.WriteLine("amount:" + result.transactions[0].amount.total);
+                Debug.WriteLine("state: " + result.state);
+                var total = decimal.Parse(result.transactions[0].amount.total);
+                if (total == 200)
+                {
+                    Debug.WriteLine("User Monthly");
+                    var patient = db.Patients.Where(p => p.userID == uid).FirstOrDefault();
+                    patient.isSubscribed = true;
+                    patient.showAds = false;
+                    patient.subStart = DateTime.UtcNow;
+                    var future = DateTime.UtcNow.AddMonths(1);
+                    patient.subEnd = future;
+                    await db.SaveChangesAsync();
+                }
+                else if (total == 1299)
+                {
+                    Debug.WriteLine("User Yearly");
+                }
 
-                Console.WriteLine("Transaction Details");
-                Console.WriteLine("cart: " + result.cart);
-                Console.WriteLine("payment method: " + result.payer.payment_method);
-                Console.WriteLine("create_time: " + result.create_time.ToLongDateString());
-                Console.WriteLine("id" + result.id);
-                Console.WriteLine("intent: " + result.intent);
-                Console.WriteLine("link 0 - href: " + result.links[0].href);
-                Console.WriteLine("link 0 - method: " + result.links[0].method);
-                Console.WriteLine("link 0 - rel: " + result.links[0].rel);
-                Console.WriteLine("payer_info - first_name: " + result.payer.payer_info.first_name);
-                Console.WriteLine("payer_info - last_name: " + result.payer.payer_info.last_name);
-                Console.WriteLine("payer_info - email: " + result.payer.payer_info.email);
-                Console.WriteLine("payer_info - street_address: " + result.payer.payer_info.shipping_address);
-                Console.WriteLine("payer_info - country_code: " + result.payer.payer_info.country_code);
-                Console.WriteLine("payer_info - payer_id: " + result.payer.payer_info.payer_id);
-                Console.WriteLine("amount:" + result.transactions[0].amount.total);
-                Console.WriteLine("state: " + result.state);
             }
 
             return Redirect("/Index");

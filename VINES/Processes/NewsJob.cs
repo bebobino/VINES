@@ -20,13 +20,12 @@ namespace VINES.Processes
         public void getNews()
         {
 
-
+            Help help = new Help();
+            help.dailyCheck();
             getPNA();
             //getDOH();
-
-
         }
-        public static async void getPNA()
+        public void getPNA()
         {
             try
             {

@@ -1,0 +1,92 @@
+﻿@page
+@model VINES.Pages.SubscribeModel
+
+@{
+    ViewData["Title"] = "Subscription";
+}
+
+ <link href="~/assets/css/pricing.css" rel="stylesheet">
+ <center>
+ <div class="container">
+     <div class="align-center">
+
+    <!-- ======= Pricing Section ======= -->
+    <section id="pricing" class="pricing">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+          <h2>Subscription</h2>
+          <p>Access advanced features available only for Subscribed members.</p>
+        </div>
+
+        <div class="row">
+
+          <div class="col-lg-4 col-md-6" data-aos="zoom-im" data-aos-delay="100">
+            <div class="box">
+              <h3>Free</h3>
+              <h4><sup>₱</sup>0<span> / month</span></h4>
+              <ul>
+                <li>News and Updates Regarding Vaccines</li>
+                <li>View Instiitutions with COVID-19 Vaccines</li>
+                <li>Annoying ADS</li>
+                <li>Non Stop Annoying ADS</li>
+                <li class="na">Institutions based on Vaccine Preference</li>
+                <li class="na">Bookmarked News and Updates on Vaccines</li>
+                <li class="na">Community Posts and Comments</li>
+              </ul>
+            </div>
+          </div>
+        
+
+          <div class="col-lg-4 col-md-12 mt-4 mt-md-0" data-aos="zoom-in" data-aos-delay="100">
+            <div class="box featured">
+              <h3>Monthly</h3>
+              <h4><sup>₱</sup>200<span> / month</span></h4>
+              <ul>
+                <li>News and Updates Regarding Vaccines</li>
+                <li>ADS Shall Disappear</li>
+                <li>Institutions based on Vaccine Preference</li>
+                <li>Bookmarked News and Updates on Vaccines</li>
+                <li>Community Posts and Comments</li>
+              </ul>
+
+              <div class="btn-wrap">
+                <form asp-page-handler="checkout" method="post">
+    <input type="hidden" name="total" value="200"/>
+   <button style="color:black" class="button button2">Subscribe</button>
+
+</form>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 mt-4 mt-lg-0" data-aos="zoom-in" data-aos-delay="100">
+            <div class="box">
+              <h3>Yearly</h3>
+              <h4><sup>₱</sup>1299<span> / year</span></h4>
+              <ul>
+                <li>Save ₱1,100</li>
+                <li>Get each Month at ₱109</li>
+                <li>Hugs from Chris</li>
+                <li>Hugs from John</li>
+                <li>Hugs from Russ</li>
+              </ul>
+              <div class="btn-wrap">
+                <form asp-page-handler="checkout" method="post">
+    <input type="hidden" name="total" value="1299"/>
+   <button style="color:black" class="button button2">Subscribe</button>
+
+</form>
+              </div>
+            </div>
+          </div>
+             
+        </div>
+
+      </div>
+    </section><!-- End Pricing Section -->
+    
+     </div>
+ </div>
+
+  </center>

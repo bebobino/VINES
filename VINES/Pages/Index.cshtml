@@ -12,11 +12,7 @@
 
 @if (@User.Identity.IsAuthenticated == false)
 {
-    <head>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-        <script type="text/javascript" src="~/assets/js/main.js">
-        </script> 
-    </head>
+ 
 
 
 
@@ -171,26 +167,8 @@
 
     <!-- End Blog Page -->
 
-<script>
 
-    
-    initializeMap();
-</script>
-    @foreach(var inst in Model.Institutions)
-    {
-        
-      
-    <script>
-var z = "@inst.institutionName".replace('&#xD;&#xA;', '');
-var i = "@inst.notes";
-        addMarker(@inst.lat, @inst.Long, z, i);
-    </script>
-    }
-<script>
-    getLocation();
-    
-    //var marker = L.marker([14.60824, 121.02170]).addTo(mymap).bindPopup("<center><p>You</p></center>");
-    </script>
+
 
     <!-- modal -->
 
@@ -205,10 +183,12 @@ var i = "@inst.notes";
                     <h4 class="modal-title">News Sources</h4>
                 </div>
                 <div class="modal-body">
+                    <center>
                     @foreach (var source in Model.Sources)
                     {
                         <a href="@source.sourcesURI">@source.sourceName</a>
                     }
+                    </center>
                     <br>
                     <input type="button" class="btn btn-secondary" id="hideSources" value="Hide" />
                 </div>
@@ -227,7 +207,7 @@ var i = "@inst.notes";
                     <h4 class="modal-title">Vaccines in database</h4>
                 </div>
                 <div class="modal-body">
-                    <table>
+                    <table style="width:100%">
                         <tr>
                             <td >Vaccine</td>
                             <td >Disease</td>
@@ -249,14 +229,14 @@ var i = "@inst.notes";
         </div>
     </div>
 
-    <div class="modal fade" id="institutions">
+    <div class="modal fade"  id="institutions">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title">Institutions in database</h4>
                 </div>
                 <div class="modal-body">
-                    <table>
+                    <table style="width:100%">
                         <tr>
                             <td >Institution Name</td>
                             <td >Address</td>
@@ -309,6 +289,19 @@ else
         Response.Redirect("/adminLanding");
     }
 }
+
+<script>
+    initializeMap();
+    getLocation();
+</script>
+    @foreach(var inst in Model.Institutions)
+    {
+    <script>
+    var z = "@inst.institutionName".replace('&#xD;&#xA;', '');
+    var i = "@inst.notes".replace('&#xD;&#xA;', '');
+        addMarker(@inst.lat, @inst.Long, z, i);
+    </script>
+    }
 
 
 

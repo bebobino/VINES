@@ -1,7 +1,12 @@
 ﻿@page
 @model VINES.Pages.Payments.SuccessModel
+@using Microsoft.AspNetCore.Authorization
+@inject IAuthorizationService AuthorizationService
 @{
 }
+
+@if (((await AuthorizationService.AuthorizeAsync(User, "AdvertiserOnly")).Succeeded) || ((await AuthorizationService.AuthorizeAsync(User, "PatientOnly")).Succeeded))
+{
 <!DOCTYPE html>
 
 <html>
@@ -17,3 +22,4 @@
         <h3>Payment Successful</h3>
     </body>
 </html>
+}
