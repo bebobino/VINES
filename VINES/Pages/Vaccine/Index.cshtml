@@ -3,7 +3,7 @@
 @using Microsoft.AspNetCore.Authorization
 @inject IAuthorizationService AuthorizationService
 @{
-  
+    Layout = "_LayoutAdmin";
 }
 
 @if ((await AuthorizationService.AuthorizeAsync(User, "AdminOnly")).Succeeded)
