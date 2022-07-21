@@ -61,11 +61,21 @@ namespace VINES.Processes
             }
             con.Close();
             con.Dispose();
-
-
-
         }
 
+        public void dailyCheck()
+        {
+            SqlConnection con = new SqlConnection(constring);
+            SqlDataReader SR = null;
+            con.Open();
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = con;
+            cmd.CommandText = "delete advertisement where endDate < GETDATE()";
+            cmd.ExecuteNonQuery();
+            cmd.CommandText = "update patients set isSubscribed = 0, showAds = 1 where subEnd < GETDATE()";
+            cmd.ExecuteNonQuery();
+
+        }
 
 
 
