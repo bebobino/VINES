@@ -19,9 +19,9 @@ namespace VINES.Models
 
         [ForeignKey("diseaseID")]
         public Diseases disease { get; set; }
-        [ForeignKey("institutionID")]
-        public Vaccines vaccine { get; set; }
         [ForeignKey("vaccineID")]
+        public Vaccines vaccine { get; set; }
+        [ForeignKey("institutionID")]
         public Institutions institution { get; set; }
     }
 }

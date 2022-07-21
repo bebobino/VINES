@@ -21,6 +21,17 @@ namespace VINES.Pages.Account
     [Authorize(Policy = "Google")]
     public class extGoogleModel : PageModel
     {
+        private readonly DatabaseContext db;
+
+        public extGoogleModel(DatabaseContext _db)
+        {
+            _db = db;
+        }
+
+        public User user { get; set; }
+
+        
+
         public async Task<RedirectToPageResult> OnGetAsync()
         {
             var accessToken = await HttpContext.GetTokenAsync(
@@ -32,9 +43,9 @@ namespace VINES.Pages.Account
             var name = User.FindFirstValue(ClaimTypes.Name);
             var email = User.FindFirstValue(ClaimTypes.Email);
 
-            Debug.WriteLine(email);
 
-            return RedirectToPage("/Account/RegisterConfirmation");
+            return RedirectToPage("/patientLanding");
         }
+
     }
 }

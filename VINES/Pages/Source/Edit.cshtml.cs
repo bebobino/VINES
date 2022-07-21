@@ -19,7 +19,8 @@ namespace VINES.Pages.Source
             _context = context;
         }
 
-        public Sources Sources { get; set; }
+        [BindProperty]
+        public Sources sources { get; set; } = default;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -34,26 +35,29 @@ namespace VINES.Pages.Source
                 return NotFound();
             }
 
-            Sources = cp;
+            sources = cp;
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostAsync(string name, string uri)
         {
             if (!ModelState.IsValid)
             {
                 return Page();
             }
 
-            _context.Attach(Sources).State = EntityState.Modified;
+            _context.Attach(sources).State = EntityState.Modified;
 
             try
             {
+                sources.sourceName = name;
+                sources.sourcesURI = uri;
+
                 await _context.SaveChangesAsync();
             }
-            catch (Exception e)
+            catch (DbUpdateConcurrencyException)
             {
-                if (!SourceExists(Sources.sourcesID))
+                if (!SourceExists(sources.sourcesID))
                 {
                     return NotFound();
                 }

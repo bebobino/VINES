@@ -1,10 +1,14 @@
 ﻿@page
 @model VINES.Pages.Account.RegistrationModel
+@using Microsoft.AspNetCore.Authorization
+@inject IAuthorizationService AuthorizationService
 @{
     ViewData["Title"] = "Registration";
     Layout = null;
 }
 
+@if (User.Identity.IsAuthenticated == false)
+{
 <!-- Registration -->
 <!doctype html>
 <html lang="en">
@@ -133,4 +137,18 @@
 @section Scripts {
     <partial name ="_ValidationScriptsPartial" />
 }
-
+}
+else{
+    @if (User.Identity.IsAuthenticated && User.IsInRole("Patient")) {
+        
+        Response.Redirect("/patientLanding");
+    }
+        else if (User.Identity.IsAuthenticated && User.IsInRole("Advertiser")) {
+        
+        Response.Redirect("/advertiserLanding");
+    }
+        else if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+    {
+        Response.Redirect("/adminLanding");
+    }
+}

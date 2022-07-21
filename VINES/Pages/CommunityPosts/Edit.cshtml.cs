@@ -16,9 +16,11 @@ namespace VINES.Pages.CommunityPosts
     public class EditModel : PageModel
     {
         private readonly DatabaseContext _context;
+        public List<CommunityPostCategoriesModel> categories { get; set; }
         public EditModel(DatabaseContext context)
         {
             _context = context;
+            
         }
 
         [BindProperty]
@@ -26,6 +28,7 @@ namespace VINES.Pages.CommunityPosts
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
+            categories = _context.CommunityPostCategories.ToList();
             if ((id == null || _context.CommunityPosts == null))
             {
                 return NotFound();
@@ -42,7 +45,7 @@ namespace VINES.Pages.CommunityPosts
 
         }
 
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostAsync(int catID)
         {
             if (!ModelState.IsValid)
             {
@@ -56,6 +59,7 @@ namespace VINES.Pages.CommunityPosts
 
             try
             {
+                CommunityPost.communityPostCategoryID = catID;
                 CommunityPost.lastModified = DateTime.Now;
                 CommunityPost.dateAdded = DateTime.Now;
 

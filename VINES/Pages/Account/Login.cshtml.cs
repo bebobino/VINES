@@ -14,7 +14,7 @@ using VINES.Processes;
 
 namespace VINES.Pages.Account
 {
-    [AllowAnonymous]
+    
     public class LoginModel : PageModel
     {
         private readonly DatabaseContext Db;
@@ -39,14 +39,7 @@ namespace VINES.Pages.Account
             public string password { get; set; }
         }
 
-        public async Task OnGetAsync(string returnUrl = null)
-        {
-            returnUrl ??= Url.Content("~/");
-            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
 
-            ReturnUrl = returnUrl;
-
-        }
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
