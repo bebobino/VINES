@@ -2,10 +2,6 @@
 @model VINES.Pages.Vaccine.IndexModel
 @using Microsoft.AspNetCore.Authorization
 @inject IAuthorizationService AuthorizationService
-@{
-    Layout = "_LayoutAdmin";
-}
-
 @if ((await AuthorizationService.AuthorizeAsync(User, "AdminOnly")).Succeeded)
 {
 <!DOCTYPE html>
