@@ -8,7 +8,6 @@
 @inject IAuthorizationService AuthorizationService
 @{
     ViewData["Title"] = "Home page";
-    Layout = "_LayoutLanding";
 }
 
 @if (@User.Identity.IsAuthenticated == false)
@@ -103,23 +102,26 @@
                     <h1 style="font-size: x-large;"><b>News and Updates</b></h1>
                     <div class="row">
                         <div>
-                            <paging calss="pagination" total-records = "@Model.Count" show-total-pages = "false"
-                  show-total-records = "false" page-size="@Model.PageSize" page-no="@Model.PageNo"></paging>
+                            
                 </div>
                 <!-- Pagination -->
-
                 <ul class="pagination">
-
+                    <li class="page-item @(!Model.ShowPrevious? "disabled":"")">
+                        <a asp-page="/Index" asp-route-p="@(Model.PageNo -1)" class="page-link"> &#8249; </a>
+                    </li>
                 @for(var i = 1; i <= Model.TotalPages; i++)
                     {
                         <li class="page-item @(i == Model.PageNo ? "active" : "")">
                             <a asp-page="/Index" asp-route-p="@i" class="page-link">@i</a>
                         </li>
                     }
-
+                    <li class="page-item  @(!Model.ShowNext? "disabled":"")">
+                        <a asp-page="/Index" asp-route-p="@(Model.PageNo + 1)" class="page-link"> &#8250; </a>
+                    </li>
                 </ul>
 
                 <!-- Pagination -->
+                
               @foreach(var webpage in Model.WebPages)
               {
                     <div class="col-md-12 col-sm-12 col-xs-12">
@@ -140,12 +142,33 @@
                 </div>
               </div>
               }
-                    
+                    <!-- Pagination -->
+                <ul class="pagination">
+                    <li class="page-item @(!Model.ShowPrevious? "disabled":"")">
+                        <a asp-page="/Index" asp-route-p="@(Model.PageNo -1)" class="page-link"> &#8249; </a>
+                    </li>
+                @for(var i = 1; i <= Model.TotalPages; i++)
+                    {
+                        <li class="page-item @(i == Model.PageNo ? "active" : "")">
+                            <a asp-page="/Index" asp-route-p="@i" class="page-link">@i</a>
+                        </li>
+                    }
+                    <li class="page-item  @(!Model.ShowNext? "disabled":"")">
+                        <a asp-page="/Index" asp-route-p="@(Model.PageNo + 1)" class="page-link"> &#8250; </a>
+                    </li>
+                </ul>
+
+                <!-- Pagination -->
             </div>
           </div>
         </div>
       </div>
+
     </div>
+
+
+
+
     <!-- End Blog Page -->
 
 <script>
@@ -156,7 +179,7 @@
     @foreach(var inst in Model.Institutions)
     {
         
-        Debug.WriteLine(inst.Long+ "," +inst.lat);
+      
     <script>
 var z = "@inst.institutionName".replace('&#xD;&#xA;', '');
 var i = "@inst.notes";

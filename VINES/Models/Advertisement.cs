@@ -22,7 +22,7 @@ namespace VINES.Models
 
         public string url { get; set; }
 
-        public int advertiseTypeID { get; set; }
+        public int advertisementTypeID { get; set; }
         public int advertisementTitle { get; set; }
         public int clicks { get; set; }
         public DateTime endDate { get; set; }
@@ -30,5 +30,7 @@ namespace VINES.Models
         public Posts posts { get; set; }
         [ForeignKey("advertiserID")]
         public Advertisers advertiser { get; set; }
+        [ForeignKey("advertisementTypeID")]
+        public AdvertisementType advertisementType { get; set; }
     }
 }

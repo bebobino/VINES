@@ -1,0 +1,9 @@
+﻿@page
+@model VINES.Pages.Forums.IndexModel
+@{
+
+    @foreach(var cat in @Model.forums)
+    {
+        <a href = "/Forums/Posts?category=@cat.forumCategory">@cat.forumCategory</a>
+    }
+}

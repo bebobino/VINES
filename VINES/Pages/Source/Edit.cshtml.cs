@@ -1,26 +1,29 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 using VINES.Models;
 
 namespace VINES.Pages.Source
 {
+    [Authorize("AdminOnly")]
     public class EditModel : PageModel
     {
         private readonly DatabaseContext _context;
-
+        
         public EditModel(DatabaseContext context)
         {
             _context = context;
         }
 
-        public Sources source { get; set; } = default;
+        public Sources Sources { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if ((id == null || _context.sources == null))
+            if ((id == null) || _context.sources == null)
             {
                 return NotFound();
             }
@@ -31,9 +34,8 @@ namespace VINES.Pages.Source
                 return NotFound();
             }
 
-            source = cp;
+            Sources = cp;
             return Page();
-
         }
 
         public async Task<IActionResult> OnPostAsync()
@@ -43,15 +45,15 @@ namespace VINES.Pages.Source
                 return Page();
             }
 
-            _context.Attach(source).State = EntityState.Modified;
+            _context.Attach(Sources).State = EntityState.Modified;
 
             try
             {
                 await _context.SaveChangesAsync();
             }
-            catch (DbUpdateConcurrencyException)
+            catch (Exception e)
             {
-                if (!SourcesExists(source.sourcesID))
+                if (!SourceExists(Sources.sourcesID))
                 {
                     return NotFound();
                 }
@@ -62,7 +64,8 @@ namespace VINES.Pages.Source
             }
             return RedirectToPage("Index");
         }
-        private bool SourcesExists(int id)
+
+        private bool SourceExists(int id)
         {
             return (_context.sources?.Any(e => e.sourcesID == id)).GetValueOrDefault();
         }

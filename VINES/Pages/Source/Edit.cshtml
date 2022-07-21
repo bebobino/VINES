@@ -2,3 +2,30 @@
 @model VINES.Pages.Source.EditModel
 @{
 }
+<h1>Edit Institutions</h1>
+<hr/>
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Sources.sourcesID" />
+            <div class="form-group">
+                <label asp-for="Sources.sourceName" class="control-label"></label>
+                <input asp-for="Sources.sourceName" class="form-control"/>
+                <span asp-validation-for="Sources.sourceName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Sources.sourcesURI" class="control-label"></label>
+                <input asp-for="Sources.sourcesURI" class="form-control"/>
+                <span asp-validation-for="Sources.sourcesURI" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to list</a>
+</div>
