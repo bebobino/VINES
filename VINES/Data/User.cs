@@ -14,12 +14,18 @@ namespace VINES.Data
         [Required]
         public int roleID { get; set; }
         [Required]
+        [Display(Name = "First Name")]
         public string firstName { get; set; }
         [Required]
+        [Display(Name = "Middle Name")]
         public string middleName { get; set; }
         [Required]
+        [Display(Name = "Last Name")]
         public string lastName { get; set; }
         [Required]
+        [Display(Name = "Contact Number")]
+        [StringLength(11, ErrorMessage = "Invalid Phone Number", MinimumLength = 11)]
+        [DataType(DataType.PhoneNumber)]
         public string contactNumber { get; set; }
         [Required]
         public int genderID { get; set; }

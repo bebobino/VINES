@@ -8,7 +8,9 @@ namespace VINES.Models
     {
         [Key]
         public int sourcesID { get; set; }
+        [Display(Name = "Name")]
         public string sourceName { get; set; }
+        [Display(Name = "URI")]
         public string sourcesURI { get; set; }
     }
 }

@@ -8,16 +8,20 @@
     <div class="col-md-4">
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Sources.sourcesID" />
-            <div class="form-group">
-                <label asp-for="Sources.sourceName" class="control-label"></label>
-                <input asp-for="Sources.sourceName" class="form-control"/>
-                <span asp-validation-for="Sources.sourceName" class="text-danger"></span>
+            <input type="hidden" asp-for="sources.sourcesID" />
+            <div class="form-group" hidden>
+                <label asp-for="sources.sourcesID" class="control-label"></label>
+                <input asp-for="sources.sourcesID" class="form-control"/>
             </div>
             <div class="form-group">
-                <label asp-for="Sources.sourcesURI" class="control-label"></label>
-                <input asp-for="Sources.sourcesURI" class="form-control"/>
-                <span asp-validation-for="Sources.sourcesURI" class="text-danger"></span>
+                <label asp-for="sources.sourceName" class="control-label"></label>
+                <input asp-for="sources.sourceName" class="form-control" name="name"/>
+                <span asp-validation-for="sources.sourceName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="sources.sourcesURI" class="control-label"></label>
+                <input asp-for="sources.sourcesURI" class="form-control" name="uri"/>
+                <span asp-validation-for="sources.sourcesURI" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />

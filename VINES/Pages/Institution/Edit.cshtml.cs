@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using VINES.Models;
@@ -11,9 +12,12 @@ namespace VINES.Pages.Institution
     public class EditModel : PageModel
     {
         private readonly DatabaseContext _context;
+
+        public List<InstitutionTypes> types { get; set; }
         public EditModel(DatabaseContext context)
         {
             _context = context;
+            types = _context.InstitutionTypes.ToList();
         }
 
         [BindProperty]

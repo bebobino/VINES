@@ -14,19 +14,19 @@
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="institutions.institutionVaccineID" />
-            <div class="form-group">
+            <div class="form-group" hidden>
                 <label asp-for="institutions.diseaseID" class="control-label"></label>
-                <input asp-for="institutions.diseaseID" class="form-control"/>
+                <input asp-for="institutions.diseaseID" class="form-control" readonly/>
                 <span asp-validation-for="institutions.diseaseID" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group" hidden>
                 <label asp-for="institutions.institutionID" class="control-label"></label>
-                <input asp-for="institutions.institutionID" class="form-control"/>
+                <input asp-for="institutions.institutionID" class="form-control" readonly/>
                 <span asp-validation-for="institutions.institutionID" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group" hidden>
                 <label asp-for="institutions.vaccineID" class="control-label"></label>
-                <input asp-for="institutions.vaccineID" class="form-control"/>
+                <input asp-for="institutions.vaccineID" class="form-control" readonly/>
                 <span asp-validation-for="institutions.vaccineID" class="text-danger"></span>
             </div>
              <div class="form-group">

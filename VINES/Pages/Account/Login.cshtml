@@ -1,5 +1,7 @@
 ﻿@page
 @model VINES.Pages.Account.LoginModel
+@using Microsoft.AspNetCore.Authorization
+@inject IAuthorizationService AuthorizationService
 @using VINES.Models
 
 @{
@@ -7,7 +9,9 @@
     Layout = null;
 }
 
-<!-- == Start of LOGIN TEMPLATE == -->
+@if (User.Identity.IsAuthenticated == false)
+{
+    <!-- == Start of LOGIN TEMPLATE == -->
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -107,3 +111,18 @@
     <partial name="_ValidationScriptsPartial" />
 }
 <!-- end of login template -->
+}
+else {
+    @if (User.Identity.IsAuthenticated && User.IsInRole("Patient")) {
+        
+        Response.Redirect("/patientLanding");
+    }
+        else if (User.Identity.IsAuthenticated && User.IsInRole("Advertiser")) {
+        
+        Response.Redirect("/advertiserLanding");
+    }
+        else if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+    {
+        Response.Redirect("/adminLanding");
+    }
+}

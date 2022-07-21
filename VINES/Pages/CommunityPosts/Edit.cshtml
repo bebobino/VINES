@@ -21,16 +21,20 @@
                 <span asp-validation-for="CommunityPost.communityPostTitle" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="CommunityPost.communityPostCategoryID" class="control-label"></label>
-                <input asp-for="CommunityPost.communityPostCategoryID" class="form-control"/>
-                <span asp-validation-for="CommunityPost.communityPostCategoryID" class="text-danger"></span>
+                <label asp-for="CommunityPost.communityPostCategory" class="control-label"></label>
+                <select asp-for="CommunityPost.communityPostCategoryID" name="catID">
+                    @foreach (var category in Model.categories)
+                    {
+                        <option value="@category.communityPostCategoryID">@category.communityPostCategory</option>
+                    }
+                </select>  
             </div>
             <div class="form-group">
                 <label asp-for="CommunityPost.communityPostContent" class="control-label"></label>
                 <input asp-for="CommunityPost.communityPostContent" class="form-control"/>
                 <span asp-validation-for="CommunityPost.communityPostContent" class="text-danger"></span>
             </div>
-             <div class="form-group">
+             <div class="form-group" hidden>
                 <label asp-for="CommunityPost.postID" class="control-label"></label>
                 <input asp-for="CommunityPost.postID" class="form-control"/>
                 <span asp-validation-for="CommunityPost.postID" class="text-danger"></span>
