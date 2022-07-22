@@ -69,7 +69,10 @@ namespace VINES.Pages
         {
             rando = new Random(DateTime.Now.Millisecond);
             ads = db.advertisements.Where(ad => ad.endDate > DateTime.UtcNow && ad.clicks > 0).ToList();
-            rnd = rando.Next(0, ads.Count-1);
+            if(ads.Count > 0)
+            {
+                rnd = rando.Next(0, ads.Count - 1);
+            }
             Debug.WriteLine(ads.Count+" ,"+rnd);
             Sources = db.sources.ToList();
             CommunityPosts = db.CommunityPosts.ToList();
