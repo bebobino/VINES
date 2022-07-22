@@ -67,7 +67,17 @@ namespace VINES.Pages.Account
                 }
                 else
                 {
-                    if (user.password != help.Hash(Input.password))
+                    if (!user.emailAuth)
+                    {
+                        ModelState.AddModelError("Error", "ERROR: Email not yet authenticated. Please check your email.");
+                        return Page();
+                    }
+                    else if (user.roleID != 3)
+                    {
+                        ModelState.AddModelError("Error", "ERROR: Not a Patient.");
+                        return Page();
+                    }
+                    else if (user.password != help.Hash(Input.password))
                     {
                         
                         user.failedAttempts++;
@@ -81,16 +91,7 @@ namespace VINES.Pages.Account
                         ModelState.AddModelError("Error", "ERROR: Invalid Email/Password combination.");
                         return Page();
                     }
-                    else if (!user.emailAuth)
-                    {
-                        ModelState.AddModelError("Error", "ERROR: Email not yet authenticated. Please check your email.");
-                        return Page();
-                    }
-                    else if (user.roleID != 3)
-                    {
-                        ModelState.AddModelError("Error", "ERROR: Not a Patient.");
-                        return Page();
-                    }
+                    
                 }
                 user.failedAttempts = 0;
                 await Db.SaveChangesAsync();

@@ -9,105 +9,13 @@
 
 @if ((await AuthorizationService.AuthorizeAsync(User, "AdminOnly")).Succeeded)
 {
+   
     <!-- ======= Blog Page ======= -->
     <div class="blog-page area-padding">
       <div class="container">
         <div class="row">
-          <div class="col-lg-4 col-md-4">
-            <div class="page-head-blog">
-              <br>
-              <h5><b>Institutions Map</b></h5>
-              <div id="vaxMap"></div>
-              <br>
-              <br>
-              <div class="single-blog-page">
-                <!-- recent start -->
-                <div class="left-blog">
-                  <h4>recent news</h4>
-                  <div class="recent-post">
-                    <!-- start single post -->
-                    <div class="recent-single-post">
-                      <div class="post-img">
-                        <a href="#">
-                          <img src="assets/img/blog/1.jpg" alt="">
-                        </a>
-                      </div>
-                      <div class="pst-content">
-                        <p><a href="#"> Redug Lerse dolor sit amet consect adipis elit.</a></p>
-                      </div>
-                    </div>
-                    <!-- End single post -->
-                    <!-- start single post -->
-                    <div class="recent-single-post">
-                      <div class="post-img">
-                        <a href="#">
-                          <img src="assets/img/blog/2.jpg" alt="">
-                        </a>
-                      </div>
-                      <div class="pst-content">
-                        <p><a href="#"> Redug Lerse dolor sit amet consect adipis elit.</a></p>
-                      </div>
-                    </div>
-                    <!-- End single post -->
-                    <!-- start single post -->
-                    <div class="recent-single-post">
-                      <div class="post-img">
-                        <a href="#">
-                          <img src="assets/img/blog/3.jpg" alt="">
-                        </a>
-                      </div>
-                      <div class="pst-content">
-                        <p><a href="#"> Redug Lerse dolor sit amet consect adipis elit.</a></p>
-                      </div>
-                    </div>
-                    <!-- End single post -->
-                    <!-- start single post -->
-                    <div class="recent-single-post">
-                      <div class="post-img">
-                        <a href="#">
-                          <img src="assets/img/blog/4.jpg" alt="">
-                        </a>
-                      </div>
-                      <div class="pst-content">
-                        <p><a href="#"> Redug Lerse dolor sit amet consect adipis elit.</a></p>
-                      </div>
-                    </div>
-                    <!-- End single post -->
-                  </div>
-                </div>
-                <!-- recent end -->
-              </div>
-            @*  <div class="single-blog-page">
-                <div class="left-blog">
-                  <h4>archive</h4>
-                  <ul>
-                    <li>
-                      <a href="#">07 July 2016</a>
-                    </li>
-                    <li>
-                      <a href="#">29 June 2016</a>
-                    </li>
-                    <li>
-                      <a href="#">13 May 2016</a>
-                    </li>
-                    <li>
-                      <a href="#">20 March 2016</a>
-                    </li>
-                    <li>
-                      <a href="#">09 Fabruary 2016</a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-              *@ 
-            </div>
-          </div>
-          <!-- End left sidebar -->
-          <!-- Start single blog -->
-          <div class="col-md-8 col-sm-8 col-xs-12">
+          
             <h1 style="font-size: x-large;"><b>Dashboard</b></h1>
-
-
 
             <section id="counts" class="counts section-bg">
               <div class="container">
@@ -148,6 +56,7 @@
         
               </div>
             </section>
+            <br />
 
             <h1 style="font-size: x-large;"><b>Diseases</b></h1>
             <div class="row">
@@ -155,46 +64,39 @@
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="single-blog">
                   <div class="blog-text">
-                    <table style="width:100%">
-                      <tr>
-                        <th colspan="2">Disease Name</th>
-                        <th colspan="2">Settings</th>
-                      </tr>
-                      <tr>
-                        <td colspan="2">COVID-19</td>
-                        <td colspan="2"><a href="#">Update</a></td>
-                      </tr>
-                      <tr>
-                        <td colspan="2">Hepatitis B</td>
-                        <td colspan="2"><a href="#">Update</a></td>
-                      </tr>
-                      <tr>
-                        <td colspan="2">Measles</td>
-                        <td colspan="2"><a href="#">Update</a></td>
-                      </tr>
-                      <tr>
-                        <td colspan="2">Polio</td>
-                        <td colspan="2"><a href="#">Update</a></td>
-                      </tr>
-                      <tr>
-                        <td colspan="2">Tetanus</td>
-                        <td colspan="2"><a href="#">Update</a></td>
-                      </tr>
-
-                    </table>
+                   <table class="table table-striped table-hover">
+                   <thead>
+                       <tr>
+                       <th>No.</th>
+                       <th>Name</th>
+                       <th>Notes</th>
+                       <th>Date Added</th>
+                       <th>Date Modified</th>
+                       </tr>
+                   </thead>
+                   <tbody>
+                       @{var i = 1;}
+                       @foreach (var diseases in Model.disease)
+                       {
+                        <tr>
+                            <td>@i</td>
+                            <td>@diseases.diseaseName</td>
+                            <td>@diseases.notes</td>
+                            <td>@diseases.dateAdded</td>
+                            <td>@diseases.dateModified</td>
+                            <td>
+                                <input type="hidden" name="id" id="id" value="@diseases.diseaseID" />
+                            </td>
+                        </tr>
+                        i++;
+                    }
+                   </tbody>
+               </table>
                   </div>
-                  <span>
-                    <a href="#" class="ready-btn">View more</a>
-                  </span>
-                  &nbsp;&nbsp;&nbsp;&nbsp;
-                  <span>
-                    <a href="#" class="ready-btn">Add new</a>
-                  </span>
                 </div>
               </div>
-            </div>
-
-
+           
+              </div>
 
 
             <h1 style="font-size: x-large;"><b>Institutions</b></h1>
@@ -203,46 +105,65 @@
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="single-blog">
                   <div class="blog-text">
-                    <table style="width:100%">
-                      <tr>
-                        <th colspan="2">Institution Name</th>
-                        <th colspan="2">Address</th>     
-                        <th colspan="2">Settings</th>
-                      </tr>
-                      <tr>
-                        <td colspan="2">Adela Serra Ty Memorial Medical Center</td>
-                        <td colspan="2">Capitol Hills, Telaje, Tandag City</td>
-                        <td colspan="2"><a href="#">Update</a></td>
-                      </tr>
-                      <tr>
-                        <td colspan="2">Adventist Hospital-Cebu, Inc.</td>
-                        <td colspan="2">#400 Tres de Abril St., San Nicolas, Cebu City</td>
-                        <td colspan="2"><a href="#">Update</a></td>
-                      </tr>
-                      <tr>
-                        <td colspan="2">Adventist Hospital-Davao, Inc.</td>
-                        <td colspan="2">Km. 7 McArthur Highway, Bangkal, Davao City</td>
-                        <td colspan="2"><a href="#">Update</a></td>
-                      </tr>
-                      <tr>
-                        <td colspan="2">Adventist Hospital-Palawan, Inc.</td>
-                        <td colspan="2">San Pedro, Puerto Princesa City</td>
-                        <td colspan="2"><a href="#">Update</a></td>
-                      </tr>
-                      <tr>
-                        <td colspan="2">Adventist Hospital-Santiago City, Inc.</td>
-                        <td colspan="2">Purok 5, National Highway, Mabini, Santiago City, Isabela</td>
-                        <td colspan="2"><a href="#">Update</a></td>
-                      </tr>
-                    </table>
+                    <form method="post">  
+            @if(Model.institutions.Count()>0)  
+                {
+                    <table class="table table-striped border">  
+                        <tr class="table-secondary">  
+                        <th>  
+                           No.  
+                        </th>  
+                        <th>  
+                            Type
+                        </th>  
+                        <th>  
+                            Name
+                        </th>
+                        <th>  
+                            Longitude
+                        </th>  
+                        <th>  
+                            Latitude
+                        </th> 
+                        <th>
+                            Notes
+                        </th>
+                    </tr>  
+                    @{ var ib = 1;}
+                    @foreach(var institution in Model.institutions)  
+                    {  
+                        <tr>  
+                            <td>
+                                @ib
+                            </td>
+                            <td>  
+                                @Html.DisplayFor(m => institution.institutionType.institutionType)  
+                            </td>  
+                            <td>  
+                                @Html.DisplayFor(m => institution.institutionName)
+                            </td>
+                            <td>  
+                                @Html.DisplayFor(m => institution.Long)  
+                            </td>  
+                            <td>  
+                                @Html.DisplayFor(m => institution.lat)  
+                            </td>
+                            <td>  
+                                @Html.DisplayFor(m => institution.notes)  
+                            </td>  
+                            
+                        </tr>  
+                        ib++;
+                    }  
+                </table>   
+            }  
+            else  
+            {  
+                <p>No institutions yet</p>  
+            }  
+        </form>  
                   </div>
-                  <span>
-                    <a href="#" class="ready-btn">View more</a>
-                  </span>
-                  &nbsp;&nbsp;&nbsp;&nbsp;
-                  <span>
-                    <a href="#" class="ready-btn">Add new</a>
-                  </span>
+                  
                 </div>
               </div>
             </div>
@@ -255,46 +176,41 @@
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="single-blog">
                   <div class="blog-text">
-                    <table style="width:100%">
-                      <tr>
-                        <th colspan="2">Vaccine For</th>
-                        <th colspan="2">Vaccine Name</th>
-                        <th colspan="2">Settings</th>
-                      </tr>
-                      <tr>
-                        <td colspan="2">COVID-19</td>
-                        <td colspan="2">Covaxin</td>
-                        <td colspan="2"><a href="#">Update</a></td>
-                      </tr>
-                      <tr>
-                        <td colspan="2">COVID-19</td>
-                        <td colspan="2">Moderna</td>
-                        <td colspan="2"><a href="#">Update</a></td>
-                      </tr>
-                      <tr>
-                        <td colspan="2">COVID-19</td>
-                        <td colspan="2">Janssen</td>
-                        <td colspan="2"><a href="#">Update</a></td>
-                      </tr>
-                      <tr>
-                        <td colspan="2">COVID-19</td>
-                        <td colspan="2">Oxford-AstraZeneca</td>
-                        <td colspan="2"><a href="#">Update</a></td>
-                      </tr>
-                      <tr>
-                        <td colspan="2">COVID-19</td>
-                        <td colspan="2">Pfizer-BioNTech</td>
-                        <td colspan="2"><a href="#">Update</a></td>
-                      </tr>
-                    </table>
+                     <table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>No.</th>
+                            <th>Disease</th>
+                            <th>Vaccine</th>
+                            <th>Notes</th>
+                            <th>Date Added</th>
+                            <th>Date Modified</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            var ia = 1;
+                        }
+                        @foreach (var vaccine in Model.vaccines)
+                        {
+                            <tr>
+                                <td>@ia</td>
+                                <td>@vaccine.disease.diseaseName</td>
+                                <td>@vaccine.vaccineName</td>
+                                <td>@vaccine.notes</td>
+                                <td>@vaccine.dateAdded</td>
+                                <td>@vaccine.dateModified</td>
+                                <td>
+                                   
+                                    <input type="hidden" name="id" id="id" value="@vaccine.vaccineID" />
+                                </td>
+                            </tr>
+                            ia++;
+                        }
+                    </tbody>
+                </table>
                   </div>
-                  <span>
-                    <a href="#" class="ready-btn">View more</a>
-                  </span>
-                  &nbsp;&nbsp;&nbsp;&nbsp;
-                  <span>
-                    <a href="#" class="ready-btn">Add new</a>
-                  </span>
+                 
                 </div>
               </div>
             </div>
@@ -302,7 +218,7 @@
           </div>
         </div>
       </div>
-    </div><!-- End Blog Page -->
+   
 
 
 <!-- dashboard modals -->
