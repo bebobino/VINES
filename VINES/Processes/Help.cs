@@ -72,6 +72,8 @@ namespace VINES.Processes
             cmd.Connection = con;
             cmd.CommandText = "update patients set isSubscribed = 0, showAds = 1 where subEnd < GETDATE()";
             cmd.ExecuteNonQuery();
+            con.Close();
+            con.Dispose();
 
         }
 

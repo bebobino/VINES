@@ -165,16 +165,31 @@
 
 
                                 <div class="blog-text">
-                                    <h5>
-                                        <p>Advertisements</p>
-                                    </h5>
-                                    @foreach(var advert in Model.Ads)
+                                    <a href="#">Advertisements</a>
+                                    @foreach (var advert in Model.Ads)
                                     {
-                                        
-                                            <h1>@advert.advertisementTitle</h1>
-                                            <img src="/images/@advert.imgsrc" width="500" height="300">
-                                            <p>Price: @advert.advertisementType.price</p>
-                                        
+
+                                        <h5>@advert.advertisementTitle</h5>
+                                        <a href="@advert.url">
+                                        <img src="/images/@advert.imgsrc" width="600" height="100" sstyle="object-fit:fill">
+                                        </a>
+                                        <p>Price: @advert.advertisementType.price</p>
+                                        if (advert.endDate > DateTime.UtcNow)
+                                        { 
+                                            @Html.Raw("Status: Active")
+                                            
+                                        }
+                                        else
+                                        {
+                                            @Html.Raw("Status: Inactive")
+                                            <form asp-page-handler="checkout" method="post">
+                                                <input type="hidden" name="total" value="@advert.advertisementType.price"/>
+                                                <input type="hidden" name="id" value="@advert.advertisementID"/>
+                                                <button style="color:black" class="button button2">Activate</button>
+
+                                            </form>
+                                        }
+
                                     }
                                 </div>
                             </div>

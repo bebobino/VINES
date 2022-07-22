@@ -39,7 +39,7 @@ namespace VINES.Pages.Payments
                 var name = User.FindFirstValue(ClaimTypes.Role);
                 Debug.WriteLine(paymentId);
                 Debug.WriteLine(name);
-                if (!name.Equals("Patient") || !name.Equals("Advertiser"))
+                if (!name.Equals("Patient") && !name.Equals("Advertiser"))
                 {
                     return Redirect("/Index");
                 }
@@ -83,6 +83,27 @@ namespace VINES.Pages.Payments
                     else if (total == 1299)
                     {
                         Debug.WriteLine("User Yearly");
+                        var patient = db.Patients.Where(p => p.userID == uid).FirstOrDefault();
+                        patient.isSubscribed = true;
+                        patient.showAds = false;
+                        patient.subStart = DateTime.UtcNow;
+                        var future = DateTime.UtcNow.AddYears(1);
+                        patient.subEnd = future;
+                        await db.SaveChangesAsync();
+                    }
+                    else
+                    {
+                        var advertisement = db.advertisements.Where(a => a.textContent == result.id).FirstOrDefault();
+                        if(advertisement != null)
+                        {
+                            var advertisementType = db.advertisementTypes.Where(a => a.advertisementTypeID == advertisement.advertisementTypeID).FirstOrDefault();
+                            advertisement.textContent = "";
+                            advertisement.clicks = advertisementType.clickLimit;
+                            advertisement.lastModified = DateTime.UtcNow;
+                            var future = DateTime.UtcNow.AddMonths(advertisementType.Duration);
+                            advertisement.endDate = future;
+                            await db.SaveChangesAsync();
+                        }
                     }
 
                 }

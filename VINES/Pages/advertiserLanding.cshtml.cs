@@ -67,11 +67,13 @@ namespace VINES.Pages
             return RedirectToPage("/Index");
         }
 
-        public async Task<IActionResult> OnPostCheckout(double total)
+        public async Task<IActionResult> OnPostCheckout(double total, int id)
         {
+            var adid = _db.advertisements.Find(id);
             var payPalAPI = new PayPalAPI(_configuration);
             string url = await payPalAPI.getRedirectURLToPayPal(total, "PHP");
-            Debug.WriteLine(payPalAPI.paypalID);
+            adid.textContent = payPalAPI.paypalID;
+            _db.SaveChanges();
             Debug.WriteLine(url);
             Console.WriteLine(total);
             return Redirect(url);

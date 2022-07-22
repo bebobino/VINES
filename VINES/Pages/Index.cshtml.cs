@@ -28,6 +28,15 @@ namespace VINES.Pages
         public List<Vaccines> Vaccines { get; set; }
         public List<Diseases> Diseases { get; set; }
         public List<Institutions> Institutions { get; set; }
+
+
+        //Ads
+        [BindProperty]
+        public List<Advertisement> ads { get; set; }
+        public int rnd { get; set; }
+        Random rand = new Random();
+
+
         public List<Sources> Sources { get; set; }
         private DatabaseContext db;
 
@@ -38,7 +47,16 @@ namespace VINES.Pages
         public int Count { get; set; }
         public int PageSize { get; set; }
         public int TotalPages { get; set; }
-        
+
+
+        public async Task<IActionResult> OnPostAd(int id)
+        {
+            Debug.WriteLine("hahaha "+ id);
+            var ads = await db.advertisements.FindAsync(id);
+            ads.clicks--;
+            await db.SaveChangesAsync();
+            return Redirect(ads.url);
+        }
 
 
         public IndexModel(ILogger<IndexModel> logger, DatabaseContext _db)
@@ -48,6 +66,9 @@ namespace VINES.Pages
         }
         public void OnGet(int p = 1 , int s = 5)
         {
+            ads = db.advertisements.Where(ad => ad.endDate > DateTime.UtcNow && ad.clicks > 0).ToList();
+            rnd = rand.Next(0, ads.Count-1);
+            Debug.WriteLine(rnd);
             Sources = db.sources.ToList();
             CommunityPosts = db.CommunityPosts.ToList();
             WebPages = db.WebPages.OrderByDescending(webpage => webpage.uploadDate).Skip((p - 1) * s).Take(s).ToList();
