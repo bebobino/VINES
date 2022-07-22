@@ -14,7 +14,7 @@ using VINES.Processes;
 
 namespace VINES.Pages.Ads
 {
-    [AllowAnonymous]
+    [Authorize("AdminOnly")]
     public class AddUserModel : PageModel
     {
         private readonly DatabaseContext Db;

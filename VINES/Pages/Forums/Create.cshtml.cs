@@ -3,7 +3,9 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
+using VINES.Data;
 using VINES.Models;
 
 namespace VINES.Pages.Forums
@@ -21,12 +23,18 @@ namespace VINES.Pages.Forums
         }
         [BindProperty]
         public ForumPost forumPost { get; set; }
+        public User users { get; set; }
         public void OnGet()
         {
+            var id = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            int idd = int.Parse(id);
         }
 
         public async Task<IActionResult> OnPost(int catID, string content, int pID)
         {
+            var id = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            int idd = int.Parse(id);
+
             var posts = new Posts
             {
                 isVisible = true
@@ -36,7 +44,8 @@ namespace VINES.Pages.Forums
 
             var forumpost = new ForumPost
             {
-                
+
+                userID = idd,
                 forumCategoryID = catID,
                 forumContent = content,
                 dateAdded = DateTime.Now,

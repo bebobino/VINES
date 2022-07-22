@@ -75,6 +75,11 @@ namespace VINES.Pages.Account
                     ModelState.AddModelError("Error", "ERROR: Not an Advertiser.");
                     return Page();
                 }
+                else if (user.isBlocked)
+                {
+                    ModelState.AddModelError("Error", "ERROR: Your account has been blocked. Contact the administrators for account reactivation.");
+                    return Page();
+                }
 
                 var claims = new List<Claim>
                 {

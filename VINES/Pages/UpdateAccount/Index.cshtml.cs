@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
@@ -12,6 +13,7 @@ using VINES.Models;
 
 namespace VINES.Pages.UpdateAccount
 {
+    [Authorize]
     public class IndexModel : PageModel
     {
         private readonly DatabaseContext db;

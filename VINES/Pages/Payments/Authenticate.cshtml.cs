@@ -39,7 +39,7 @@ namespace VINES.Pages.Payments
                 var name = User.FindFirstValue(ClaimTypes.Role);
                 Debug.WriteLine(paymentId);
                 Debug.WriteLine(name);
-                if (!name.Equals("Patient"))
+                if (!name.Equals("Patient") || !name.Equals("Advertiser"))
                 {
                     return Redirect("/Index");
                 }

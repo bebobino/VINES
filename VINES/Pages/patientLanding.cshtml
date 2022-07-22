@@ -216,9 +216,31 @@
                     <h4 class="modal-title">News Sources</h4>
                 </div>
                 <div class="modal-body">
-                    @foreach (var source in Model.Sources)
-                    {
-                        <a href="@source.sourcesURI">@source.sourceName</a>
+                                             @if(Model.Sources.Count()>0)  
+                {
+                    <table class="table table-striped border">  
+                        <tr class="table-secondary">  
+                            <th>
+                                No.
+                            </th>
+                        <th>  
+                            Name
+                        </th>
+                    </tr>  
+                    @{ var i = 1;}
+                    @foreach(var sources in Model.Sources)  
+                    {  
+                        <tr>  
+                            <td>
+                                @i
+                            </td>  
+                            <td>  
+                                @Html.DisplayFor(m => sources.sourceName)
+                            </td>
+                        </tr>  
+                        i++;
+                    }  
+                    </table>
                     }
                     <br>
                     <input type="button" class="btn btn-secondary" id="hideSources" value="Hide" />
@@ -234,22 +256,34 @@
               <h4 class="modal-title">Institutions in database</h4>
           </div>
           <div class="modal-body">
-            <p>Adela Serra Ty Memorial Medical Center</p>
-            <p>Adventist Hospital-Cebu, Inc.</p>
-            <p>Adventist Hospital-Davao, Inc.</p>
-            <p>Adventist Hospital-Palawan, Inc.</p>
-            <p>Adventist Hospital-Santiago City, Inc.</p>
-            <p>Adventist Medical Center Manila</p>
-            <p>Adventist Medical Center-Bacolod, Inc.</p>
-            <p>Adventist Medical Center-Iligan City, Inc.</p>
-            <p>Adventist Medical Center-Valencia City, Inc.</p>
-            <p>Ago General Hospital</p>
-            <p>Air Force General Hospital</p>
-            <p>Alabang Medical Center</p>
-            <p>Albay Doctors Hospital</p>
-            <p>Allah Valley Medical Specialists Center, Inc.</p>
-            <p>Allied Care Experts (ACE) Medical Center - Baypointe, Inc.</p>
-            <p>Allied Care Experts (ACE) Medical Center - Pateros, Inc.</p>
+                         @if(Model.Institutions.Count()>0)  
+                {
+                    <table class="table table-striped border">  
+                        <tr class="table-secondary">  
+                        <th>  
+                           No.  
+                        </th>  
+                        <th>  
+                            Name
+                        </th>
+                    </tr>  
+                    @{ var i = 1;}
+                    @foreach(var institution in Model.Institutions)  
+                    {  
+                        <tr>  
+                            <td>
+                                @i
+                            </td>  
+                            <td>  
+                                @Html.DisplayFor(m => institution.institutionName)
+                            </td>
+                        </tr>  
+                        i++;
+                    }  
+                    </table>
+                    }
+             </div>
+             <div>
             <br>
             <input type="button" class="btn btn-secondary" id="hideInstitutions" value="Hide" />
           </div>
@@ -264,16 +298,38 @@
               <h4 class="modal-title">Vaccines in database</h4>
           </div>
           <div class="modal-body">
-            
-            <p>Covaxin</p>
-            <p>Moderna</p>
-            <p>Janssen</p>
-            <p>Oxford-AstraZeneca</p>
-            <p>Pfizer-BioNTech</p>
-            <p>Sinovac</p>
-            <p>Sinopharm</p>
-            <p>Sputnik V</p>
-            <br>
+                 @if(Model.Vaccines.Count()>0)  
+                {
+                    <table class="table table-striped border">  
+                        <tr class="table-secondary">  
+                        <th>  
+                           No.  
+                        </th>  
+                        <th>  
+                            Name
+                        </th>
+                        <th>
+                            Vaccine For
+                        </th>
+                    </tr>  
+                    @{ var i = 1;}
+                    @foreach(var vaccines in Model.Vaccines)  
+                    {  
+                        <tr>  
+                            <td>
+                                @i
+                            </td>  
+                            <td>  
+                                @Html.DisplayFor(m => vaccines.vaccineName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(m => vaccines.disease.diseaseName)
+                            </td>
+                        </tr>  
+                        i++;
+                    }  
+                    </table>
+                    }
             <input type="button" class="btn btn-secondary" id="hideVaccines" value="Hide" />
           </div>
       </div>

@@ -7,7 +7,9 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
+using VINES.Data;
 using VINES.Models;
 
 namespace VINES.Pages.Forums
@@ -22,6 +24,8 @@ namespace VINES.Pages.Forums
             _context = context;
 
         }
+
+        public User user { get; set; }
 
         [BindProperty]
         public ForumPost ForumPost { get; set; } = default;
@@ -47,6 +51,9 @@ namespace VINES.Pages.Forums
 
         public async Task<IActionResult> OnPostAsync(int catID)
         {
+            var id = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            int idd = int.Parse(id);
+
             if (!ModelState.IsValid)
             {
 
@@ -59,6 +66,7 @@ namespace VINES.Pages.Forums
 
             try
             {
+                ForumPost.userID = idd;
                 ForumPost.forumCategoryID = catID;
                 ForumPost.lastModified = DateTime.Now;
                 ForumPost.dateAdded = DateTime.Now;
