@@ -79,13 +79,12 @@
 
                         <li class="dropdown"><a href="#"><span>User Settings</span> <i class="bi bi-chevron-right"></i></a>
                             <ul>
-                                <li><a class="nav-link scrollto" asp-page="/Status/Index">User Status</a></li>
-                                <li><a class="nav-link scrollto" href="#portfolio">User Logs</a></li>
+                                <li><a class="nav-link scrollto" asp-page="/Status/Index">User Status</a></li>                 
                             </ul>
                         </li>
                         <li class="dropdown"><a href="#"><span>@User.Identity.Name</span> <i class="bi bi-chevron-right"></i></a>
                             <ul>
-                                <li><a class="nav-link scrollto" asp-page"="/UpdateAccount/Index">Update Account</a></li>
+                                <li><a class="nav-link scrollto" asp-page="/UpdateAccount/Index">Update Account</a></li>
                                 <li><a class="nav-link scrollto" asp-page="/Account/Logout">Logout</a></li>
                             </ul>
                         </li>
@@ -126,6 +125,7 @@
                 {
                    <ul>
                         <li><a class="nav-link scrollto" asp-page="/patientLanding">Home</a></li>
+                        <li><a class="nav-link scrollto" asp-page="/Forums/Index">Forum Posts</a></li>
                         <li><a class="nav-link scrollto" asp-page="/About">About VINES</a></li>
                         <li><a class="nav-link scrollto" asp-page="/Privacy">Privacy</a></li>
 
@@ -133,7 +133,6 @@
                             <ul>
                                 <li><a class="nav-link scrollto" asp-page="/Subscribe">Subscription</a></li> 
                                 <li><a class="nav-link scrollto" asp-page="/UpdateAccount/Index">Update Account</a></li>
-                                <li><a class="nav-link scrollto" asp-page="Account Help">Account Help</a></li>
                                 <li><a class="nav-link scrollto" asp-page="/Account/Logout">Logout</a></li>
                             </ul>
                         </li>
