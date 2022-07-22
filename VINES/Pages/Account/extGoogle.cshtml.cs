@@ -28,9 +28,10 @@ namespace VINES.Pages.Account
             _db = db;
         }
 
+        [BindProperty]
         public User user { get; set; }
 
-        
+
 
         public async Task<RedirectToPageResult> OnGetAsync()
         {
@@ -43,8 +44,17 @@ namespace VINES.Pages.Account
             var name = User.FindFirstValue(ClaimTypes.Name);
             var email = User.FindFirstValue(ClaimTypes.Email);
 
+            /**if (email == data)
+            {
+                return RedirectToPage("patientLanding");
+            }
+            else
+            {
+                return RedirectToPage("/Account/Registration");
+            } **/
 
-            return RedirectToPage("/patientLanding");
+            return RedirectToPage("index");
+            
         }
 
     }

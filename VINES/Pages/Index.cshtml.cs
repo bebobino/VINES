@@ -63,6 +63,8 @@ namespace VINES.Pages
             Debug.WriteLine("test");
             help.checkIP();
 
+            var rand = new Random();
+
         }
 
         

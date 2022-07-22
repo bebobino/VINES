@@ -223,15 +223,11 @@
               <h4 class="modal-title">News Sources</h4>
           </div>
           <div class="modal-body">
-
-            <p>https://www.fda.gov.ph/advisories/</p>
-            <p>https://doh.gov.ph/press-releases</p>
-            <p>https://www.who.int/news-room/headlines</p>
-            <p>https://manila.gov.ph/news-and-events/</p>
-            <p>https://quezoncity.gov.ph/news-and-media/</p>
-            <p>https://www.makati.gov.ph/content/news</p>
-            <p>https://www.pasigcity.gov.ph/news-events</p>
-            <br>
+              @foreach (var x in Model.Sources)
+                {
+                    <p>@x.sourceName</p>
+                }
+                <br>
             <input type="button" class="btn btn-secondary" id="hideSources" value="Hide" />
           </div>
       </div>
@@ -245,24 +241,11 @@
               <h4 class="modal-title">Institutions in database</h4>
           </div>
           <div class="modal-body">
-            <p>Adela Serra Ty Memorial Medical Center</p>
-            <p>Adventist Hospital-Cebu, Inc.</p>
-            <p>Adventist Hospital-Davao, Inc.</p>
-            <p>Adventist Hospital-Palawan, Inc.</p>
-            <p>Adventist Hospital-Santiago City, Inc.</p>
-            <p>Adventist Medical Center Manila</p>
-            <p>Adventist Medical Center-Bacolod, Inc.</p>
-            <p>Adventist Medical Center-Iligan City, Inc.</p>
-            <p>Adventist Medical Center-Valencia City, Inc.</p>
-            <p>Ago General Hospital</p>
-            <p>Air Force General Hospital</p>
-            <p>Alabang Medical Center</p>
-            <p>Albay Doctors Hospital</p>
-            <p>Allah Valley Medical Specialists Center, Inc.</p>
-            <p>Allied Care Experts (ACE) Medical Center - Baypointe, Inc.</p>
-            <p>Allied Care Experts (ACE) Medical Center - Pateros, Inc.</p>
-            <br>
-            <input type="button" class="btn btn-secondary" id="hideInstitutions" value="Hide" />
+              @foreach (var insti in Model.Institutions)
+                {
+                    <p>@insti.institutionName</p>
+                }
+                <input type="button" class="btn btn-secondary" id="hideInstitutions" value="Hide" />
           </div>
       </div>
   </div>
@@ -275,16 +258,11 @@
               <h4 class="modal-title">Vaccines in database</h4>
           </div>
           <div class="modal-body">
-            
-            <p>Covaxin</p>
-            <p>Moderna</p>
-            <p>Janssen</p>
-            <p>Oxford-AstraZeneca</p>
-            <p>Pfizer-BioNTech</p>
-            <p>Sinovac</p>
-            <p>Sinopharm</p>
-            <p>Sputnik V</p>
-            <br>
+              @foreach (var vax in Model.Vaccines)
+                {
+                    <p>@vax.vaccineName</p>
+                }
+                <br>
             <input type="button" class="btn btn-secondary" id="hideVaccines" value="Hide" />
           </div>
       </div>

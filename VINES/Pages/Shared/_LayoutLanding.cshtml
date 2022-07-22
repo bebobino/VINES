@@ -74,15 +74,14 @@
 
                         <li class="dropdown"><a href="#"><span>User Settings</span> <i class="bi bi-chevron-right"></i></a>
                             <ul>
-                                <li><a class="nav-link scrollto" asp-page="/Account/UserStatus">User Status</a></li>
+                                <li><a class="nav-link scrollto" asp-page="/Status/Index">User Status</a></li>
                                 <li><a class="nav-link scrollto" href="#portfolio">User Logs</a></li>
                             </ul>
                         </li>
                         <li class="dropdown"><a href="#"><span>@User.Identity.Name</span> <i class="bi bi-chevron-right"></i></a>
                             <ul>
+                                <li><a class="nav-link scrollto" asp-page"="/Account/Index">Update Account</a></li>
                                 <li><a class="nav-link scrollto" asp-page="/Account/Logout">Logout</a></li>
-                                <li><a class="nav-link scrollto" asp-page"="/Account/AccountSettings">Update Account</a></li>
-                                <li><a class="nav-link scrollto" href="#contact">Account Help</a></li>
                             </ul>
                         </li>
 
@@ -121,7 +120,7 @@
                 else if (User.Identity.IsAuthenticated && User.IsInRole("Patient"))
                 {
                    <ul>
-                        <li><a class="nav-link scrollto " href="#hero">Home</a></li>
+                        <li><a class="nav-link scrollto " asp-page="/patientLanding">Home</a></li>
                         <li><a class="nav-link scrollto" href="#about">About VINES</a></li>
                         <li><a class="nav-link scrollto" href="#services">Vaccine Logs</a></li>
                         <li><a class="nav-link scrollto" href="#portfolio">Privacy</a></li>
