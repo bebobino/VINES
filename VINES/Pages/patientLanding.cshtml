@@ -126,11 +126,11 @@
                 @for(var i = 1; i <= Model.TotalPages; i++)
                     {
                         <li class="page-item @(i == Model.PageNo ? "active" : "")">
-                            <a asp-page="/Index" asp-route-p="@i" class="page-link">@i</a>
+                            <a asp-page="/patientLanding" asp-route-p="@i" class="page-link">@i</a>
                         </li>
                     }
                     <li class="page-item  @(!Model.ShowNext? "disabled":"")">
-                        <a asp-page="/Index" asp-route-p="@(Model.PageNo + 1)" class="page-link"> &#8250; </a>
+                        <a asp-page="/patientLanding" asp-route-p="@(Model.PageNo + 1)" class="page-link"> &#8250; </a>
                     </li>
                 </ul>
 
@@ -159,7 +159,7 @@
                     <!-- Pagination -->
                 <ul class="pagination">
                     <li class="page-item @(!Model.ShowPrevious? "disabled":"")">
-                        <a asp-page="/Index" asp-route-p="@(Model.PageNo -1)" class="page-link"> &#8249; </a>
+                        <a asp-page="/patientLanding" asp-route-p="@(Model.PageNo -1)" class="page-link"> &#8249; </a>
                     </li>
                 @for(var i = 1; i <= Model.TotalPages; i++)
                     {
@@ -168,7 +168,7 @@
                         </li>
                     }
                     <li class="page-item  @(!Model.ShowNext? "disabled":"")">
-                        <a asp-page="/Index" asp-route-p="@(Model.PageNo + 1)" class="page-link"> &#8250; </a>
+                        <a asp-page="/patientLanding" asp-route-p="@(Model.PageNo + 1)" class="page-link"> &#8250; </a>
                     </li>
                 </ul>
 
@@ -335,3 +335,16 @@
       </div>
   </div>
 </div>
+
+<script>
+    initializeMap();
+    getLocation();
+</script>
+                                    @foreach(var inst in Model.Institutions)
+    {
+    <script>
+    var z = "@inst.institutionName".replace('&#xD;&#xA;', '');
+    var i = "@inst.notes".replace('&#xD;&#xA;', '');
+        addMarker(@inst.lat, @inst.Long, z, i);
+    </script>
+    }

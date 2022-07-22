@@ -165,11 +165,11 @@
 
 
                                 <div class="blog-text">
-                                    <a href="#">Advertisements</a>
+                                    <a href="#"><h1>Advertisements</h1></a>
                                     @foreach (var advert in Model.Ads)
                                     {
 
-                                        <h5>@advert.advertisementTitle</h5>
+                                        <h5>Title: @advert.advertisementTitle</h5>
                                         <a href="@advert.url">
                                         <img src="/images/@advert.imgsrc" width="600" height="100" sstyle="object-fit:fill">
                                         </a>
@@ -189,6 +189,8 @@
 
                                             </form>
                                         }
+                                        <br />
+                                        <br />
 
                                     }
                                 </div>

@@ -34,7 +34,7 @@ namespace VINES.Pages
         [BindProperty]
         public List<Advertisement> ads { get; set; }
         public int rnd { get; set; }
-        public Random rando =new Random();
+        public Random rando =new Random(DateTime.Now.Millisecond);
 
 
 
@@ -67,9 +67,10 @@ namespace VINES.Pages
         }
         public void OnGet(int p = 1 , int s = 5)
         {
+            rando = new Random(DateTime.Now.Millisecond);
             ads = db.advertisements.Where(ad => ad.endDate > DateTime.UtcNow && ad.clicks > 0).ToList();
             rnd = rando.Next(0, ads.Count-1);
-            Debug.WriteLine(rnd);
+            Debug.WriteLine(ads.Count+" ,"+rnd);
             Sources = db.sources.ToList();
             CommunityPosts = db.CommunityPosts.ToList();
             WebPages = db.WebPages.OrderByDescending(webpage => webpage.uploadDate).Skip((p - 1) * s).Take(s).ToList();
