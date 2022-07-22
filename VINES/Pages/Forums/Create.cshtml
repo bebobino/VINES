@@ -1,0 +1,66 @@
+﻿@page
+@model VINES.Pages.Forums.CreateModel
+@using Microsoft.AspNetCore.Authorization
+@inject IAuthorizationService AuthorizationService
+@{
+}
+
+@if ((await AuthorizationService.AuthorizeAsync(User, "PatientOnly")).Succeeded)
+{
+
+<br />  
+<h2 class="text-info">Create New Forum Post</h2>  
+<br />  
+  
+<div class="border container" style="padding:30px;">  
+    <form method="post">  
+        <div class="form-group row">  
+ 
+        </div>  
+         <div class="form-group row">  
+            <div class="col-4">  
+                <label asp-for="forumPost.forumCategory"></label>  
+            </div>  
+            <div class="col-6">  
+                <select asp-for="forumPost.forumCategoryID" name="catID">
+                    @foreach (var category in Model.categories)
+                    {
+                        <option value="@category.forumCategoryID">@category.forumCategory</option>
+                    }
+                </select>  
+            </div>  
+        </div>  
+  
+        <div class="form-group row">  
+            <div class="col-4">  
+                <label asp-for="forumPost.forumContent"></label>  
+            </div>
+            <div class="col-6">  
+                <textarea asp-for="forumPost.forumContent" class="form-control" name="content"></textarea>
+            </div>  
+        </div>  
+  
+        <div class="form-group row">  
+            <div class="col-3 offset-4">  
+                <input type="submit" value="Create" class="btn btn-primary form-control" />  
+            </div>  
+            <div class="col-3">  
+                <a asp-page="Index" class="btn btn-success form-control">Back to Index</a>  
+            </div>  
+        </div>  
+    </form>  
+</div>  
+}
+else {
+    @if (User.Identity.IsAuthenticated && User.IsInRole("Patient")) {
+        
+        Response.Redirect("/patientLanding");
+    }
+        else if (User.Identity.IsAuthenticated && User.IsInRole("Advertiser")) {
+        
+        Response.Redirect("/advertiserLanding");
+    }
+        else{
+        Response.Redirect("/Index");
+    }
+}
