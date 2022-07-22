@@ -53,6 +53,7 @@
                                <button asp-page-handler="Delete" asp-route-id="@forum.forumPostID" onclick="return confirm('Are you sure you want to delete?')" 
                                class="btn btn-danger btn-sm">Delete</button>  
                                 <a asp-page="Edit" asp-route-id="@forum.forumPostID" class="btn btn-success btn-sm text-white">Edit</a>  
+                                  <a asp-page="Details" asp-route-id="@forum.forumPostID" class="btn btn-warning btn-sm text-white">Details</a>  
                             </td>  
                         </tr>  
                         i++;
