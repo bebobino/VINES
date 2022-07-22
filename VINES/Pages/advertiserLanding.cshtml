@@ -1,5 +1,5 @@
 ﻿@page
-@model advertiserLandingModel
+@model VINES.Pages.advertiserLandingModel
 @using Microsoft.AspNetCore.Authorization
 @inject IAuthorizationService AuthorizationService
 @{
@@ -60,20 +60,6 @@
                             <!-- recent end -->
                         </div>
                         <div class="single-blog-page">
-                            <div class="left-blog">
-                                <h4>Monthly Billing Statement Archive</h4>
-                                <ul>
-                                    <li>
-                                        <a href="#">May 2022</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">June 2022</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">July 2022</a>
-                                    </li>
-                                </ul>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -93,7 +79,7 @@
 
                                 <div class="card col-lg-3 col-md-5 col-6 d-md-flex align-items-center text-center" id="showAdvertisements">
                                     <br>
-                                    <h1>7</h1>
+                                    <h1></h1>
                                     <h5>Advertisements Active</h5>
 
                                 </div>
@@ -139,12 +125,36 @@
                                         <a href="#">Add Advertisement</a>
                                     </h5>
                                     <form method="post" enctype="multipart/form-data">
-                                        <input type="file" accept="image/png, image/gif, image/jpeg" asp-for="Photo" />
+                                        <label>Advertisment Name</label>
+                                        <br />
+                                        <input type="text" asp-for="Ad.advertisementTitle" required/>
+                                        <br />
+                                        <label>URL Destination</label>
+                                        <br />
+                                        <input type="text" asp-for="Ad.url" required/>
+                                        <label>Ad Type</label>
+                                        <br />
+                                        <select asp-for="Ad.advertisementTypeID" required>
+                                        @foreach (var adcat in Model.AdTypes)
+                                            {
+                                                <option value="@adcat.advertisementTypeID">@adcat.advertisementType</option>
+                                            }
+
+                                        </select>
+                                        <br />
+                                        <label>Image</label>
+                                        <br />
+                                        <input type="file" accept="image/png, image/gif, image/jpeg" asp-for="Photo" required/>
+                                        <br />
+                                        <br />
                                         <input type="submit" />
+
                                     </form>
+                                    <br />
+                                    <br />
                                 </div>
 
-
+                                
 
 
 
@@ -156,28 +166,16 @@
 
                                 <div class="blog-text">
                                     <h5>
-                                        <a href="#">Active Advertisements</a>
+                                        <p>Advertisements</p>
                                     </h5>
-                                    <table style="width:100%">
-                                        <tr>
-                                            <th colspan="2">Advertisement Title</th>
-                                            <th colspan="2">Subscription Start Date</th> 
-                                            <th colspan="2">Subscription Duration</th>
-                                            <th colspan="2">Total Subscription Cost</th>
-                                        </tr>
-                                        <tr>
-                                            <td colspan="2">Shopee Ad</td>
-                                            <td colspan="2">07-11-2022</td>
-                                            <td colspan="2">2 Months</td>
-                                            <td colspan="2">&#8369;1,000</td>
-                                        </tr>
-                                        <tr>
-                                            <td colspan="2">Lazada Ad</td>
-                                            <td colspan="2">07-11-2022</td>
-                                            <td colspan="2">10 Months</td>
-                                            <td colspan="2">&#8369;5,000</td>
-                                        </tr>
-                                    </table>
+                                    @foreach(var advert in Model.Ads)
+                                    {
+                                        
+                                            <h1>@advert.advertisementTitle</h1>
+                                            <img src="/images/@advert.imgsrc" width="500" height="300">
+                                            <p>Price: @advert.advertisementType.price</p>
+                                        
+                                    }
                                 </div>
                             </div>
                         </div>

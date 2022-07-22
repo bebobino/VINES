@@ -38,17 +38,25 @@
                         </div>
                         <div class="single-blog-page">
                             <div class="left-blog">
-                                <h4>Community Posts</h4>
-                                @foreach (var communitypost in Model.CommunityPosts)
-                                {
-                                    <ul>
-                                        <li>
-                                            <a href="#">@communitypost.communityPostTitle</a>
-                                            <p>@communitypost.communityPostContent</p>
-                                        </li>
-                                    </ul>
-                                }
-                            </div>
+                  <h4>COMMUNITY POSTS</h4>
+                  <div class="recent-post">
+                    @foreach(var com in Model.CommunityPosts)
+                     {
+                     <div class="recent-single-post">
+                      <div class="post-img">
+
+                          <img src="assets/img/VINESii.png" alt="">
+                      </div>
+                      <div class="pst-content">
+                          
+                        <p>@com.communityPostTitle</p>
+                        <br />
+                        <p>@com.communityPostContent</p>
+                      </div>
+                    </div>
+                    }
+                  </div>
+                </div>
                         </div>
                     </div>
                 </div>
