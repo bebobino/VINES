@@ -5,69 +5,31 @@
 @{
   ViewData["Title"] = "advertiserLanding";
 }
+<style>
+.btn-buy {
+    display: inline-block;
+    padding: 10px 40px;
+    border-radius: 4px;
+    color: #2487ce;
+    transition: none;
+    font-size: 14px;
+    font-weight: 400;
+    font-family: "Raleway", sans-serif;
+    font-weight: 600;
+    transition: 0.3s;
+    border: 2px solid #2487ce;
+}
+
+</style>
 
 @if ((await AuthorizationService.AuthorizeAsync(User, "AdvertiserOnly")).Succeeded)
-{
+{ 
     <!-- ======= Blog Page ======= -->
     <div class="blog-page area-padding">
         <div class="container">
             <div class="row">
-                <div class="col-lg-4 col-md-4">
-                    <div class="page-head-blog">
-                        <div class="single-blog-page">
-                            <!-- recent Ads -->
-                            <div class="left-blog">
-                                <h4>Recently Added Advertisements</h4>
-                                <div class="recent-post">
-                                    <!-- start single post -->
-                                    <div class="recent-single-post">
-                                        <div class="post-img">
-                                            <a href="#">
-                                                <img src="assets/img/blog/1.jpg" alt="">
-                                            </a>
-                                        </div>
-                                        <div class="pst-content">
-                                            <p><a href="#"> Redug Lerse dolor sit amet consect adipis elit.</a></p>
-                                        </div>
-                                    </div>
-                                    <!-- End single post -->
-                                    <!-- start single post -->
-                                    <div class="recent-single-post">
-                                        <div class="post-img">
-                                            <a href="#">
-                                                <img src="assets/img/blog/2.jpg" alt="">
-                                            </a>
-                                        </div>
-                                        <div class="pst-content">
-                                            <p><a href="#"> Redug Lerse dolor sit amet consect adipis elit.</a></p>
-                                        </div>
-                                    </div>
-                                    <!-- End single post -->
-                                    <!-- start single post -->
-                                    <div class="recent-single-post">
-                                        <div class="post-img">
-                                            <a href="#">
-                                                <img src="assets/img/blog/3.jpg" alt="">
-                                            </a>
-                                        </div>
-                                        <div class="pst-content">
-                                            <p><a href="#"> Redug Lerse dolor sit amet consect adipis elit.</a></p>
-                                        </div>
-                                    </div>
-                                    <!-- End single post -->
-                                </div>
-                            </div>
-                            <!-- recent end -->
-                        </div>
-                        <div class="single-blog-page">
-                        </div>
-                    </div>
-                </div>
-                <!-- End left sidebar -->
-
-
-                <!-- Start single blog -->
-                <div class="col-md-8 col-sm-8 col-xs-12">
+                
+                
                     <h1 style="font-size: x-large;"><b>Top Level Summary</b></h1>
 
                     <section id="counts" class="counts section-bg">
@@ -157,19 +119,11 @@
 
                                 
 
-
-
-
-
-
-
-
-
                                 <div class="blog-text">
                                     <a href="#"><h1>Advertisements</h1></a>
                                     @foreach (var advert in Model.Ads)
                                     {
-
+                                     
                                         <h5>Title: @advert.advertisementTitle</h5>
                                         <a href="@advert.url">
                                         <img src="/images/@advert.imgsrc" width="600" height="100" sstyle="object-fit:fill">
@@ -186,53 +140,20 @@
                                             <form asp-page-handler="checkout" method="post">
                                                 <input type="hidden" name="total" value="@advert.advertisementType.price"/>
                                                 <input type="hidden" name="id" value="@advert.advertisementID"/>
-                                                <button style="color:black" class="button button2">Activate</button>
+                                                <button style="color:#2487ce" class="btn-buy">Subscribe</button>
 
                                             </form>
                                         }
                                         <br />
                                         <br />
-
+                                        
                                     }
-                                </div>
+                                    </div>                                
                             </div>
                         </div>
-                        <!-- Start single blog -->
-                        <div class="col-md-12 col-sm-12 col-xs-12">
-                            <div class="single-blog">
-                                <div class="blog-text">
-                                    <h5>
-                                        <a href="#">Manage Advertisements</a>
-                                    </h5>
-                                    <table style="width:100%">
-                                        <tr>
-                                            <th colspan="2">Advertisement Title</th>
-                                            <th colspan="2">Description</th>
-                                            <th colspan="2">Monthly Budget</th>
-                                            <th colspan="2">Settings</th>
-                                        </tr>
-                                        <tr>
-                                            <td colspan="2">Shopee</td>
-                                            <td colspan="2">Shopee Monthly Sale Ads</td>
-                                            <td colspan="2">&#8369;500</td>
-                                            <td colspan="2"><a href="#">Update</a>/<a href="#">Delete</a></td>
-                                        </tr>
-                                        <tr>
-                                            <td colspan="2">Lazada</td>
-                                            <td colspan="2">Lazada Monthly Sale Ads</td>
-                                            <td colspan="2">&#8369;500</td>
-                                            <td colspan="2"><a href="#">Update</a>/<a href="#">Delete</a></td>
-                                        </tr>
-                                    </table>
-                                </div>
-                                <br />
-                                <span>
-                                    <a href="#" class="ready-btn">Add New Advertisement</a>
-                                </span>
-                            </div>
-                        </div>
+                        
                     </div>
-                </div>
+               
             </div>
         </div>
     </div><!-- End Blog Page -->
