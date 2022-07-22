@@ -17,6 +17,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using VINES.Services;
 using Microsoft.AspNetCore.Authentication.Facebook;
+using VINES.Processes;
 
 namespace VINES
 {
@@ -131,6 +132,9 @@ namespace VINES
                 options.Password.RequiredLength = 0;
                 options.Password.RequiredUniqueChars = 1;
             });
+
+            services.AddTransient<DataSeeder>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

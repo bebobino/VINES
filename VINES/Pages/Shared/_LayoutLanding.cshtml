@@ -49,6 +49,7 @@
 
     <!--BODY, header is inside-->
 <body>
+
   <!-- ======= Header ======= -->
   <header id="header" class="fixed-top d-flex align-items-center">
     <div class="container d-flex justify-content-between">
@@ -177,6 +178,7 @@
 
   <!-- ==BODY GOES IN HERE. WHATEVER PAGE CALLS THIS LAYOUT. -->
     <div class="container">
+        <partial name="_CookieConsentPartial" />
         <main role="main" class="pb-3">
             @RenderBody()
         </main>

@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authentication.Google;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -25,34 +26,37 @@ namespace VINES.Pages.Account
 
         public extGoogleModel(DatabaseContext _db)
         {
-            _db = db;
-
-            user = db.Users.ToList();
+            db = _db;
         }
 
-        [BindProperty]
-        public List<User> user { get; set; }
+        public User user { get; set; }
 
 
 
-        public async Task<RedirectToPageResult> OnGetAsync()
+        public async Task<IActionResult> OnGetAsync()
         {
+
             var accessToken = await HttpContext.GetTokenAsync(
             GoogleDefaults.AuthenticationScheme, "access_token");
 
+                var email = User.FindFirstValue(ClaimTypes.Email);
 
-            var claims = User.Claims;
+                var claims = new List<Claim>
+                {
+                    new Claim(ClaimTypes.NameIdentifier, ClaimTypes.NameIdentifier),
+                    new Claim(ClaimTypes.Name, email),
+                    new Claim(ClaimTypes.Role, "Patient"),
 
-            var name = User.FindFirstValue(ClaimTypes.Name);
-            var email = User.FindFirstValue(ClaimTypes.Email);
+                };
 
-            var emails = db.Users.Find(email);
+                var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                var principal = new ClaimsPrincipal(identity);
 
-            Debug.WriteLine(emails);
+                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal,
+                    new AuthenticationProperties { IsPersistent = false });
 
-            return RedirectToPage("Index");
-            
+                return RedirectToPage("/patientLanding");
+
         }
-
     }
 }
