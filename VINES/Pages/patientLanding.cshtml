@@ -227,63 +227,55 @@
         </div>
     </div>
 
-    <div class="modal fade" id="vaccines">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Vaccines in database</h4>
-                </div>
-                <div class="modal-body">
-                    <table>
-                        <tr>
-                            <td >Vaccine</td>
-                            <td >Disease</td>
-                            <td >Description</td>
-                        </tr>
-                        @foreach (var vaccine in Model.Vaccines)
-                        {
-                            <tr>
-                                <td>@vaccine.vaccineName</td>
-                                <td>@vaccine.disease.diseaseName</td>
-                                <td>@vaccine.notes</td>
-                            </tr>
-                        }
-                    </table>
-                    <br>
-                    <input type="button" class="btn btn-secondary" id="hideVaccines" value="Hide" />
-                </div>
-            </div>
-        </div>
-    </div>
+<div class="modal fade" id="institutions">
+  <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h4 class="modal-title">Institutions in database</h4>
+          </div>
+          <div class="modal-body">
+            <p>Adela Serra Ty Memorial Medical Center</p>
+            <p>Adventist Hospital-Cebu, Inc.</p>
+            <p>Adventist Hospital-Davao, Inc.</p>
+            <p>Adventist Hospital-Palawan, Inc.</p>
+            <p>Adventist Hospital-Santiago City, Inc.</p>
+            <p>Adventist Medical Center Manila</p>
+            <p>Adventist Medical Center-Bacolod, Inc.</p>
+            <p>Adventist Medical Center-Iligan City, Inc.</p>
+            <p>Adventist Medical Center-Valencia City, Inc.</p>
+            <p>Ago General Hospital</p>
+            <p>Air Force General Hospital</p>
+            <p>Alabang Medical Center</p>
+            <p>Albay Doctors Hospital</p>
+            <p>Allah Valley Medical Specialists Center, Inc.</p>
+            <p>Allied Care Experts (ACE) Medical Center - Baypointe, Inc.</p>
+            <p>Allied Care Experts (ACE) Medical Center - Pateros, Inc.</p>
+            <br>
+            <input type="button" class="btn btn-secondary" id="hideInstitutions" value="Hide" />
+          </div>
+      </div>
+  </div>
+</div>
 
-    <div class="modal fade" id="institutions">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Institutions in database</h4>
-                </div>
-                <div class="modal-body">
-                    <table>
-                        <tr>
-                            <td >Institution Name</td>
-                            <td >Address</td>
-                        </tr>
-                        @foreach (var institution in Model.Institutions)
-                        {
-                            <tr>
-                                <td>@institution.institutionName</td>
-                                <td>@institution.notes</td>
-                            </tr>
-                        }
-                    </table>
-                    <br>
-                    <input type="button" class="btn btn-secondary" id="hideInstitutions" value="Hide" />
-                </div>
-            </div>
-        </div>
-    </div>
-
-<script>
-initializeMap();
-getLocation();
-</script>
+<div class="modal fade" id="vaccines">
+  <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h4 class="modal-title">Vaccines in database</h4>
+          </div>
+          <div class="modal-body">
+            
+            <p>Covaxin</p>
+            <p>Moderna</p>
+            <p>Janssen</p>
+            <p>Oxford-AstraZeneca</p>
+            <p>Pfizer-BioNTech</p>
+            <p>Sinovac</p>
+            <p>Sinopharm</p>
+            <p>Sputnik V</p>
+            <br>
+            <input type="button" class="btn btn-secondary" id="hideVaccines" value="Hide" />
+          </div>
+      </div>
+  </div>
+</div>
