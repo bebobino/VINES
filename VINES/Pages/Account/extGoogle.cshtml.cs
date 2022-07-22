@@ -39,7 +39,10 @@ namespace VINES.Pages.Account
             var accessToken = await HttpContext.GetTokenAsync(
             GoogleDefaults.AuthenticationScheme, "access_token");
 
-                var email = User.FindFirstValue(ClaimTypes.Email);
+            var email = User.FindFirstValue(ClaimTypes.Email);
+
+
+
 
                 var claims = new List<Claim>
                 {

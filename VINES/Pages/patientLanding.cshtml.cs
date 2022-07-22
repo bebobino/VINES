@@ -31,6 +31,7 @@ namespace VINES.Pages
         public List<Institutions> Institutions { get; set; }
         public List<Sources> Sources { get; set; }
         private DatabaseContext db;
+        public Patients patient { get; set; }
 
 
         //Ads
@@ -56,6 +57,17 @@ namespace VINES.Pages
         }
         public void OnGet(int p = 1 , int s = 5)
         {
+            try
+            {
+                var uid = User.FindFirstValue(ClaimTypes.NameIdentifier);
+                Debug.WriteLine("ID is: "+uid);
+                int x = int.Parse(uid);
+                patient = db.Patients.Where(p => p.userID == x).FirstOrDefault();
+                Debug.WriteLine("patient logged");
+            }catch(Exception)
+            {
+
+            }
             rando = new Random(DateTime.Now.Millisecond);
             ads = db.advertisements.Where(ad => ad.endDate > DateTime.UtcNow && ad.clicks > 0).ToList();
             if (ads.Count > 0)
