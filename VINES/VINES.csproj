@@ -13,50 +13,24 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\assets\css\About.css" />
     <Content Remove="wwwroot\assets\css\pricing.css" />
     <Content Remove="wwwroot\assets\css\privacy.css" />
+    <Content Remove="wwwroot\assets\css\team.css" />
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="wwwroot\assets\css\team.css" />
+    <None Include="wwwroot\assets\css\about.css" />
     <None Include="wwwroot\assets\css\privacy.css" />
     <None Include="wwwroot\assets\css\pricing.css" />
     <None Include="wwwroot\assets\css\style.css" />
-    <None Include="wwwroot\assets\img\about\1.jpg" />
-    <None Include="wwwroot\assets\img\about\2.jpg" />
     <None Include="wwwroot\assets\img\apple-touch-icon.png" />
     <None Include="wwwroot\assets\img\background\hero-bg.jpg" />
-    <None Include="wwwroot\assets\img\background\page-header.jpg" />
-    <None Include="wwwroot\assets\img\background\reviews-bg.jpg" />
-    <None Include="wwwroot\assets\img\background\slider-bg.jpg" />
-    <None Include="wwwroot\assets\img\blog\1.jpg" />
-    <None Include="wwwroot\assets\img\blog\2.jpg" />
-    <None Include="wwwroot\assets\img\blog\3.jpg" />
-    <None Include="wwwroot\assets\img\blog\4.jpg" />
-    <None Include="wwwroot\assets\img\blog\5.jpg" />
-    <None Include="wwwroot\assets\img\blog\6.jpg" />
-    <None Include="wwwroot\assets\img\blog\b02.jpg" />
     <None Include="wwwroot\assets\img\favicon-16x16.png" />
     <None Include="wwwroot\assets\img\favicon-32x32.png" />
     <None Include="wwwroot\assets\img\favicon.png" />
-    <None Include="wwwroot\assets\img\hero-carousel\1.jpg" />
-    <None Include="wwwroot\assets\img\hero-carousel\2.jpg" />
-    <None Include="wwwroot\assets\img\hero-carousel\3.jpg" />
-    <None Include="wwwroot\assets\img\portfolio\1.jpg" />
-    <None Include="wwwroot\assets\img\portfolio\2.jpg" />
-    <None Include="wwwroot\assets\img\portfolio\3.jpg" />
-    <None Include="wwwroot\assets\img\portfolio\4.jpg" />
-    <None Include="wwwroot\assets\img\portfolio\5.jpg" />
-    <None Include="wwwroot\assets\img\portfolio\6.jpg" />
     <None Include="wwwroot\assets\img\preloader.gif" />
-    <None Include="wwwroot\assets\img\team\1.jpg" />
-    <None Include="wwwroot\assets\img\team\2.jpg" />
-    <None Include="wwwroot\assets\img\team\3.jpg" />
-    <None Include="wwwroot\assets\img\team\4.jpg" />
-    <None Include="wwwroot\assets\img\testimonials\testimonials-1.jpg" />
-    <None Include="wwwroot\assets\img\testimonials\testimonials-2.jpg" />
-    <None Include="wwwroot\assets\img\testimonials\testimonials-3.jpg" />
-    <None Include="wwwroot\assets\img\testimonials\testimonials-4.jpg" />
-    <None Include="wwwroot\assets\img\testimonials\testimonials-5.jpg" />
     <None Include="wwwroot\assets\img\venubox\close.gif" />
     <None Include="wwwroot\assets\img\venubox\next.gif" />
     <None Include="wwwroot\assets\img\venubox\preload-circle.png" />
@@ -166,6 +140,7 @@
   
   <ItemGroup>
     <Folder Include="Pages\Patient\" />
+    <Folder Include="wwwroot\images\" />
     <Folder Include="wwwroot\Scripts\" />
   </ItemGroup>
 

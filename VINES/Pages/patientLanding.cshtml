@@ -6,11 +6,8 @@
 @inject IAuthorizationService AuthorizationService
 @{
   ViewData["Title"] = "patientLanding";
-
-              
-  
-
 }
+
 
  <!-- ======= Blog Page ======= -->
     <div class="blog-page area-padding">
@@ -27,56 +24,23 @@
               <div class="single-blog-page">
                 <!-- recent start -->
                 <div class="left-blog">
-                  <h4>recent news</h4>
+                  <h4>COMMUNITY POSTS</h4>
                   <div class="recent-post">
-                    <!-- start single post -->
-                    <div class="recent-single-post">
+                    @foreach(var com in Model.CommunityPosts)
+                     {
+                     <div class="recent-single-post">
                       <div class="post-img">
-                        <a href="#">
-                          <img src="assets/img/blog/1.jpg" alt="">
-                        </a>
+
+                          <img src="assets/img/VINESii.png" alt="">
                       </div>
                       <div class="pst-content">
-                        <p><a href="#"> Redug Lerse dolor sit amet consect adipis elit.</a></p>
+                          
+                        <p>@com.communityPostTitle</p>
+                        <br />
+                        <p>@com.communityPostContent</p>
                       </div>
                     </div>
-                    <!-- End single post -->
-                    <!-- start single post -->
-                    <div class="recent-single-post">
-                      <div class="post-img">
-                        <a href="#">
-                          <img src="assets/img/blog/2.jpg" alt="">
-                        </a>
-                      </div>
-                      <div class="pst-content">
-                        <p><a href="#"> Redug Lerse dolor sit amet consect adipis elit.</a></p>
-                      </div>
-                    </div>
-                    <!-- End single post -->
-                    <!-- start single post -->
-                    <div class="recent-single-post">
-                      <div class="post-img">
-                        <a href="#">
-                          <img src="assets/img/blog/3.jpg" alt="">
-                        </a>
-                      </div>
-                      <div class="pst-content">
-                        <p><a href="#"> Redug Lerse dolor sit amet consect adipis elit.</a></p>
-                      </div>
-                    </div>
-                    <!-- End single post -->
-                    <!-- start single post -->
-                    <div class="recent-single-post">
-                      <div class="post-img">
-                        <a href="#">
-                          <img src="assets/img/blog/4.jpg" alt="">
-                        </a>
-                      </div>
-                      <div class="pst-content">
-                        <p><a href="#"> Redug Lerse dolor sit amet consect adipis elit.</a></p>
-                      </div>
-                    </div>
-                    <!-- End single post -->
+                    }
                   </div>
                 </div>
                 <!-- recent end -->
@@ -110,76 +74,104 @@
           <div class="col-md-8 col-sm-8 col-xs-12">
             <h1 style="font-size: x-large;"><b>Dashboard</b></h1>
 
+                    <section id="counts" class="counts section-bg">
+                        <div class="container">
 
+                            <div class="row justify-content-end">
 
-            <section id="counts" class="counts section-bg">
-              <div class="container">
-        
-                <div class="row justify-content-end">
+                                <div class="card col-lg-3 col-md-5 col-6 d-md-flex align-items-center text-center" id="showSources">
+                                    <br>
+                                    <h1>@Model.Sources.Count</h1>
+                                    <h5>News Sources</h5>
 
-                  <div class="card col-lg-3 col-md-5 col-6 d-md-flex align-items-center text-center" id="showSources">
-                      <br>
-                      <h1>7</h1>
-                      <h5>News Sources</h5>
+                                </div>
 
-                  </div>
-                  
-                  <div class="card col-lg-3 col-md-5 col-6 d-md-flex align-items-center text-center" id = "showInstitutions">
-                      <br>
-                      <h1>16</h1>
-                      <h5>Institutions in database</h5>
+                                <div class="card col-lg-3 col-md-5 col-6 d-md-flex align-items-center text-center" id = "showInstitutions">
+                                    <br>
+                                    <h1>@Model.Institutions.Count</h1>
+                                    <h5>Institutions in database</h5>
 
-                  </div>
+                                </div>
 
-                  <div class="card col-lg-3 col-md-5 col-6 d-md-flex align-items-center text-center" id = "showVaccines">
-                      <br>
-                      <h1>8</h1>
-                      <h5>Vaccines in database</h5>
+                                <div class="card col-lg-3 col-md-5 col-6 d-md-flex align-items-center text-center" id = "showVaccines">
+                                    <br>
+                                    <h1>@Model.Vaccines.Count</h1>
+                                    <h5>Vaccines in database</h5>
 
-                  </div>
+                                </div>
 
-                  <div class="card col-lg-3 col-md-5 col-6 d-md-flex align-items-center text-center">
-                      <br>
-                      <h1>87</h1>
-                      <h5>Recommendations generated</h5>
+                                <div class="card col-lg-3 col-md-5 col-6 d-md-flex align-items-center text-center">
+                                    <br>
+                                    <h1>87</h1>
+                                    <h5>Recommendations generated</h5>
 
-                  </div>
-                  
-        
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </section>
+
+                                <h1 style="font-size: x-large;"><b>News and Updates</b></h1>
+                    <div class="row">
+                        <div>
+                            
                 </div>
-        
-              </div>
-            </section>
+                <!-- Pagination -->
+                <ul class="pagination">
+                    <li class="page-item @(!Model.ShowPrevious? "disabled":"")">
+                        <a asp-page="/Index" asp-route-p="@(Model.PageNo -1)" class="page-link"> &#8249; </a>
+                    </li>
+                @for(var i = 1; i <= Model.TotalPages; i++)
+                    {
+                        <li class="page-item @(i == Model.PageNo ? "active" : "")">
+                            <a asp-page="/Index" asp-route-p="@i" class="page-link">@i</a>
+                        </li>
+                    }
+                    <li class="page-item  @(!Model.ShowNext? "disabled":"")">
+                        <a asp-page="/Index" asp-route-p="@(Model.PageNo + 1)" class="page-link"> &#8250; </a>
+                    </li>
+                </ul>
 
-            <h1 style="font-size: x-large;"><b>Vaccines</b></h1>
-            <div class="row">
-              <!-- End single blog -->
-              <div class="col-md-12 col-sm-12 col-xs-12">
+                <!-- Pagination -->
+                
+              @foreach(var webpage in Model.WebPages)
+              {
+                    <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="single-blog">
                   <div class="blog-text">
                     <h5>
-                      <a href="#">Vaccine History</a>
+                      <a href="@webpage.webURL">@webpage.pageTitle</a>
                     </h5>
-                    <table style="width:100%">
-                      <tr>
-                        <th colspan="2">Vaccine Name</th>
-                        <th colspan="2">Date</th> 
-                        <th colspan="2">Institution</th>
-                      </tr>
-                      <tr>
-                        <td colspan="2">Oxford-AstraZeneca</td>
-                        <td colspan="2">05-20-2021</td>
-                        <td colspan="2">Hospital X</td>
-                      </tr>
-                      <tr>
-                        <td colspan="2">Oxford-AstraZeneca</td>
-                        <td colspan="2">06-20-2021</td>
-                        <td colspan="2">Hospital X</td>
-                      </tr>
-                    </table>
+                    <div class="blog-meta">
+                      <span class="date-type">
+                        <i class="bi bi-calendar"></i>@webpage.uploadDate
+                      </span>
+                    </div>
+                    <p>
+                      @webpage.summary
+                    </p>
                   </div>
                 </div>
               </div>
+              }
+                    <!-- Pagination -->
+                <ul class="pagination">
+                    <li class="page-item @(!Model.ShowPrevious? "disabled":"")">
+                        <a asp-page="/Index" asp-route-p="@(Model.PageNo -1)" class="page-link"> &#8249; </a>
+                    </li>
+                @for(var i = 1; i <= Model.TotalPages; i++)
+                    {
+                        <li class="page-item @(i == Model.PageNo ? "active" : "")">
+                            <a asp-page="/Index" asp-route-p="@i" class="page-link">@i</a>
+                        </li>
+                    }
+                    <li class="page-item  @(!Model.ShowNext? "disabled":"")">
+                        <a asp-page="/Index" asp-route-p="@(Model.PageNo + 1)" class="page-link"> &#8250; </a>
+                    </li>
+                </ul>
+
+                <!-- Pagination -->
               <!-- Start single blog -->
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="single-blog">
@@ -216,23 +208,23 @@
 
     <!-- dashboard modals -->
 
-<div class="modal fade" id="newsSources">
-  <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-          <div class="modal-header">
-              <h4 class="modal-title">News Sources</h4>
-          </div>
-          <div class="modal-body">
-              @foreach (var x in Model.Sources)
-                {
-                    <p>@x.sourceName</p>
-                }
-                <br>
-            <input type="button" class="btn btn-secondary" id="hideSources" value="Hide" />
-          </div>
-      </div>
-  </div>
-</div>
+    <div class="modal fade" id="newsSources">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">News Sources</h4>
+                </div>
+                <div class="modal-body">
+                    @foreach (var source in Model.Sources)
+                    {
+                        <a href="@source.sourcesURI">@source.sourceName</a>
+                    }
+                    <br>
+                    <input type="button" class="btn btn-secondary" id="hideSources" value="Hide" />
+                </div>
+            </div>
+        </div>
+    </div>
 
 <div class="modal fade" id="institutions">
   <div class="modal-dialog modal-dialog-centered">
@@ -241,11 +233,24 @@
               <h4 class="modal-title">Institutions in database</h4>
           </div>
           <div class="modal-body">
-              @foreach (var insti in Model.Institutions)
-                {
-                    <p>@insti.institutionName</p>
-                }
-                <input type="button" class="btn btn-secondary" id="hideInstitutions" value="Hide" />
+            <p>Adela Serra Ty Memorial Medical Center</p>
+            <p>Adventist Hospital-Cebu, Inc.</p>
+            <p>Adventist Hospital-Davao, Inc.</p>
+            <p>Adventist Hospital-Palawan, Inc.</p>
+            <p>Adventist Hospital-Santiago City, Inc.</p>
+            <p>Adventist Medical Center Manila</p>
+            <p>Adventist Medical Center-Bacolod, Inc.</p>
+            <p>Adventist Medical Center-Iligan City, Inc.</p>
+            <p>Adventist Medical Center-Valencia City, Inc.</p>
+            <p>Ago General Hospital</p>
+            <p>Air Force General Hospital</p>
+            <p>Alabang Medical Center</p>
+            <p>Albay Doctors Hospital</p>
+            <p>Allah Valley Medical Specialists Center, Inc.</p>
+            <p>Allied Care Experts (ACE) Medical Center - Baypointe, Inc.</p>
+            <p>Allied Care Experts (ACE) Medical Center - Pateros, Inc.</p>
+            <br>
+            <input type="button" class="btn btn-secondary" id="hideInstitutions" value="Hide" />
           </div>
       </div>
   </div>
@@ -258,11 +263,16 @@
               <h4 class="modal-title">Vaccines in database</h4>
           </div>
           <div class="modal-body">
-              @foreach (var vax in Model.Vaccines)
-                {
-                    <p>@vax.vaccineName</p>
-                }
-                <br>
+            
+            <p>Covaxin</p>
+            <p>Moderna</p>
+            <p>Janssen</p>
+            <p>Oxford-AstraZeneca</p>
+            <p>Pfizer-BioNTech</p>
+            <p>Sinovac</p>
+            <p>Sinopharm</p>
+            <p>Sputnik V</p>
+            <br>
             <input type="button" class="btn btn-secondary" id="hideVaccines" value="Hide" />
           </div>
       </div>

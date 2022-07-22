@@ -9,7 +9,7 @@ namespace VINES.Models
         [Key]
         public int advertisementTypeID { get; set; }
 
-        public int advertisementType { get; set; }
+        public string advertisementType { get; set; }
 
         public decimal price { get; set; }
         public int clickLimit { get; set; }

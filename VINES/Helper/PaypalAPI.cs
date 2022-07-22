@@ -66,7 +66,7 @@ namespace VINES.Helper
             };
             return http;
         }
-
+        public string paypalID { get; set; }
         private async Task<PaypalAccessToken> GetPaypalAccessTokenAsync(HttpClient http)
         {
             byte[] bytes = Encoding.GetEncoding("iso-8859-1").GetBytes($"{configuration
@@ -123,8 +123,10 @@ namespace VINES.Helper
             HttpResponseMessage response = await http.SendAsync(request);
 
             string content = await response.Content.ReadAsStringAsync();
+            
 
             PaypalPaymentCreatedResponse paypalPaymentCreated = JsonConvert.DeserializeObject<PaypalPaymentCreatedResponse>(content);
+            paypalID = paypalPaymentCreated.id;
             return paypalPaymentCreated;
         }
 
@@ -146,6 +148,7 @@ namespace VINES.Helper
             string content = await response.Content.ReadAsStringAsync();
 
             PayPalPaymentExcecutedResponse executedPayment = JsonConvert.DeserializeObject<PayPalPaymentExcecutedResponse>(content);
+            paypalID = executedPayment.id;
             return executedPayment;
         }
 
