@@ -32,6 +32,13 @@ namespace VINES.Pages
         public List<Sources> Sources { get; set; }
         private DatabaseContext db;
 
+
+        //Ads
+        [BindProperty]
+        public List<Advertisement> ads { get; set; }
+        public int rnd { get; set; }
+        public Random rando = new Random(DateTime.Now.Millisecond);
+
         //pagination
         public int PageNo { get; set; }
         public bool ShowPrevious { get; set; }
@@ -49,7 +56,13 @@ namespace VINES.Pages
         }
         public void OnGet(int p = 1 , int s = 5)
         {
-            var ID = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            rando = new Random(DateTime.Now.Millisecond);
+            ads = db.advertisements.Where(ad => ad.endDate > DateTime.UtcNow && ad.clicks > 0).ToList();
+            if (ads.Count > 0)
+            {
+                rnd = rando.Next(0, ads.Count - 1);
+            }
+            Debug.WriteLine(ads.Count + " ," + rnd);
             Sources = db.sources.ToList();
             CommunityPosts = db.CommunityPosts.ToList();
             WebPages = db.WebPages.OrderByDescending(webpage => webpage.uploadDate).Skip((p - 1) * s).Take(s).ToList();
@@ -64,6 +77,8 @@ namespace VINES.Pages
             Help help = new Help();
             Debug.WriteLine("test");
             help.checkIP();
+
+            var rand = new Random();
 
         }
 

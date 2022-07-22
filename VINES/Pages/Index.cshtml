@@ -60,6 +60,19 @@
                 <!-- End left sidebar -->
                 <!-- Start single blog -->
                 <div class="col-md-8 col-sm-8 col-xs-12">
+                    <h5><b>Advertisement</b></h5>
+                    @if(Model.ads.Count > 0){
+
+                    Debug.WriteLine("Advertisment number is: " + Model.ads[Model.rnd].advertisementID);
+                    <form method="post" asp-page-handler="Ad">
+                        <input type="hidden" name="id" value="@Model.ads[Model.rnd].advertisementID"/>
+                        <input type="image" id="image" alt="Login" src="~/images/@Model.ads[Model.rnd].imgsrc" height="300px" width="100%">
+                    </form>
+                    }
+                    
+                    
+                        
+                    
                     <h1 style="font-size: x-large;"><b>Dashboard</b></h1>
 
                     <section id="counts" class="counts section-bg">
