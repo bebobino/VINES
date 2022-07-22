@@ -34,7 +34,8 @@ namespace VINES.Pages
         [BindProperty]
         public List<Advertisement> ads { get; set; }
         public int rnd { get; set; }
-        Random rand = new Random();
+        public Random rando =new Random();
+
 
 
         public List<Sources> Sources { get; set; }
@@ -67,7 +68,7 @@ namespace VINES.Pages
         public void OnGet(int p = 1 , int s = 5)
         {
             ads = db.advertisements.Where(ad => ad.endDate > DateTime.UtcNow && ad.clicks > 0).ToList();
-            rnd = rand.Next(0, ads.Count-1);
+            rnd = rando.Next(0, ads.Count-1);
             Debug.WriteLine(rnd);
             Sources = db.sources.ToList();
             CommunityPosts = db.CommunityPosts.ToList();
