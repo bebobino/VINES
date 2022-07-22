@@ -130,6 +130,7 @@ namespace VINES.Pages.Account
                     await Db.SaveChangesAsync();
 
                     help.sendEmail(Input.email, "Account Confirmation", "Here is your authentication link: "+AppSettings.Site.Url+"Account/RegisterConfirmation/?key1="+user.userID+"&key2="+help.Hash(user.email));
+                    return RedirectToPage("/Account/Login");
 
                 }
             }

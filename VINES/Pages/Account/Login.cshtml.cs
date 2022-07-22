@@ -60,6 +60,11 @@ namespace VINES.Pages.Account
                     return Page();
                     
                 }
+                else if(user.isBlocked)
+                {
+                    ModelState.AddModelError("Error", "ERROR: Your account has been blocked. Please contact administrators for unblock.");
+                    return Page();
+                }
                 else
                 {
                     if (user.password != help.Hash(Input.password))
@@ -78,7 +83,7 @@ namespace VINES.Pages.Account
                     }
                     else if (!user.emailAuth)
                     {
-                        ModelState.AddModelError("Error", "ERROR: Email not yet authenticated.");
+                        ModelState.AddModelError("Error", "ERROR: Email not yet authenticated. Please check your email.");
                         return Page();
                     }
                     else if (user.roleID != 3)

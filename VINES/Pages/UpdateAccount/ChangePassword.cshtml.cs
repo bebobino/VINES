@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.ComponentModel.DataAnnotations;
@@ -9,6 +10,7 @@ using VINES.Processes;
 
 namespace VINES.Pages.UpdateAccount
 {
+    [Authorize]
     public class ChangePasswordModel : PageModel
     {
         public DatabaseContext Db;

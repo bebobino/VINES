@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Collections.Generic;
@@ -8,6 +9,7 @@ using VINES.Models;
 
 namespace VINES.Pages.Status
 {
+    [Authorize("AdminOnly")]
     public class IndexModel : PageModel
     {
         private readonly DatabaseContext _db;

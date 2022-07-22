@@ -26,10 +26,12 @@ namespace VINES.Pages.Account
         public extGoogleModel(DatabaseContext _db)
         {
             _db = db;
+
+            user = db.Users.ToList();
         }
 
         [BindProperty]
-        public User user { get; set; }
+        public List<User> user { get; set; }
 
 
 
@@ -44,16 +46,11 @@ namespace VINES.Pages.Account
             var name = User.FindFirstValue(ClaimTypes.Name);
             var email = User.FindFirstValue(ClaimTypes.Email);
 
-            /**if (email == data)
-            {
-                return RedirectToPage("patientLanding");
-            }
-            else
-            {
-                return RedirectToPage("/Account/Registration");
-            } **/
+            var emails = db.Users.Find(email);
 
-            return RedirectToPage("index");
+            Debug.WriteLine(emails);
+
+            return RedirectToPage("Index");
             
         }
 
