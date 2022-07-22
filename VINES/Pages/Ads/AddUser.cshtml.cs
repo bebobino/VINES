@@ -117,7 +117,7 @@ namespace VINES.Pages.Ads
                         password = help.Hash(Input.password), 
                         contactNumber = Input.contactNumber, 
                         roleID = 2, isBlocked = false, 
-                        isLocked = false, emailAuth = false, 
+                        isLocked = false, emailAuth = true, 
                         dateRegistered = DateTime.Now, 
                         lastModified = DateTime.Now, 
                         failedAttempts = 0};
@@ -130,7 +130,7 @@ namespace VINES.Pages.Ads
                     };
                     Db.advertisers.Add(ad);
                     await Db.SaveChangesAsync();
-                    return RedirectToPage("/Account/RegisterCofirmation", new {email = Input.email});
+                    return RedirectToPage("/Index");
                 }
             }
             return Page();
