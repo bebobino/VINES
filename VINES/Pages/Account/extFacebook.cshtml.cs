@@ -22,10 +22,9 @@ namespace VINES.Pages.Account
 
             var claims = new List<Claim>
                 {
-                    new Claim(ClaimTypes.NameIdentifier, User.FindFirstValue(ClaimTypes.NameIdentifier)),
+                    
                     new Claim(ClaimTypes.Name, email),
                     new Claim(ClaimTypes.Role, "Patient"),
-
                 };
 
             var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);

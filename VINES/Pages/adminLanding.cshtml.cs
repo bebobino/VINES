@@ -14,6 +14,7 @@ namespace VINES.Pages
     public class adminLandingModel : PageModel
     {
         public List<Vaccines> vaccines { get; set; }
+        public List<Sources> sources { get; set; }
         public List<Diseases> diseases { get; set; }
         public List<Diseases> disease { get; set; }
         public List<Institutions> institutions { get; set; }
@@ -35,6 +36,7 @@ namespace VINES.Pages
             institutions = db.Institutions.ToList();
             institutionTypes = db.InstitutionTypes.ToList();
             disease = db.Diseases.ToList();
+            sources = db.sources.ToList();
         }
        
     }
