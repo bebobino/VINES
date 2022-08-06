@@ -5,145 +5,86 @@
 @using System.Diagnostics
 @inject IAuthorizationService AuthorizationService
 @{
-  ViewData["Title"] = "patientLanding";
+    ViewData["Title"] = "patientLanding";
 }
- <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
-            integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
-            crossorigin=""/>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+      integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+      crossorigin="" />
 
-      <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
-      integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
-      crossorigin=""></script>
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+        integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+        crossorigin=""></script>
 
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
- <!-- ======= Blog Page ======= -->
-    <div class="blog-page area-padding">
-      <div class="container">
+<!-- ======= Blog Page ======= -->
+<div class="blog-page area-padding">
+    <div class="container">
         <div class="row">
-          <div class="col-lg-4 col-md-4">
-            <div class="page-head-blog">
-              <br>
-              <h5><b>Institutions Near You</b></h5>
-              <div id="vaxMap"></div>
-              
-              <br>
-              <div class="single-blog-page">
-                <!-- recent start -->
-                <div class="left-blog">
-                  <h4>COMMUNITY POSTS</h4>
-                  <div class="recent-post">
-                    @foreach(var com in Model.CommunityPosts)
-                     {
-                     <div class="recent-single-post">
-                      <div class="post-img">
 
-                          <img src="assets/img/VINESii.png" alt="">
-                      </div>
-                      <div class="pst-content">
-                          
-                        <p>@com.communityPostTitle</p>
-                        <br />
-                        <p>@com.communityPostContent</p>
-                      </div>
-                    </div>
-                    }
-                  </div>
-                </div>
-                <!-- recent end -->
-              </div>
-             @* <div class="single-blog-page">
-                <div class="left-blog">
-                  <h4>archive</h4>
-                  <ul>
-                    <li>
-                      <a href="#">07 July 2016</a>
-                    </li>
-                    <li>
-                      <a href="#">29 June 2016</a>
-                    </li>
-                    <li>
-                      <a href="#">13 May 2016</a>
-                    </li>
-                    <li>
-                      <a href="#">20 March 2016</a>
-                    </li>
-                    <li>
-                      <a href="#">09 Fabruary 2016</a>
-                    </li>
-                  </ul>
-                </div>
-              </div> 
-              *@
-            </div>
-          </div>
-          <!-- End left sidebar -->
-          <!-- Start single blog -->
-          <div class="col-md-8 col-sm-8 col-xs-12">
-              
-                @if (!Model.patient.isSubscribed)
-                {
-                    
+            @if (!Model.patient.isSubscribed)
+            {
+
                 <h5><b>Advertisement</b></h5>
-                @if(Model.ads.Count > 0){
+                @if (Model.ads.Count > 0)
+                {
                     <form method="post" asp-page-handler="Ad">
-                        <input type="hidden" name="id" value="@Model.ads[Model.rnd].advertisementID"/>
+                        <input type="hidden" name="id" value="@Model.ads[Model.rnd].advertisementID" />
                         <input type="image" id="image" alt="Login" src="~/images/@Model.ads[Model.rnd].imgsrc" height="300px" width="100%">
                     </form>
-                    }
                 }
+            }
             <h1 style="font-size: x-large;"><b>Dashboard</b></h1>
 
-                    <section id="counts" class="counts section-bg">
-                        <div class="container">
+            <section id="counts" class="counts section-bg">
+                <div class="container">
 
-                            <div class="row justify-content-end">
+                    <div class="row justify-content-end">
 
-                                <div class="card col-lg-3 col-md-5 col-6 d-md-flex align-items-center text-center" id="showSources">
-                                    <br>
-                                    <h1>@Model.Sources.Count</h1>
-                                    <h5>News Sources</h5>
-
-                                </div>
-
-                                <div class="card col-lg-3 col-md-5 col-6 d-md-flex align-items-center text-center" id = "showInstitutions">
-                                    <br>
-                                    <h1>@Model.Institutions.Count</h1>
-                                    <h5>Institutions in database</h5>
-
-                                </div>
-
-                                <div class="card col-lg-3 col-md-5 col-6 d-md-flex align-items-center text-center" id = "showVaccines">
-                                    <br>
-                                    <h1>@Model.Vaccines.Count</h1>
-                                    <h5>Vaccines in database</h5>
-
-                                </div>
-
-                                <div class="card col-lg-3 col-md-5 col-6 d-md-flex align-items-center text-center">
-                                    <br>
-                                    <h1>87</h1>
-                                    <h5>Recommendations generated</h5>
-
-                                </div>
-
-                            </div>
+                        <div class="card col-lg-3 col-md-5 col-6 d-md-flex align-items-center text-center" id="showSources">
+                            <br>
+                            <h1>@Model.Sources.Count</h1>
+                            <h5>News Sources</h5>
 
                         </div>
-                    </section>
 
-                                <h1 style="font-size: x-large;"><b>News and Updates</b></h1>
-                    <div class="row">
-                        <div>
-                            
+                        <div class="card col-lg-3 col-md-5 col-6 d-md-flex align-items-center text-center" id="showInstitutions">
+                            <br>
+                            <h1>@Model.Institutions.Count</h1>
+                            <h5>Institutions in database</h5>
+
+                        </div>
+
+                        <div class="card col-lg-3 col-md-5 col-6 d-md-flex align-items-center text-center" id="showVaccines">
+                            <br>
+                            <h1>@Model.Vaccines.Count</h1>
+                            <h5>Vaccines in database</h5>
+
+                        </div>
+
+                        <div class="card col-lg-3 col-md-5 col-6 d-md-flex align-items-center text-center">
+                            <br>
+                            <h1>87</h1>
+                            <h5>Recommendations generated</h5>
+
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <br />
+            <br />
+
+            <h1 style="font-size: x-large;"><b>News and Updates</b></h1>
+            <div class="row">
+                <div>
                 </div>
                 <!-- Pagination -->
                 <ul class="pagination">
                     <li class="page-item @(!Model.ShowPrevious? "disabled":"")">
                         <a asp-page="/Index" asp-route-p="@(Model.PageNo -1)" class="page-link"> &#8249; </a>
                     </li>
-                @for(var i = 1; i <= Model.TotalPages; i++)
+                    @for (var i = 1; i <= Model.TotalPages; i++)
                     {
                         <li class="page-item @(i == Model.PageNo ? "active" : "")">
                             <a asp-page="/patientLanding" asp-route-p="@i" class="page-link">@i</a>
@@ -153,35 +94,38 @@
                         <a asp-page="/patientLanding" asp-route-p="@(Model.PageNo + 1)" class="page-link"> &#8250; </a>
                     </li>
                 </ul>
+                <br />
+                <br />
 
                 <!-- Pagination -->
-                
-              @foreach(var webpage in Model.WebPages)
-              {
+                @foreach (var webpage in Model.WebPages)
+                {
                     <div class="col-md-12 col-sm-12 col-xs-12">
-                <div class="single-blog">
-                  <div class="blog-text">
-                    <h5>
-                      <a href="@webpage.webURL">@webpage.pageTitle</a>
-                    </h5>
-                    <div class="blog-meta">
-                      <span class="date-type">
-                        <i class="bi bi-calendar"></i>@webpage.uploadDate
-                      </span>
+                        <div class="single-blog">
+                            <div class="blog-text">
+                                <h5>
+                                    <a href="@webpage.webURL">@webpage.pageTitle</a>
+                                </h5>
+                                <div class="blog-meta">
+                                    <span class="date-type">
+                                        <i class="bi bi-calendar"></i>@webpage.uploadDate
+                                    </span>
+                                </div>
+                                <p>
+                                    @webpage.summary
+                                </p>
+                            </div>
+                        </div>
                     </div>
-                    <p>
-                      @webpage.summary
-                    </p>
-                  </div>
-                </div>
-              </div>
-              }
-                    <!-- Pagination -->
+                }
+                <br />
+                <br />
+                <!-- Pagination -->
                 <ul class="pagination">
                     <li class="page-item @(!Model.ShowPrevious? "disabled":"")">
                         <a asp-page="/patientLanding" asp-route-p="@(Model.PageNo -1)" class="page-link"> &#8249; </a>
                     </li>
-                @for(var i = 1; i <= Model.TotalPages; i++)
+                    @for (var i = 1; i <= Model.TotalPages; i++)
                     {
                         <li class="page-item @(i == Model.PageNo ? "active" : "")">
                             <a asp-page="/Index" asp-route-p="@i" class="page-link">@i</a>
@@ -191,182 +135,194 @@
                         <a asp-page="/patientLanding" asp-route-p="@(Model.PageNo + 1)" class="page-link"> &#8250; </a>
                     </li>
                 </ul>
-
-                <!-- Pagination -->
-              <!-- Start single blog -->
-      @*        <div class="col-md-12 col-sm-12 col-xs-12">
-                <div class="single-blog">
-                  <div class="blog-text">
-                    <h5>
-                      <a href="#">Vaccine Preferences</a>
-                    </h5>
-                    <table style="width:100%">
-                      <tr>
-                        <th colspan="2">Vaccine For</th>
-                        <th colspan="2">Vaccine Name</th>
-                        <th colspan="2">Budget</th>
-                        <th colspan="2">Settings</th>
-                      </tr>
-                      <tr>
-                        <td colspan="2">COVID-19</td>
-                        <td colspan="2">Oxford-AstraZeneca</td>
-                        <td colspan="2">&#8369;2,500</td>
-                        <td colspan="2"><a href="#">Update</a>/<a href="#">Delete</a></td>
-                      </tr>
-                    </table>
-                  </div>
-                  <span>
-                    <a href="#" class="ready-btn">Add new</a>
-                  </span>
-                </div>
-              </div>
             </div>
-          </div>
-          *@
-        </div>
-      </div>
-    </div><!-- End Blog Page -->
-    
+            <br />
+            <br />
 
+            <div class="blog-page area-padding">
+                <h5><b>Institutions Near You</b></h5>
+                <div id="vaxMap"></div>
+            </div>
+            <br />
+            <br />
 
-    <!-- dashboard modals -->
+            <!-- Community Posts -->
+            <div class="single-blog-page">
+                <div class="left-blog">
+                    <h4>COMMUNITY POSTS</h4>
+                    <div class="recent-post">
+                        @foreach (var com in Model.CommunityPosts)
+                        {
+                            <div class="recent-single-post">
+                                <div class="post-img">
 
-    <div class="modal fade" id="newsSources">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">News Sources</h4>
+                                    <img src="assets/img/VINESii.png" alt="">
+                                </div>
+                                <div class="pst-content">
+
+                                    <p>@com.communityPostTitle</p>
+                                    <br />
+                                    <p>@com.communityPostContent</p>
+                                </div>
+                            </div>
+                        }
+                    </div>
                 </div>
-                <div class="modal-body">
-                                             @if(Model.Sources.Count()>0)  
+            </div> <!-- End community posts. -->
+            <!-- End left sidebar -->
+            <!-- Start single blog -->
+
+        </div>
+    </div>
+</div> 
+<!-- End Blog Page -->
+
+
+
+<!-- dashboard modals -->
+
+<div class="modal fade" id="newsSources">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">News Sources</h4>
+            </div>
+            <div class="modal-body">
+                @if (Model.Sources.Count() > 0)
                 {
-                    <table class="table table-striped border">  
-                        <tr class="table-secondary">  
+                    <table class="table table-striped border">
+                        <tr class="table-secondary">
                             <th>
                                 No.
                             </th>
-                        <th>  
-                            Name
-                        </th>
-                    </tr>  
-                    @{ var i = 1;}
-                    @foreach(var sources in Model.Sources)  
-                    {  
-                        <tr>  
-                            <td>
-                                @i
-                            </td>  
-                            <td>  
-                                @Html.DisplayFor(m => sources.sourceName)
-                            </td>
-                        </tr>  
-                        i++;
-                    }  
+                            <th>
+                                Name
+                            </th>
+                        </tr>
+                        @{
+                            var i = 1;
+                        }
+                        @foreach (var sources in Model.Sources)
+                        {
+                            <tr>
+                                <td>
+                                    @i
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(m => sources.sourceName)
+                                </td>
+                            </tr>
+                            i++;
+                        }
                     </table>
-                    }
-                    <br>
-                    <input type="button" class="btn btn-secondary" id="hideSources" value="Hide" />
-                </div>
+                }
+                <br>
+                <input type="button" class="btn btn-secondary" id="hideSources" value="Hide" />
             </div>
         </div>
     </div>
+</div>
 
 <div class="modal fade" id="institutions">
-  <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-          <div class="modal-header">
-              <h4 class="modal-title">Institutions in database</h4>
-          </div>
-          <div class="modal-body">
-                         @if(Model.Institutions.Count()>0)  
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Institutions in database</h4>
+            </div>
+            <div class="modal-body">
+                @if (Model.Institutions.Count() > 0)
                 {
-                    <table class="table table-striped border">  
-                        <tr class="table-secondary">  
-                        <th>  
-                           No.  
-                        </th>  
-                        <th>  
-                            Name
-                        </th>
-                    </tr>  
-                    @{ var i = 1;}
-                    @foreach(var institution in Model.Institutions)  
-                    {  
-                        <tr>  
-                            <td>
-                                @i
-                            </td>  
-                            <td>  
-                                @Html.DisplayFor(m => institution.institutionName)
-                            </td>
-                        </tr>  
-                        i++;
-                    }  
+                    <table class="table table-striped border">
+                        <tr class="table-secondary">
+                            <th>
+                                No.
+                            </th>
+                            <th>
+                                Name
+                            </th>
+                        </tr>
+                        @{
+                            var i = 1;
+                        }
+                        @foreach (var institution in Model.Institutions)
+                        {
+                            <tr>
+                                <td>
+                                    @i
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(m => institution.institutionName)
+                                </td>
+                            </tr>
+                            i++;
+                        }
                     </table>
-                    }
-             </div>
-             <div>
-            <br>
-            <input type="button" class="btn btn-secondary" id="hideInstitutions" value="Hide" />
-          </div>
-      </div>
-  </div>
+                }
+            </div>
+            <div>
+                <br>
+                <input type="button" class="btn btn-secondary" id="hideInstitutions" value="Hide" />
+            </div>
+        </div>
+    </div>
 </div>
 
 <div class="modal fade" id="vaccines">
-  <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-          <div class="modal-header">
-              <h4 class="modal-title">Vaccines in database</h4>
-          </div>
-          <div class="modal-body">
-                 @if(Model.Vaccines.Count()>0)  
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Vaccines in database</h4>
+            </div>
+            <div class="modal-body">
+                @if (Model.Vaccines.Count() > 0)
                 {
-                    <table class="table table-striped border">  
-                        <tr class="table-secondary">  
-                        <th>  
-                           No.  
-                        </th>  
-                        <th>  
-                            Name
-                        </th>
-                        <th>
-                            Vaccine For
-                        </th>
-                    </tr>  
-                    @{ var i = 1;}
-                    @foreach(var vaccines in Model.Vaccines)  
-                    {  
-                        <tr>  
-                            <td>
-                                @i
-                            </td>  
-                            <td>  
-                                @Html.DisplayFor(m => vaccines.vaccineName)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(m => vaccines.disease.diseaseName)
-                            </td>
-                        </tr>  
-                        i++;
-                    }  
+                    <table class="table table-striped border">
+                        <tr class="table-secondary">
+                            <th>
+                                No.
+                            </th>
+                            <th>
+                                Name
+                            </th>
+                            <th>
+                                Vaccine For
+                            </th>
+                        </tr>
+                        @{
+                            var i = 1;
+                        }
+                        @foreach (var vaccines in Model.Vaccines)
+                        {
+                            <tr>
+                                <td>
+                                    @i
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(m => vaccines.vaccineName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(m => vaccines.disease.diseaseName)
+                                </td>
+                            </tr>
+                            i++;
+                        }
                     </table>
-                    }
-            <input type="button" class="btn btn-secondary" id="hideVaccines" value="Hide" />
-          </div>
-      </div>
-  </div>
+                }
+                <input type="button" class="btn btn-secondary" id="hideVaccines" value="Hide" />
+            </div>
+        </div>
+    </div>
 </div>
 
 <script>
     initializeMap();
     getLocation();
 </script>
-                                    @foreach(var inst in Model.Institutions)
-    {
+@foreach (var inst in Model.Institutions)
+{
     <script>
-    var z = "@inst.institutionName".replace('&#xD;&#xA;', '');
-    var i = "@inst.notes".replace('&#xD;&#xA;', '');
+        var z = "@inst.institutionName".replace('&#xD;&#xA;', '');
+        var i = "@inst.notes".replace('&#xD;&#xA;', '');
         addMarker(@inst.lat, @inst.Long, z, i);
     </script>
-    }
+}
