@@ -19,7 +19,7 @@
         <div class="container">
             <div class="row">
 
-                <h5><b>Advertisement</b></h5>
+                <h1 style="font-size: x-large;"><b>Advertisement</b></h1>
                 @if (Model.ads.Count > 0)
                 {
                     <form method="post" asp-page-handler="Ad">
@@ -149,11 +149,11 @@
                                     <div class="recent-single-post">
                                         <div class="post-img">
 
-                                            <img src="assets/img/VINESii.png" alt="">
+                                            <img src="assets/img/VINESii.png" style="max-width:200px">
                                         </div>
                                         <div class="pst-content">
 
-                                            <p>@com.communityPostTitle</p>
+                                            <p style="strong">@com.communityPostTitle</p>
                                             <br />
                                             <p>@com.communityPostContent</p>
                                         </div>

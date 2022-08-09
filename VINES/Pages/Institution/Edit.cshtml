@@ -3,63 +3,70 @@
 @using Microsoft.AspNetCore.Authorization
 @inject IAuthorizationService AuthorizationService
 @{
+    ViewData["Title"] = "Edit";
 }
 @if ((await AuthorizationService.AuthorizeAsync(User, "AdminOnly")).Succeeded)
 {
-<h1>Edit Institutions</h1>
-<hr/>
-<div class="row">
-    <div class="col-md-4">
-        <form method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="institutions.institutionID" />
-            <div class="form-group">
-                <label asp-for="institutions.institutionType.institutionType" class="control-label"></label>
-                <input asp-for="institutions.institutionType.institutionType" class="form-control" readonly/>
-                <span asp-validation-for="institutions.institutionTypeID" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="institutions.institutionName" class="control-label"></label>
-                <input asp-for="institutions.institutionName" class="form-control"/>
-                <span asp-validation-for="institutions.institutionName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="institutions.Long" class="control-label"></label>
-                <input type="number" asp-for="institutions.Long" class="form-control"/>
-                <span asp-validation-for="institutions.Long" class="text-danger"></span>
-            </div>
+    <div class="blog-page area-padding">
+        <h4>Edit Institutions</h4>
+        <hr />
+        <div class="row">
+            <div class="col-md-4">
+                <form method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="institutions.institutionID" />
+                    <div class="form-group">
+                        <label asp-for="institutions.institutionType.institutionType" class="control-label">Institution Type</label>
+                        <input asp-for="institutions.institutionType.institutionType" class="form-control" readonly />
+                        <span asp-validation-for="institutions.institutionTypeID" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="institutions.institutionName" class="control-label">Institution Name</label>
+                        <input asp-for="institutions.institutionName" class="form-control" />
+                        <span asp-validation-for="institutions.institutionName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="institutions.Long" class="control-label">Longitude</label>
+                        <input type="number" asp-for="institutions.Long" class="form-control" />
+                        <span asp-validation-for="institutions.Long" class="text-danger"></span>
+                    </div>
 
-            <div class="form-group">
-                <label asp-for="institutions.lat" class="control-label"></label>
-                <input type="number" asp-for="institutions.lat" class="form-control"/>
-                <span asp-validation-for="institutions.lat" class="text-danger"></span>
+                    <div class="form-group">
+                        <label asp-for="institutions.lat" class="control-label">Latitude</label>
+                        <input type="number" asp-for="institutions.lat" class="form-control" />
+                        <span asp-validation-for="institutions.lat" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="institutions.notes" class="control-label">Notes</label>
+                        <textarea asp-for="institutions.notes" class="form-control"></textarea>
+                        <span asp-validation-for="institutions.notes" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Save" class="btn btn-primary" />
+                    </div>
+                </form>
             </div>
-            <div class="form-group">
-                <label asp-for="institutions.notes" class="control-label"></label>
-                <textarea asp-for="institutions.notes" class="form-control"></textarea>
-                <span asp-validation-for="institutions.notes" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
+
+        <div>
+            <a asp-page="Index">Back to list</a>
+        </div>
     </div>
-</div>
-
-<div>
-    <a asp-page="Index">Back to list</a>
-</div>
 }
-else {
-        @if (User.Identity.IsAuthenticated && User.IsInRole("Patient")) {
-        
+else
+{
+    @if (User.Identity.IsAuthenticated && User.IsInRole("Patient"))
+    {
+
         Response.Redirect("/patientLanding");
     }
-        else if (User.Identity.IsAuthenticated && User.IsInRole("Advertiser")) {
-        
+    else if (User.Identity.IsAuthenticated && User.IsInRole("Advertiser"))
+    {
+
         Response.Redirect("/advertiserLanding");
     }
-        else{
+    else
+    {
         Response.Redirect("/Index");
     }
 }

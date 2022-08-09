@@ -6,88 +6,98 @@
 }
 @if ((await AuthorizationService.AuthorizeAsync(User, "AdminOnly")).Succeeded)
 {
- <div class="container row p-0 m-0">  
-        <div class="col-10">  
-        <h2 class="text-info">Institutions</h2>  
-    </div>  
-    <div class="col-2">  
-        <a asp-page="Create" class="btn btn-info form-control text-white">Add An Institution</a>  
-    </div>  
-    <div class="col-12 border p-3 mt-3">  
-        <form method="post">  
-            @if(Model.institutions.Count()>0)  
-                {
-                    <table class="table table-striped border">  
-                        <tr class="table-secondary">  
-                        <th>  
-                           No.  
-                        </th>  
-                        <th>  
-                            Type
-                        </th>  
-                        <th>  
-                            Name
-                        </th>
-                        <th>  
-                            Longitude
-                        </th>  
-                        <th>  
-                            Latitude
-                        </th> 
-                        <th>
-                            Notes
-                        </th>
-                    </tr>  
-                    @{ var i = 1;}
-                    @foreach(var institution in Model.institutions)  
-                    {  
-                        <tr>  
-                            <td>
-                                @i
-                            </td>
-                            <td>  
-                                @Html.DisplayFor(m => institution.institutionType.institutionType)  
-                            </td>  
-                            <td>  
-                                @Html.DisplayFor(m => institution.institutionName)
-                            </td>
-                            <td>  
-                                @Html.DisplayFor(m => institution.Long)  
-                            </td>  
-                            <td>  
-                                @Html.DisplayFor(m => institution.lat)  
-                            </td>
-                            <td>  
-                                @Html.DisplayFor(m => institution.notes)  
-                            </td>  
-                            <td>  
-                               <button asp-page-handler="Delete" asp-route-id="@institution.institutionID" onclick="return confirm('Are you sure you want to delete?')" 
-                               class="btn btn-danger btn-sm">Delete</button>  
-                                <a asp-page="Edit" asp-route-id="@institution.institutionID" class="btn btn-success btn-sm text-white">Edit</a>  
-                            </td>  
-                        </tr>  
-                        i++;
-                    }  
-                </table>   
-            }  
-            else  
-            {  
-                <p>No institutions yet</p>  
-            }  
-        </form>  
-    </div>  
-</div>  
+    <div class="blog-page area-padding">
+        <div class="container row p-0 m-0">
+            <div class="col-10">
+                <h2 class="text-info">Institutions</h2>
+            </div>
+            <div class="col-2">
+                <a asp-page="Create" class="btn btn-info form-control text-white">Add An Institution</a>
+            </div>
+            <div class="col-12 border p-3 mt-3">
+                <form method="post">
+                    @if (Model.institutions.Count() > 0)
+                    {
+                        <table class="table table-striped border">
+                            <tr class="table-secondary">
+                                <th>
+                                    No.
+                                </th>
+                                <th>
+                                    Type
+                                </th>
+                                <th>
+                                    Name
+                                </th>
+                                <th>
+                                    Longitude
+                                </th>
+                                <th>
+                                    Latitude
+                                </th>
+                                <th>
+                                    Notes
+                                </th>
+                            </tr>
+                            @{
+                                var i = 1;
+                            }
+                            @foreach (var institution in Model.institutions)
+                            {
+                                <tr>
+                                    <td>
+                                        @i
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(m => institution.institutionType.institutionType)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(m => institution.institutionName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(m => institution.Long)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(m => institution.lat)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(m => institution.notes)
+                                    </td>
+                                    <td>
+                                        <button asp-page-handler="Delete" asp-route-id="@institution.institutionID" onclick="return confirm('Are you sure you want to delete?')"
+                                    class="btn btn-danger btn-sm">
+                                            Delete
+                                        </button>
+                                        <a asp-page="Edit" asp-route-id="@institution.institutionID" class="btn btn-success btn-sm text-white">Edit</a>
+                                    </td>
+                                </tr>
+                                i++;
+                            }
+                        </table>
+                    }
+                    else
+                    {
+                        <p>No institutions yet</p>
+                    }
+                </form>
+            </div>
+        </div>
+    </div>
 }
-else {
-    @if (User.Identity.IsAuthenticated && User.IsInRole("Patient")) {
-        
+else
+{
+    @if (User.Identity.IsAuthenticated && User.IsInRole("Patient"))
+    {
+
         Response.Redirect("/patientLanding");
     }
-        else if (User.Identity.IsAuthenticated && User.IsInRole("Advertiser")) {
-        
+    else if (User.Identity.IsAuthenticated && User.IsInRole("Advertiser"))
+    {
+
         Response.Redirect("/advertiserLanding");
     }
-        else{
+    else
+    {
         Response.Redirect("/Index");
     }
 }

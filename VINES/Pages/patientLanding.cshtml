@@ -26,7 +26,7 @@
             @if (!Model.patient.isSubscribed)
             {
 
-                <h5><b>Advertisement</b></h5>
+                <h1 style="font-size: x-large;"><b>Advertisement</b></h1>
                 @if (Model.ads.Count > 0)
                 {
                     <form method="post" asp-page-handler="Ad">
@@ -156,7 +156,7 @@
                             <div class="recent-single-post">
                                 <div class="post-img">
 
-                                    <img src="assets/img/VINESii.png" alt="">
+                                    <img src="assets/img/VINESii.png" style="max-width:200px" alt="">
                                 </div>
                                 <div class="pst-content">
 
@@ -169,16 +169,13 @@
                     </div>
                 </div>
             </div> <!-- End community posts. -->
-            <!-- End left sidebar -->
-            <!-- Start single blog -->
+
+
 
         </div>
     </div>
-</div> 
+</div>
 <!-- End Blog Page -->
-
-
-
 <!-- dashboard modals -->
 
 <div class="modal fade" id="newsSources">

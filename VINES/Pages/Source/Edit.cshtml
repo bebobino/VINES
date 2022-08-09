@@ -1,35 +1,38 @@
 ﻿@page
 @model VINES.Pages.Source.EditModel
 @{
+    ViewData["Title"] = "Edit";
 }
-<h1>Edit Institutions</h1>
-<hr/>
-<div class="row">
-    <div class="col-md-4">
-        <form method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="sources.sourcesID" />
-            <div class="form-group" hidden>
-                <label asp-for="sources.sourcesID" class="control-label"></label>
-                <input asp-for="sources.sourcesID" class="form-control"/>
-            </div>
-            <div class="form-group">
-                <label asp-for="sources.sourceName" class="control-label"></label>
-                <input asp-for="sources.sourceName" class="form-control" name="name"/>
-                <span asp-validation-for="sources.sourceName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="sources.sourcesURI" class="control-label"></label>
-                <input asp-for="sources.sourcesURI" class="form-control" name="uri"/>
-                <span asp-validation-for="sources.sourcesURI" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+<div class="blog-page area-padding">
+    <h4>Edit Source</h4>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="sources.sourcesID" />
+                <div class="form-group" hidden>
+                    <label asp-for="sources.sourcesID" class="control-label"></label>
+                    <input asp-for="sources.sourcesID" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="sources.sourceName" class="control-label">Source Name</label>
+                    <input asp-for="sources.sourceName" class="form-control" name="name" />
+                    <span asp-validation-for="sources.sourceName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="sources.sourcesURI" class="control-label">Source URL</label>
+                    <input asp-for="sources.sourcesURI" class="form-control" name="uri" />
+                    <span asp-validation-for="sources.sourcesURI" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
     </div>
-</div>
 
-<div>
-    <a asp-page="Index">Back to list</a>
+    <div>
+        <a asp-page="Index">Back to list</a>
+    </div>
 </div>
