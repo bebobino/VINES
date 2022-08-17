@@ -6,80 +6,86 @@
 }
 @if ((await AuthorizationService.AuthorizeAsync(User, "AdminOnly")).Succeeded)
 {
-<h2 class="text-info">Add An Institution</h2>    
-<div class="border container" style="padding:30px;">  
-    <form method="post">  
-        <div class="form-group row">
-            <div class="form-group row">  
-            <div class="col-4">  
-                <label asp-for="institutions.institutionTypeID"></label>  
-            </div>  
-            <div class="col-6">  
-                <select asp-for="institutions.institutionTypeID" name="typeID">
-                    @foreach (var types in Model.institutionTypes)
-                    {
-                        <option value="@types.institutionTypeID">@types.institutionType</option>
-                    }
-                </select>  
-            </div>  
+    <div class="blog-page area-padding">
+        <h2 class="text-info">Add An Institution</h2>
+        <div class="border container" style="padding:30px;">
+            <form method="post">
+                <div class="form-group row">
+                    <div class="form-group row">
+                        <div class="col-4">
+                            <label asp-for="institutions.institutionTypeID">Institution Type</label>
+                        </div>
+                        <div class="col-6">
+                            <select asp-for="institutions.institutionTypeID" name="typeID">
+                                @foreach (var types in Model.institutionTypes)
+                                {
+                                    <option value="@types.institutionTypeID">@types.institutionType</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <label asp-for="institutions.institutionName">Institution Name</label>
+                    </div>
+                    <div class="col-6">
+                        <input asp-for="institutions.institutionName" class="form-control" name="name" />
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="institutions.Long">Longitude</label>
+                    </div>
+                    <div class="col-6">
+                        <input type="number" asp-for="institutions.Long" class="form-control" name="Long"></input>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="institutions.lat">Latitude</label>
+                    </div>
+                    <div class="col-6">
+                        <input type="number" asp-for="institutions.lat" class="form-control" name="lat">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="institutions.notes">Notes</label>
+                    </div>
+                    <div class="col-6">
+                        <textarea asp-for="institutions.notes" class="form-control" name="notes"></textarea>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-3 offset-4">
+                        <input type="submit" value="Create" class="btn btn-primary form-control" />
+                    </div>
+                    <div class="col-3">
+                        <a asp-page="Index" class="btn btn-success form-control">Back to Index</a>
+                    </div>
+                </div>
+            </form>
         </div>
-            <div class="col-4">  
-                <label asp-for="institutions.institutionName"></label>  
-            </div>  
-            <div class="col-6">  
-                <input asp-for="institutions.institutionName" class="form-control" name="name" />  
-            </div>  
-        </div>   
-  
-        <div class="form-group row">  
-            <div class="col-4">  
-                <label asp-for="institutions.Long"></label>  
-            </div>
-            <div class="col-6">  
-                <input type="number" asp-for="institutions.Long" class="form-control" name="Long"></input>
-            </div>  
-        </div>  
+    </div>
 
-        <div class="form-group row">  
-            <div class="col-4">  
-                <label asp-for="institutions.lat"></label>  
-            </div>
-            <div class="col-6">  
-                <input type="number" asp-for="institutions.lat" class="form-control" name="lat">
-            </div>  
-        </div>  
-
-        <div class="form-group row">  
-            <div class="col-4">  
-                <label asp-for="institutions.notes"></label>  
-            </div>
-            <div class="col-6">  
-                <textarea asp-for="institutions.notes" class="form-control" name="notes"></textarea>
-            </div>  
-        </div>  
-  
-        <div class="form-group row">  
-            <div class="col-3 offset-4">  
-                <input type="submit" value="Create" class="btn btn-primary form-control" />  
-            </div>  
-            <div class="col-3">  
-                <a asp-page="Index" class="btn btn-success form-control">Back to Index</a>  
-            </div>  
-        </div>  
-    </form>  
-</div>   
 }
 else
 {
-        @if (User.Identity.IsAuthenticated && User.IsInRole("Patient")) {
-        
+    @if (User.Identity.IsAuthenticated && User.IsInRole("Patient"))
+    {
+
         Response.Redirect("/patientLanding");
     }
-        else if (User.Identity.IsAuthenticated && User.IsInRole("Advertiser")) {
-        
+    else if (User.Identity.IsAuthenticated && User.IsInRole("Advertiser"))
+    {
+
         Response.Redirect("/advertiserLanding");
     }
-        else{
+    else
+    {
         Response.Redirect("/Index");
     }
 }
