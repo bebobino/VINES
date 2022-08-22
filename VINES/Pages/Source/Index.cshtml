@@ -7,9 +7,7 @@
         <div class="col-10">
             <h2 class="text-info">Sources</h2>
         </div>
-        <div class="col-2">
-            <a asp-page="Create" class="btn btn-info form-control text-white">Add a News Source</a>
-        </div>
+
         <div class="col-12 border p-3 mt-3">
             <form method="post">
                 @if (Model.source.Count() > 0)
@@ -61,6 +59,9 @@
                     <p>No sources yet</p>
                 }
             </form>
+            <div class="col-2">
+                <a asp-page="Create" class="btn btn-info btn-sm text-white">Add a News Source</a>
+            </div>
         </div>
     </div>
 </div>

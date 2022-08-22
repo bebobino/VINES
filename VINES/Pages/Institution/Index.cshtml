@@ -11,9 +11,6 @@
             <div class="col-10">
                 <h2 class="text-info">Institutions</h2>
             </div>
-            <div class="col-2">
-                <a asp-page="Create" class="btn btn-info form-control text-white">Add An Institution</a>
-            </div>
             <div class="col-12 border p-3 mt-3">
                 <form method="post">
                     @if (Model.institutions.Count() > 0)
@@ -28,12 +25,6 @@
                                 </th>
                                 <th>
                                     Name
-                                </th>
-                                <th>
-                                    Longitude
-                                </th>
-                                <th>
-                                    Latitude
                                 </th>
                                 <th>
                                     Notes
@@ -58,12 +49,6 @@
                                         @Html.DisplayFor(m => institution.institutionName)
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(m => institution.Long)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(m => institution.lat)
-                                    </td>
-                                    <td>
                                         @Html.DisplayFor(m => institution.notes)
                                     </td>
                                     <td>
@@ -83,6 +68,9 @@
                         <p>No institutions yet</p>
                     }
                 </form>
+                <div class="col-2">
+                    <a asp-page="Create" class="btn btn-info btn-sm text-white">Add An Institution</a>
+                </div>
             </div>
         </div>
     </div>

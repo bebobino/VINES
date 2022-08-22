@@ -12,9 +12,7 @@
             <div class="col-10">
                 <h2 class="text-info">Community Posts</h2>
             </div>
-            <div class="col-2">
-                <a asp-page="Create" class="btn btn-info form-control text-white">Create New Post</a>
-            </div>
+
             <div class="col-12 border p-3 mt-3">
                 <form method="post">
                     @if (Model.communityPosts.Count() > 0)
@@ -72,6 +70,9 @@
                         <p>No Community Posts Created</p>
                     }
                 </form>
+                <div class="col-2">
+                    <a asp-page="Create" class="btn btn-info btn-sm text-white">Create New Post</a>
+                </div>
             </div>
         </div>
     </div>

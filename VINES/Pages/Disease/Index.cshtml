@@ -11,9 +11,7 @@
             <div class="col-10">
                 <h2 class="text-info">Diseases</h2>
             </div>
-            <div class="col-2">
-                <a asp-page="Create" class="btn btn-info form-control text-white">Add a Disease</a>
-            </div>
+
             <div class="col-12 border p-3 mt-3">
                 <form method="post">
                     @if (Model.diseases.Count() > 0)
@@ -70,6 +68,9 @@
                         <p>No disease yet.</p>
                     }
                 </form>
+                <div class="col-2">
+                    <a asp-page="Create" class="btn btn-info btn-sm text-white">Add a Disease</a>
+                </div>
             </div>
         </div>
     </div>

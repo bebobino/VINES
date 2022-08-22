@@ -3,162 +3,163 @@
 @using Microsoft.AspNetCore.Authorization
 @inject IAuthorizationService AuthorizationService
 @{
-  ViewData["Title"] = "advertiserLanding";
+    ViewData["Title"] = "advertiserLanding";
 }
 <style>
-.btn-buy {
-    display: inline-block;
-    padding: 10px 40px;
-    border-radius: 4px;
-    color: #2487ce;
-    transition: none;
-    font-size: 14px;
-    font-weight: 400;
-    font-family: "Raleway", sans-serif;
-    font-weight: 600;
-    transition: 0.3s;
-    border: 2px solid #2487ce;
-}
+    .btn-buy {
+        display: inline-block;
+        padding: 10px 40px;
+        border-radius: 4px;
+        color: #2487ce;
+        transition: none;
+        font-size: 14px;
+        font-weight: 400;
+        font-family: "Raleway", sans-serif;
+        font-weight: 600;
+        transition: 0.3s;
+        border: 2px solid #2487ce;
+    }
 
 </style>
 
 @if ((await AuthorizationService.AuthorizeAsync(User, "AdvertiserOnly")).Succeeded)
-{ 
+{
     <!-- ======= Blog Page ======= -->
     <div class="blog-page area-padding">
         <div class="container">
             <div class="row">
-                
-                
-                    <h1 style="font-size: x-large;"><b>Top Level Summary</b></h1>
-
-                    <section id="counts" class="counts section-bg">
-                        <div class="container">
-
-                            <div class="row justify-content-end">
 
 
+                <h1 style="font-size: x-large;"><b>Top Level Summary</b></h1>
 
-                                <div class="card col-lg-3 col-md-5 col-6 d-md-flex align-items-center text-center" id="showAdvertisements">
-                                    <br>
-                                    <h1></h1>
-                                    <h5>Advertisements Active</h5>
+                <section id="counts" class="counts section-bg">
+                    <div class="container">
 
-                                </div>
+                        <div class="row justify-content-end">
 
-                                <div class="card col-lg-3 col-md-5 col-6 d-md-flex align-items-center text-center" id = "showInteractions">
-                                    <br>
-                                    <h1>160</h1>
-                                    <h5>Interactions per Day</h5>
 
-                                </div>
 
-                                <div class="card col-lg-3 col-md-5 col-6 d-md-flex align-items-center text-center" id = "showMCost">
-                                    <br>
-                                    <h1>&#8369;1,000</h1>
-                                    <h5>Monthly cost on ads</h5>
-
-                                </div>
-
-                                <div class="card col-lg-3 col-md-5 col-6 d-md-flex align-items-center text-center" id="showTCost">
-                                    <br>
-                                    <h1>&#8369;7,500</h1>
-                                    <h5>Total Expenses spent on Ads</h5>
-
-                                </div>
-
+                            <div class="card col-lg-3 col-md-5 col-6 d-md-flex align-items-center text-center" id="showAdvertisements">
+                                <br>
+                                <h1></h1>
+                                <h5>Advertisements Active</h5>
 
                             </div>
 
+                            <div class="card col-lg-3 col-md-5 col-6 d-md-flex align-items-center text-center" id="showInteractions">
+                                <br>
+                                <h1>160</h1>
+                                <h5>Interactions per Day</h5>
+
+                            </div>
+
+                            <div class="card col-lg-3 col-md-5 col-6 d-md-flex align-items-center text-center" id="showMCost">
+                                <br>
+                                <h1>&#8369;1,000</h1>
+                                <h5>Monthly cost on ads</h5>
+
+                            </div>
+
+                            <div class="card col-lg-3 col-md-5 col-6 d-md-flex align-items-center text-center" id="showTCost">
+                                <br>
+                                <h1>&#8369;7,500</h1>
+                                <h5>Total Expenses spent on Ads</h5>
+
+                            </div>
+
+
                         </div>
-                    </section>
-                    <br />
-                    <br />
 
-                    <h1 style="font-size: x-large;"><b>Advertising Information</b></h1>
-                    <div class="row">
-                        <!-- End single blog -->
-                        <div class="col-md-12 col-sm-12 col-xs-12">
-                            <div class="single-blog">
+                    </div>
+                </section>
+            </div>
+
+            <div class="blog-page area-padding">
+                <h1 style="font-size: x-large;"><b>Advertising Information</b></h1>
+                <div class="row">
+                    <!-- End single blog -->
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="single-blog">
 
 
-                                <div class="blog-text">
-                                    <h5>
-                                        <a href="#">Add Advertisement</a>
-                                    </h5>
-                                    <form method="post" enctype="multipart/form-data">
-                                        <label>Advertisment Name</label>
-                                        <br />
-                                        <input type="text" asp-for="Ad.advertisementTitle" required/>
-                                        <br />
-                                        <label>URL Destination</label>
-                                        <br />
-                                        <input type="text" asp-for="Ad.url" required/>
-                                        <br />
-                                        <label>Ad Type</label>
-                                        <br />
-                                        <select asp-for="Ad.advertisementTypeID" required>
+                            <div class="blog-text">
+
+                                <form method="post" enctype="multipart/form-data">
+                                    <label>Advertisment Name</label>
+                                    <br />
+                                    <input type="text" asp-for="Ad.advertisementTitle" required />
+                                    <br />
+                                    <label>URL Destination</label>
+                                    <br />
+                                    <input type="text" asp-for="Ad.url" required />
+                                    <br />
+                                    <label>Ad Type</label>
+                                    <br />
+                                    <select asp-for="Ad.advertisementTypeID" required>
                                         @foreach (var adcat in Model.AdTypes)
-                                            {
-                                                <option value="@adcat.advertisementTypeID">@adcat.advertisementType</option>
-                                            }
+                                        {
+                                            <option value="@adcat.advertisementTypeID">@adcat.advertisementType</option>
+                                        }
 
-                                        </select>
-                                        <br />
-                                        <label>Image</label>
-                                        <br />
-                                        <input type="file" accept="image/png, image/gif, image/jpeg" asp-for="Photo" required/>
-                                        <br />
-                                        <br />
-                                        <input type="submit" />
+                                    </select>
+                                    <br />
+                                    <br />
+                             
+                                    <label>Image</label>
+                                    <br />
+                                    <input type="file" accept="image/png, image/gif, image/jpeg" asp-for="Photo" required />
+                                    <br />
+                                    <br />
+                                    <input type="submit" />
+
+                                </form>
+                                <br />
+                                <br />
+                            </div>
+                        </div>
+
+
+
+                        <div class="blog-text">
+                            <h5>Advertisements</h5>
+                            @foreach (var advert in Model.Ads)
+                            {
+
+                                <h5>Title: @advert.advertisementTitle</h5>
+                                <a href="@advert.url">
+                                    <img src="/images/@advert.imgsrc" width="600" height="100" sstyle="object-fit:fill">
+                                </a>
+                                <p>Price: @advert.advertisementType.price</p>
+                                if (advert.endDate > DateTime.UtcNow)
+                                {
+                                    @Html.Raw("Status: Active")
+
+                                }
+                                else
+                                {
+                                    @Html.Raw("Status: Inactive")
+                                    <form asp-page-handler="checkout" method="post">
+                                        <input type="hidden" name="total" value="@advert.advertisementType.price" />
+                                        <input type="hidden" name="id" value="@advert.advertisementID" />
+                                        <button style="color:#2487ce" class="btn-buy">Subscribe</button>
 
                                     </form>
-                                    <br />
-                                    <br />
-                                </div>
+                                }
+                                <br />
+                                <br />
 
-                                
-
-                                <div class="blog-text">
-                                    <a href="#"><h1>Advertisements</h1></a>
-                                    @foreach (var advert in Model.Ads)
-                                    {
-                                     
-                                        <h5>Title: @advert.advertisementTitle</h5>
-                                        <a href="@advert.url">
-                                        <img src="/images/@advert.imgsrc" width="600" height="100" sstyle="object-fit:fill">
-                                        </a>
-                                        <p>Price: @advert.advertisementType.price</p>
-                                        if (advert.endDate > DateTime.UtcNow)
-                                        { 
-                                            @Html.Raw("Status: Active")
-                                            
-                                        }
-                                        else
-                                        {
-                                            @Html.Raw("Status: Inactive")
-                                            <form asp-page-handler="checkout" method="post">
-                                                <input type="hidden" name="total" value="@advert.advertisementType.price"/>
-                                                <input type="hidden" name="id" value="@advert.advertisementID"/>
-                                                <button style="color:#2487ce" class="btn-buy">Subscribe</button>
-
-                                            </form>
-                                        }
-                                        <br />
-                                        <br />
-                                        
-                                    }
-                                    </div>                                
-                            </div>
+                            }
                         </div>
-                        
                     </div>
-               
+                </div>
+
             </div>
+
         </div>
-    </div><!-- End Blog Page -->
+    </div>
 
 
+    <!-- End Blog Page -->
     <!-- dashboard modals -->
 
     <div class="modal fade" id="showAdvertisements">
@@ -211,18 +212,18 @@
         </div>
     </div>
 }
-else 
+else
 {
-        @if (User.Identity.IsAuthenticated && User.IsInRole("Patient"))
-        {
+    @if (User.Identity.IsAuthenticated && User.IsInRole("Patient"))
+    {
         Response.Redirect("/patientLanding");
     }
-        else if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
-        {
+    else if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+    {
         Response.Redirect("/adminLanding");
     }
-        else
-        {
+    else
+    {
         Response.Redirect("/Index");
     }
 }

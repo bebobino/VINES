@@ -11,9 +11,7 @@
             <div class="col-10">
                 <h2 class="text-info">Institution's Vaccines'</h2>
             </div>
-            <div class="col-2">
-                <a asp-page="Create" class="btn btn-info form-control text-white">Register Vaccine</a>
-            </div>
+
             <div class="col-12 border p-3 mt-3">
                 <form method="post">
                     @if (Model.institutionVaccines.Count() > 0)
@@ -83,6 +81,9 @@
                         <p>No Vaccines registered per Institutions yet</p>
                     }
                 </form>
+                <div class="col-2">
+                    <a asp-page="Create" class="btn btn-info btn-sm text-white">Register Vaccine</a>
+                </div>
             </div>
         </div>
     </div>
