@@ -51,13 +51,13 @@ img {
 }
 
 p {
-    margin: 0 0 15px;
+    margin: 0 0 18px;
     color: #444;
 }
 
 h1, h2, h3, h4, h5, h6 {
     font-family: 'Raleway', sans-serif;
-    margin: 0 0 15px;
+    margin: 0 0 18px;
     color: #444;
     font-weight: 500;
 }
@@ -88,7 +88,7 @@ h5 {
 }
 
 h6 {
-    font-size: 16px;
+    font-size: 18px;
     line-height: 20px;
 }
 
@@ -111,7 +111,7 @@ body {
     background: #fff none repeat scroll 0 0;
     color: #444;
     font-family: 'Open Sans', sans-serif;
-    font-size: 14px;
+    font-size: 18px;
     text-align: left;
     overflow-x: hidden;
     line-height: 22px;
@@ -2553,6 +2553,16 @@ span.email-notes {
         ;
     }
 
+.scroll-auto {
+    -webkit-overflow-scrolling: auto; /* Stops scrolling immediately */
+    overflow: auto;
+    width: 100%;
+}
+
+.px-2 {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
 
 
 
