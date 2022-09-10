@@ -55,46 +55,52 @@
                 </section>
             </div>
 
-            <h1 style="font-size: x-large;"><b>Diseases</b></h1>
-            <div class="row">
-                <!-- End single blog -->
-                <div class="col-md-12 col-sm-12 col-xs-12">
-                    <div class="single-blog">
-                        <div class="blog-text">
-                            <table class="table table-striped table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>No.</th>
-                                        <th>Name</th>
-                                        <th>Notes</th>
-                                        <th>Date Added</th>
-                                        <th>Date Modified</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @{
-                                        var i = 1;
-                                    }
-                                    @foreach (var diseases in Model.disease)
-                                    {
-                                        <tr>
-                                            <td>@i</td>
-                                            <td>@diseases.diseaseName</td>
-                                            <td>@diseases.notes</td>
-                                            <td>@diseases.dateAdded</td>
-                                            <td>@diseases.dateModified</td>
-                                            <td>
-                                                <input type="hidden" name="id" id="id" value="@diseases.diseaseID" />
-                                            </td>
-                                        </tr>
-                                        i++;
-                                    }
-                                </tbody>
-                            </table>
+            <div class="px-2">
+
+                <h1 style="font-size: x-large;"><b>Diseases</b></h1>
+                <div class="row">
+                    <!-- End single blog -->
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="single-blog">
+                            <div class="blog-text">
+                                <div class="scroll-auto">
+                                    <table class="table table-striped table-hover">
+
+                                        <thead>
+                                            <tr>
+                                                <th>No.</th>
+                                                <th>Name</th>
+                                                <th>Notes</th>
+                                                <th>Date Added</th>
+                                                <th>Date Modified</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @{
+                                                var i = 1;
+                                            }
+                                            @foreach (var diseases in Model.disease)
+                                            {
+                                                <tr>
+                                                    <td>@i</td>
+                                                    <td>@diseases.diseaseName</td>
+                                                    <td>@diseases.notes</td>
+                                                    <td>@diseases.dateAdded</td>
+                                                    <td>@diseases.dateModified</td>
+                                                    <td>
+                                                        <input type="hidden" name="id" id="id" value="@diseases.diseaseID" />
+                                                    </td>
+                                                </tr>
+                                                i++;
+                                            }
+                                        </tbody>
+
+                                    </table>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-
             </div>
 
 
@@ -106,57 +112,60 @@
                     <div class="single-blog">
                         <div class="blog-text">
                             <form method="post">
-                                @if (Model.institutions.Count() > 0)
-                                {
-                                    <table class="table table-striped table-hover">
-                                        <thead>
-                                            <tr>
-                                                <th>
-                                                    No.
-                                                </th>
-                                                <th>
-                                                    Type
-                                                </th>
-                                                <th>
-                                                    Name
-                                                </th>
-                                                <th>
-                                                    Notes
-                                                </th>
-                                            </tr>
-                                        </thead>
-                                        @{
-                                            var ib = 1;
-                                        }
-                                        @foreach (var institution in Model.institutions)
-                                        {
-                                            <tr>
-                                                <td>
-                                                    @ib
-                                                </td>
-                                                <td>
-                                                    @Html.DisplayFor(m => institution.institutionType.institutionType)
-                                                </td>
-                                                <td>
-                                                    @Html.DisplayFor(m => institution.institutionName)
-                                                </td>
-                                                <td>
-                                                    @Html.DisplayFor(m => institution.notes)
-                                                </td>
+                                <div class="scroll-auto">
+                                    @if (Model.institutions.Count() > 0)
+                                    {
+                                        <table class="table table-striped table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>
+                                                        No.
+                                                    </th>
+                                                    <th>
+                                                        Type
+                                                    </th>
+                                                    <th>
+                                                        Name
+                                                    </th>
+                                                    <th>
+                                                        Notes
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            @{
+                                                var ib = 1;
+                                            }
+                                            @foreach (var institution in Model.institutions)
+                                            {
+                                                <tr>
+                                                    <td>
+                                                        @ib
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(m => institution.institutionType.institutionType)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(m => institution.institutionName)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(m => institution.notes)
+                                                    </td>
 
-                                            </tr>
-                                            ib++;
-                                        }
-                                    </table>
-                                }
-                                else
-                                {
-                                    <p>No institutions yet</p>
-                                }
+                                                </tr>
+                                                ib++;
+                                            }
+                                        </table>
+                                    }
+                                    else
+                                    {
+                                        <p>No institutions yet</p>
+                                    }
+                                </div>
                             </form>
                         </div>
 
                     </div>
+
                 </div>
             </div>
 
@@ -168,45 +177,46 @@
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="single-blog">
                         <div class="blog-text">
-                            <table class="table table-striped table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>No.</th>
-                                        <th>Disease</th>
-                                        <th>Vaccine</th>
-                                        <th>Notes</th>
-                                        <th>Date Added</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @{
-                                        var ia = 1;
-                                    }
-                                    @foreach (var vaccine in Model.vaccines)
-                                    {
+                            <div class="scroll-auto">
+                                <table class="table table-striped table-hover">
+                                    <thead>
                                         <tr>
-                                            <td>@ia</td>
-                                            <td>@vaccine.disease.diseaseName</td>
-                                            <td>@vaccine.vaccineName</td>
-                                            <td>@vaccine.notes</td>
-                                            <td>@vaccine.dateAdded</td>
-                                            <td>
-
-                                                <input type="hidden" name="id" id="id" value="@vaccine.vaccineID" />
-                                            </td>
+                                            <th>No.</th>
+                                            <th>Disease</th>
+                                            <th>Vaccine</th>
+                                            <th>Notes</th>
+                                            <th>Date Added</th>
                                         </tr>
-                                        ia++;
-                                    }
-                                </tbody>
-                            </table>
-                        </div>
+                                    </thead>
+                                    <tbody>
+                                        @{
+                                            var ia = 1;
+                                        }
+                                        @foreach (var vaccine in Model.vaccines)
+                                        {
+                                            <tr>
+                                                <td>@ia</td>
+                                                <td>@vaccine.disease.diseaseName</td>
+                                                <td>@vaccine.vaccineName</td>
+                                                <td>@vaccine.notes</td>
+                                                <td>@vaccine.dateAdded</td>
+                                                <td>
 
+                                                    <input type="hidden" name="id" id="id" value="@vaccine.vaccineID" />
+                                                </td>
+                                            </tr>
+                                            ia++;
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
+
 
 
 

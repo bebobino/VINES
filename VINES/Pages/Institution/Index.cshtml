@@ -13,63 +13,67 @@
             </div>
             <div class="col-12 border p-3 mt-3">
                 <form method="post">
-                    @if (Model.institutions.Count() > 0)
-                    {
-                        <table class="table table-striped border">
-                            <tr class="table-secondary">
-                                <th>
-                                    No.
-                                </th>
-                                <th>
-                                    Type
-                                </th>
-                                <th>
-                                    Name
-                                </th>
-                                <th>
-                                    Notes
-                                </th>
-                                <th>
+                    <div class="scroll-auto">
+                        @if (Model.institutions.Count() > 0)
+                        {
+                            <table class="table table-striped border">
+                                <tr class="table-secondary">
+                                    <th>
+                                        No.
+                                    </th>
+                                    <th>
+                                        Type
+                                    </th>
+                                    <th>
+                                        Name
+                                    </th>
+                                    <th>
+                                        Notes
+                                    </th>
+                                    <th>
 
-                                </th>
-                            </tr>
-                            @{
-                                var i = 1;
-                            }
-                            @foreach (var institution in Model.institutions)
-                            {
-                                <tr>
-                                    <td>
-                                        @i
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(m => institution.institutionType.institutionType)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(m => institution.institutionName)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(m => institution.notes)
-                                    </td>
-                                    <td>
-                                        <button asp-page-handler="Delete" asp-route-id="@institution.institutionID" onclick="return confirm('Are you sure you want to delete?')"
-                                    class="btn btn-danger btn-sm">
-                                            Delete
-                                        </button>
-                                        <a asp-page="Edit" asp-route-id="@institution.institutionID" class="btn btn-success btn-sm text-white">Edit</a>
-                                    </td>
+                                    </th>
                                 </tr>
-                                i++;
-                            }
-                        </table>
-                    }
-                    else
-                    {
-                        <p>No institutions yet</p>
-                    }
+                                @{
+                                    var i = 1;
+                                }
+                                @foreach (var institution in Model.institutions)
+                                {
+                                    <tr>
+                                        <td>
+                                            @i
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(m => institution.institutionType.institutionType)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(m => institution.institutionName)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(m => institution.notes)
+                                        </td>
+                                        <td>
+                                            <button asp-page-handler="Delete" asp-route-id="@institution.institutionID" onclick="return confirm('Are you sure you want to delete?')"
+                                        class="btn btn-danger btn-sm">
+                                                Delete
+                                            </button>
+                                            <a asp-page="Edit" asp-route-id="@institution.institutionID" class="btn btn-success btn-sm text-white">Edit</a>
+                                        </td>
+                                    </tr>
+                                    i++;
+                                }
+                            </table>
+                        }
+                        else
+                        {
+                            <p>No institutions yet</p>
+                        }
+                    </div>
                 </form>
+            </div>
+            <div class="px-2">
                 <div class="col-2">
-                    <a asp-page="Create" class="btn btn-info btn-sm text-white">Add An Institution</a>
+                    <a asp-page="Create" class="btn btn-primary btn-sm text-white">Add An Institution</a>
                 </div>
             </div>
         </div>

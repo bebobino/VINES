@@ -14,64 +14,69 @@
 
             <div class="col-12 border p-3 mt-3">
                 <form method="post">
-                    @if (Model.diseases.Count() > 0)
-                    {
-                        <table class="table table-striped border">
-                            <tr class="table-secondary">
-                                <th>
-                                    No.
-                                </th>
+                    <div class="scroll-auto">
+                        @if (Model.diseases.Count() > 0)
+                        {
+                            <table class="table table-striped border">
+                                <tr class="table-secondary">
+                                    <th>
+                                        No.
+                                    </th>
 
-                                <th>
-                                    Name
-                                </th>
+                                    <th>
+                                        Name
+                                    </th>
 
-                                <th>
-                                    Notes
-                                </th>
-                                <th>
-                                    Date Added
-                                </th>
-                                <th>
+                                    <th>
+                                        Notes
+                                    </th>
+                                    <th>
+                                        Date Added
+                                    </th>
+                                    <th>
 
-                                </th>
-                            </tr>
-                            @{
-                                var i = 1;
-                            }
-                            @foreach (var diseases in Model.diseases)
-                            {
-                                <tr>
-                                    <td>
-                                        @i
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(m => diseases.diseaseName)
-                                    </td>
-
-                                    <td>
-                                        @Html.DisplayFor(m => diseases.notes)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(m => diseases.dateAdded)
-                                    </td>
-                                    <td>
-                                        <a asp-page="Edit" asp-route-id="@diseases.diseaseID" class="btn btn-success btn-sm text-white">Edit</a>
-                                    </td>
+                                    </th>
                                 </tr>
-                                i++;
-                            }
-                        </table>
-                    }
-                    else
-                    {
-                        <p>No disease yet.</p>
-                    }
-                </form>
-                <div class="col-2">
-                    <a asp-page="Create" class="btn btn-info btn-sm text-white">Add a Disease</a>
-                </div>
+                                @{
+                                    var i = 1;
+                                }
+                                @foreach (var diseases in Model.diseases)
+                                {
+                                    <tr>
+                                        <td>
+                                            @i
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(m => diseases.diseaseName)
+                                        </td>
+
+                                        <td>
+                                            @Html.DisplayFor(m => diseases.notes)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(m => diseases.dateAdded)
+                                        </td>
+                                        <td>
+                                            <a asp-page="Edit" asp-route-id="@diseases.diseaseID" class="btn btn-success btn-sm text-white">Edit</a>
+                                        </td>
+                                    </tr>
+                                    i++;
+                                }
+                            </table>
+                        }
+                        else
+                        {
+                            <p>No disease yet.</p>
+                        }
+                    </div>
+                </form>              
             </div>
+
+             <div class="px-2">
+                    <div class="col-2">
+                        <a asp-page="Create" class="btn btn-primary btn-sm text-white">Add a Disease</a>
+                    </div>
+             </div>
         </div>
     </div>
 }

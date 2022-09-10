@@ -10,6 +10,7 @@
 
         <div class="col-12 border p-3 mt-3">
             <form method="post">
+                <div class="scroll-auto">
                 @if (Model.source.Count() > 0)
                 {
                     <table class="table table-striped border">
@@ -58,11 +59,14 @@
                 {
                     <p>No sources yet</p>
                 }
+                </div>
             </form>
-            <div class="col-2">
-                <a asp-page="Create" class="btn btn-info btn-sm text-white">Add a News Source</a>
-            </div>
         </div>
+         <div class="px-2">
+                <div class="col-4">
+                    <a asp-page="Create" class="btn btn-primary btn-sm text-white">Add a News Source</a>
+                </div>
+            </div>
     </div>
 </div>
 
