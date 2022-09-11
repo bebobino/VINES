@@ -1,45 +1,41 @@
 ﻿@page
 @model VINES.Pages.Status.IndexModel
 @{
+    ViewData["Title"] = "User Status";
 }
- <form method="post">
-     <table class="table">
-         <thead>
-             <tr>
-                 <th>
-                     Name
-                 </th>
-                 <th>
-                     Email
-                 </th>
-                 <th>
-                     Role
-                 </th>
-                 <th>
-                    Access Status (if blocked)
-                 </th>
-             </tr>
-         </thead>
-         <tbody>
-             @for (var i = 0; i < Model.users.Count(); i++)
-             {
-                 <tr>
-                     <td>
-                         <input type="hidden" class="userID" asp-for="@Model.users[i].userID"/>
-                         <input type="text" class="email" asp-for="@Model.users[i].firstName" readonly/>
-                     </td>
-                     <td>
-                         <input type="text" class="email" asp-for="@Model.users[i].email" readonly/>
-                     </td>
-                     <td>
-                         <input type="text" class="email" asp-for="@Model.users[i].role.role" readonly/>
-                     </td>
-                     <td>
-                         <input type="checkbox" class="chk" asp-for="@Model.users[i].isBlocked" data-id="@Model.users[i].userID" />
-                     </td>
-                 </tr>
-             }
-         </tbody>
-     </table>
-     <input type="submit" value="Submit" />
-     </form>
+<div class="blog-page area-padding">
+    <form method="post">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        First Name
+                    </th>
+                    <th>
+                        Last Name
+                    </th>
+                    <th>
+                        Access Status (if blocked)
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (var i = 0; i < Model.users.Count(); i++)
+                {
+                    <tr>
+                        <td>
+                            @Model.users[i].firstName
+                        </td>
+                        <td>
+                            @Model.users[i].lastName
+                        </td>
+                        <td>
+                            <input type="checkbox" class="chk" asp-for="@Model.users[i].isBlocked" data-id="@Model.users[i].userID" />
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <input type="submit" value="Submit"  class="btn btn-primary"/>
+    </form>
+</div>

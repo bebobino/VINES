@@ -46,12 +46,14 @@ namespace VINES.Pages.Account
         {
             var email = User.FindFirstValue(ClaimTypes.Email);
 
+
+
+
                 var claims = new List<Claim>
                 {
-                    new Claim(ClaimTypes.NameIdentifier, ClaimTypes.NameIdentifier),
-                    new Claim(ClaimTypes.Name, email),
+                    new Claim(ClaimTypes.NameIdentifier, user.userID.ToString()),
+                    new Claim(ClaimTypes.Name, user.email),
                     new Claim(ClaimTypes.Role, "Patient"),
-
                 };
 
                 var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
@@ -59,6 +61,9 @@ namespace VINES.Pages.Account
 
                 await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal,
                     new AuthenticationProperties { IsPersistent = false });
+
+               
+
 
                 return RedirectToPage("/patientLanding");
         }

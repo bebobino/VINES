@@ -41,10 +41,9 @@ namespace VINES.Pages.Account
             var email = User.FindFirstValue(ClaimTypes.Email);
                 var claims = new List<Claim>
                 {
-                    new Claim(ClaimTypes.NameIdentifier, ClaimTypes.NameIdentifier),
+                    new Claim(ClaimTypes.NameIdentifier, User.FindFirstValue(ClaimTypes.NameIdentifier)),
                     new Claim(ClaimTypes.Name, email),
                     new Claim(ClaimTypes.Role, "Patient"),
-
                 };
 
                 var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);

@@ -6,88 +6,100 @@
 }
 @if ((await AuthorizationService.AuthorizeAsync(User, "AdminOnly")).Succeeded)
 {
-     <div class="container row p-0 m-0">  
-        <div class="col-10">  
-        <h2 class="text-info">Institution's Vaccines'</h2>  
-    </div>  
-    <div class="col-2">  
-        <a asp-page="Create" class="btn btn-info form-control text-white">Register A Vaccine For An Institution</a>  
-    </div>  
-    <div class="col-12 border p-3 mt-3">  
-        <form method="post">  
-            @if(Model.institutionVaccines.Count()>0)  
-                {
-                    <table class="table table-striped border">  
-                        <tr class="table-secondary">  
-                        <th>  
-                           No.  
-                        </th>  
-                        <th>  
-                            Disease
-                        </th>  
-                        <th>  
-                            Institution
-                        </th>
-                        <th>  
-                            Vaccine
-                        </th>  
-                        <th>  
-                            Price
-                        </th> 
-                        <th>
-                            Notes
-                        </th>
-                    </tr>  
-                    @{ var i = 1;}
-                    @foreach(var institutionvax in Model.institutionVaccines)  
-                    {  
-                        <tr>  
-                            <td>
-                                @i
-                            </td>
-                            <td>  
-                                @Html.DisplayFor(m => institutionvax.disease.diseaseName)  
-                            </td>  
-                            <td>  
-                                @Html.DisplayFor(m => institutionvax.institution.institutionName)
-                            </td>
-                            <td>  
-                                @Html.DisplayFor(m => institutionvax.vaccine.vaccineName)  
-                            </td>  
-                            <td>  
-                                @Html.DisplayFor(m => institutionvax.price)  
-                            </td>
-                            <td>  
-                                @Html.DisplayFor(m => institutionvax.notes)  
-                            </td>  
-                            <td>  
-                               <button asp-page-handler="Delete" asp-route-id="@institutionvax.institutionVaccineID" onclick="return confirm('Are you sure you want to delete?')" 
-                               class="btn btn-danger btn-sm">Delete</button>  
-                                <a asp-page="Edit" asp-route-id="@institutionvax.institutionVaccineID" class="btn btn-success btn-sm text-white">Edit</a>  
-                            </td>  
-                        </tr>  
-                        i++;
-                    }  
-                </table>   
-            }  
-            else  
-            {  
-                <p>No Vaccines registered per Institutions yet</p>  
-            }  
-        </form>  
-    </div>  
-</div>  
+    <div class="blog-page area-padding">
+        <div class="container row p-0 m-0">
+            <div class="col-10">
+                <h2 class="text-info">Institution's Vaccines'</h2>
+            </div>
+
+            <div class="col-12 border p-3 mt-3">
+                <form method="post">
+                    <div class="scroll-auto">
+                        @if (Model.institutionVaccines.Count() > 0)
+                        {
+                            <table class="table table-striped border">
+                                <tr class="table-secondary">
+                                    <th>
+                                        No.
+                                    </th>
+                                    <th>
+                                        Disease
+                                    </th>
+                                    <th>
+                                        Institution
+                                    </th>
+                                    <th>
+                                        Vaccine
+                                    </th>
+                                    <th>
+                                        Price
+                                    </th>
+                                    <th>
+
+                                    </th>
+                                </tr>
+                                @{
+                                    var i = 1;
+                                }
+                                @foreach (var institutionvax in Model.institutionVaccines)
+                                {
+                                    <tr>
+                                        <td>
+                                            @i
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(m => institutionvax.disease.diseaseName)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(m => institutionvax.institution.institutionName)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(m => institutionvax.vaccine.vaccineName)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(m => institutionvax.price)
+                                        </td>
+                                        <td>
+                                            <button asp-page-handler="Delete" asp-route-id="@institutionvax.institutionVaccineID" onclick="return confirm('Are you sure you want to delete?')"
+                                        class="btn btn-danger btn-sm">
+                                                Delete
+                                            </button>
+                                            <a asp-page="Edit" asp-route-id="@institutionvax.institutionVaccineID" class="btn btn-success btn-sm text-white">Edit</a>
+                                        </td>
+                                    </tr>
+                                    i++;
+                                }
+                            </table>
+                        }
+                        else
+                        {
+                            <p>No Vaccines registered per Institutions yet</p>
+                        }
+                    </div>
+                </form>
+            </div>
+            <div class="px-2">
+                <div class="col-4">
+                    <a asp-page="Create" class="btn btn-primary btn-sm text-white">Register A Vaccine</a>
+                </div>
+            </div>
+        </div>
+    </div>
 }
-else {
-    @if (User.Identity.IsAuthenticated && User.IsInRole("Patient")) {
-        
+else
+{
+    @if (User.Identity.IsAuthenticated && User.IsInRole("Patient"))
+    {
+
         Response.Redirect("/patientLanding");
     }
-        else if (User.Identity.IsAuthenticated && User.IsInRole("Advertiser")) {
-        
+    else if (User.Identity.IsAuthenticated && User.IsInRole("Advertiser"))
+    {
+
         Response.Redirect("/advertiserLanding");
     }
-        else{
+    else
+    {
         Response.Redirect("/Index");
     }
 }

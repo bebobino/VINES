@@ -24,7 +24,7 @@
     <None Include="wwwroot\assets\css\about.css" />
     <None Include="wwwroot\assets\css\privacy.css" />
     <None Include="wwwroot\assets\css\pricing.css" />
-    <None Include="wwwroot\assets\css\style.css" />
+    <None Include="wwwroot\assets\css\style1.css" />
     <None Include="wwwroot\assets\img\apple-touch-icon.png" />
     <None Include="wwwroot\assets\img\background\hero-bg.jpg" />
     <None Include="wwwroot\assets\img\favicon-16x16.png" />
@@ -42,7 +42,7 @@
     <None Include="wwwroot\assets\img\VINES - Color150ppi.png" />
     <None Include="wwwroot\assets\img\VINES.png" />
     <None Include="wwwroot\assets\img\VINESFull.png" />
-    <None Include="wwwroot\assets\js\main.js" />
+    <None Include="wwwroot\assets\js\main1.js" />
     <None Include="wwwroot\assets\vendor\animate.css\animate.compat.css" />
     <None Include="wwwroot\assets\vendor\animate.css\animate.css" />
     <None Include="wwwroot\assets\vendor\animate.css\animate.min.css" />
@@ -103,8 +103,6 @@
     <None Include="wwwroot\assets\vendor\boxicons\fonts\boxicons.ttf" />
     <None Include="wwwroot\assets\vendor\boxicons\fonts\boxicons.woff" />
     <None Include="wwwroot\assets\vendor\boxicons\fonts\boxicons.woff2" />
-    <None Include="wwwroot\assets\vendor\glightbox\css\glightbox.css" />
-    <None Include="wwwroot\assets\vendor\glightbox\css\glightbox.min.css" />
     <None Include="wwwroot\assets\vendor\glightbox\js\glightbox.js" />
     <None Include="wwwroot\assets\vendor\glightbox\js\glightbox.min.js" />
     <None Include="wwwroot\assets\vendor\isotope-layout\isotope.pkgd.js" />

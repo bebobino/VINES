@@ -1,65 +1,82 @@
 ﻿@page
 @model VINES.Pages.UpdateAccount.IndexModel
 @{
+    ViewData["Title"] = "Update Account";
 }
-<div class="container row p-0 m-6">
-    <div class="col-18">
-        <h2 class="text-info">Your information</h2>
+
+<div class="blog-page area-padding">
+    <div class="container row p-0 m-6">
+        <div class="col-18">
+            <h2 class="text-info">Your information</h2>
+        </div>
+
+        <div class="col-12 border pt-m3">
+            <form method="post">
+                <div class="col-12 border p-3 mt-3" hidden>
+                    <label asp-for="user.userID"></label>
+                    <input asp-for="user.userID" />
+                </div>
+                <div class="col-12 border p-3 mt-3" hidden>
+                    <label asp-for="user.roleID"></label>
+                    <input asp-for="user.roleID" />
+                </div>
+                <div class="col-12 border p-3 mt-3">
+                    <label asp-for="user.firstName"></label>
+                    <input asp-for="user.firstName" />
+                    <span asp-validation-for="user.firstName"></span>
+                </div>
+                <div class="col-12 border p-3 mt-3">
+                    <label asp-for="user.middleName"></label>
+                    <input asp-for="user.middleName" />
+                    <span asp-validation-for="user.middleName"></span>
+                </div>
+                <div class="col-12 border p-3 mt-3">
+                    <label asp-for="user.lastName"></label>
+                    <input asp-for="user.lastName" />
+                    <span asp-validation-for="user.lastName"></span>
+                </div>
+
+                <div class="col-12 border p-3 mt-3">
+                    <label asp-for="user.contactNumber"></label>
+                    <input asp-for="user.contactNumber" />
+                    <span asp-validation-for="user.contactNumber"></span>
+                </div>
+
+                <div class="col-12 border p-3 mt-3" hidden>
+                    <label asp-for="user.email"></label>
+                    <input asp-for="user.email" readonly />
+                </div>
+
+                <div class="col-12 border p-3 mt-3" hidden>
+                    <label asp-for="user.password"></label>
+                    <input asp-for="user.password" readonly />
+                </div>
+
+                <div class="col-12 border p-3 mt-3" hidden>
+                    <label asp-for="user.dateRegistered"></label>
+                    <input asp-for="user.dateRegistered" readonly />
+                </div>
+
+                <div class="col-12 border p-3 mt-3" hidden>
+                    <label asp-for="user.genderID"></label>
+                    <input asp-for="user.genderID" readonly />
+                </div>
+
+            </form>
+            <br />
+            <div class="col-2">
+                <input type="submit" value="Update" class="btn btn-primary btn-sm text-white" />
+            </div>
+            <br />
+
+            <div class="col-2">
+                <a asp-page="ChangePassword" class="btn btn-success btn-sm text-white">Change Password</a>
+            </div>
+            <br />
+        </div>
     </div>
-    <div class="col-12 border pt-m3">
-    <form method="post">
-        <div class="col-12 border p-3 mt-3" hidden>
-            <label asp-for="user.userID"></label>
-            <input asp-for="user.userID"/>
-        </div>
-        <div class="col-12 border p-3 mt-3" hidden>
-            <label asp-for="user.roleID"></label>
-            <input asp-for="user.roleID"/>
-        </div>
-        <div class="col-12 border p-3 mt-3">
-            <label asp-for="user.firstName"></label>
-            <input asp-for="user.firstName" />
-            <span asp-validation-for="user.firstName"></span>
-        </div>
-        <div class="col-12 border p-3 mt-3">
-            <label asp-for="user.middleName"></label>
-            <input asp-for="user.middleName" />
-            <span asp-validation-for="user.middleName"></span>
-        </div>
-        <div class="col-12 border p-3 mt-3">
-            <label asp-for="user.lastName"></label>
-            <input asp-for="user.lastName" />
-            <span asp-validation-for="user.lastName"></span>
-        </div>
+    <br />
 
-        <div class="col-12 border p-3 mt-3">
-            <label asp-for="user.contactNumber"></label>
-            <input asp-for="user.contactNumber" />
-            <span asp-validation-for="user.contactNumber"></span>
-        </div>
 
-        <div class="col-12 border p-3 mt-3">
-            <label asp-for="user.email"></label>
-            <input asp-for="user.email" readonly/>
-        </div>
 
-        <div class="col-12 border p-3 mt-3" hidden>
-            <label asp-for="user.password"></label>
-            <input asp-for="user.password" readonly/>
-        </div>
-
-        <div class="col-12 border p-3 mt-3" hidden>
-            <label asp-for="user.dateRegistered"></label>
-            <input asp-for="user.dateRegistered" readonly/>
-        </div>
-
-        <div class="col-12 border p-3 mt-3" hidden>
-            <label asp-for="user.genderID"></label>
-            <input asp-for="user.genderID" readonly/>
-        </div>
-        <input type="submit" value="Update" class="btn btn-pill text-white btn-block btn-primary"/>
-        <a asp-page="ChangePassword" class="btn btn-success btn-sm text-white">Change Password</a>  
-    </form>
-    </div>
-    
 </div>

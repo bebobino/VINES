@@ -1,49 +1,50 @@
 ﻿@page
-@model VINES.Pages.CommunityPosts.CreateModel
+@model VINES.Pages.Vaccine.CreateModel
 @using Microsoft.AspNetCore.Authorization
 @inject IAuthorizationService AuthorizationService
 @{
 }
-
 @if ((await AuthorizationService.AuthorizeAsync(User, "AdminOnly")).Succeeded)
 {
-
     <div class="blog-page area-padding">
-        <h2 class="text-info">Create New Community Post</h2>
-        <br />
-
         <div class="border container" style="padding:30px;">
             <form method="post">
                 <div class="form-group row">
-                    <div class="col-4">
-                        <label asp-for="communityPost.communityPostTitle">Title</label>
-                    </div>
-                    <div class="col-6">
-                        <input asp-for="communityPost.communityPostTitle" class="form-control" name="title" />
+                    <div class="form-group row">
+                        <div class="col-4">
+                            <label asp-for="Vaccines.diseaseID">Disease Name</label>
+                        </div>
+                        <div class="col-6">
+                            <select asp-for="Vaccines.diseaseID" name="dID">
+                                @foreach (var diseases in Model.disease)
+                                {
+                                    <option value="@diseases.diseaseID">@diseases.diseaseName</option>
+                                }
+                            </select>
+                        </div>
                     </div>
                 </div>
+        
                 <div class="form-group row">
                     <div class="col-4">
-                        <label asp-for="communityPost.communityPostCategory">Category</label>
+                        <label asp-for="Vaccines.vaccineName">Vaccine Name</label>
                     </div>
                     <div class="col-6">
-                        <select asp-for="communityPost.communityPostCategoryID" name="catID">
-                            @foreach (var category in Model.categories)
-                            {
-                                <option value="@category.communityPostCategoryID">@category.communityPostCategory</option>
-                            }
-                        </select>
+                        <textarea type="number" asp-for="Vaccines.vaccineName" class="form-control" name="notes"></textarea>
                     </div>
                 </div>
 
+            
+
                 <div class="form-group row">
                     <div class="col-4">
-                        <label asp-for="communityPost.communityPostContent">Content</label>
+                        <label asp-for="Vaccines.notes">Notes</label>
                     </div>
                     <div class="col-6">
-                        <textarea asp-for="communityPost.communityPostContent" class="form-control" name="content"></textarea>
+                        <textarea type="number" asp-for="Vaccines.notes" class="form-control" name="notes"></textarea>
                     </div>
                 </div>
+
 
                 <div class="form-group row">
                     <div class="col-3 offset-4">
@@ -56,6 +57,7 @@
             </form>
         </div>
     </div>
+
 }
 else
 {

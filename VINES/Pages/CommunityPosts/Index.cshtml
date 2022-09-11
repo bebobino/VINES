@@ -4,82 +4,99 @@
 @inject IAuthorizationService AuthorizationService
 @{
     ViewData["Title"] = "Community Post";
-    }
+}
+
 @if ((await AuthorizationService.AuthorizeAsync(User, "AdminOnly")).Succeeded)
 {
-    <div class="container row p-0 m-0">  
-        <div class="col-10">  
-        <h2 class="text-info">Community Posts</h2>  
-    </div>  
-    <div class="col-2">  
-        <a asp-page="Create" class="btn btn-info form-control text-white">Create New Post</a>  
-    </div>  
-    <div class="col-12 border p-3 mt-3">  
-        <form method="post">  
-            @if(Model.communityPosts.Count()>0)  
-                {
-                    <table class="table table-striped border">  
-                        <tr class="table-secondary">  
-                        <th>  
-                           No.  
-                        </th>  
-                        <th>  
-                            Title
-                        </th>  
-                        <th>  
-                            Category
-                        </th>
-                        <th>  
-                            Content
-                        </th>  
-                        <th>  
-  
-                        </th> 
-                    </tr>  
-                    @{ var i = 1;}
-                    @foreach(var community in Model.communityPosts)  
-                    {  
-                        <tr>  
-                            <td>
-                                @i
-                            </td>
-                            <td>  
-                                @Html.DisplayFor(m => community.communityPostTitle)  
-                            </td>  
-                            <td>  
-                                @Html.DisplayFor(m => community.communityPostCategory.communityPostCategory)
-                            </td>
-                            <td>  
-                                @Html.DisplayFor(m => community.communityPostContent)  
-                            </td>  
-                            <td>  
-                               <button asp-page-handler="Delete" asp-route-id="@community.communityPostID" onclick="return confirm('Are you sure you want to delete?')" 
-                               class="btn btn-danger btn-sm">Delete</button>  
-                                <a asp-page="Edit" asp-route-id="@community.communityPostID" class="btn btn-success btn-sm text-white">Edit</a>  
-                            </td>  
-                        </tr>  
-                        i++;
-                    }  
-                </table>   
-            }  
-            else  
-            {  
-                <p>No Community Posts Created</p>  
-            }  
-        </form>  
-    </div>  
-</div>  
+    <div class="blog-page area-padding">
+        <div class="container row p-0 m-0">
+            <div class="col-10">
+                <h2 class="text-info">Community Posts</h2>
+            </div>
+
+            <div class="col-12 border p-3 mt-3">
+                <form method="post">
+                    <div class="scroll-auto">
+                        @if (Model.communityPosts.Count() > 0)
+                        {
+                            <table class="table table-striped border">
+                                <tr class="table-secondary">
+                                    <th>
+                                        No.
+                                    </th>
+                                    <th>
+                                        Title
+                                    </th>
+                                    <th>
+                                        Category
+                                    </th>
+                                    <th>
+                                        Content
+                                    </th>
+                                    <th>
+
+                                    </th>
+                                </tr>
+                                @{
+                                    var i = 1;
+                                }
+                                @foreach (var community in Model.communityPosts)
+                                {
+                                    <tr>
+                                        <td>
+                                            @i
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(m => community.communityPostTitle)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(m => community.communityPostCategory.communityPostCategory)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(m => community.communityPostContent)
+                                        </td>
+                                        <td>
+                                            <button asp-page-handler="Delete" asp-route-id="@community.communityPostID" onclick="return confirm('Are you sure you want to delete?')"
+                                        class="btn btn-danger btn-sm">
+                                                Delete
+                                            </button>
+                                            <a asp-page="Edit" asp-route-id="@community.communityPostID" class="btn btn-success btn-sm text-white">Edit</a>
+                                        </td>
+                                    </tr>
+                                    i++;
+                                }
+                            </table>
+                        }
+                        else
+                        {
+                            <p>No Community Posts Created</p>
+                        }
+                    </div>
+                </form>
+            </div>
+            <div class="px-2">
+                <div class="col-4">
+                    <a asp-page="Create" class="btn btn-primary btn-sm text-white">Create New Post</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
 }
-else {
-       @if (User.Identity.IsAuthenticated && User.IsInRole("Patient")) {
-        
+else
+{
+    @if (User.Identity.IsAuthenticated && User.IsInRole("Patient"))
+    {
+
         Response.Redirect("/patientLanding");
     }
-        else if (User.Identity.IsAuthenticated && User.IsInRole("Advertiser")) {
-        
+    else if (User.Identity.IsAuthenticated && User.IsInRole("Advertiser"))
+    {
+
         Response.Redirect("/advertiserLanding");
     }
-        else{
+    else
+    {
         Response.Redirect("/Index");
     }
 }

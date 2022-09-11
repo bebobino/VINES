@@ -8,58 +8,68 @@
 }
 @if ((await AuthorizationService.AuthorizeAsync(User, "AdminOnly")).Succeeded)
 {
-<h1>Edit Community Post</h1>
-<hr/>
-<div class="row">
-    <div class="col-md-4">
-        <form method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="CommunityPost.communityPostID" />
-            <div class="form-group">
-                <label asp-for="CommunityPost.communityPostTitle" class="control-label"></label>
-                <input asp-for="CommunityPost.communityPostTitle" class="form-control"/>
-                <span asp-validation-for="CommunityPost.communityPostTitle" class="text-danger"></span>
+    <div class="blog-page area-padding">
+        <h4>Edit Community Post</h4>
+        <hr />
+        <div class="row">
+            <div class="col-md-4">
+                <form method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="CommunityPost.communityPostID" />
+                    <div class="form-group">
+                        <label asp-for="CommunityPost.communityPostTitle" class="control-label">Title</label>
+                        <input asp-for="CommunityPost.communityPostTitle" class="form-control" />
+                        <span asp-validation-for="CommunityPost.communityPostTitle" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="CommunityPost.communityPostCategory" class="control-label">Category</label>
+                        <select asp-for="CommunityPost.communityPostCategoryID" name="catID">
+                            @foreach (var category in Model.categories)
+                            {
+                                <option value="@category.communityPostCategoryID">@category.communityPostCategory</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="CommunityPost.communityPostContent" class="control-label">Content</label>
+                        <input asp-for="CommunityPost.communityPostContent" class="form-control" />
+                        <span asp-validation-for="CommunityPost.communityPostContent" class="text-danger"></span>
+                    </div>
+                    <div class="form-group" hidden>
+                        <label asp-for="CommunityPost.postID" class="control-label"></label>
+                        <input asp-for="CommunityPost.postID" class="form-control" />
+                        <span asp-validation-for="CommunityPost.postID" class="text-danger"></span>
+                    </div>
+                    <div class="px-2">
+                        <div class="col-3">
+                            <input type="submit" value="Save" class="btn btn-primary btn-sm text-white" />
+                        </div>
+                    </div>
+                </form>
             </div>
-            <div class="form-group">
-                <label asp-for="CommunityPost.communityPostCategory" class="control-label"></label>
-                <select asp-for="CommunityPost.communityPostCategoryID" name="catID">
-                    @foreach (var category in Model.categories)
-                    {
-                        <option value="@category.communityPostCategoryID">@category.communityPostCategory</option>
-                    }
-                </select>  
-            </div>
-            <div class="form-group">
-                <label asp-for="CommunityPost.communityPostContent" class="control-label"></label>
-                <input asp-for="CommunityPost.communityPostContent" class="form-control"/>
-                <span asp-validation-for="CommunityPost.communityPostContent" class="text-danger"></span>
-            </div>
-             <div class="form-group" hidden>
-                <label asp-for="CommunityPost.postID" class="control-label"></label>
-                <input asp-for="CommunityPost.postID" class="form-control"/>
-                <span asp-validation-for="CommunityPost.postID" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
-</div>
+        </div>
 
-<div>
-    <a asp-page="Index">Back to list</a>
-</div>
+        <div class="px-2">
+            <div class="col-3">
+                <a asp-page="Index" class="btn btn-success btn-sm text-white">Back to Index</a>
+            </div>
+        </div>
+    </div>
 }
-else {
-        @if (User.Identity.IsAuthenticated && User.IsInRole("Patient")) {
-        
+else
+{
+    @if (User.Identity.IsAuthenticated && User.IsInRole("Patient"))
+    {
+
         Response.Redirect("/patientLanding");
     }
-        else if (User.Identity.IsAuthenticated && User.IsInRole("Advertiser")) {
-        
+    else if (User.Identity.IsAuthenticated && User.IsInRole("Advertiser"))
+    {
+
         Response.Redirect("/advertiserLanding");
     }
-        else{
+    else
+    {
         Response.Redirect("/Index");
     }
 }

@@ -4,80 +4,88 @@
 @inject IAuthorizationService AuthorizationService
 @{
     ViewData["Title"] = "Forum Post";
-    }
+}
 
 @if ((await AuthorizationService.AuthorizeAsync(User, "PatientOnly")).Succeeded)
 {
-    <div class="container row p-0 m-0">  
-        <div class="col-10">  
-        <h2 class="text-info">Forum Posts</h2>  
-    </div>  
-    <div class="col-2">  
-        <a asp-page="Create" class="btn btn-info form-control text-white">Create New Post</a>  
-    </div>  
-    <div class="col-12 border p-3 mt-3">  
-        <form method="post">  
-            @if(Model.forumPosts.Count()>0)  
+    <div class="container row p-0 m-0">
+        <div class="col-10">
+            <h2 class="text-info">Forum Posts</h2>
+        </div>
+        <div class="col-12 border p-3 mt-3">
+            <form method="post">
+                @if (Model.forumPosts.Count() > 0)
                 {
-                    <table class="table table-striped border">  
-                        <tr class="table-secondary">  
-                        <th>  
-                           No.  
-                        </th>  
-                        
-                        <th>  
-                            Category
-                        </th>
-                        <th>  
-                            Content
-                        </th>  
-                        <th>  
-  
-                        </th> 
-                    </tr>  
-                    @{ var i = 1;}
-                    @foreach(var forum in Model.forumPosts)  
-                    {  
-                        <tr>  
-                            <td>
-                                @i
-                            </td>
-                            <td>  
-                                @Html.DisplayFor(m => forum.forumContent)  
-                            </td>  
-                            <td>  
-                                @Html.DisplayFor(m => forum.forumCategory.forumCategory)
-                            </td>
-                            
-                            <td>  
-                               <button asp-page-handler="Delete" asp-route-id="@forum.forumPostID" onclick="return confirm('Are you sure you want to delete?')" 
-                               class="btn btn-danger btn-sm">Delete</button>  
-                                <a asp-page="Edit" asp-route-id="@forum.forumPostID" class="btn btn-success btn-sm text-white">Edit</a>  
-                                  <a asp-page="Details" asp-route-id="@forum.forumPostID" class="btn btn-warning btn-sm text-white">Details</a>  
-                            </td>  
-                        </tr>  
-                        i++;
-                    }  
-                </table>   
-            }  
-            else  
-            {  
-                <p>No Forum Posts Created</p>  
-            }  
-        </form>  
-    </div>  
-</div>  
+                    <table class="table table-striped border">
+                        <tr class="table-secondary">
+                            <th>
+                                No.
+                            </th>
+
+                            <th>
+                                Category
+                            </th>
+                            <th>
+                                Content
+                            </th>
+                            <th>
+
+                            </th>
+                        </tr>
+                        @{
+                            var i = 1;
+                        }
+                        @foreach (var forum in Model.forumPosts)
+                        {
+                            <tr>
+                                <td>
+                                    @i
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(m => forum.forumContent)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(m => forum.forumCategory.forumCategory)
+                                </td>
+
+                                <td>
+                                    <button asp-page-handler="Delete" asp-route-id="@forum.forumPostID" onclick="return confirm('Are you sure you want to delete?')"
+                                class="btn btn-danger btn-sm">
+                                        Delete
+                                    </button>
+                                    <a asp-page="Edit" asp-route-id="@forum.forumPostID" class="btn btn-success btn-sm text-white">Edit</a>
+                                    <a asp-page="Details" asp-route-id="@forum.forumPostID" class="btn btn-warning btn-sm text-white">Details</a>
+                                </td>
+                            </tr>
+                            i++;
+                        }
+                    </table>
+                }
+                else
+                {
+                    <p>No Forum Posts Created</p>
+                }
+            </form>
+            <div class="col-2">
+                <a asp-page="Create" class="btn btn-info btn-sm text-white">Create New Post</a>
+            </div>
+        </div>
+    </div>
 }
-else {
-       @if (User.Identity.IsAuthenticated && User.IsInRole("Patient")) {
-        
+else
+{
+    @if (User.Identity.IsAuthenticated && User.IsInRole("Patient"))
+    {
+
         Response.Redirect("/patientLanding");
     }
-        else if (User.Identity.IsAuthenticated && User.IsInRole("Advertiser")) {
-        
+    else if (User.Identity.IsAuthenticated && User.IsInRole("Advertiser"))
+    {
+
         Response.Redirect("/advertiserLanding");
     }
-        else{
+    else
+    {
         Response.Redirect("/Index");
     }
 }
