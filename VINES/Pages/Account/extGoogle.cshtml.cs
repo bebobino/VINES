@@ -51,8 +51,6 @@ namespace VINES.Pages.Account
 
                 var claims = new List<Claim>
                 {
-                    new Claim(ClaimTypes.NameIdentifier, user.userID.ToString()),
-                    new Claim(ClaimTypes.Name, user.email),
                     new Claim(ClaimTypes.Role, "Patient"),
                 };
 

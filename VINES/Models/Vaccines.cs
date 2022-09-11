@@ -20,7 +20,7 @@ namespace VINES.Models
         [Required]
         public DateTime dateAdded { get; set; }
         [Required]
-        public DateTime dateModified { get; set; }
+        public DateTime? dateModified { get; set; }
         [ForeignKey("diseaseID")]
         public Diseases disease { get; set; }
     }
