@@ -9,6 +9,8 @@ namespace VINES.Models
         [Key]
         public int communityPostCategoryID { get; set; }
 
+        [Display(Name = "Category")]
+
         public string communityPostCategory { get; set; }
     }
 }

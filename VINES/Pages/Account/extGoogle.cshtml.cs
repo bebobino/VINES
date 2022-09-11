@@ -29,20 +29,22 @@ namespace VINES.Pages.Account
             db = _db;
         }
 
-        public User user { get; set; }
+
+        [BindProperty]
+        public User users { get; set; }
 
 
 
-        public async Task<IActionResult> OnGetAsync()
+        public async Task OnGetAsync()
         {
 
             var accessToken = await HttpContext.GetTokenAsync(
             GoogleDefaults.AuthenticationScheme, "access_token");
+        }
 
+        public async Task<IActionResult> OnPostAsync()
+        {
             var email = User.FindFirstValue(ClaimTypes.Email);
-
-
-
 
                 var claims = new List<Claim>
                 {
@@ -59,7 +61,6 @@ namespace VINES.Pages.Account
                     new AuthenticationProperties { IsPersistent = false });
 
                 return RedirectToPage("/patientLanding");
-
         }
     }
 }

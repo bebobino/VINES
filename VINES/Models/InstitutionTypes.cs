@@ -9,6 +9,8 @@ namespace VINES.Models
     {
         [Key]
         public int institutionTypeID { get;set; }
+        [Required]
+        [Display(Name = "Type of Institution")]
         public string institutionType { get;set; }
     }
 }

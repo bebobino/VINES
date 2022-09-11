@@ -4,3 +4,9 @@
 @{
     Layout = null;
 }
+
+<p>Please confirm that this is your email</p>
+<form method="post">
+    <input asp-for="users.email" value="@User.FindFirstValue(ClaimTypes.Email)"/>
+    <input type="submit" value="Check"/>
+</form>

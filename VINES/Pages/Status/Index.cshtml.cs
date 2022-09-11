@@ -14,6 +14,8 @@ namespace VINES.Pages.Status
     {
         private readonly DatabaseContext _db;
 
+        public List<Roles> roles { get; set; }
+
         public IndexModel(DatabaseContext db)
         {
             _db = db;
