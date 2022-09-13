@@ -218,6 +218,13 @@
     selector: '.portfolio-lightbox'
   });
 
+    /**
+  * Initiate glightbox 
+  */
+    const glightbox = GLightbox({
+        selector: '.glightbox'
+    });
+
   /**
    * Testimonials slider
    */
@@ -241,7 +248,7 @@
     });
 
 
-})()
+}()
 
 
 //Cueto Code

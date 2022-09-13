@@ -81,6 +81,8 @@
                   <!--  ===== ADD Gender Drop down ==== -->
                   <div class="form-group last mb-4">
                     <label asp-for="Input.gender"></label>
+                    <br />
+                    <br />
                     <select asp-for="Input.gender">
                         @foreach (var genders in Model.genders)
                                             {
@@ -93,6 +95,8 @@
                   <!-- ======= HELP FIX DOB ====== -->
                   <div class="form-group last mb-4">
                     <label asp-for="Input.dateOfBirth"></label>
+                    <br />
+                    <br />
                     <input type="date" class="form-control" asp-for="Input.dateOfBirth">
                
                   </div>

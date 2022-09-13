@@ -88,13 +88,15 @@
                                     <label>Advertisment Name</label>
                                     <br />
                                     <input type="text" asp-for="Ad.advertisementTitle" required />
+                                    <br />                                  
                                     <br />
                                     <label>URL Destination</label>
                                     <br />
                                     <input type="text" asp-for="Ad.url" required />
                                     <br />
+                                     <br />
                                     <label>Ad Type</label>
-                                    <br />
+                                   <br />
                                     <select asp-for="Ad.advertisementTypeID" required>
                                         @foreach (var adcat in Model.AdTypes)
                                         {
@@ -124,11 +126,12 @@
                             <h5>Advertisements</h5>
                             @foreach (var advert in Model.Ads)
                             {
-
                                 <h5>Title: @advert.advertisementTitle</h5>
-                                <a href="@advert.url">
-                                    <img src="/images/@advert.imgsrc" width="600" height="100" sstyle="object-fit:fill">
+                                <div class="scroll-auto">
+                                <a href="@advert.url">                                    
+                                        <img src="/images/@advert.imgsrc" width="400" height="100" style="object-fit: contain">                                   
                                 </a>
+                                 </div>
                                 <p>Price: @advert.advertisementType.price</p>
                                 if (advert.endDate > DateTime.UtcNow)
                                 {
@@ -154,7 +157,6 @@
                 </div>
 
             </div>
-
         </div>
     </div>
 
@@ -170,8 +172,8 @@
                 </div>
                 <div class="modal-body">
 
-                    <p>Shopee</p>
-                    <p>Lazada</p>
+                    <p></p>
+                    <p></p>
                     <br>
                     <input type="button" class="btn btn-secondary" id="hideAdvertisements" value="Hide" />
                 </div>
@@ -186,8 +188,8 @@
                     <h4 class="modal-title">Interactions per Day</h4>
                 </div>
                 <div class="modal-body">
-                    <p><b>Shopee</b> :25</p>
-                    <p><b>Lazada</b> :25</p>
+                    <p></p>
+                    <p></p>
                     <br>
                     <input type="button" class="btn btn-secondary" id="hideInteractions" value="Hide" />
                 </div>
@@ -203,8 +205,8 @@
                 </div>
                 <div class="modal-body">
 
-                    <p>Shopee &#8369;5,000</p>
-                    <p>Lazada &#8369;5,000</p>
+                    <p></p>
+                    <p></p>
                     <br>
                     <input type="button" class="btn btn-secondary" id="hideMCost" value="Hide" />
                 </div>
