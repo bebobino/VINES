@@ -51,6 +51,11 @@ namespace VINES.Data
 
         [Required]
         public int failedAttempts { get; set; }
-    
+        [ForeignKey("roleID")]
+        public Roles role { get; set; }
+        internal static object FindFirstValue(string email)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

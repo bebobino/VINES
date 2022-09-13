@@ -9,12 +9,20 @@ namespace VINES.Models
     {
         [Key]
         public int institutionVaccineID { get; set; }
+        [Required]
         public int diseaseID { get; set; }
+        [Required]
         public int institutionID { get; set; }
+        [Required]
         public int vaccineID { get; set;}
+        [Required]
+        [Display(Name = "Price")]
         public decimal price { get; set;}
+        [Display(Name = "Notes")]
         public string notes { get; set; }
+        [Required]
         public DateTime dateAdded { get; set; }
+        [Required]
         public DateTime lastModified { get; set; }
 
         [ForeignKey("diseaseID")]

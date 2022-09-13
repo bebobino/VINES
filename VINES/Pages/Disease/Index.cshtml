@@ -57,7 +57,10 @@
                                             @Html.DisplayFor(m => diseases.dateAdded)
                                         </td>
                                         <td>
-                                            <a asp-page="Edit" asp-route-id="@diseases.diseaseID" class="btn btn-success btn-sm text-white">Edit</a>
+                                               <button asp-page-handler="Delete" asp-route-id="@diseases.diseaseID" onclick="return confirm('Are you sure you want to delete?')"
+                                        class="btn btn-danger btn-sm">
+                                                Delete
+                                            </button>
                                         </td>
                                     </tr>
                                     i++;

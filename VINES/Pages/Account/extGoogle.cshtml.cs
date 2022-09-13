@@ -29,25 +29,28 @@ namespace VINES.Pages.Account
             db = _db;
         }
 
-        public User user { get; set; }
+
+        [BindProperty]
+        public User users { get; set; }
 
 
 
-        public async Task<IActionResult> OnGetAsync()
+        public async Task OnGetAsync()
         {
 
             var accessToken = await HttpContext.GetTokenAsync(
             GoogleDefaults.AuthenticationScheme, "access_token");
+        }
 
+        public async Task<IActionResult> OnPostAsync()
+        {
             var email = User.FindFirstValue(ClaimTypes.Email);
 
 
 
 
-             var claims = new List<Claim>
+                var claims = new List<Claim>
                 {
-                    new Claim(ClaimTypes.NameIdentifier, user.userID.ToString()),
-                    new Claim(ClaimTypes.Name, user.email),
                     new Claim(ClaimTypes.Role, "Patient"),
                 };
 
@@ -61,7 +64,6 @@ namespace VINES.Pages.Account
 
 
                 return RedirectToPage("/patientLanding");
-
         }
     }
 }
