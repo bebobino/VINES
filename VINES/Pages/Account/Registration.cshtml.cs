@@ -37,12 +37,15 @@ namespace VINES.Pages.Account
         {
             [Required]
             [Display(Name = "First Name")]
+            [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Use letters only please")]
             public string firstName { get; set; }
 
+            [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Use letters only please")]
             [Display(Name = "Middle Name")]
             public string middleName { get; set; }
 
             [Required]
+            [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Use letters only please")]
             [Display(Name = "Last Name")]
             public string lastName { get; set; }
 
