@@ -48,33 +48,33 @@
                               <div class="form-block">
                                   <div class="mb-4">
                                       <h3><strong>Sign Up</strong></h3>
-                                      <p class="mb-4">It's quick and easy.</p>
+                                      <p class="mb-4" style="color:black">It's quick and easy.</p>
                                   </div>
                                   <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
                                       @Html.ValidationMessage("Error", new { @style = "color:red" })
                                       @Html.ValidationMessage("Success", new { @style = "color:green" })
                                       <div class="form-group last mb-4">
-                                          <label asp-for="Input.firstName"></label>
+                                          <label asp-for="Input.firstName" style="color:black">First Name</label>
                                           <input type="text" class="form-control" asp-for="Input.firstName" required>
                                           <span asp-validation-for="Input.firstName" class="text-danger"></span>
 
                                       </div>
 
                                       <div class="form-group last mb-4">
-                                          <label asp-for="Input.middleName"></label>
+                                          <label asp-for="Input.middleName" style="color:black">Middle Name</label>
                                           <input type="text" class="form-control" asp-for="Input.middleName">
                                           <span asp-validation-for="Input.middleName" class="text-danger"></span>
                                       </div>
 
                                       <div class="form-group last mb-4">
-                                          <label asp-for="Input.lastName"></label>
+                                          <label asp-for="Input.lastName" style="color:black">Last Name</label>
                                           <input type="text" class="form-control" asp-for="Input.lastName" required>
                                           <span asp-validation-for="Input.lastName" class="text-danger"></span>
 
                                       </div>
 
                                       <div class="form-group last mb-4">
-                                          <label asp-for="Input.contactNumber"></label>
+                                          <label asp-for="Input.contactNumber" style="color:black">Contact Number</label>
                                           <input type="tel" class="form-control" asp-for="Input.contactNumber" min="11" max="11">
                                           <span asp-validation-for="Input.contactNumber" class="text-danger"></span>
                                       </div>
@@ -82,7 +82,7 @@
 
                                       <!--  ===== ADD Gender Drop down ==== -->
                                       <div class="form-group last mb-4">
-                                          <label asp-for="Input.gender"></label>
+                                          <label asp-for="Input.gender" style="color:black">Gender</label>
                                           <br />
                                           <br />
                                           <select asp-for="Input.gender">
@@ -96,7 +96,7 @@
                                       </div>
                                       <!-- ======= HELP FIX DOB ====== -->
                                       <div class="form-group last mb-4">
-                                          <label asp-for="Input.dateOfBirth"></label>
+                                          <label asp-for="Input.dateOfBirth" style="color:black">Date of Birth</label>
                                           <br />
                                           <br />
                                           <input type="date" class="form-control" asp-for="Input.dateOfBirth" max="@DateTime.Today.ToString("yyyy'-'MM'-'dd")" required>
@@ -104,19 +104,19 @@
 
                                       </div>
                                       <div class="form-group first">
-                                          <label asp-for="Input.email"></label>
+                                          <label asp-for="Input.email" style="color:black">Email</label>
                                           <input type="text" class="form-control" asp-for="Input.email" required>
                                           <span asp-validation-for="Input.email" class="text-danger"></span>
 
                                       </div>
                                       <div class="form-group last mb-4">
-                                          <label asp-for="Input.password"></label>
+                                          <label asp-for="Input.password" style="color:black">Password</label>
                                           <input type="password" class="form-control" asp-for="Input.password" required>
                                           <span asp-validation-for="Input.password" class="text-danger"></span>
 
                                       </div>
                                       <div class="form-group last mb-4">
-                                          <label asp-for="Input.confirmPassword"></label>
+                                          <label asp-for="Input.confirmPassword" style="color:black">Confirm Password</label>
                                           <input type="password" class="form-control" asp-for="Input.confirmPassword" required />
                                           <span asp-validation-for="Input.confirmPassword" class="text-danger"></span>
                                       </div>

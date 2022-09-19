@@ -40,28 +40,28 @@
                                 <div class="card col-lg-3 col-md-5 col-6 d-md-flex align-items-center text-center" id="showSources">
                                     <br>
                                     <h1>@Model.Sources.Count</h1>
-                                    <h5>News Sources</h5>
+                                    <p>News Sources</p>
 
                                 </div>
 
                                 <div class="card col-lg-3 col-md-5 col-6 d-md-flex align-items-center text-center" id="showInstitutions">
                                     <br>
                                     <h1>@Model.Institutions.Count</h1>
-                                    <h5>Institutions in database</h5>
+                                    <p>Institutions in database</p>
 
                                 </div>
 
                                 <div class="card col-lg-3 col-md-5 col-6 d-md-flex align-items-center text-center" id="showVaccines">
                                     <br>
                                     <h1>@Model.Vaccines.Count</h1>
-                                    <h5>Vaccines in database</h5>
+                                    <p>Vaccines in database</p>
 
                                 </div>
 
                                 <div class="card col-lg-3 col-md-5 col-6 d-md-flex align-items-center text-center">
                                     <br>
                                     <h1>87</h1>
-                                    <h5>Recommendations generated</h5>
+                                    <p>Recommendations generated</p>
 
                                 </div>
 
@@ -198,11 +198,11 @@
                     <h4 class="modal-title">Vaccines in database</h4>
                 </div>
                 <div class="modal-body">
-                    <table style="width:100%">
+                    <table class="table table-striped table-hover">
                         <tr>
-                            <td>Vaccine</td>
-                            <td>Disease</td>
-                            <td>Description</td>
+                            <td><b>Vaccine</b></td>
+                            <td><b>Disease</b></td>
+                            <td><b>Description</b></td>
                         </tr>
                         @foreach (var vaccine in Model.Vaccines)
                         {
@@ -227,10 +227,10 @@
                     <h4 class="modal-title">Institutions in database</h4>
                 </div>
                 <div class="modal-body">
-                    <table style="width:100%">
+                    <table class="table table-striped table-hover">
                         <tr>
-                            <td>Institution Name</td>
-                            <td>Address</td>
+                            <td><b>Institution Name</b></td>
+                            <td><b>Address</b></td>
                         </tr>
                         @foreach (var institution in Model.Institutions)
                         {

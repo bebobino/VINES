@@ -31,15 +31,15 @@
 
                             <div class="card col-lg-3 col-md-5 col-6 d-md-flex align-items-center text-center" id="showInstitutions">
                                 <br>
-                                <h1>@Model.institutions.Count</h1>
-                                <h5>Institutions in database</h5>
+                                @*<h1>@Model.Roles.1.Count</h1>*@
+                                <h5>Number of Patients</h5>
 
                             </div>
 
                             <div class="card col-lg-3 col-md-5 col-6 d-md-flex align-items-center text-center" id="showVaccines">
                                 <br>
-                                <h1>@Model.vaccines.Count</h1>
-                                <h5>Vaccines in database</h5>
+                                @*<h1>@Model.Advertisers.Count</h1>*@
+                                <h5>Number of Advertisers</h5>
 
                             </div>
 
@@ -77,12 +77,12 @@
                                         </thead>
                                         <tbody>
                                             @{
-                                                var i = 1;
+                                                var ic = 1;
                                             }
                                             @foreach (var diseases in Model.disease)
                                             {
                                                 <tr>
-                                                    <td>@i</td>
+                                                    <td>@ic</td>
                                                     <td>@diseases.diseaseName</td>
                                                     <td>@diseases.notes</td>
                                                     <td>@diseases.dateAdded</td>
@@ -91,7 +91,7 @@
                                                         <input type="hidden" name="id" id="id" value="@diseases.diseaseID" />
                                                     </td>
                                                 </tr>
-                                                i++;
+                                                ic++;
                                             }
                                         </tbody>
 
@@ -223,80 +223,6 @@
 
     <!-- dashboard modals -->
 
-    <div class="modal fade" id="newsSources">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">News Sources</h4>
-                </div>
-                <div class="modal-body">
-
-                    <p>https://www.fda.gov.ph/advisories/</p>
-                    <p>https://doh.gov.ph/press-releases</p>
-                    <p>https://www.who.int/news-room/headlines</p>
-                    <p>https://manila.gov.ph/news-and-events/</p>
-                    <p>https://quezoncity.gov.ph/news-and-media/</p>
-                    <p>https://www.makati.gov.ph/content/news</p>
-                    <p>https://www.pasigcity.gov.ph/news-events</p>
-                    <br>
-                    <input type="button" class="btn btn-secondary" id="hideSources" value="Hide" />
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal fade" id="institutions">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Institutions in database</h4>
-                </div>
-                <div class="modal-body">
-                    <p>Adela Serra Ty Memorial Medical Center</p>
-                    <p>Adventist Hospital-Cebu, Inc.</p>
-                    <p>Adventist Hospital-Davao, Inc.</p>
-                    <p>Adventist Hospital-Palawan, Inc.</p>
-                    <p>Adventist Hospital-Santiago City, Inc.</p>
-                    <p>Adventist Medical Center Manila</p>
-                    <p>Adventist Medical Center-Bacolod, Inc.</p>
-                    <p>Adventist Medical Center-Iligan City, Inc.</p>
-                    <p>Adventist Medical Center-Valencia City, Inc.</p>
-                    <p>Ago General Hospital</p>
-                    <p>Air Force General Hospital</p>
-                    <p>Alabang Medical Center</p>
-                    <p>Albay Doctors Hospital</p>
-                    <p>Allah Valley Medical Specialists Center, Inc.</p>
-                    <p>Allied Care Experts (ACE) Medical Center - Baypointe, Inc.</p>
-                    <p>Allied Care Experts (ACE) Medical Center - Pateros, Inc.</p>
-                    <br>
-                    <input type="button" class="btn btn-secondary" id="hideInstitutions" value="Hide" />
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal fade" id="vaccines">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Vaccines in database</h4>
-                </div>
-                <div class="modal-body">
-
-                    <p>Covaxin</p>
-                    <p>Moderna</p>
-                    <p>Janssen</p>
-                    <p>Oxford-AstraZeneca</p>
-                    <p>Pfizer-BioNTech</p>
-                    <p>Sinovac</p>
-                    <p>Sinopharm</p>
-                    <p>Sputnik V</p>
-                    <br>
-                    <input type="button" class="btn btn-secondary" id="hideVaccines" value="Hide" />
-                </div>
-            </div>
-        </div>
-    </div>
 }
 else
 {

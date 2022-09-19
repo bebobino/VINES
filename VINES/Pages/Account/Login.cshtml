@@ -49,49 +49,42 @@
               <div class="form-block">
                   <div class="mb-4">
                   <h3>Sign In to <strong>VINES</strong></h3>
-                  <p class="mb-4">Use a local account to log in.</p>
+                  <p class="mb-4" style="color:black">Use a local account to log in.</p>
                 </div>
                 <form id="account" method="post">
                     @Html.ValidationMessage("Error", new { @style="color:red" })
                   <div class="form-group first">
-                    <label asp-for="Input.email"></label>
+                    <label asp-for="Input.email" style="color:black">Email</label>
                     <input type="text" asp-for="Input.email" class="form-control">
                     <span asp-validation-for="Input.email" class="text-danger"></span>
 
                   </div>
                   <div class="form-group last mb-4">
-                    <label asp-for="Input.password"></label>
+                    <label asp-for="Input.password" style="color:black">Password</label>
                     <input type="password" asp-for="Input.password" class="form-control" id="password">
                     <span asp-validation-for="Input.password" class="text-danger"></span>
                   </div>
                   
                   <div class="d-flex mb-5 align-items-center">
-                    <label class="control control--checkbox mb-0"><span class="caption">Remember me</span>
+                    <label class="control control--checkbox mb-0"><span class="caption" style="color:black">Remember me</span>
                       <input type="checkbox"/>
                       <div class="control__indicator"></div>
                     </label>
-                    <span class="ml-auto"><a class="" asp-page="/Account/Registration">Create New Account</a></span> 
+                    <span class="ml-auto"><a style="color:black" class="" asp-page="/Account/Registration">Create New Account</a></span> 
                   </div>
 
                   <input type="submit" value="Log In" class="btn btn-pill text-white btn-block btn-primary">
 
-                  <span class="d-block text-center my-4 text-muted"> or sign in with</span>
+                  <span class="d-block text-center my-4 text-muted" style="color:black"> or sign in with</span>
                   
-                  <div class="social-login text-center">
-                    <a asp-page="/Account/extFacebook" class="facebook">
-                      <span class="icon-facebook mr-2"></span> 
-                    </a>
-                    <a href="/Account/extGoogle" class="google">
-                      <span class="icon-google mr-2"></span> 
-                    </a>
-                  </div>
+              
                   
                   <div class="other-login">
-                  <span class="ml-auto"><a class="" asp-page="/Account/LoginAdvert">Login as an Advertiser</a></span>
+                  <span class="ml-auto"><a style="color:black" class="" asp-page="/Account/LoginAdvert">Login as an Advertiser</a></span>
                   </div>
                 </form>
 
-                <a href="/Index">Return to home</a>
+                <a href="/Index" style="color:black">Return to home</a>
               </div>
             </div>
           </div>

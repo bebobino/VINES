@@ -3,7 +3,7 @@ body {
   background-color: #f8fafb; }
 
 p {
-  color: #b3b3b3;
+  color: #000000;
   font-weight: 300; }
 
 h1, h2, h3, h4, h5, h6,
@@ -65,7 +65,7 @@ h2 {
       font-size: 12px;
       display: block;
       margin-bottom: 0;
-      color: #b3b3b3; }
+      color: #000000; }
     .content .contents .form-group.focus, .content .bg .form-group.focus {
       background: #fff; }
     .content .contents .form-group.field--not-empty label, .content .bg .form-group.field--not-empty label {
@@ -167,7 +167,7 @@ h2 {
   background: #ccc; }
 
 .control input:checked ~ .control__indicator {
-  background: #38d39f; }
+  background: #001b66; }
 
 .control:hover input:not([disabled]):checked ~ .control__indicator,
 .control input:checked:focus ~ .control__indicator {

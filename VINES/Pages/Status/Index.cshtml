@@ -9,10 +9,10 @@
             <thead>
                 <tr>
                     <th>
-                        First Name
+                        Email
                     </th>
                     <th>
-                        Last Name
+                        Role
                     </th>
                     <th>
                         Access Status (if blocked)
@@ -24,10 +24,10 @@
                 {
                     <tr>
                         <td>
-                            @Model.users[i].firstName
+                            @Model.users[i].email
                         </td>
                         <td>
-                            @Model.users[i].lastName
+                            @Model.users[i].role
                         </td>
                         <td>
                             <input type="checkbox" class="chk" asp-for="@Model.users[i].isBlocked" data-id="@Model.users[i].userID" />
