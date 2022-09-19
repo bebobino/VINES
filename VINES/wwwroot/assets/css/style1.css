@@ -2114,7 +2114,7 @@ span.email-notes {
     }
 
         .footer-logo h2 span {
-            color: #00ffbb;
+            color: #001b66;
         }
 
 .footer-icons ul li {
@@ -2153,7 +2153,7 @@ span.email-notes {
 }
 
 .footer-contacts p span {
-    color: #00ffbb;
+    color: #001b66;
     font-weight: 700;
 }
 
@@ -2167,8 +2167,8 @@ span.email-notes {
 }
 
 .popular-tag ul li a:hover, .footer-icons ul li a:hover {
-    background: #00ffbb;
-    border: 1px solid #00ffbb;
+    background: #001b66;
+    border: 1px solid #001b66;
     color: #fff;
 }
 
@@ -2194,7 +2194,7 @@ span.email-notes {
 
 .copyright-text a:hover {
     text-decoration: underline;
-    color: #00ffbb;
+    color: #001b66;
 }
 
 .copyright-text a {
@@ -2207,7 +2207,7 @@ span.email-notes {
 }
 
 .copyright a, .credits a {
-    color: #00ffbb;
+    color: #001b66;
 }
 
 .credits {
@@ -2564,6 +2564,10 @@ span.email-notes {
     padding-bottom: 10px;
 }
 
+.px-3 {
+    padding-top: 2px;
+    padding-bottom: 2px;
+}
 
 
 

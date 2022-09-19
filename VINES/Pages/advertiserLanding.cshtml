@@ -10,14 +10,14 @@
         display: inline-block;
         padding: 10px 40px;
         border-radius: 4px;
-        color: #2487ce;
+        color: #001b66;
         transition: none;
         font-size: 14px;
         font-weight: 400;
         font-family: "Raleway", sans-serif;
         font-weight: 600;
         transition: 0.3s;
-        border: 2px solid #2487ce;
+        border: 2px solid #001b66;
     }
 
 </style>
@@ -80,40 +80,44 @@
                     <!-- End single blog -->
                     <div class="col-md-12 col-sm-12 col-xs-12">
                         <div class="single-blog">
-
-
                             <div class="blog-text">
 
                                 <form method="post" enctype="multipart/form-data">
-                                    <label>Advertisment Name</label>
-                                    <br />
-                                    <input type="text" asp-for="Ad.advertisementTitle" required />
-                                    <br />                                  
-                                    <br />
-                                    <label>URL Destination</label>
-                                    <br />
-                                    <input type="text" asp-for="Ad.url" required />
-                                    <br />
-                                     <br />
-                                    <label>Ad Type</label>
-                                   <br />
-                                    <select asp-for="Ad.advertisementTypeID" required>
-                                        @foreach (var adcat in Model.AdTypes)
-                                        {
-                                            <option value="@adcat.advertisementTypeID">@adcat.advertisementType</option>
-                                        }
+                                    <div class="scroll-auto">
+                                        <table class="table table-striped border">
+                                            <tr class="table-secondary">
+                                                <th>Advertisement Name </th>
+                                            </tr>
+                                            <tr><td><input type="text" asp-for="Ad.advertisementTitle" required /></td></tr>
+                                            <tr class="table-secondary">
+                                                <th>URL Destination </th>
+                                            </tr>
+                                            <tr>
+                                                <td><input type="text" asp-for="Ad.url" required /></td>
+                                            </tr>
+                                            <tr class="table-secondary">
+                                                <th>Ad Type </th>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <select asp-for="Ad.advertisementTypeID" required>
+                                                        @foreach (var adcat in Model.AdTypes)
+                                                        {
+                                                            <option value="@adcat.advertisementTypeID">@adcat.advertisementType</option>
+                                                        }
 
-                                    </select>
-                                    <br />
-                                    <br />
-                             
-                                    <label>Image</label>
-                                    <br />
-                                    <input type="file" accept="image/png, image/gif, image/jpeg" asp-for="Photo" required />
-                                    <br />
-                                    <br />
-                                    <input type="submit" />
-
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                            <tr class="table-secondary">
+                                                <th>Image </th>
+                                            </tr>
+                                            <tr>
+                                                <td><input type="file" accept="image/png, image/gif, image/jpeg" asp-for="Photo" required /></td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    <input type="submit" style="color:#001b66" class="btn-buy" />
                                 </form>
                                 <br />
                                 <br />
@@ -121,38 +125,66 @@
                         </div>
 
 
+                        <!-- Help here...TD for status malfunctions. -->
+                         <div class="blog-text">
+                            <h1 style="font-size: x-large;"><b>Advertisements</b></h1>
+                            <div class="scroll-auto">
+                                <table class="table table-striped border">
+                                    <thead>
+                                        <tr>
+                                            <th>Title:</th>
+                                            <th>Image Banner:</th>
+                                            <th>Price:</th>
+                                            <th>Status:</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
 
-                        <div class="blog-text">
-                            <h5>Advertisements</h5>
-                            @foreach (var advert in Model.Ads)
-                            {
-                                <h5>Title: @advert.advertisementTitle</h5>
-                                <div class="scroll-auto">
-                                <a href="@advert.url">                                    
-                                        <img src="/images/@advert.imgsrc" width="400" height="100" style="object-fit: contain">                                   
-                                </a>
-                                 </div>
-                                <p>Price: @advert.advertisementType.price</p>
-                                if (advert.endDate > DateTime.UtcNow)
-                                {
-                                    @Html.Raw("Status: Active")
+                                        @foreach (var advert in Model.Ads)
+                                        {
+                                            <tr>
 
-                                }
-                                else
-                                {
-                                    @Html.Raw("Status: Inactive")
-                                    <form asp-page-handler="checkout" method="post">
-                                        <input type="hidden" name="total" value="@advert.advertisementType.price" />
-                                        <input type="hidden" name="id" value="@advert.advertisementID" />
-                                        <button style="color:#2487ce" class="btn-buy">Subscribe</button>
+                                                <td>@advert.advertisementTitle</td>
+                                                <td>
+                                                    <a href="@advert.url">
+                                                        <img src="/images/@advert.imgsrc" width="400" height="100" style="object-fit: contain">
+                                                    </a>
+                                                </td>
+                                                <td>@advert.advertisementType.price</td>
 
-                                    </form>
-                                }
-                                <br />
-                                <br />
+                                                <td>
+                                                if (advert.endDate > DateTime.UtcNow)
+                                                {
+                                                
+                                                    @Html.Raw("Status: Active")
+                                                
 
-                            }
+                                                }
+                                                else
+                                                {
+                                               
+                                                    @Html.Raw("Status: Inactive")
+                                                    <form asp-page-handler="checkout" method="post">
+                                                        <input type="hidden" name="total" value="@advert.advertisementType.price" />
+                                                        <input type="hidden" name="id" value="@advert.advertisementID" />
+                                                        <button style="color:#2487ce" class="btn-buy">Subscribe</button>
+
+                                                    </form>
+                                                
+                                                }
+                                                </td>
+
+
+                                            </tr>
+
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
+                        
+
                     </div>
                 </div>
 
@@ -229,3 +261,41 @@ else
         Response.Redirect("/Index");
     }
 }
+
+@*
+    <div class="blog-text">
+                            <h1 style="font-size: x-large;"><b>Advertisements</b></h1>
+                            @foreach (var advert in Model.Ads)
+                            {
+                                <h5>Title: @advert.advertisementTitle</h5>
+                                <div class="scroll-auto">
+                                    <a href="@advert.url">
+                                        <img src="/images/@advert.imgsrc" width="400" height="100" style="object-fit: contain">
+                                    </a>
+                                </div>
+                                <p>Price: @advert.advertisementType.price</p>
+                                if (advert.endDate > DateTime.UtcNow)
+                                {
+                                    @Html.Raw("Status: Active")
+
+                                }
+                                else
+                                {
+                                    @Html.Raw("Status: Inactive")
+                                    <form asp-page-handler="checkout" method="post">
+                                        <input type="hidden" name="total" value="@advert.advertisementType.price" />
+                                        <input type="hidden" name="id" value="@advert.advertisementID" />
+                                        <button style="color:#001b66" class="btn-buy">Subscribe</button>
+
+                                    </form>
+                                }
+                                <br />
+                                <br />
+
+                            }
+                        </div>
+*@
+
+@*
+               
+            *@
