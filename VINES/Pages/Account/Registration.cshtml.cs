@@ -38,17 +38,21 @@ namespace VINES.Pages.Account
             [Required]
             [Display(Name = "First Name")]
             public string firstName { get; set; }
+
             [Display(Name = "Middle Name")]
             public string middleName { get; set; }
+
             [Required]
             [Display(Name = "Last Name")]
             public string lastName { get; set; }
+
             [Required]
             [Display(Name = "Gender")]
             public int gender { get; set; }
 
             [Required]
             [Display(Name ="Date of Birth")]
+            [MinimumAge(18, ErrorMessage = "You Must Be Eighteen (18) Years of Age")]
             public DateTime dateOfBirth { get; set; }
 
             [Required]
@@ -58,6 +62,7 @@ namespace VINES.Pages.Account
 
             [Required]
             [Display(Name = "Contact Nunber")]
+            [RegularExpression(@"^[0-9]{11}$", ErrorMessage = "Only Numeric Inputs Allowed")]
             [DataType(DataType.PhoneNumber)]
             [StringLength(11, ErrorMessage = "Invalid Phone Number", MinimumLength = 11)]
             public string contactNumber { get; set; }
