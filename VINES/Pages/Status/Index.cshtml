@@ -1,7 +1,6 @@
 ﻿@page
 @model VINES.Pages.Status.IndexModel
 @{
-    ViewData["Title"] = "User Status";
 }
 <div class="blog-page area-padding">
     <form method="post">
@@ -9,13 +8,16 @@
             <thead>
                 <tr>
                     <th>
+
+                    </th>
+                    <th>
                         Email
                     </th>
                     <th>
                         Role
                     </th>
-                    <th>
-                        Access Status (if blocked)
+                    <th style="text-align:center">
+                        Access Status
                     </th>
                 </tr>
             </thead>
@@ -24,18 +26,21 @@
                 {
                     <tr>
                         <td>
-                            @Model.users[i].email
+                            <input type="hidden" class="userID" asp-for="@Model.users[i].userID" />
                         </td>
                         <td>
-                            @Model.users[i].role
+                            <label type="text" class="email" asp-for="@Model.users[i].email" readonly>@Model.users[i].email</label>
                         </td>
                         <td>
+                            <label type="text" class="role" asp-for="@Model.users[i].role.role" readonly>@Model.users[i].role.role</label>
+                        </td>
+                        <td style="text-align:center">
                             <input type="checkbox" class="chk" asp-for="@Model.users[i].isBlocked" data-id="@Model.users[i].userID" />
                         </td>
                     </tr>
                 }
             </tbody>
         </table>
-        <input type="submit" value="Submit"  class="btn btn-primary"/>
+        <button type="submit" class="btn btn-success" value="Update">Update</button>
     </form>
 </div>

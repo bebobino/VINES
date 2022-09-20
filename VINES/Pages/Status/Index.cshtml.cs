@@ -19,15 +19,17 @@ namespace VINES.Pages.Status
             _db = db;
         }
         public List<User> users { get; set; }
+        public List<Roles> roles { get; set; }
 
         public void OnGet()
         {
             users = _db.Users.Where(e => e.roleID != 1).ToList();
+            roles = _db.roles.ToList();
         }
 
         public async Task<IActionResult> OnPost(List<User> users)
         {
-            foreach(var use in users)
+            foreach (var use in users)
             {
                 _db.Users.Where(c => c.userID == use.userID).FirstOrDefault().isBlocked = use.isBlocked;
             }

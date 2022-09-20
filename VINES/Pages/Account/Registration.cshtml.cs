@@ -33,19 +33,22 @@ namespace VINES.Pages.Account
 
         public IList<AuthenticationScheme> ExternalLogins { get; set; }
 
-       public class InputModel
+        public class InputModel
         {
             [Required]
             [Display(Name = "First Name")]
-            [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Use letters only please")]
+            [RegularExpression(@"^[a-zA-Z''-'\s]{1,40}$",
+         ErrorMessage = "Characters are not allowed.")]
             public string firstName { get; set; }
 
-            [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Use letters only please")]
+            [RegularExpression(@"^[a-zA-Z''-'\s]{1,40}$",
+     ErrorMessage = "Characters are not allowed.")]
             [Display(Name = "Middle Name")]
             public string middleName { get; set; }
 
             [Required]
-            [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Use letters only please")]
+            [RegularExpression(@"^[a-zA-Z''-'\s]{1,40}$",
+         ErrorMessage = "Characters are not allowed.")]
             [Display(Name = "Last Name")]
             public string lastName { get; set; }
 
@@ -54,8 +57,8 @@ namespace VINES.Pages.Account
             public int gender { get; set; }
 
             [Required]
-            [Display(Name ="Date of Birth")]
-            [MinimumAge(18, ErrorMessage = "You Must Be Eighteen (18) Years of Age")]
+            [Display(Name = "Date of Birth")]
+            [MinimumAge(18, ErrorMessage = "You Must Be At Least Eighteen (18) Years of Age")]
             public DateTime dateOfBirth { get; set; }
 
             [Required]
@@ -84,7 +87,7 @@ namespace VINES.Pages.Account
             [Required]
             public DateTime dateRegistered { get; set; }
             [Required]
-            public DateTime lastModified { get; set;}
+            public DateTime lastModified { get; set; }
 
             [Required]
             public int failedAttempts { get; set; }
