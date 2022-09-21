@@ -17,12 +17,12 @@
                 </div>
                 <div class="form-group">
                     <label asp-for="sources.sourceName" class="control-label">Source Name</label>
-                    <input asp-for="sources.sourceName" class="form-control" name="name" />
+                    <input asp-for="sources.sourceName" class="form-control" name="name" required/>
                     <span asp-validation-for="sources.sourceName" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label asp-for="sources.sourcesURI" class="control-label">Source URL</label>
-                    <input asp-for="sources.sourcesURI" class="form-control" name="uri" />
+                    <input asp-for="sources.sourcesURI" class="form-control" name="uri" required/>
                     <span asp-validation-for="sources.sourcesURI" class="text-danger"></span>
                 </div>
                 <div class="px-2">

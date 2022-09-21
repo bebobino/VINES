@@ -18,7 +18,7 @@
                     <input type="hidden" asp-for="CommunityPost.communityPostID" />
                     <div class="form-group">
                         <label asp-for="CommunityPost.communityPostTitle" class="control-label">Title</label>
-                        <input asp-for="CommunityPost.communityPostTitle" class="form-control" />
+                        <input asp-for="CommunityPost.communityPostTitle" class="form-control" required/>
                         <span asp-validation-for="CommunityPost.communityPostTitle" class="text-danger"></span>
                     </div>
                     <div class="form-group">
@@ -32,7 +32,7 @@
                     </div>
                     <div class="form-group">
                         <label asp-for="CommunityPost.communityPostContent" class="control-label">Content</label>
-                        <input asp-for="CommunityPost.communityPostContent" class="form-control" />
+                        <input asp-for="CommunityPost.communityPostContent" class="form-control" required/>
                         <span asp-validation-for="CommunityPost.communityPostContent" class="text-danger"></span>
                     </div>
                     <div class="form-group" hidden>

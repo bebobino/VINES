@@ -84,23 +84,34 @@
 
                                 <form method="post" enctype="multipart/form-data">
                                     <div class="scroll-auto">
+
                                         <table class="table table-striped border">
                                             <tr class="table-secondary">
-                                                <th>Advertisement Name </th>
-                                            </tr>
-                                            <tr><td><input type="text" asp-for="Ad.advertisementTitle" required /></td></tr>
-                                            <tr class="table-secondary">
-                                                <th>URL Destination </th>
-                                            </tr>
-                                            <tr>
-                                                <td><input type="text" asp-for="Ad.url" required /></td>
-                                            </tr>
-                                            <tr class="table-secondary">
-                                                <th>Ad Type </th>
+                                                <th> <label asp-for="Ad.advertisementTitle">Advertisement Title</label> </th>
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <select asp-for="Ad.advertisementTypeID" required>
+                                                      <input type="text" class="form-control" asp-for="Ad.advertisementTitle" required>
+                                                </td>
+
+                                            </tr>
+
+
+                                            <tr class="table-secondary">
+                                                <th><label asp-for="Ad.url">URL Destination</label> </th>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <input type="text" class="form-control" asp-for="Ad.url" required>
+                                                </td>
+                                            </tr>
+
+                                            <tr class="table-secondary">
+                                                <th> <label asp-for="Ad.advertisementTypeID">Advertisement Type </label> </th>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <select asp-for="Ad.advertisementTypeID" class="form-control" required>
                                                         @foreach (var adcat in Model.AdTypes)
                                                         {
                                                             <option value="@adcat.advertisementTypeID">@adcat.advertisementType</option>
@@ -110,14 +121,19 @@
                                                 </td>
                                             </tr>
                                             <tr class="table-secondary">
-                                                <th>Image </th>
+                                                <th><label asp-for="Photo">Banner Image </label> </th>
                                             </tr>
                                             <tr>
-                                                <td><input type="file" accept="image/png, image/gif, image/jpeg" asp-for="Photo" required /></td>
+                                                <td> 
+                                                    <input type="file" class="form-control" accept="image/png, image/gif, image/jpeg" asp-for="Photo" required />
+                                                     
+                                                </td>
                                             </tr>
                                         </table>
                                     </div>
-                                    <input type="submit" style="color:#001b66" class="btn-buy" />
+                                    <div class="px-2">
+                                        <input type="submit" style="color:#001b66" class="btn-buy" />
+                                    </div>
                                 </form>
                                 <br />
                                 <br />
@@ -143,9 +159,9 @@
                                     <tbody>
                                         @foreach (var advert in Model.Ads)
                                         {
-                                       <tr>
+                                            <tr>
 
-                                       <td>@advert.advertisementTitle</td>
+                                                <td><center>@advert.advertisementTitle</center></td>
                                                 <td>
                                                     <a href="@advert.url">
                                                         <img src="/images/@advert.imgsrc" width="400" height="100" style="object-fit: contain">
@@ -153,29 +169,30 @@
                                                 </td>
                                                 <td>@advert.advertisementType.price</td>
 
-                                            @if(advert.endDate > DateTime.UtcNow)
+                                                @if (advert.endDate > DateTime.UtcNow)
                                                 {
-                                                
-                                               <td> @Html.Raw("Status: Active")</td>
-                                                
+
+                                                    <td> @Html.Raw("Status: Active")</td>
+
 
                                                 }
-                                            else
+                                                else
                                                 {
-                                               <td>
+                                                    <td>
 
-                                                   @Html.Raw("Status: Inactive")
-                                                    <form asp-page-handler="checkout" method="post">
-                                                        <input type="hidden" name="total" value="@advert.advertisementType.price" />
-                                                        <input type="hidden" name="id" value="@advert.advertisementID" />
-                                                        <button style="color:#001b66" class="btn-buy">Subscribe</button>
+                                                        @Html.Raw("Status: Inactive")
+                                                        <div class="px-2">
+                                                            <form asp-page-handler="checkout" method="post">
+                                                                <input type="hidden" name="total" value="@advert.advertisementType.price" />
+                                                                <input type="hidden" name="id" value="@advert.advertisementID" />
+                                                                <button style="color:#001b66" class="btn-buy">Subscribe</button>
 
-                                                    </form>
-                                                
-                                               </td>
+                                                            </form>
+                                                        </div>
+                                                    </td>
 
                                                 }
-                                           </tr>
+                                            </tr>
                                         }
                                     </tbody>
                                 </table>

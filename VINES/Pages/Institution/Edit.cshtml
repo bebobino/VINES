@@ -22,18 +22,18 @@
                     </div>
                     <div class="form-group">
                         <label asp-for="institutions.institutionName" class="control-label">Institution Name</label>
-                        <input asp-for="institutions.institutionName" class="form-control" />
+                        <input asp-for="institutions.institutionName" class="form-control" required/>
                         <span asp-validation-for="institutions.institutionName" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <label asp-for="institutions.Long" class="control-label">Longitude</label>
-                        <input type="number" asp-for="institutions.Long" class="form-control" />
+                        <input type="number" asp-for="institutions.Long" class="form-control" required/>
                         <span asp-validation-for="institutions.Long" class="text-danger"></span>
                     </div>
 
                     <div class="form-group">
                         <label asp-for="institutions.lat" class="control-label">Latitude</label>
-                        <input type="number" asp-for="institutions.lat" class="form-control" />
+                        <input type="number" asp-for="institutions.lat" class="form-control" required/>
                         <span asp-validation-for="institutions.lat" class="text-danger"></span>
                     </div>
                     <div class="form-group">

@@ -10,7 +10,7 @@
             <h2 class="text-primary">Your information</h2>
         </div>
 
-        <div class="col-12 border pt-m3">
+        <div class="border container" style="padding:30px;">
             <form method="post">
                 <div class="col-12 border p-3 mt-3" hidden>
                     <label asp-for="user.userID"></label>
@@ -20,26 +20,42 @@
                     <label asp-for="user.roleID"></label>
                     <input asp-for="user.roleID" />
                 </div>
-                <div class="col-12 border p-3 mt-3">
-                    <label asp-for="user.firstName"></label>
-                    <input asp-for="user.firstName" />
-                    <span asp-validation-for="user.firstName"></span>
-                </div>
-                <div class="col-12 border p-3 mt-3">
-                    <label asp-for="user.middleName"></label>
-                    <input asp-for="user.middleName" />
-                    <span asp-validation-for="user.middleName"></span>
-                </div>
-                <div class="col-12 border p-3 mt-3">
-                    <label asp-for="user.lastName"></label>
-                    <input asp-for="user.lastName" />
-                    <span asp-validation-for="user.lastName"></span>
+
+                 <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="user.firstName">First Name</label>
+                    </div>
+                    <div class="col-6">
+                        <input asp-for="user.firstName" class="form-control" name="firstName" required/>
+                    </div>
                 </div>
 
-                <div class="col-12 border p-3 mt-3">
-                    <label asp-for="user.contactNumber"></label>
-                    <input asp-for="user.contactNumber" />
-                    <span asp-validation-for="user.contactNumber"></span>
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="user.middleName">Middle Name</label>
+                    </div>
+                    <div class="col-6">
+                        <input asp-for="user.middleName" class="form-control" name="middleName" required/>
+                    </div>
+                </div>
+
+               <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="user.lastName">Last Name</label>
+                    </div>
+                    <div class="col-6">
+                        <input asp-for="user.lastName" class="form-control" name="lastName" required/>
+                    </div>
+                </div>
+
+
+                 <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="user.contactNumber">Contact Number</label>
+                    </div>
+                    <div class="col-6">
+                        <input asp-for="user.contactNumber" class="form-control" name="contactNumber" required/>
+                    </div>
                 </div>
 
                 <div class="col-12 border p-3 mt-3" hidden>
