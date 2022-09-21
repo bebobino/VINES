@@ -3,6 +3,7 @@
 @using Microsoft.AspNetCore.Authorization
 @inject IAuthorizationService AuthorizationService
 @{
+     ViewData["Title"] = "Create Disease";
 }
 @if ((await AuthorizationService.AuthorizeAsync(User, "AdminOnly")).Succeeded)
 {
@@ -15,7 +16,7 @@
                         <label asp-for="Diseases.diseaseName">Disease Name</label>
                     </div>
                     <div class="col-6">
-                        <input asp-for="Diseases.diseaseName" class="form-control" name="name" />
+                        <input asp-for="Diseases.diseaseName" class="form-control" name="name" required/>
                     </div>
                 </div>
 
@@ -40,6 +41,7 @@
             </form>
         </div>
     </div>
+
 
 }
 else

@@ -11,7 +11,10 @@ namespace VINES.Models
         [Required]
         public int diseaseID { get; set; }
         [Required]
+        [RegularExpression(@"^[a-zA-Z''-'\s]{1,40}$",
+        ErrorMessage = "Characters are not allowed.")]
         [Display(Name = "Disease Name")]
+
         public string diseaseName { get; set; }
         [Display(Name = "Notes")]
         public string notes { get; set; }

@@ -14,11 +14,13 @@ namespace VINES.Pages
     public class adminLandingModel : PageModel
     {
         public List<Vaccines> vaccines { get; set; }
-        public List<Sources> sources { get; set; }
+        public List<Sources> Sources { get; set; }
         public List<Diseases> diseases { get; set; }
         public List<Diseases> disease { get; set; }
         public List<Institutions> institutions { get; set; }
         public List<InstitutionTypes> institutionTypes { get; set; }
+        public List<Patients> patients { get; set; } 
+        public List<Advertisers> advertisers { get; set; }
 
         public List<User> Users { get; set; }
 
@@ -31,12 +33,14 @@ namespace VINES.Pages
 
         public void OnGet()
         {
+            advertisers = db.advertisers.ToList();
+            patients = db.Patients.ToList();
             vaccines = db.vaccines.ToList();
             diseases = db.diseases.ToList();
             institutions = db.Institutions.ToList();
             institutionTypes = db.InstitutionTypes.ToList();
             disease = db.Diseases.ToList();
-            sources = db.sources.ToList();
+            Sources = db.sources.ToList();
         }
        
     }

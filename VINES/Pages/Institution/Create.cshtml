@@ -28,7 +28,7 @@
                         <label asp-for="institutions.institutionName">Institution Name</label>
                     </div>
                     <div class="col-6">
-                        <input asp-for="institutions.institutionName" class="form-control" name="name" />
+                        <input asp-for="institutions.institutionName" class="form-control" name="name" required/>
                     </div>
                 </div>
 
@@ -37,7 +37,7 @@
                         <label asp-for="institutions.Long">Longitude</label>
                     </div>
                     <div class="col-6">
-                        <input type="number" asp-for="institutions.Long" class="form-control" name="Long"></input>
+                        <input type="number" asp-for="institutions.Long" class="form-control" name="Long" required></input>
                     </div>
                 </div>
 
@@ -46,7 +46,7 @@
                         <label asp-for="institutions.lat">Latitude</label>
                     </div>
                     <div class="col-6">
-                        <input type="number" asp-for="institutions.lat" class="form-control" name="lat">
+                        <input type="number" asp-for="institutions.lat" class="form-control" name="lat" required>
                     </div>
                 </div>
 

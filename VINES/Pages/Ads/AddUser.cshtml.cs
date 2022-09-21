@@ -42,11 +42,17 @@ namespace VINES.Pages.Ads
             public int institution { get; set; }
             [Required]
             [Display(Name = "First Name")]
+            [RegularExpression(@"^[a-zA-Z''-'\s]{1,40}$",
+            ErrorMessage = "Characters are not allowed.")]
             public string firstName { get; set; }
             [Display(Name = "Middle Name")]
+            [RegularExpression(@"^[a-zA-Z''-'\s]{1,40}$",
+            ErrorMessage = "Characters are not allowed.")]
             public string middleName { get; set; }
             [Required]
             [Display(Name = "Last Name")]
+            [RegularExpression(@"^[a-zA-Z''-'\s]{1,40}$",
+            ErrorMessage = "Characters are not allowed.")]
             public string lastName { get; set; }
             [Required]
             [Display(Name = "Gender")]
@@ -54,6 +60,7 @@ namespace VINES.Pages.Ads
 
             [Required]
             [Display(Name ="Date of Birth")]
+            [MinimumAge(18, ErrorMessage = "You Must Be At Least Eighteen (18) Years of Age")]
             public DateTime dateOfBirth { get; set; }
 
             [Required]

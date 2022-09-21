@@ -125,8 +125,8 @@
                         </div>
 
 
-                        <!-- Help here...TD for status malfunctions. -->
-                         <div class="blog-text">
+
+                        <div class="blog-text">
                             <h1 style="font-size: x-large;"><b>Advertisements</b></h1>
                             <div class="scroll-auto">
                                 <table class="table table-striped border">
@@ -136,16 +136,16 @@
                                             <th>Image Banner:</th>
                                             <th>Price:</th>
                                             <th>Status:</th>
-                                            <th></th>
+
+
                                         </tr>
                                     </thead>
                                     <tbody>
-
                                         @foreach (var advert in Model.Ads)
                                         {
-                                            <tr>
+                                       <tr>
 
-                                                <td>@advert.advertisementTitle</td>
+                                       <td>@advert.advertisementTitle</td>
                                                 <td>
                                                     <a href="@advert.url">
                                                         <img src="/images/@advert.imgsrc" width="400" height="100" style="object-fit: contain">
@@ -153,18 +153,18 @@
                                                 </td>
                                                 <td>@advert.advertisementType.price</td>
 
-                                                <td>
-                                                if (advert.endDate > DateTime.UtcNow)
+                                            @if(advert.endDate > DateTime.UtcNow)
                                                 {
                                                 
-                                                    @Html.Raw("Status: Active")
+                                               <td> @Html.Raw("Status: Active")</td>
                                                 
 
                                                 }
-                                                else
+                                            else
                                                 {
-                                               
-                                                    @Html.Raw("Status: Inactive")
+                                               <td>
+
+                                                   @Html.Raw("Status: Inactive")
                                                     <form asp-page-handler="checkout" method="post">
                                                         <input type="hidden" name="total" value="@advert.advertisementType.price" />
                                                         <input type="hidden" name="id" value="@advert.advertisementID" />
@@ -172,18 +172,18 @@
 
                                                     </form>
                                                 
+                                               </td>
+
                                                 }
-                                                </td>
-
-
-                                            </tr>
-
+                                           </tr>
                                         }
                                     </tbody>
                                 </table>
                             </div>
                         </div>
-                        
+
+
+
 
                     </div>
                 </div>
@@ -262,40 +262,3 @@ else
     }
 }
 
-@*
-    <div class="blog-text">
-                            <h1 style="font-size: x-large;"><b>Advertisements</b></h1>
-                            @foreach (var advert in Model.Ads)
-                            {
-                                <h5>Title: @advert.advertisementTitle</h5>
-                                <div class="scroll-auto">
-                                    <a href="@advert.url">
-                                        <img src="/images/@advert.imgsrc" width="400" height="100" style="object-fit: contain">
-                                    </a>
-                                </div>
-                                <p>Price: @advert.advertisementType.price</p>
-                                if (advert.endDate > DateTime.UtcNow)
-                                {
-                                    @Html.Raw("Status: Active")
-
-                                }
-                                else
-                                {
-                                    @Html.Raw("Status: Inactive")
-                                    <form asp-page-handler="checkout" method="post">
-                                        <input type="hidden" name="total" value="@advert.advertisementType.price" />
-                                        <input type="hidden" name="id" value="@advert.advertisementID" />
-                                        <button style="color:#001b66" class="btn-buy">Subscribe</button>
-
-                                    </form>
-                                }
-                                <br />
-                                <br />
-
-                            }
-                        </div>
-*@
-
-@*
-               
-            *@

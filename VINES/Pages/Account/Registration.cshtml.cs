@@ -38,17 +38,17 @@ namespace VINES.Pages.Account
             [Required]
             [Display(Name = "First Name")]
             [RegularExpression(@"^[a-zA-Z''-'\s]{1,40}$",
-         ErrorMessage = "Characters are not allowed.")]
+            ErrorMessage = "Characters are not allowed.")]
             public string firstName { get; set; }
 
             [RegularExpression(@"^[a-zA-Z''-'\s]{1,40}$",
-     ErrorMessage = "Characters are not allowed.")]
+            ErrorMessage = "Characters are not allowed.")]
             [Display(Name = "Middle Name")]
             public string middleName { get; set; }
 
             [Required]
             [RegularExpression(@"^[a-zA-Z''-'\s]{1,40}$",
-         ErrorMessage = "Characters are not allowed.")]
+            ErrorMessage = "Characters are not allowed.")]
             [Display(Name = "Last Name")]
             public string lastName { get; set; }
 
@@ -113,19 +113,24 @@ namespace VINES.Pages.Account
                 {
                     ModelState.AddModelError("Success", "SUCCESS: User created.");
                     var help = new Help();
-                    user = new User { firstName = Input.firstName, 
-                        middleName = Input.middleName, 
-                        lastName = Input.lastName, 
-                        genderID = Input.gender, 
-                        dateOfBirth = Input.dateOfBirth, 
-                        email = Input.email, 
-                        password = help.Hash(Input.password), 
-                        contactNumber = Input.contactNumber, 
-                        roleID = 3, isBlocked = false, 
-                        isLocked = false, emailAuth = false, 
-                        dateRegistered = DateTime.Now, 
-                        lastModified = DateTime.Now, 
-                        failedAttempts = 0};
+                    user = new User
+                    {
+                        firstName = Input.firstName,
+                        middleName = Input.middleName,
+                        lastName = Input.lastName,
+                        genderID = Input.gender,
+                        dateOfBirth = Input.dateOfBirth,
+                        email = Input.email,
+                        password = help.Hash(Input.password),
+                        contactNumber = Input.contactNumber,
+                        roleID = 3,
+                        isBlocked = false,
+                        isLocked = false,
+                        emailAuth = false,
+                        dateRegistered = DateTime.Now,
+                        lastModified = DateTime.Now,
+                        failedAttempts = 0
+                    };
                     Db.Users.Add(user);
                     await Db.SaveChangesAsync();
                     var patient = new Patients
@@ -140,7 +145,7 @@ namespace VINES.Pages.Account
                     Db.Patients.Add(patient);
                     await Db.SaveChangesAsync();
 
-                    help.sendEmail(Input.email, "Account Confirmation", "Here is your authentication link: "+AppSettings.Site.Url+"Account/RegisterConfirmation/?key1="+user.userID+"&key2="+help.Hash(user.email));
+                    help.sendEmail(Input.email, "Account Confirmation", "Here is your authentication link: " + AppSettings.Site.Url + "Account/RegisterConfirmation/?key1=" + user.userID + "&key2=" + help.Hash(user.email));
                     return RedirectToPage("/Account/Login");
 
                 }
