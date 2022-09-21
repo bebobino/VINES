@@ -3,6 +3,7 @@
 @using Microsoft.AspNetCore.Authorization
 @inject IAuthorizationService AuthorizationService
 @{
+    ViewData["Title"] = "Institution Vaccines";
 }
 @if ((await AuthorizationService.AuthorizeAsync(User, "AdminOnly")).Succeeded)
 {
@@ -60,11 +61,15 @@
                                             @Html.DisplayFor(m => institutionvax.price)
                                         </td>
                                         <td>
+                                            <div class="px-3">
                                             <button asp-page-handler="Delete" asp-route-id="@institutionvax.institutionVaccineID" onclick="return confirm('Are you sure you want to delete?')"
                                         class="btn btn-danger btn-sm">
                                                 Delete
                                             </button>
+                                            </div>
+                                             <div class="px-3">
                                             <a asp-page="Edit" asp-route-id="@institutionvax.institutionVaccineID" class="btn btn-success btn-sm text-white">Edit</a>
+                                            </div>
                                         </td>
                                     </tr>
                                     i++;

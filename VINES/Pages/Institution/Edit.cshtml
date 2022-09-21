@@ -3,12 +3,12 @@
 @using Microsoft.AspNetCore.Authorization
 @inject IAuthorizationService AuthorizationService
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Edit Institution";
 }
 @if ((await AuthorizationService.AuthorizeAsync(User, "AdminOnly")).Succeeded)
 {
     <div class="blog-page area-padding">
-        <h4>Edit Institutions</h4>
+        <h4 class="text-primary">Edit Institutions</h4>
         <hr />
         <div class="row">
             <div class="col-md-4">

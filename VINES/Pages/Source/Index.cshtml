@@ -1,6 +1,7 @@
 ﻿@page
 @model VINES.Pages.Source.IndexModel
 @{
+    ViewData["Title"] = "Sources List";
 }
 <div class="blog-page area-padding">
     <div class="container row p-0 m-0">
@@ -44,11 +45,15 @@
                                     @Html.DisplayFor(m => sources.sourcesURI)
                                 </td>
                                 <td>
+                                    <div class ="px-3">
                                     <button asp-page-handler="Delete" asp-route-id="@sources.sourcesID" onclick="return confirm('Are you sure you want to delete?')"
                                     class="btn btn-danger btn-sm">
                                         Delete
                                     </button>
+                                    </div>
+                                    <div class ="px-3">
                                     <a asp-page="Edit" asp-route-id="@sources.sourcesID" class="btn btn-success btn-sm text-white">Edit</a>
+                                    </div>
                                 </td>
                             </tr>
                             i++;
