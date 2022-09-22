@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using VINES.Models;
 
 namespace VINES.Pages.Vaccine
@@ -26,29 +27,21 @@ namespace VINES.Pages.Vaccine
             diseases = Db.diseases.ToList();
         }
 
-        public IActionResult OnPostCreate(int ID, string name, string notes)
+        public async Task<IActionResult> OnPostDelete(int id)
         {
-            var vaccines = new Vaccines
+            var com = await Db.vaccines.FindAsync(id);
+            if (com == null)
             {
-                diseaseID = ID,
-                vaccineName = name,
-                notes = notes,
-                dateAdded = DateTime.Now,
-                dateModified = DateTime.Now
-            };
+                return NotFound();
 
-            Db.vaccines.Add(vaccines);
-            Db.SaveChanges();
-            return RedirectToPage("Index");
-        }
-
-        public IActionResult OnPostDelete(int id)
-        {
-            var vaccine = Db.vaccines.Where(x => x.vaccineID == id).FirstOrDefault();
-            Db.vaccines.Remove(vaccine);
-            Db.SaveChanges();
+            }
+            Db.vaccines.Remove(com);
+            await Db.SaveChangesAsync();
 
             return RedirectToPage("Index");
         }
     }
 }
+
+
+

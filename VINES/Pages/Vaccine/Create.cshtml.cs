@@ -10,38 +10,41 @@ namespace VINES.Pages.Vaccine
 {
     public class CreateModel : PageModel
     {
-        private readonly DatabaseContext _Db;
-        public List<Diseases> disease { get; set; }
-        public List<Vaccines> vaccines { get; set; }
+        private readonly DatabaseContext db;
+        public List<Diseases> diseases { get; set; }
 
-        public CreateModel(DatabaseContext Db)
+        public CreateModel(DatabaseContext _db)
         {
-            _Db = Db;
-            disease = _Db.Diseases.ToList();
-            vaccines = _Db.vaccines.ToList();
+            db = _db;
+            diseases = _db.diseases.ToList();
         }
+
         [BindProperty]
-        public Vaccines Vaccines { get; set; }
+        public Vaccines vaccines { get; set; }
 
         public void OnGet()
         {
+
         }
 
-        public async Task<IActionResult> OnPost(int dID, int vID, string vName, string notes )
+        public async Task<IActionResult> OnPost(int dId, string name, string notes)
         {
             var vaccines = new Vaccines
             {
-                diseaseID = dID,
-                vaccineID = vID,
-                vaccineName = vName,
+                diseaseID = dId,
+                vaccineName = name,
                 notes = notes,
                 dateAdded = DateTime.Now,
                 dateModified = DateTime.Now
             };
 
-            _Db.vaccines.Add(Vaccines);
-            await _Db.SaveChangesAsync();
+            db.vaccines.Add(vaccines);
+            await db.SaveChangesAsync();
             return RedirectToPage("Index");
         }
+
     }
 }
+
+
+
