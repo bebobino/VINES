@@ -17,7 +17,7 @@
                             <label asp-for="institutions.institutionTypeID">Institution Type</label>
                         </div>
                         <div class="col-6">
-                            <select asp-for="institutions.institutionTypeID" name="typeID">
+                            <select asp-for="institutions.institutionTypeID" name="typeID" class="form-control">
                                 @foreach (var types in Model.institutionTypes)
                                 {
                                     <option value="@types.institutionTypeID">@types.institutionType</option>
@@ -38,7 +38,7 @@
                         <label asp-for="institutions.Long">Longitude</label>
                     </div>
                     <div class="col-6">
-                        <input type="number" asp-for="institutions.Long" class="form-control" name="Long" required></input>
+                        <input type="number" asp-for="institutions.Long" class="form-control" name="Long" required>
                     </div>
                 </div>
 

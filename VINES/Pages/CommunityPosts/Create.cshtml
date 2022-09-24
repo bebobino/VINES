@@ -27,7 +27,7 @@
                         <label asp-for="communityPost.communityPostCategory">Category</label>
                     </div>
                     <div class="col-6">
-                        <select asp-for="communityPost.communityPostCategoryID" name="catID">
+                        <select asp-for="communityPost.communityPostCategoryID" name="catID" class="form-control">
                             @foreach (var category in Model.categories)
                             {
                                 <option value="@category.communityPostCategoryID">@category.communityPostCategory</option>

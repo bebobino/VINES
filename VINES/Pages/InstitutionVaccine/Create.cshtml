@@ -17,7 +17,7 @@
                                 <label asp-for="institutionVaccines.diseaseID">Disease Name</label>
                             </div>
                             <div class="col-6">
-                                <select asp-for="institutionVaccines.diseaseID" name="dID">
+                                <select asp-for="institutionVaccines.diseaseID" name="dID" class="form-control">
                                     @foreach (var diseases in Model.disease)
                                     {
                                         <option value="@diseases.diseaseID">@diseases.diseaseName</option>
@@ -31,7 +31,7 @@
                             <label asp-for="institutionVaccines.institutionID">Institution Name</label>
                         </div>
                         <div class="col-6">
-                            <select asp-for="institutionVaccines.institutionID" name="instiID">
+                            <select asp-for="institutionVaccines.institutionID" name="instiID" class="form-control">
                                 @foreach (var institution in Model.institutions)
                                 {
                                     <option value="@institution.institutionID">@institution.institutionName</option>
@@ -44,7 +44,7 @@
                             <label asp-for="institutionVaccines.vaccineID">Vaccine Name</label>
                         </div>
                         <div class="col-6">
-                            <select asp-for="institutionVaccines.vaccineID" name="vID">
+                            <select asp-for="institutionVaccines.vaccineID" name="vID" class="form-control">
                                 @foreach (var vaccines in Model.vaccines)
                                 {
                                     <option value="@vaccines.vaccineID">@vaccines.vaccineName</option>

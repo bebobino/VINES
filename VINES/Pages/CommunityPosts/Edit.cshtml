@@ -23,7 +23,7 @@
                     </div>
                     <div class="form-group">
                         <label asp-for="CommunityPost.communityPostCategory" class="control-label">Category</label>
-                        <select asp-for="CommunityPost.communityPostCategoryID" name="catID">
+                        <select asp-for="CommunityPost.communityPostCategoryID" name="catID" class="form-control">
                             @foreach (var category in Model.categories)
                             {
                                 <option value="@category.communityPostCategoryID">@category.communityPostCategory</option>

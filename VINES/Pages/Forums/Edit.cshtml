@@ -19,7 +19,7 @@
 
                     <div class="form-group">
                         <label asp-for="ForumPost.forumCategory" class="control-label">Forum Category</label>
-                        <select asp-for="ForumPost.forumCategoryID" name="catID">
+                        <select asp-for="ForumPost.forumCategoryID" name="catID" class="form-control">
                             @foreach (var category in Model.categories)
                             {
                                 <option value="@category.forumCategoryID">@category.forumCategory</option>

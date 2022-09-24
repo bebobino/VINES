@@ -15,7 +15,7 @@
                             <label asp-for="vaccines.diseaseID">Disease Name</label>
                         </div>
                         <div class="col-6">
-                            <select asp-for="vaccines.diseaseID" name="dID">
+                            <select asp-for="vaccines.diseaseID" name="dID" class="form-control">
                                 @foreach (var diseases in Model.diseases)
                                 {
                                     <option value="@diseases.diseaseID">@diseases.diseaseName</option>
