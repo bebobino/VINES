@@ -170,6 +170,8 @@
     </div>
 
     <!-- End Blog Page -->
+
+
     <!-- modal -->
     <div class="modal fade" id="newsSources">
         <div class="modal-dialog modal-dialog-centered">
@@ -177,16 +179,38 @@
                 <div class="modal-header">
                     <h4 class="modal-title">News Sources</h4>
                 </div>
-                <div class="modal-body">
-                    <center>
-                        @foreach (var source in Model.Sources)
-                        {
-                            <a href="@source.sourcesURI">@source.sourceName</a>
+               <div class="modal-body">
+                @if (Model.Sources.Count() > 0)
+                {
+                    <table class="table table-striped border">
+                        <tr class="table-secondary">
+                            <th>
+                                No.
+                            </th>
+                            <th>
+                                Name
+                            </th>
+                        </tr>
+                        @{
+                            var i = 1;
                         }
-                    </center>
-                    <br>
-                    <input type="button" class="btn btn-secondary" id="hideSources" value="Hide" />
-                </div>
+                        @foreach (var sources in Model.Sources)
+                        {
+                            <tr>
+                                <td>
+                                    @i
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(m => sources.sourceName)
+                                </td>
+                            </tr>
+                            i++;
+                        }
+                    </table>
+                }
+                <br>
+                <input type="button" class="btn btn-secondary" id="hideSources" value="Hide" />
+            </div>
             </div>
         </div>
     </div>
