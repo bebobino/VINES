@@ -4,35 +4,49 @@
     ViewData["Title"] = "Create New Source";
 }
 <div class="blog-page area-padding">
-<h2 class="text-primary">Add A Source</h2>    
-<div class="border container" style="padding:30px;">  
-    <form method="post">  
+
+    <h2 class="text-primary">Add A Source</h2>
+    <div class="border container" style="padding:30px;">
         <div class="form-group row">
-            <div class="col-4">  
-                <label asp-for="sources.sourceName"></label>  
-            </div>  
-            <div class="col-6">  
-                <input asp-for="sources.sourceName" class="form-control" name="name" required/>  
-            </div>  
-        </div>   
-        <div class="form-group row">
-            <div class="col-4">  
-                <label asp-for="sources.sourcesURI"></label>  
-            </div>  
-            <div class="col-6">  
-                <input asp-for="sources.sourcesURI" class="form-control" name="uri" required/>  
-            </div>  
-        </div>  
-  
-  
-         <div class="form-group row">
-                    <div class="col-3 offset-4">
-                        <input type="submit" value="Create" class="btn btn-primary btn-sm text-white" />
-                    </div>
-                    <div class="col-3">
-                        <a asp-page="Index" class="btn btn-success btn-sm text-white">Back to Index</a>
-                    </div>
+            <div class="row justify-content-center">
+
+                <div class="form-block">
+                    <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                        @Html.ValidationMessage("Error", new { @style = "color:red" })
+                        @Html.ValidationMessage("Success", new { @style = "color:green" })
+
+                        <div class="form-group row">
+                            <div class="col-4">
+                                <label asp-for="Input.sourceName" style="color:black">Source Name</label>
+                            </div>
+                            <div class="col-6">
+                                <input type="text" class="form-control" asp-for="Input.sourceName">
+                                <span asp-validation-for="Input.sourceName" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-4">
+                                <label asp-for="Input.sourcesURI" style="color:black">Source URI</label>
+                            </div>
+                            <div class="col-6">
+                                <input type="text" class="form-control" asp-for="Input.sourcesURI" required>
+                                <span asp-validation-for="Input.sourcesURI" class="text-danger"></span>
+                            </div>
+
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-3 offset-4">
+                                <input type="submit" value="Add a Source" class="btn btn-primary btn-sm text-white" />
+                            </div>
+                            <div class="col-3">
+                                <a asp-page="Index" class="btn btn-success btn-sm text-white">Back to Index</a>
+                            </div>
+                        </div>
+                    </form>
                 </div>
-    </form>  
-</div> 
-</div>
+            </div>
+        </div>
+
+    </div>

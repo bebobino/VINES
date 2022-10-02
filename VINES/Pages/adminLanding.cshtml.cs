@@ -41,6 +41,7 @@ namespace VINES.Pages
             institutionTypes = db.InstitutionTypes.ToList();
             disease = db.Diseases.ToList();
             Sources = db.sources.ToList();
+            Users = db.Users.ToList();
         }
        
     }

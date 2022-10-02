@@ -342,6 +342,18 @@ $(document).ready(function () {
     $("#hideVaccines").click(function () {
       $("#vaccines").modal('hide');
     });
+    $("#showPatients").click(function () {
+        $("#patients").modal('show');
+    });
+    $("#hidePatients").click(function () {
+        $("#patients").modal('hide');
+    });
+    $("#showAdvertisers").click(function () {
+        $("#advertisers").modal('show');
+    });
+    $("#hideAdvertisers").click(function () {
+        $("#advertisers").modal('hide');
+    });
 
 });
 
