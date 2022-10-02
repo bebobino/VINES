@@ -42,7 +42,7 @@
     <None Include="wwwroot\assets\img\VINES - Color150ppi.png" />
     <None Include="wwwroot\assets\img\VINES.png" />
     <None Include="wwwroot\assets\img\VINESFull.png" />
-    <None Include="wwwroot\assets\js\main2.js" />
+    <None Include="wwwroot\assets\js\main1.js" />
     <None Include="wwwroot\assets\vendor\animate.css\animate.compat.css" />
     <None Include="wwwroot\assets\vendor\animate.css\animate.css" />
     <None Include="wwwroot\assets\vendor\animate.css\animate.min.css" />
