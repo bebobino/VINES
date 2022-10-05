@@ -221,130 +221,133 @@
     <!-- dashboard modals -->
 
     <div class="modal fade" id="newsSources">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">News Sources</h4>
-            </div>
-            <div class="modal-body">
-                @if (Model.Sources.Count() > 0)
-                {
-                    <table class="table table-striped border">
-                        <tr class="table-secondary">
-                            <th>
-                                No.
-                            </th>
-                            <th>
-                                Name
-                            </th>
-                        </tr>
-                        @{
-                            var i = 1;
-                        }
-                        @foreach (var sources in Model.Sources)
-                        {
-                            <tr>
-                                <td>
-                                    @i
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(m => sources.sourceName)
-                                </td>
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">News Sources</h4>
+                </div>
+                <div class="modal-body">
+                    @if (Model.Sources.Count() > 0)
+                    {
+                        <table class="table table-striped border">
+                            <tr class="table-secondary">
+                                <th>
+                                    No.
+                                </th>
+                                <th>
+                                    Name
+                                </th>
                             </tr>
-                            i++;
-                        }
-                    </table>
-                }
-                <br>
-                <input type="button" class="btn btn-secondary" id="hideSources" value="Hide" />
+                            @{
+                                var i = 1;
+                            }
+                            @foreach (var sources in Model.Sources)
+                            {
+                                <tr>
+                                    <td>
+                                        @i
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(m => sources.sourceName)
+                                    </td>
+                                </tr>
+                                i++;
+                            }
+                        </table>
+                    }
+                    <br>
+                    <input type="button" class="btn btn-secondary" id="hideSources" value="Hide" />
+                </div>
             </div>
         </div>
     </div>
-</div>
 
 
-<div class="modal fade" id="patients">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">List of Patients</h4>
-            </div>
-            <div class="modal-body">
-                @if (Model.patients.Count() > 0)
-                {
-                    <table class="table table-striped border">
-                        <tr class="table-secondary">
-                            <th>
-                                No.
-                            </th>
-                            <th>
-                                Name
-                            </th>
-                        </tr>
-                        @{
-                            var i = 1;
-                        }
-                        @foreach (var patients in Model.patients)
-                        {
-                            <tr>
-                                <td>
-                                    @i
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(m => patients.user.email)
-                                </td>
-                            </tr>
-                            i++;
-                        }
-                    </table>
-                }
-                <input type="button" class="btn btn-secondary" id="hidePatients" value="Hide" />
+    <div class="modal fade" id="patients">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">List of Patients</h4>
+                </div>
+                <div class="modal-body">
+                    @if (Model.patients.Count() > 0)
+                    {
+                        <div class="scroll-auto">
+                            <table class="table table-striped border">
+                                <tr class="table-secondary">
+                                    <th>
+                                        No.
+                                    </th>
+                                    <th>
+                                        Name
+                                    </th>
+                                </tr>
+                                @{
+                                    var i = 1;
+                                }
+                                @foreach (var patients in Model.patients)
+                                {
+                                    <tr>
+                                        <td>
+                                            @i
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(m => patients.user.email)
+                                        </td>
+                                    </tr>
+                                    i++;
+                                }
+                            </table>
+                        </div>
+                    }
+                    <br />
+                    <input type="button" class="btn btn-secondary" id="hidePatients" value="Hide" />
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-<div class="modal fade" id="advertisers">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">List of Advertisers</h4>
-            </div>
-            <div class="modal-body">
-                @if (Model.advertisers.Count() > 0)
-                {
-                    <table class="table table-striped border">
-                        <tr class="table-secondary">
-                            <th>
-                                No.
-                            </th>
-                            <th>
-                                Name
-                            </th>
-                        </tr>
-                        @{
-                            var i = 1;
-                        }
-                        @foreach (var advertisers in Model.advertisers)
-                        {
-                            <tr>
-                                <td>
-                                    @i
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(m => advertisers.user.email)
-                                </td>
+    <div class="modal fade" id="advertisers">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">List of Advertisers</h4>
+                </div>
+                <div class="modal-body">
+                    @if (Model.advertisers.Count() > 0)
+                    {
+                        <table class="table table-striped border">
+                            <tr class="table-secondary">
+                                <th>
+                                    No.
+                                </th>
+                                <th>
+                                    Name
+                                </th>
                             </tr>
-                            i++;
-                        }
-                    </table>
-                }
-                <br>
-                <input type="button" class="btn btn-secondary" id="hideAdvertisers" value="Hide" />
+                            @{
+                                var i = 1;
+                            }
+                            @foreach (var advertisers in Model.advertisers)
+                            {
+                                <tr>
+                                    <td>
+                                        @i
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(m => advertisers.user.email)
+                                    </td>
+                                </tr>
+                                i++;
+                            }
+                        </table>
+                    }
+                    <br>
+                    <input type="button" class="btn btn-secondary" id="hideAdvertisers" value="Hide" />
+                </div>
             </div>
         </div>
     </div>
-</div>
 
 }
 else

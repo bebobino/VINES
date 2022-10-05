@@ -8,24 +8,28 @@
 @if ((await AuthorizationService.AuthorizeAsync(User, "AdminOnly")).Succeeded)
 {
     <div class="blog-page area-padding">
+        <h2 class="text-primary">Add Vaccine Price</h2>
         <div class="border container" style="padding:30px;">
             <div class="scroll-auto">
+
                 <form method="post">
+
+
                     <div class="form-group row">
-                        <div class="form-group row">
-                            <div class="col-4">
-                                <label asp-for="institutionVaccines.diseaseID">Disease Name</label>
-                            </div>
-                            <div class="col-6">
-                                <select asp-for="institutionVaccines.diseaseID" name="dID" class="form-control">
-                                    @foreach (var diseases in Model.disease)
-                                    {
-                                        <option value="@diseases.diseaseID">@diseases.diseaseName</option>
-                                    }
-                                </select>
-                            </div>
+                        <div class="col-4">
+                            <label asp-for="institutionVaccines.diseaseID">Disease Name</label>
+                        </div>
+                        <div class="col-6">
+                            <select asp-for="institutionVaccines.diseaseID" name="dID" class="form-control">
+                                @foreach (var diseases in Model.disease)
+                                {
+                                    <option value="@diseases.diseaseID">@diseases.diseaseName</option>
+                                }
+                            </select>
                         </div>
                     </div>
+
+
                     <div class="form-group row">
                         <div class="col-4">
                             <label asp-for="institutionVaccines.institutionID">Institution Name</label>
@@ -39,6 +43,7 @@
                             </select>
                         </div>
                     </div>
+
                     <div class="form-group row">
                         <div class="col-4">
                             <label asp-for="institutionVaccines.vaccineID">Vaccine Name</label>
@@ -79,6 +84,7 @@
                             <a asp-page="Index" class="btn btn-success btn-sm text-white">Back to Index</a>
                         </div>
                     </div>
+
                 </form>
             </div>
         </div>
