@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using VINES.Data;
 using VINES.Models;
+using VINES.Processes;
 
 namespace VINES.Pages.Status
 {
@@ -29,9 +30,11 @@ namespace VINES.Pages.Status
 
         public async Task<IActionResult> OnPost(List<User> users)
         {
+            var help = new Help();
             foreach (var use in users)
             {
                 _db.Users.Where(c => c.userID == use.userID).FirstOrDefault().isBlocked = use.isBlocked;
+                help.sendEmail(help.Decrypt(use.email), "ACCOUNT BLOCKED", "Your account has been blocked for activities deemed inappropriate by the administrators. Please contact them via email at vinessupport@gmail.com");
             }
 
             _db.SaveChanges();
