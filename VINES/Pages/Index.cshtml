@@ -20,12 +20,18 @@
             <div class="row">
 
                 <h1 style="font-size: x-large;"><b>Advertisement</b></h1>
-                @if (Model.ads.Count > 0)
+                @try
                 {
-                    <form method="post" asp-page-handler="Ad">
-                        <input type="hidden" name="id" value="@Model.ads[Model.rnd].advertisementID" />
+                    if(Model.ads.Count > 0)
+                {
+                        <form method="post" asp-page-handler="Ad">
+                            <input type="hidden" name="id" value="@Model.ads[Model.rnd].advertisementID" />
                         <input type="image" id="image" alt="Login" src="~/images/@Model.ads[Model.rnd].imgsrc" height="300px" width="100%">
-                    </form>
+                        </form>
+                    }
+                }catch(Exception ex)
+                {
+                    
                 }
                 <br />
                 <br />

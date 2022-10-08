@@ -10,6 +10,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using VINES.Data;
 using VINES.Models;
+using VINES.Processes;
 
 namespace VINES.Pages.UpdateAccount
 {
@@ -27,15 +28,26 @@ namespace VINES.Pages.UpdateAccount
 
         public void OnGet()
         {
+            var help = new Help();
             var id = User.FindFirstValue(ClaimTypes.NameIdentifier);
             int idd = int.Parse(id);
             user = db.Users.Where(x => x.userID == idd).FirstOrDefault();
+            //fname midmane lname contact
+            user.firstName = help.Decrypt(user.firstName);
+            user.middleName = help.Decrypt(user.middleName);
+            user.lastName = help.Decrypt(user.lastName);
+            user.contactNumber = help.Decrypt(user.contactNumber);
         }
 
         public async Task<IActionResult> OnPost()
         {
-            db.Attach(user).State = EntityState.Modified;
 
+            var help = new Help();
+
+            user.firstName = help.Encrypt(user.firstName);
+            user.middleName = help.Encrypt(user.middleName);
+            user.lastName = help.Encrypt(user.lastName);
+            user.contactNumber = help.Encrypt(user.contactNumber);
             user.dateOfBirth = user.dateOfBirth;
             user.isBlocked = user.isBlocked;
             user.isLocked = user.isLocked;

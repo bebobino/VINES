@@ -19,6 +19,7 @@ namespace VINES.Pages.Account
     {
         private readonly DatabaseContext Db;
 
+
         public List<Gender> genders { get; set; }
 
         public RegistrationModel(DatabaseContext Db)
@@ -115,14 +116,14 @@ namespace VINES.Pages.Account
                     var help = new Help();
                     user = new User
                     {
-                        firstName = Input.firstName,
-                        middleName = Input.middleName,
-                        lastName = Input.lastName,
+                        firstName = help.Encrypt(Input.firstName),
+                        middleName = help.Encrypt(Input.middleName),
+                        lastName = help.Encrypt(Input.lastName),
                         genderID = Input.gender,
                         dateOfBirth = Input.dateOfBirth,
-                        email = Input.email,
-                        password = help.Hash(Input.password),
-                        contactNumber = Input.contactNumber,
+                        email = help.Encrypt(Input.email),
+                        password = help.Encrypt(Input.password),
+                        contactNumber = help.Encrypt(Input.contactNumber),
                         roleID = 3,
                         isBlocked = false,
                         isLocked = false,
@@ -145,7 +146,7 @@ namespace VINES.Pages.Account
                     Db.Patients.Add(patient);
                     await Db.SaveChangesAsync();
 
-                    help.sendEmail(Input.email, "Account Confirmation", "Here is your authentication link: " + AppSettings.Site.Url + "Account/RegisterConfirmation/?key1=" + user.userID + "&key2=" + help.Hash(user.email));
+                    help.sendEmail(Input.email, "Account Confirmation", "Here is your authentication link: " + AppSettings.Site.Url + "Account/RegisterConfirmation/?key1=" + user.userID +"&key2=" + user.email);
                     return RedirectToPage("/Account/Login");
 
                 }

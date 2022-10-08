@@ -37,7 +37,7 @@ namespace VINES.Pages.Account
                 }
                 else
                 {
-                    var email = help.Hash(user.email);
+                    var email = user.email;
                     key2 = key2.Replace(" ", "+");
                     if (email.Equals(key2))
                     {
