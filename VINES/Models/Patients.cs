@@ -14,6 +14,7 @@ namespace VINES.Models
         public bool showAds { get; set; }
         public bool isSubscribed { get; set; }
         public DateTime subStart { get; set; }
+        public string payment { get; set; }
         public DateTime subEnd { get; set; }
         [ForeignKey("userID")]
         public User user { get; set; }

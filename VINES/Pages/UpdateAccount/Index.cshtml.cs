@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
 using System.Linq;
 using System.Security.Claims;
@@ -26,6 +27,28 @@ namespace VINES.Pages.UpdateAccount
         [BindProperty]
         public User user { get; set; }
 
+        [BindProperty]
+        public InputModel input { get; set; }
+        public class InputModel
+        {
+            [Required]
+            [DataType(DataType.Text)]
+            [Display(Name = "First Name")]
+            public string fName { get; set; }
+
+            [DataType(DataType.Text)]
+            [Display(Name = "Middle Name")]
+            public string mName { get; set; }
+            [Required]
+            [DataType(DataType.Text)]
+            [Display(Name = "Last Name")]
+            public string lName { get; set; }
+
+            [Required]
+            [DataType(DataType.Text)]
+            [Display(Name = "Contact Number")]
+            public string contact { get; set; }
+        }
         public void OnGet()
         {
             var help = new Help();
@@ -43,7 +66,7 @@ namespace VINES.Pages.UpdateAccount
         {
 
             var help = new Help();
-
+            //db.Attach(user).State = EntityState.Modified;
             user.firstName = help.Encrypt(user.firstName);
             user.middleName = help.Encrypt(user.middleName);
             user.lastName = help.Encrypt(user.lastName);
