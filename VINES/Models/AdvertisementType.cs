@@ -11,7 +11,7 @@ namespace VINES.Models
 
         public string advertisementType { get; set; }
 
-        public double price { get; set; }
+        public decimal price { get; set; }
         public int clickLimit { get; set; }
         public int Duration { get; set; }
 
