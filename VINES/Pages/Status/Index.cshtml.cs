@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -33,9 +34,28 @@ namespace VINES.Pages.Status
             var help = new Help();
             foreach (var use in users)
             {
+                
+                var x = _db.Users.Where(c => c.userID == use.userID).FirstOrDefault();
+                if(x.isBlocked != use.isBlocked)
+                {
+                    if (use.isBlocked)
+                    {
+                        Console.WriteLine("Blocking now... bye "+help.Decrypt(x.email));
+                        help.sendEmail(help.Decrypt(x.email), "ACCOUNT BLOCKED", "Your account has been blocked for activities deemed inappropriate by the administrators. For questions please contact us via email at vinessupport@gmail.com");
+
+                    }
+                    else
+                    {
+                        Console.WriteLine("Unblocking now");
+                        help.sendEmail(help.Decrypt(x.email), "ACCOUNT UNBLOCKED", "Your account has been unblocked you may now use your account. For questions please contact us via email at vinessupport@gmail.com");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Unchanged");
+                }
                 _db.Users.Where(c => c.userID == use.userID).FirstOrDefault().isBlocked = use.isBlocked;
-                help.sendEmail(help.Decrypt(use.email), "ACCOUNT BLOCKED", "Your account has been blocked for activities deemed inappropriate by the administrators. Please contact them via email at vinessupport@gmail.com");
-            }
+                }
 
             _db.SaveChanges();
             return RedirectToPage("Index");

@@ -39,17 +39,17 @@
 
 
 
-                            <div class="card col-lg-3 col-md-5 col-6 d-md-flex align-items-center text-center" id="showAdvertisements">
+                            <div class="card col-lg-3 col-md-5 col-6 d-md-flex align-items-center text-center" id="showAdvertisementsA">
                                 <br>
-                                <h4>0</h4>
+                                <h1>@Model.active.Count</h1>
                                 <p>Advertisements Active</p>
 
                             </div>
 
-                            <div class="card col-lg-3 col-md-5 col-6 d-md-flex align-items-center text-center" id="showInteractions">
+                            <div class="card col-lg-3 col-md-5 col-6 d-md-flex align-items-center text-center" id="showAdvertisementsI">
                                 <br>
-                                <h4>160</h4>
-                                <p>Interactions per Day</p>
+                                <h1>@Model.inactive.Count</h1>
+                                <p>Advertisements Inactive</p>
 
                             </div>
                             @{decimal x = 0;}
@@ -58,14 +58,14 @@
                             }
                             <div class="card col-lg-3 col-md-5 col-6 d-md-flex align-items-center text-center" id="showMCost">
                                 <br>
-                                <h4>&#8369;@x</h4>
-                                <p>Total cost of ads</p>
+                                <h1>&#8369;@x</h1>
+                                <p>Total Cost of Ads</p>
 
                             </div>
 
-                            <div class="card col-lg-3 col-md-5 col-6 d-md-flex align-items-center text-center" id="showTCost">
+                            <div class="card col-lg-3 col-md-5 col-6 d-md-flex align-items-center text-center" id="showAdvertisers">
                                 <br>
-                                <h4>&#8369;7,500</h4>
+                                <h1>&#8369;7,500</h1>
                                 <p>Total Expenses spent on Ads</p>
 
                             </div>
@@ -216,44 +216,89 @@
     <!-- End Blog Page -->
     <!-- dashboard modals -->
 
-    <div class="modal fade" id="showAdvertisements">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Advertisements Active</h4>
-                </div>
-                <div class="modal-body">
+<div class="modal fade" id="adsA">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Advertisements Active</h4>
+            </div>
+            <div class="modal-body">
+                @if (Model.active.Count() > 0)
+                {
+                    <table class="table table-striped border">
+                        <tr class="table-secondary">
+                            <th>
+                                Advertisement ID
+                            </th>
+                            <th>
+                                Advertisement Title
+                            </th>
+                        </tr>
 
-                    <p></p>
-                    <p></p>
-                    <br>
-                    <input type="button" class="btn btn-secondary" id="hideAdvertisements" value="Hide" />
-                </div>
+                        @foreach (var advertisement in Model.active)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(m => advertisement.advertisementID)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(m => advertisement.advertisementTitle)
+                                </td>
+                            </tr>
+                            
+                        }
+                    </table>
+                }
+                <input type="button" class="btn btn-secondary" id="hideAdvertisementsA" value="hide" />
             </div>
         </div>
     </div>
+</div>
 
-    <div class="modal fade" id="showInteractions">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Interactions per Day</h4>
-                </div>
-                <div class="modal-body">
-                    <p></p>
-                    <p></p>
-                    <br>
-                    <input type="button" class="btn btn-secondary" id="hideInteractions" value="Hide" />
-                </div>
+<div class="modal fade" id="adsI">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Advertisements Active</h4>
+            </div>
+            <div class="modal-body">
+                @if (Model.inactive.Count() > 0)
+                {
+                    <table class="table table-striped border">
+                        <tr class="table-secondary">
+                            <th>
+                                Advertisement ID
+                            </th>
+                            <th>
+                                Advertisement Title
+                            </th>
+                        </tr>
+
+                        @foreach (var advertisement in Model.inactive)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(m => advertisement.advertisementID)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(m => advertisement.advertisementTitle)
+                                </td>
+                            </tr>
+                            
+                        }
+                    </table>
+                }
+                <input type="button" class="btn btn-secondary" id="hideAdvertisementsI" value="hide" />
             </div>
         </div>
     </div>
+</div>
 
     <div class="modal fade" id="showMCost">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Monthly cost on Ads</h4>
+                    <h4 class="modal-title">Total Cost on Ads</h4>
                 </div>
                 <div class="modal-body">
 
@@ -265,6 +310,8 @@
             </div>
         </div>
     </div>
+
+    
 }
 else
 {

@@ -38,8 +38,9 @@ namespace VINES.Pages
         public Advertisement Ad { get; set; }
         
         public List<AdReceipts> adr { get; set; }
-
-         
+        public List<Advertisement> active { get; set; }
+        public List<Advertisement> inactive { get; set; }
+        
 
 
         public async Task<IActionResult> OnPost()
@@ -70,7 +71,6 @@ namespace VINES.Pages
                 Ad.imgsrc = uniqueFileName;
                 Ad.advertiserID = adver.advertiserID;
                 Ad.lastModified = DateTime.UtcNow;
-                Ad.advertisementTypeID = 1;
                 Ad.dateAdded = DateTime.UtcNow;
                 Ad.clicks = 0;
                 Ad.endDate = DateTime.UtcNow;
@@ -106,6 +106,9 @@ namespace VINES.Pages
             AdTypes = _db.advertisementTypes.ToList();
             Ads = _db.advertisements.Where(a => a.advertiser.userID == uid).ToList();
             adr = _db.AdReceipts.Where(a => a.advertiser.userID == uid).ToList();
+            active = Ads.Where(a => a.endDate > DateTime.UtcNow && a.clicks > 0).ToList();
+            inactive = Ads.Where(a => a.endDate <= DateTime.UtcNow || a.clicks <= 0).ToList();
+            
         }
     }
 }

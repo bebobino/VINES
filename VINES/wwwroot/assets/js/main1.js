@@ -306,24 +306,6 @@ function showNotification(title, notifbody) {
 }
 
 $(document).ready(function () {
-    $("#regButton").click(function () {
-        $("#newUser").modal('show');
-    });
-    $("#regHide").click(function () {
-        $("#newUser").modal('hide');
-    });
-    $("#newVac").click(function () {
-        $("#newVaccine").modal('show');
-    });
-    $("#hideVac").click(function () {
-        $("#newVaccine").modal('hide');
-    });
-    $("#forgot").click(function () {
-        $("#forgotPass").modal('show');
-    });
-    $("#hideForgot").click(function () {
-        $("#forgotPass").modal('hide');
-    });
     $("#showSources").click(function () {
       $("#newsSources").modal('show');
     });
@@ -353,6 +335,18 @@ $(document).ready(function () {
     });
     $("#hideAdvertisers").click(function () {
         $("#advertisers").modal('hide');
+    });
+    $("#showAdvertisementsA").click(function () {
+        $("#adsA").modal('show');
+    });
+    $("#hideAdvertisementsA").click(function () {
+        $("#adsA").modal('hide');
+    });
+    $("#showAdvertisementsI").click(function () {
+        $("#adsI").modal('show');
+    });
+    $("#hideAdvertisementsI").click(function () {
+        $("#adsI").modal('hide');
     });
 
 });
