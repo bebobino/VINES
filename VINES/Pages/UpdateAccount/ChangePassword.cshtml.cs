@@ -54,12 +54,12 @@ namespace VINES.Pages.UpdateAccount
             int idd = int.Parse(id);
             var _user = Db.Users.Find(idd);
 
-            if (_user.password.Equals(help.Hash(input.password)))
+            if (_user.password.Equals(help.Encrypt(input.password)))
             {
                 //okay to
                 if (input.newPassword.Equals(input.confirmPassword))
                 {
-                    _user.password = help.Hash(input.newPassword);
+                    _user.password = help.Encrypt(input.newPassword);
                     Db.SaveChanges();
 
                 }

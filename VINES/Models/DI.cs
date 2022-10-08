@@ -5,6 +5,7 @@
         public static ConnectionStrings ConnectionStrings { get; set; }
         public static Smtp Smtp { get; set; }
         public static Site Site { get; set; }
+        public static Cryp Cryp { get; set; }
     }
 
     public class ConnectionStrings
@@ -24,5 +25,10 @@
         public string Url { get; set; }
     }
 
-    
+    public class Cryp
+    {
+        public string Key { get; set; }
+    }
+
+
 }

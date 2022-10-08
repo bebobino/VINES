@@ -9,6 +9,8 @@ using System.Net;
 using System.Net.Mail;
 using System.Security.Cryptography;
 using VINES.Models;
+using System.Text;
+using System.IO;
 
 namespace VINES.Processes
 {
@@ -181,6 +183,62 @@ namespace VINES.Processes
             HashTool.Clear();
             return Convert.ToBase64String(EncryptedBytes);
         }
+
+        readonly static string key = AppSettings.Cryp.Key;
+
+        public string Encrypt(string text)
+        {
+            byte[] iv = new byte[16];
+            byte[] array;
+            using (Aes aes = Aes.Create())
+            {
+                aes.Key = Encoding.UTF8.GetBytes(key);
+                aes.IV = iv;
+                ICryptoTransform encryptor = aes.CreateEncryptor(aes.Key, aes.IV);
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    using (CryptoStream cs = new CryptoStream(ms, encryptor, CryptoStreamMode.Write))
+                    {
+                        using (StreamWriter streamWriter = new StreamWriter((Stream)cs))
+                        {
+                            streamWriter.Write(text);
+                        }
+                        array = ms.ToArray();
+                    }
+                }
+            }
+            return Convert.ToBase64String(array);
+        }
+
+        public string Decrypt(string text)
+        {
+            byte[] iv = new byte[16];
+            byte[] buffer = Convert.FromBase64String(text);
+            using (Aes aes = Aes.Create())
+            {
+                aes.Key = Encoding.UTF8.GetBytes(key);
+                aes.IV = iv;
+                ICryptoTransform decryptor = aes.CreateDecryptor(aes.Key, aes.IV);
+                using (MemoryStream ms = new MemoryStream(buffer))
+                {
+                    using (CryptoStream cs = new CryptoStream(ms, decryptor, CryptoStreamMode.Read))
+                    {
+                        using (StreamReader streamReader = new StreamReader(cs))
+                        {
+                            return streamReader.ReadToEnd();
+                        }
+                    }
+                }
+            }
+        }
+
+
+
+
+
+
+
+
     }
 }
 

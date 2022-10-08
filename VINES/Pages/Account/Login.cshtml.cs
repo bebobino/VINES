@@ -48,7 +48,7 @@ namespace VINES.Pages.Account
             if (ModelState.IsValid)
             {
                 var help = new Help();
-                var user = Db.Users.Where(f => f.email == Input.email).FirstOrDefault();
+                var user = Db.Users.Where(f => f.email == help.Encrypt(Input.email)).FirstOrDefault();
                 if (user == null)
                 {
                     ModelState.AddModelError("Error", "ERROR: You are not a registered user.");
@@ -77,7 +77,7 @@ namespace VINES.Pages.Account
                         ModelState.AddModelError("Error", "ERROR: Not a Patient.");
                         return Page();
                     }
-                    else if (user.password != help.Hash(Input.password))
+                    else if (user.password != help.Encrypt(Input.password))
                     {
                         
                         user.failedAttempts++;
@@ -85,7 +85,7 @@ namespace VINES.Pages.Account
                         {
                             user.isLocked = true;
                             ModelState.AddModelError("Error", "ERROR: Your account has been locked. Please check your Email to unlock.");
-                            help.sendEmail(user.email, "Account Recovery", "To access your account, click the link provided. " + AppSettings.Site.Url + "Account/Recovery?key1=" + user.userID + "&key2=" + help.Hash(user.email) + "&key3=" + help.Hash(user.password));
+                            help.sendEmail(help.Decrypt(user.email), "Account Recovery", "To access your account, click the link provided. " + AppSettings.Site.Url + "Account/Recovery?key1=" + user.userID + "&key2=" + help.Hash(user.email) + "&key3=" + help.Hash(user.password));
                         }
                         await Db.SaveChangesAsync();
                         ModelState.AddModelError("Error", "ERROR: Invalid Email/Password combination.");
@@ -101,7 +101,7 @@ namespace VINES.Pages.Account
                 var claims = new List<Claim>
                 {
                     new Claim(ClaimTypes.NameIdentifier, user.userID.ToString()),
-                    new Claim(ClaimTypes.Name, user.email),
+                    new Claim(ClaimTypes.Name, help.Decrypt(user.email)),
                     new Claim(ClaimTypes.Role, "Patient"),
                 };
 

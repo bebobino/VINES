@@ -42,28 +42,44 @@ namespace VINES.Pages
 
         public async Task<IActionResult> OnPost()
         {
-            string uploadsFolder = Path.Combine(_environment.WebRootPath, "images");
-            string uniqueFileName = Guid.NewGuid().ToString() + "_" + Photo.FileName;
-            string filePath = Path.Combine(uploadsFolder, uniqueFileName);
-            Debug.WriteLine("file is in: "+filePath);
-            using (var fileStream = new FileStream(filePath, FileMode.Create))
+            string[] fileType = Photo.FileName.Split(".");
+            int x = fileType.Length - 1;
+            if (string.Equals(fileType[x], "jpg", StringComparison.OrdinalIgnoreCase) ||
+                string.Equals(fileType[x], "png", StringComparison.OrdinalIgnoreCase) ||
+                string.Equals(fileType[x], "jpeg", StringComparison.OrdinalIgnoreCase) ||
+                string.Equals(fileType[x], "gif", StringComparison.OrdinalIgnoreCase)
+                )
             {
-                await Photo.CopyToAsync(fileStream);
+
+
+                string uploadsFolder = Path.Combine(_environment.WebRootPath, "images");
+                string uniqueFileName = Guid.NewGuid().ToString() + "_" + Photo.FileName;
+                string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+                Debug.WriteLine("file is in: " + filePath);
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    await Photo.CopyToAsync(fileStream);
+                }
+
+                var aid = User.FindFirstValue(ClaimTypes.NameIdentifier);
+                var uid = int.Parse(aid);
+                var adver = _db.advertisers.Where(a => a.userID == uid).FirstOrDefault();
+
+                Ad.imgsrc = uniqueFileName;
+                Ad.advertiserID = adver.advertiserID;
+                Ad.lastModified = DateTime.UtcNow;
+                Ad.advertisementTypeID = 1;
+                Ad.dateAdded = DateTime.UtcNow;
+                Ad.clicks = 0;
+                Ad.endDate = DateTime.UtcNow;
+                _db.advertisements.Add(Ad);
+                await _db.SaveChangesAsync();
+                Debug.WriteLine("tama ka");
             }
-
-            var aid = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var uid = int.Parse(aid);
-            var adver = _db.advertisers.Where(a => a.userID == uid).FirstOrDefault();
-
-            Ad.imgsrc = uniqueFileName;
-            Ad.advertiserID = adver.advertiserID;
-            Ad.lastModified = DateTime.UtcNow;
-            Ad.advertisementTypeID = 1;
-            Ad.dateAdded = DateTime.UtcNow;
-            Ad.clicks = 0;
-            Ad.endDate = DateTime.UtcNow;
-            _db.advertisements.Add(Ad);
-            await _db.SaveChangesAsync();
+            else
+            {
+                Debug.WriteLine("bobo");
+            }
             return RedirectToPage("/Index");
         }
 

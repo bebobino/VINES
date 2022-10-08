@@ -49,6 +49,8 @@ namespace VINES.Pages
         public int PageSize { get; set; }
         public int TotalPages { get; set; }
 
+        public Help helper = new Help();
+
 
         public async Task<IActionResult> OnPostAd(int id)
         {
@@ -67,13 +69,21 @@ namespace VINES.Pages
         }
         public void OnGet(int p = 1 , int s = 5)
         {
+            string x = helper.Encrypt("test2022");
+            Debug.Write("Encrypted = " + x);
+            Debug.Write("Decrypted = " + helper.Decrypt(x));
             rando = new Random(DateTime.Now.Millisecond);
-            ads = db.advertisements.Where(ad => ad.endDate > DateTime.UtcNow && ad.clicks > 0).ToList();
-            if(ads.Count > 0)
+            try
             {
-                rnd = rando.Next(0, ads.Count - 1);
+                ads = db.advertisements.Where(ad => ad.endDate > DateTime.UtcNow && ad.clicks > 0).ToList();
+                if (ads.Count > 0)
+                {
+                    rnd = rando.Next(0, ads.Count - 1);
+                }
+                Debug.WriteLine(ads.Count + " ," + rnd);
             }
-            Debug.WriteLine(ads.Count+" ,"+rnd);
+            catch (Exception ex) { }
+            
             Sources = db.sources.ToList();
             CommunityPosts = db.CommunityPosts.ToList();
             WebPages = db.WebPages.OrderByDescending(webpage => webpage.uploadDate).Skip((p - 1) * s).Take(s).ToList();
