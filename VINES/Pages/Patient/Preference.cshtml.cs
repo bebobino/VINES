@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System;
@@ -8,6 +9,7 @@ using VINES.Models;
 
 namespace VINES.Pages.Patient
 {
+    [Authorize("PatientOnly")]
     public class Preference : PageModel
     {
         private readonly DatabaseContext _Db;
