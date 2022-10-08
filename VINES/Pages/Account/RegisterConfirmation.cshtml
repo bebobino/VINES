@@ -8,21 +8,26 @@
 
 @if (User.Identity.IsAuthenticated == false)
 {
-<h1>@ViewData["Title"]</h1>
-<p>
-    You have successfully Registered! Click <a asp-page="/Account/Login">here</a> to log in.
-</p>
+    <div class="blog-page area-padding">
+        <h1>@ViewData["Title"]</h1>
+        <p>
+            You have successfully Registered! Click <a asp-page="/Account/Login"><b>here</b></a> to log in.
+        </p>
+    </div>
 }
-else {
-    @if (User.Identity.IsAuthenticated && User.IsInRole("Patient")) {
-        
+else
+{
+    @if (User.Identity.IsAuthenticated && User.IsInRole("Patient"))
+    {
+
         Response.Redirect("/patientLanding");
     }
-        else if (User.Identity.IsAuthenticated && User.IsInRole("Advertiser")) {
-        
+    else if (User.Identity.IsAuthenticated && User.IsInRole("Advertiser"))
+    {
+
         Response.Redirect("/advertiserLanding");
     }
-        else if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+    else if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
     {
         Response.Redirect("/adminLanding");
     }

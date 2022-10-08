@@ -37,6 +37,7 @@ namespace VINES.Pages
         [BindProperty]
         public Advertisement Ad { get; set; }
         
+        public List<AdReceipts> adr { get; set; }
 
          
 
@@ -102,9 +103,9 @@ namespace VINES.Pages
         {
             var aid = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var uid = int.Parse(aid);
-            
             AdTypes = _db.advertisementTypes.ToList();
             Ads = _db.advertisements.Where(a => a.advertiser.userID == uid).ToList();
+            adr = _db.AdReceipts.Where(a => a.advertiser.userID == uid).ToList();
         }
     }
 }

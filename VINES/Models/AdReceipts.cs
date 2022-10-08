@@ -11,7 +11,7 @@ namespace VINES.Models
         public int adReceiptID { get; set; }
         public int advertisementID { get; set; }
         public int advertiserID { get; set; }
-        public double price { get; set; }
+        public decimal price { get; set; }
         public string paymentID { get; set; }
         public DateTime dateCreated { get; set; }
 

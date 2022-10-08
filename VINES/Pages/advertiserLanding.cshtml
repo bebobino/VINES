@@ -41,28 +41,31 @@
 
                             <div class="card col-lg-3 col-md-5 col-6 d-md-flex align-items-center text-center" id="showAdvertisements">
                                 <br>
-                                <h1>0</h1>
+                                <h4>0</h4>
                                 <p>Advertisements Active</p>
 
                             </div>
 
                             <div class="card col-lg-3 col-md-5 col-6 d-md-flex align-items-center text-center" id="showInteractions">
                                 <br>
-                                <h1>160</h1>
+                                <h4>160</h4>
                                 <p>Interactions per Day</p>
 
                             </div>
-
+                            @{decimal x = 0;}
+                            @foreach(var ar in Model.adr){
+                                x += ar.price;
+                            }
                             <div class="card col-lg-3 col-md-5 col-6 d-md-flex align-items-center text-center" id="showMCost">
                                 <br>
-                                <h1>&#8369;1,000</h1>
-                                <p>Monthly cost on ads</p>
+                                <h4>&#8369;@x</h4>
+                                <p>Total cost of ads</p>
 
                             </div>
 
                             <div class="card col-lg-3 col-md-5 col-6 d-md-flex align-items-center text-center" id="showTCost">
                                 <br>
-                                <h1>&#8369;7,500</h1>
+                                <h4>&#8369;7,500</h4>
                                 <p>Total Expenses spent on Ads</p>
 
                             </div>

@@ -27,6 +27,7 @@ namespace VINES.Pages.Payments
 
         public string payerID { get; set; }
         public AdReceipts adr { get; set; }
+        public decimal x = 0;
 
 
 
@@ -68,6 +69,7 @@ namespace VINES.Pages.Payments
                     Debug.WriteLine("payer_info - street_address: " + result.payer.payer_info.shipping_address);
                     Debug.WriteLine("payer_info - country_code: " + result.payer.payer_info.country_code);
                     Debug.WriteLine("payer_info - payer_id: " + result.payer.payer_info.payer_id);
+                    x = decimal.Parse(result.transactions[0].amount.total);
                     Debug.WriteLine("amount:" + result.transactions[0].amount.total);
                     Debug.WriteLine("state: " + result.state);
                     var total = decimal.Parse(result.transactions[0].amount.total);
@@ -104,11 +106,12 @@ namespace VINES.Pages.Payments
                             {
                                 advertiserID = advertisement.advertiserID,
                                 advertisementID = advertisement.advertisementID,
-                                price = advertisement.advertisementType.price,
+                                price = x,
                                 paymentID = help.Encrypt(result.id),
                                 dateCreated = DateTime.UtcNow
                             };
-                            db.Add(adr);
+                            db.AdReceipts.Add(adr);
+                            await db.SaveChangesAsync();
                             var advertisementType = db.advertisementTypes.Where(a => a.advertisementTypeID == advertisement.advertisementTypeID).FirstOrDefault();
                             advertisement.textContent = "";
                             advertisement.clicks = advertisementType.clickLimit;
