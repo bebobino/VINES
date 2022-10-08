@@ -48,8 +48,8 @@ namespace VINES.Pages.Account
                 Debug.WriteLine("Walang account");
             }
             else{
-                var email = help.Hash(user.email);
-                var password = help.Hash(user.password);
+                var email = help.Encrypt(user.email);
+                var password = help.Encrypt(user.password);
                 key2 = key2.Replace(" ", "+");
                 key3 = key3.Replace(" ", "+");
                 Debug.WriteLine(help.Hash(user.email)+"     ,     "+key2);
@@ -66,7 +66,7 @@ namespace VINES.Pages.Account
             if (ModelState.IsValid)
             {
                 var _user = db.Users.Where(f => f.email == input.email).FirstOrDefault();
-                _user.password = help.Hash(input.password);
+                _user.password = help.Encrypt(input.password);
                 _user.isLocked = false;
                 _user.failedAttempts = 0;
                 _user.lastModified = DateTime.Now;

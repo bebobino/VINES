@@ -13,6 +13,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using VINES.Helper;
 using VINES.Models;
+using VINES.Processes;
 
 namespace VINES.Pages
 {
@@ -85,10 +86,11 @@ namespace VINES.Pages
 
         public async Task<IActionResult> OnPostCheckout(double total, int id)
         {
+            var help = new Help();
             var adid = _db.advertisements.Find(id);
             var payPalAPI = new PayPalAPI(_configuration);
             string url = await payPalAPI.getRedirectURLToPayPal(total, "PHP");
-            adid.textContent = payPalAPI.paypalID;
+            adid.textContent = help.Encrypt(payPalAPI.paypalID);
             _db.SaveChanges();
             Debug.WriteLine(url);
             Console.WriteLine(total);

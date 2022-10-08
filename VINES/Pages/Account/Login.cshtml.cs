@@ -85,7 +85,7 @@ namespace VINES.Pages.Account
                         {
                             user.isLocked = true;
                             ModelState.AddModelError("Error", "ERROR: Your account has been locked. Please check your Email to unlock.");
-                            help.sendEmail(help.Decrypt(user.email), "Account Recovery", "To access your account, click the link provided. " + AppSettings.Site.Url + "Account/Recovery?key1=" + user.userID + "&key2=" + help.Hash(user.email) + "&key3=" + help.Hash(user.password));
+                            help.sendEmail(help.Decrypt(user.email), "Account Recovery", "To access your account, click the link provided. " + AppSettings.Site.Url + "Account/Recovery?key1=" + user.userID + "&key2=" + help.Encrypt(user.email) + "&key3=" + help.Encrypt(user.password));
                         }
                         await Db.SaveChangesAsync();
                         ModelState.AddModelError("Error", "ERROR: Invalid Email/Password combination.");

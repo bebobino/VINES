@@ -9,6 +9,7 @@ using System.Diagnostics;
 using VINES.Models;
 using VINES.Helper;
 using System.Security.Claims;
+using VINES.Processes;
 
 namespace VINES.Pages.Payments
 {
@@ -25,6 +26,7 @@ namespace VINES.Pages.Payments
         public string paymentId { get; set; }
 
         public string payerID { get; set; }
+        public AdReceipts adr { get; set; }
 
 
 
@@ -80,6 +82,7 @@ namespace VINES.Pages.Payments
                         patient.subEnd = future;
                         await db.SaveChangesAsync();
                     }
+                    //obsolete
                     else if (total == 1299)
                     {
                         Debug.WriteLine("User Yearly");
@@ -93,9 +96,19 @@ namespace VINES.Pages.Payments
                     }
                     else
                     {
-                        var advertisement = db.advertisements.Where(a => a.textContent == result.id).FirstOrDefault();
+                        var help = new Help();
+                        var advertisement = db.advertisements.Where(a => a.textContent == help.Encrypt(result.id)).FirstOrDefault();
                         if(advertisement != null)
                         {
+                            adr = new AdReceipts
+                            {
+                                advertiserID = advertisement.advertiserID,
+                                advertisementID = advertisement.advertisementID,
+                                price = advertisement.advertisementType.price,
+                                paymentID = help.Encrypt(result.id),
+                                dateCreated = DateTime.UtcNow
+                            };
+                            db.Add(adr);
                             var advertisementType = db.advertisementTypes.Where(a => a.advertisementTypeID == advertisement.advertisementTypeID).FirstOrDefault();
                             advertisement.textContent = "";
                             advertisement.clicks = advertisementType.clickLimit;
