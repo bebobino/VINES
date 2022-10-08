@@ -2,6 +2,7 @@
 @model VINES.Pages.Ads.AddUserModel
 @{
     ViewData["Title"] = "Registration";
+    Layout = null;
 }
 
 <!-- Registration -->
@@ -24,7 +25,7 @@
     <!-- Style -->
     <link rel="stylesheet" href="~/loginAssets/css/style.css">
 
-    <title>VINES - Create New Account</title>
+    <title>VINES - Create New Advertiser</title>
   </head>
   <body>
   
@@ -41,8 +42,8 @@
             <div class="col-md-12">
               <div class="form-block">
                   <div class="mb-4">
-                  <h3><strong>Sign Up</strong></h3>
-                  <p class="mb-4" style="color:black">It's quick and easy.</p>
+                  <h3><strong>Create Advertiser Account</strong></h3>
+                  <p class="mb-4" style="color:black">Enter Details</p>
                 </div>
                 <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
                     <div class="form-group last mb-4">
@@ -137,6 +138,9 @@
                   </div>
 
                   <input type="submit" value="Create New Account" class="btn btn-pill text-white btn-block btn-primary">
+                  <br />
+        
+                  <a href="adminLanding" class="btn btn-pill text-white btn-block btn-primary" value="Back to Admin Landing"></a>
 
                 </form>
               </div>
