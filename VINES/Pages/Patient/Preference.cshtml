@@ -1,0 +1,15 @@
+﻿@page
+@model VINES.Pages.Patient.Preference
+@using Microsoft.AspNetCore.Authorization
+@inject IAuthorizationService AuthorizationService
+@{
+}
+@foreach(var x in Model.inst)
+{
+    <p>@x.vaccine.vaccineName</p>
+    <p>@x.institution.institutionName</p>
+    <p>@x.institution.institutionType.institutionType</p>
+    <p>Php @x.price</p>
+    <br />
+
+}

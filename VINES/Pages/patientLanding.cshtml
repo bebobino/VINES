@@ -339,3 +339,22 @@
         addMarker(@inst.lat, @inst.Long, z, i);
     </script>
 }
+
+
+
+
+                    <form method="post">
+                        
+                        <p>Preferred Vaccine Brand</p>
+                        <select asp-for="vax">
+                            @foreach(var vax in Model.Vaccines){
+                                <option value = "@vax.vaccineID">@vax.vaccineName</option>
+                            }
+                        </select>
+                        <br />
+                        <br />
+                        <p>Budget</p>
+                        <input type="range" asp-for="budget" value="0" min="0" max="@Model.maxVax" oninput="this.nextElementSibling.value = 'Php ' + this.value">
+                        <output>Php 0</output>
+                        <input type="submit" value="Create Vaccine Preference" class="btn btn-pill text-white btn-block btn-primary">
+                    </form>

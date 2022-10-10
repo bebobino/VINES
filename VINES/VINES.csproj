@@ -137,7 +137,6 @@
 
   
   <ItemGroup>
-    <Folder Include="Pages\Patient\" />
     <Folder Include="wwwroot\images\" />
     <Folder Include="wwwroot\Scripts\" />
   </ItemGroup>

@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Security.Claims;
+using System.Threading.Tasks;
 using VINES.Models;
 using VINES.Processes;
 
@@ -30,8 +31,15 @@ namespace VINES.Pages
         public List<Diseases> Diseases { get; set; }
         public List<Institutions> Institutions { get; set; }
         public List<Sources> Sources { get; set; }
+        //public List <InstitutionVaccines> InstitutionVaccines { get; set; }
         private DatabaseContext db;
         public Patients patient { get; set; }
+
+        public decimal maxVax { get; set; }
+        [BindProperty]
+        public int vax { get; set; }
+        [BindProperty]
+        public decimal budget { get; set; }
 
 
         //Ads
@@ -60,10 +68,9 @@ namespace VINES.Pages
             try
             {
                 var uid = User.FindFirstValue(ClaimTypes.NameIdentifier);
-                Debug.WriteLine("ID is: "+uid);
                 int x = int.Parse(uid);
                 patient = db.Patients.Where(p => p.userID == x).FirstOrDefault();
-                Debug.WriteLine("patient logged");
+                maxVax = decimal.Parse(db.InstitutionVaccines.Max(i => i.price).ToString());
             }catch(Exception)
             {
 
@@ -74,7 +81,6 @@ namespace VINES.Pages
             {
                 rnd = rando.Next(0, ads.Count - 1);
             }
-            Debug.WriteLine(ads.Count + " ," + rnd);
             Sources = db.sources.ToList();
             CommunityPosts = db.CommunityPosts.ToList();
             WebPages = db.WebPages.OrderByDescending(webpage => webpage.uploadDate).Skip((p - 1) * s).Take(s).ToList();
@@ -87,13 +93,18 @@ namespace VINES.Pages
             Vaccines = db.vaccines.Include("disease").ToList();
             Institutions = db.Institutions.ToList();
             Help help = new Help();
-            Debug.WriteLine("test");
             help.checkIP();
 
             var rand = new Random();
 
         }
 
+        public async Task<IActionResult> OnPost()
+        {
+            Debug.WriteLine(vax);
+            Debug.WriteLine(budget);
+            return Redirect("/Patient/Preference?vax="+vax+"&budget="+budget);
+        }
 
 
 
