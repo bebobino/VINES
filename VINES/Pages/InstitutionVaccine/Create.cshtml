@@ -12,9 +12,8 @@
         <div class="border container" style="padding:30px;">
             <div class="scroll-auto">
 
-                <form method="post">
-
-
+                <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                    @Html.ValidationMessage("Error", new { @style = "color:red" })
                     <div class="form-group row">
                         <div class="col-4">
                             <label asp-for="institutionVaccines.diseaseID">Disease Name</label>
@@ -63,7 +62,7 @@
                             <label asp-for="institutionVaccines.price">Price</label>
                         </div>
                         <div class="col-6">
-                            <input type="number" asp-for="institutionVaccines.price" class="form-control" name="price"></input>
+                            <input type="number" asp-for="institutionVaccines.price" class="form-control" name="price" />
                         </div>
                     </div>
 
@@ -72,7 +71,9 @@
                             <label asp-for="institutionVaccines.notes">Notes</label>
                         </div>
                         <div class="col-6">
-                            <textarea type="number" asp-for="institutionVaccines.notes" class="form-control" name="notes"></textarea>
+                            <input type="text" asp-for="institutionVaccines.notes" class="form-control" name="notes" />
+                            <span asp-validation-for="institutionVaccines.notes" class="text-danger"></span>
+
                         </div>
                     </div>
 

@@ -4,6 +4,7 @@
 @inject IAuthorizationService AuthorizationService
 @{
     ViewData["Title"] = "advertiserLanding";
+
 }
 <style>
     .btn-buy {
@@ -39,31 +40,34 @@
 
 
 
-                            <div class="card col-lg-3 col-md-5 col-6 d-md-flex align-items-center text-center" id="showAdvertisementsA">
+                            <div class="card col-lg-3 col-md-5 col-6 d-md-flex align-items-center text-center" id="showSources">
                                 <br>
                                 <h1>@Model.active.Count</h1>
                                 <p>Advertisements Active</p>
 
                             </div>
 
-                            <div class="card col-lg-3 col-md-5 col-6 d-md-flex align-items-center text-center" id="showAdvertisementsI">
+                            <div class="card col-lg-3 col-md-5 col-6 d-md-flex align-items-center text-center" id="showInstitutions">
                                 <br>
                                 <h1>@Model.inactive.Count</h1>
                                 <p>Advertisements Inactive</p>
 
                             </div>
-                            @{decimal x = 0;}
-                            @foreach(var ar in Model.adr){
+                            @{
+                                decimal x = 0;
+                            }
+                            @foreach (var ar in Model.adr)
+                            {
                                 x += ar.price;
                             }
-                            <div class="card col-lg-3 col-md-5 col-6 d-md-flex align-items-center text-center" id="showMCost">
+                            <div class="card col-lg-3 col-md-5 col-6 d-md-flex align-items-center text-center" id="showAdvertisers">
                                 <br>
                                 <h1>&#8369;@x</h1>
-                                <p>Total Cost of Ads</p>
+                                <p>Billing Statement (Total)</p>
 
                             </div>
 
-                            <div class="card col-lg-3 col-md-5 col-6 d-md-flex align-items-center text-center" id="showAdvertisers">
+                            <div class="card col-lg-3 col-md-5 col-6 d-md-flex align-items-center text-center" id="">
                                 <br>
                                 <h1>&#8369;7,500</h1>
                                 <p>Total Expenses spent on Ads</p>
@@ -94,7 +98,7 @@
                                             </tr>
                                             <tr>
                                                 <td>
-                                                      <input type="text" class="form-control" asp-for="Ad.advertisementTitle" required>
+                                                    <input type="text" class="form-control" asp-for="Ad.advertisementTitle" required>
                                                 </td>
 
                                             </tr>
@@ -127,9 +131,9 @@
                                                 <th><label asp-for="Photo">Banner Image </label> </th>
                                             </tr>
                                             <tr>
-                                                <td> 
+                                                <td>
                                                     <input type="file" class="form-control" accept="image/png, image/gif, image/jpeg" asp-for="Photo" required />
-                                                     
+
                                                 </td>
                                             </tr>
                                         </table>
@@ -201,10 +205,6 @@
                                 </table>
                             </div>
                         </div>
-
-
-
-
                     </div>
                 </div>
 
@@ -216,102 +216,190 @@
     <!-- End Blog Page -->
     <!-- dashboard modals -->
 
-<div class="modal fade" id="adsA">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Advertisements Active</h4>
-            </div>
-            <div class="modal-body">
-                @if (Model.active.Count() > 0)
-                {
-                    <table class="table table-striped border">
-                        <tr class="table-secondary">
-                            <th>
-                                Advertisement ID
-                            </th>
-                            <th>
-                                Advertisement Title
-                            </th>
-                        </tr>
-
-                        @foreach (var advertisement in Model.active)
-                        {
-                            <tr>
-                                <td>
-                                    @Html.DisplayFor(m => advertisement.advertisementID)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(m => advertisement.advertisementTitle)
-                                </td>
-                            </tr>
-                            
-                        }
-                    </table>
-                }
-                <input type="button" class="btn btn-secondary" id="hideAdvertisementsA" value="hide" />
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="modal fade" id="adsI">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Advertisements Active</h4>
-            </div>
-            <div class="modal-body">
-                @if (Model.inactive.Count() > 0)
-                {
-                    <table class="table table-striped border">
-                        <tr class="table-secondary">
-                            <th>
-                                Advertisement ID
-                            </th>
-                            <th>
-                                Advertisement Title
-                            </th>
-                        </tr>
-
-                        @foreach (var advertisement in Model.inactive)
-                        {
-                            <tr>
-                                <td>
-                                    @Html.DisplayFor(m => advertisement.advertisementID)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(m => advertisement.advertisementTitle)
-                                </td>
-                            </tr>
-                            
-                        }
-                    </table>
-                }
-                <input type="button" class="btn btn-secondary" id="hideAdvertisementsI" value="hide" />
-            </div>
-        </div>
-    </div>
-</div>
-
-    <div class="modal fade" id="showMCost">
+    <div class="modal fade" id="newsSources">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Total Cost on Ads</h4>
+                    <h4 class="modal-title">Advertisements Active</h4>
                 </div>
                 <div class="modal-body">
-
-                    <p></p>
-                    <p></p>
-                    <br>
-                    <input type="button" class="btn btn-secondary" id="hideMCost" value="Hide" />
+                    <div class="scroll-auto">
+                        @if (Model.active.Count() > 0)
+                        {
+                            <table class="table table-striped border">
+                                <tr class="table-secondary">
+                                    <th>
+                                        No.
+                                    </th>
+                                    <th>
+                                        Advertisement ID
+                                    </th>
+                                    <th>
+                                        Advertisement Title
+                                    </th>
+                                    <th>
+                                        Advertisement End Date
+                                    </th>
+                                </tr>
+                                @{
+                                    var i = 1;
+                                }
+                                @foreach (var ads in Model.active)
+                                {
+                                    <tr>
+                                        <td>
+                                            @i
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(m => ads.advertisementID)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(m => ads.advertisementTitle)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(m => ads.endDate)
+                                        </td>
+                                    </tr>
+                                    i++;
+                                }
+                            </table>
+                        }
+                        else
+                        {
+                            <p>No Advertisements active yet. </p>
+                        }
+                    </div>
+                    <br />
+                    <input type="button" class="btn btn-secondary" id="hideSources" value="Hide" />
                 </div>
             </div>
         </div>
     </div>
 
-    
+    <div class="modal fade" id="institutions">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Advertisements Inactive</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="scroll-auto">
+                        @if (Model.inactive.Count() > 0)
+                        {
+                            <table class="table table-striped border">
+                                <tr class="table-secondary">
+                                    <th>
+                                        No.
+                                    </th>
+                                    <th>
+                                        Advertisement ID
+                                    </th>
+                                    <th>
+                                        Advertisement Title
+                                    </th>
+
+                                </tr>
+                                @{
+                                    var ia = 1;
+                                }
+                                @foreach (var advertisement in Model.inactive)
+                                {
+                                    <tr>
+                                        <td>
+                                            @ia
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(m => advertisement.advertisementID)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(m => advertisement.advertisementTitle)
+                                        </td>
+                                    </tr>
+                                    ia++;
+                                }
+                            </table>
+                        }
+                        else
+                        {
+                            <p>No Advertisements inactive. </p>
+                        }
+                    </div>
+                    <br />
+                    <input type="button" class="btn btn-secondary" id="hideInstitutions" value="Hide" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="advertisers">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Total Cost of Ads</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="scroll-auto">
+
+                        <table class="table table-striped border">
+                            <tr class="table-secondary">
+                                <th>
+                                    No.
+                                </th>
+                                <th>
+                                    Advertisement ID
+                                </th>
+                                <th>
+                                    Advertisement Title
+                                </th>
+                                <th>
+                                    Payment ID
+                                </th>
+                                <th>
+                                    Advertisement Price
+                                </th>
+                                <th>
+                                    Date Paid
+                                </th>
+                            </tr>
+                            @{
+                                var ib = 1;
+                            }
+                            @foreach (var advertisement in Model.adr)
+                            {
+
+                                <tr>
+                                    <td>
+                                        @ib
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(m => advertisement.advertisementID)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(m => advertisement.advertisement.advertisementTitle)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(m => advertisement.paymentID)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(m => advertisement.price)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(m => advertisement.dateCreated)
+                                    </td>
+                                </tr>
+                                ib++;
+                            }
+                        </table>
+
+                    </div>
+                    <br>
+                    <input type="button" class="btn btn-secondary" id="hideAdvertisers" value="Hide" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 }
 else
 {

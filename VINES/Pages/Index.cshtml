@@ -22,16 +22,17 @@
                 <h1 style="font-size: x-large;"><b>Advertisement</b></h1>
                 @try
                 {
-                    if(Model.ads.Count > 0)
-                {
+                    if (Model.ads.Count > 0)
+                    {
                         <form method="post" asp-page-handler="Ad">
                             <input type="hidden" name="id" value="@Model.ads[Model.rnd].advertisementID" />
-                        <input type="image" id="image" alt="Login" src="~/images/@Model.ads[Model.rnd].imgsrc" height="300px" width="100%">
+                            <input type="image" id="image" alt="Login" src="~/images/@Model.ads[Model.rnd].imgsrc" height="300px" width="100%">
                         </form>
                     }
-                }catch(Exception ex)
+                }
+                catch (Exception ex)
                 {
-                    
+
                 }
                 <br />
                 <br />
@@ -176,8 +177,6 @@
     </div>
 
     <!-- End Blog Page -->
-
-
     <!-- modal -->
     <div class="modal fade" id="newsSources">
         <div class="modal-dialog modal-dialog-centered">
@@ -185,38 +184,43 @@
                 <div class="modal-header">
                     <h4 class="modal-title">News Sources</h4>
                 </div>
-               <div class="modal-body">
-                @if (Model.Sources.Count() > 0)
-                {
-                    <table class="table table-striped border">
-                        <tr class="table-secondary">
-                            <th>
-                                No.
-                            </th>
-                            <th>
-                                Name
-                            </th>
-                        </tr>
-                        @{
-                            var i = 1;
-                        }
-                        @foreach (var sources in Model.Sources)
-                        {
-                            <tr>
-                                <td>
-                                    @i
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(m => sources.sourceName)
-                                </td>
+                <div class="modal-body">
+                    @if (Model.Sources.Count() > 0)
+                    {
+                        <table class="table table-striped border">
+                            <tr class="table-secondary">
+                                <th>
+                                    No.
+                                </th>
+                                <th>
+                                    Name
+                                </th>
                             </tr>
-                            i++;
-                        }
-                    </table>
-                }
-                <br>
-                <input type="button" class="btn btn-secondary" id="hideSources" value="Hide" />
-            </div>
+                            @{
+                                var i = 1;
+                            }
+                            @foreach (var sources in Model.Sources)
+                            {
+                                <tr>
+                                    <td>
+                                        @i
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(m => sources.sourceName)
+                                    </td>
+                                </tr>
+                                i++;
+                            }
+                        </table>
+
+                    }
+                    else
+                    {
+                        <p>No Sources yet.</p>
+                    }
+                    <br>
+                    <input type="button" class="btn btn-secondary" id="hideSources" value="Hide" />
+                </div>
             </div>
         </div>
     </div>
@@ -228,21 +232,34 @@
                     <h4 class="modal-title">Vaccines in database</h4>
                 </div>
                 <div class="modal-body">
-                    <table class="table table-striped table-hover">
-                        <tr>
-                            <td><b>Vaccine</b></td>
-                            <td><b>Disease</b></td>
-                            <td><b>Description</b></td>
-                        </tr>
-                        @foreach (var vaccine in Model.Vaccines)
-                        {
+                    @if (Model.Vaccines.Count() > 0)
+                    {
+                        <table class="table table-striped table-hover">
                             <tr>
-                                <td>@vaccine.vaccineName</td>
-                                <td>@vaccine.disease.diseaseName</td>
-                                <td>@vaccine.notes</td>
+                                <td><b>No.</b></td>
+                                <td><b>Vaccine</b></td>
+                                <td><b>Disease</b></td>
+                                <td><b>Description</b></td>
                             </tr>
-                        }
-                    </table>
+                            @{
+                                var ia = 1;
+                            }
+                            @foreach (var vaccine in Model.Vaccines)
+                            {
+                                <tr>
+                                    <td>@ia</td>
+                                    <td>@vaccine.vaccineName</td>
+                                    <td>@vaccine.disease.diseaseName</td>
+                                    <td>@vaccine.notes</td>
+                                </tr>
+                                ia++;
+                            }
+                        </table>
+                    }
+                    else
+                    {
+                        <p>No Vaccines yet.</p>
+                    }
                     <br>
                     <input type="button" class="btn btn-secondary" id="hideVaccines" value="Hide" />
                 </div>
@@ -257,28 +274,50 @@
                     <h4 class="modal-title">Institutions in database</h4>
                 </div>
                 <div class="modal-body">
-                    <table class="table table-striped table-hover">
-                        <tr>
-                            <td><b>Institution Name</b></td>
-                            <td><b>Address</b></td>
-                        </tr>
-                        @foreach (var institution in Model.Institutions)
-                        {
-                            <tr>
-                                <td>@institution.institutionName</td>
-                                <td>@institution.notes</td>
+                    @if (Model.Vaccines.Count() > 0)
+                    {
+                        <table class="table table-striped border">
+                            <tr class="table-secondary">
+                                <th>
+                                    No.
+                                </th>
+                                <th>
+                                    Name
+                                </th>
+                                <th>
+                                    Vaccine For
+                                </th>
                             </tr>
-                        }
-                    </table>
+                            @{
+                                var ib = 1;
+                            }
+                            @foreach (var vaccines in Model.Vaccines)
+                            {
+                                <tr>
+                                    <td>
+                                        @ib
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(m => vaccines.vaccineName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(m => vaccines.disease.diseaseName)
+                                    </td>
+                                </tr>
+                                ib++;
+                            }
+                        </table>
+                    }
+                    else
+                    {
+                        <p>No Vaccines yet.</p>
+                    }
                     <br>
                     <input type="button" class="btn btn-secondary" id="hideInstitutions" value="Hide" />
                 </div>
             </div>
         </div>
     </div>
-
-
-
 
 
     <script>

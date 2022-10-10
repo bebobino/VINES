@@ -35,118 +35,118 @@
                     </form>
                 }
             }
-            <h1 style="font-size: x-large;"><b>Dashboard</b></h1>
-
-            <section id="counts" class="counts section-bg">
-                <div class="container">
-
-                    <div class="row justify-content-end">
-
-                        <div class="card col-lg-3 col-md-5 col-6 d-md-flex align-items-center text-center" id="showSources">
-                            <br>
-                            <h1>@Model.Sources.Count</h1>
-                            <p>News Sources</p>
-
-                        </div>
-
-                        <div class="card col-lg-3 col-md-5 col-6 d-md-flex align-items-center text-center" id="showInstitutions">
-                            <br>
-                            <h1>@Model.Institutions.Count</h1>
-                            <p>Institutions in database</p>
-
-                        </div>
-
-                        <div class="card col-lg-3 col-md-5 col-6 d-md-flex align-items-center text-center" id="showVaccines">
-                            <br>
-                            <h1>@Model.Vaccines.Count</h1>
-                            <p>Vaccines in database</p>
-
-                        </div>
-
-                        <div class="card col-lg-3 col-md-5 col-6 d-md-flex align-items-center text-center">
-                            <br>
-                            <h1>87</h1>
-                            <p>Recommendations generated</p>
-
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <br />
-            <br />
-
-
             <div class="blog-page area-padding">
-                <h1 style="font-size: x-large;"><b>News and Updates</b></h1>
-                <div class="row">
-                    <div>
+                <h1 style="font-size: x-large;"><b>Dashboard</b></h1>
+
+                <section id="counts" class="counts section-bg">
+                    <div class="container">
+
+                        <div class="row justify-content-end">
+
+                            <div class="card col-lg-3 col-md-5 col-6 d-md-flex align-items-center text-center" id="showSources">
+                                <br>
+                                <h1>@Model.Sources.Count</h1>
+                                <p>News Sources</p>
+
+                            </div>
+
+                            <div class="card col-lg-3 col-md-5 col-6 d-md-flex align-items-center text-center" id="showInstitutions">
+                                <br>
+                                <h1>@Model.Institutions.Count</h1>
+                                <p>Institutions in database</p>
+
+                            </div>
+
+                            <div class="card col-lg-3 col-md-5 col-6 d-md-flex align-items-center text-center" id="showVaccines">
+                                <br>
+                                <h1>@Model.Vaccines.Count</h1>
+                                <p>Vaccines in database</p>
+
+                            </div>
+
+                            <div class="card col-lg-3 col-md-5 col-6 d-md-flex align-items-center text-center">
+                                <br>
+                                <h1>87</h1>
+                                <p>Recommendations generated</p>
+
+                            </div>
+                        </div>
                     </div>
-                    <!-- Pagination -->
-                    <div class="scroll-auto">
-                        <ul class="pagination">
-                            <li class="page-item @(!Model.ShowPrevious? "disabled":"")">
-                                <a asp-page="/Index" asp-route-p="@(Model.PageNo -1)" class="page-link"> &#8249; </a>
-                            </li>
-                            @for (var i = 1; i <= Model.TotalPages; i++)
-                            {
-                                <li class="page-item @(i == Model.PageNo ? "active" : "")">
-                                    <a asp-page="/patientLanding" asp-route-p="@i" class="page-link">@i</a>
-                                </li>
-                            }
-                            <li class="page-item  @(!Model.ShowNext? "disabled":"")">
-                                <a asp-page="/patientLanding" asp-route-p="@(Model.PageNo + 1)" class="page-link"> &#8250; </a>
-                            </li>
-                        </ul>
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <br />
+                </section>
+            </div>
+            <br />
+            <br />
 
 
-                        <!-- Pagination -->
-                        @foreach (var webpage in Model.WebPages)
+
+            <h1 style="font-size: x-large;"><b>News and Updates</b></h1>
+            <br />
+            <br />
+            <div class="row">
+                <div>
+                </div>
+                <!-- Pagination -->
+                <div class="scroll-auto">
+                    <ul class="pagination">
+                        <li class="page-item @(!Model.ShowPrevious? "disabled":"")">
+                            <a asp-page="/Index" asp-route-p="@(Model.PageNo -1)" class="page-link"> &#8249; </a>
+                        </li>
+                        @for (var i = 1; i <= Model.TotalPages; i++)
                         {
-                            <div class="col-md-12 col-sm-12 col-xs-12">
-                                <div class="single-blog">
-                                    <div class="blog-text">
-                                        <h5>
-                                            <a href="@webpage.webURL">@webpage.pageTitle</a>
-                                        </h5>
-                                        <div class="blog-meta">
-                                            <span class="date-type">
-                                                <i class="bi bi-calendar"></i>@webpage.uploadDate
-                                            </span>
-                                        </div>
-                                        <p>
-                                            @webpage.summary
-                                        </p>
+                            <li class="page-item @(i == Model.PageNo ? "active" : "")">
+                                <a asp-page="/patientLanding" asp-route-p="@i" class="page-link">@i</a>
+                            </li>
+                        }
+                        <li class="page-item  @(!Model.ShowNext? "disabled":"")">
+                            <a asp-page="/patientLanding" asp-route-p="@(Model.PageNo + 1)" class="page-link"> &#8250; </a>
+                        </li>
+                    </ul>
+                    <br />
+                    <br />
+
+                    <!-- Pagination -->
+                    @foreach (var webpage in Model.WebPages)
+                    {
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="single-blog">
+                                <div class="blog-text">
+                                    <h5>
+                                        <a href="@webpage.webURL">@webpage.pageTitle</a>
+                                    </h5>
+                                    <div class="blog-meta">
+                                        <span class="date-type">
+                                            <i class="bi bi-calendar"></i>@webpage.uploadDate
+                                        </span>
                                     </div>
+                                    <p>
+                                        @webpage.summary
+                                    </p>
                                 </div>
                             </div>
+                        </div>
+                    }
+                    <br />
+                    <br />
+                    <!-- Pagination -->
+                    <ul class="pagination">
+                        <li class="page-item @(!Model.ShowPrevious? "disabled":"")">
+                            <a asp-page="/patientLanding" asp-route-p="@(Model.PageNo -1)" class="page-link"> &#8249; </a>
+                        </li>
+                        @for (var i = 1; i <= Model.TotalPages; i++)
+                        {
+                            <li class="page-item @(i == Model.PageNo ? "active" : "")">
+                                <a asp-page="/Index" asp-route-p="@i" class="page-link">@i</a>
+                            </li>
                         }
-                        <br />
-                        <br />
-                        <!-- Pagination -->
-                        <ul class="pagination">
-                            <li class="page-item @(!Model.ShowPrevious? "disabled":"")">
-                                <a asp-page="/patientLanding" asp-route-p="@(Model.PageNo -1)" class="page-link"> &#8249; </a>
-                            </li>
-                            @for (var i = 1; i <= Model.TotalPages; i++)
-                            {
-                                <li class="page-item @(i == Model.PageNo ? "active" : "")">
-                                    <a asp-page="/Index" asp-route-p="@i" class="page-link">@i</a>
-                                </li>
-                            }
-                            <li class="page-item  @(!Model.ShowNext? "disabled":"")">
-                                <a asp-page="/patientLanding" asp-route-p="@(Model.PageNo + 1)" class="page-link"> &#8250; </a>
-                            </li>
-                        </ul>
-                    </div>
-                    <br />
-                    <br />
+                        <li class="page-item  @(!Model.ShowNext? "disabled":"")">
+                            <a asp-page="/patientLanding" asp-route-p="@(Model.PageNo + 1)" class="page-link"> &#8250; </a>
+                        </li>
+                    </ul>
                 </div>
+                <br />
+                <br />
             </div>
+
 
             <div class="blog-page area-padding">
                 <h5><b>Institutions Near You</b></h5>
@@ -174,12 +174,11 @@
                     </div>
                 </div>
             </div> <!-- End community posts. -->
-
-
-
         </div>
     </div>
 </div>
+
+
 <!-- End Blog Page -->
 <!-- dashboard modals -->
 
@@ -218,6 +217,10 @@
                         }
                     </table>
                 }
+                else
+                {
+                    <p>No sources yet.</p>
+                }
                 <br>
                 <input type="button" class="btn btn-secondary" id="hideSources" value="Hide" />
             </div>
@@ -244,21 +247,25 @@
                             </th>
                         </tr>
                         @{
-                            var i = 1;
+                            var ia = 1;
                         }
                         @foreach (var institution in Model.Institutions)
                         {
                             <tr>
                                 <td>
-                                    @i
+                                    @ia
                                 </td>
                                 <td>
                                     @Html.DisplayFor(m => institution.institutionName)
                                 </td>
                             </tr>
-                            i++;
+                            ia++;
                         }
                     </table>
+                }
+                else
+                {
+                    <p>No institutions yet</p>
                 }
                 <br>
                 <input type="button" class="btn btn-secondary" id="hideInstitutions" value="Hide" />
@@ -291,13 +298,13 @@
                             </th>
                         </tr>
                         @{
-                            var i = 1;
+                            var ib = 1;
                         }
                         @foreach (var vaccines in Model.Vaccines)
                         {
                             <tr>
                                 <td>
-                                    @i
+                                    @ib
                                 </td>
                                 <td>
                                     @Html.DisplayFor(m => vaccines.vaccineName)
@@ -306,9 +313,13 @@
                                     @Html.DisplayFor(m => vaccines.disease.diseaseName)
                                 </td>
                             </tr>
-                            i++;
+                            ib++;
                         }
                     </table>
+                }
+                else
+                {
+                    <p>No Vaccines yet.</p>
                 }
                 <input type="button" class="btn btn-secondary" id="hideVaccines" value="Hide" />
             </div>

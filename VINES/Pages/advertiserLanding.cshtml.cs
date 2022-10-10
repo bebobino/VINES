@@ -36,11 +36,15 @@ namespace VINES.Pages
         public IFormFile Photo { get; set; }
         [BindProperty]
         public Advertisement Ad { get; set; }
-        
+
         public List<AdReceipts> adr { get; set; }
         public List<Advertisement> active { get; set; }
         public List<Advertisement> inactive { get; set; }
-        
+        public List<Advertisement> advertisement { get; set; }
+
+        public List<Advertisers> advertisers { get; set; }
+
+        Help help = new Help();
 
 
         public async Task<IActionResult> OnPost()
@@ -106,8 +110,17 @@ namespace VINES.Pages
             AdTypes = _db.advertisementTypes.ToList();
             Ads = _db.advertisements.Where(a => a.advertiser.userID == uid).ToList();
             adr = _db.AdReceipts.Where(a => a.advertiser.userID == uid).ToList();
+
+            
             active = Ads.Where(a => a.endDate > DateTime.UtcNow && a.clicks > 0).ToList();
             inactive = Ads.Where(a => a.endDate <= DateTime.UtcNow || a.clicks <= 0).ToList();
+            advertisement = _db.advertisements.ToList();
+            advertisers = _db.advertisers.ToList();
+
+            foreach(var x in adr)
+            {
+                x.paymentID = help.Decrypt(x.paymentID);
+            }
             
         }
     }

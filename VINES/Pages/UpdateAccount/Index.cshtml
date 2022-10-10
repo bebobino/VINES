@@ -1,5 +1,4 @@
-﻿@page
-@model VINES.Pages.UpdateAccount.IndexModel
+﻿@model VINES.Pages.UpdateAccount.IndexModel
 @{
     ViewData["Title"] = "Update Account";
 }
@@ -21,12 +20,12 @@
                     <input asp-for="user.roleID" />
                 </div>
 
-                 <div class="form-group row">
+                <div class="form-group row">
                     <div class="col-4">
                         <label asp-for="user.firstName">First Name</label>
                     </div>
                     <div class="col-6">
-                        <input asp-for="user.firstName" class="form-control" name="firstName" required/>
+                        <input asp-for="user.firstName" class="form-control" name="firstName" value="@Model.user.firstName" required />
                     </div>
                 </div>
 
@@ -35,26 +34,26 @@
                         <label asp-for="user.middleName">Middle Name</label>
                     </div>
                     <div class="col-6">
-                        <input asp-for="user.middleName" class="form-control" name="middleName" required/>
+                        <input asp-for="user.middleName" class="form-control" name="middleName" value="@Model.user.middleName" required />
                     </div>
                 </div>
 
-               <div class="form-group row">
+                <div class="form-group row">
                     <div class="col-4">
                         <label asp-for="user.lastName">Last Name</label>
                     </div>
                     <div class="col-6">
-                        <input asp-for="user.lastName" class="form-control" name="lastName" required/>
+                        <input asp-for="user.lastName" class="form-control" name="lastName" value="@Model.user.lastName" required />
                     </div>
                 </div>
 
 
-                 <div class="form-group row">
+                <div class="form-group row">
                     <div class="col-4">
                         <label asp-for="user.contactNumber">Contact Number</label>
                     </div>
                     <div class="col-6">
-                        <input asp-for="user.contactNumber" class="form-control" name="contactNumber" required/>
+                        <input asp-for="user.contactNumber" class="form-control" name="contactNumber" value="@Model.user.contactNumber" required />
                     </div>
                 </div>
 
@@ -78,14 +77,13 @@
                     <input asp-for="user.genderID" readonly />
                 </div>
 
-            
-            <br />
-            <div class="col-2">
-                <input type="submit" value="Update" class="btn btn-primary btn-sm text-white" />
-            </div>
-            <br />
-            </form>
+                <br />
+                <div class="col-2">
+                    <input type="submit" value="Update" class="btn btn-primary btn-sm text-white" />
+                </div>
+                <br />
 
+            </form>
             <div class="col-2">
                 <a asp-page="ChangePassword" class="btn btn-success btn-sm text-white">Change Password</a>
             </div>
