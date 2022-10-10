@@ -53,7 +53,15 @@
                                 <p>Advertisements Inactive</p>
 
                             </div>
-                            @{
+                       
+                            <div class="card col-lg-3 col-md-5 col-6 d-md-flex align-items-center text-center" id="showPatients">
+                                <br>
+                                <h1>@Model.advertisement.Count</h1>
+                                <p>Advertisements</p>
+
+                            </div>
+
+                             @{
                                 decimal x = 0;
                             }
                             @foreach (var ar in Model.adr)
@@ -64,13 +72,6 @@
                                 <br>
                                 <h1>&#8369;@x</h1>
                                 <p>Billing Statement (Total)</p>
-
-                            </div>
-
-                            <div class="card col-lg-3 col-md-5 col-6 d-md-flex align-items-center text-center" id="">
-                                <br>
-                                <h1>&#8369;7,500</h1>
-                                <p>Total Expenses spent on Ads</p>
 
                             </div>
 
@@ -398,7 +399,80 @@
             </div>
         </div>
     </div>
+    @*
+    <div class="modal fade" id="patient">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">List of Advertisements</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="scroll-auto">
+                        @if (Model.advertisement.Count() > 0)
+                        {
+                        <table class="table table-striped border">
+                            <tr class="table-secondary">
+                                <th>
+                                    No.
+                                </th>
+                                <th>
+                                    Advertisement ID
+                                </th>
+                                <th>
+                                    Advertisement Title
+                                </th>
+                                <th>
+                                    Payment ID
+                                </th>
+                                <th>
+                                    Advertisement Price
+                                </th>
+                                <th>
+                                    Date Paid
+                                </th>
+                            </tr>
+                            @{
+                                var ic = 1;
+                            }
+                            @foreach (var advertisement in Model.advertisement)
+                            {
 
+                                <tr>
+                                    <td>
+                                        @ic
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(m => advertisement.advertisementID)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(m => advertisement.advertisement.advertisementTitle)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(m => advertisement.paymentID)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(m => advertisement.price)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(m => advertisement.dateCreated)
+                                    </td>
+                                </tr>
+                                ic++;
+                            }
+                        </table>
+                         }
+                        else
+                        {
+                            <p>No Advertisements yet. </p>
+                        }
+                    </div>
+                    <br>
+                    <input type="button" class="btn btn-secondary" id="hideAdvertisers" value="Hide" />
+                </div>
+            </div>
+        </div>
+    </div>
+    *@
 
 }
 else

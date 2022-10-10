@@ -17,6 +17,7 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<link href="~/assets/css/slider.css" rel="stylesheet">
 
 <!-- ======= Blog Page ======= -->
 <div class="blog-page area-padding">
@@ -64,10 +65,10 @@
 
                             </div>
 
-                            <div class="card col-lg-3 col-md-5 col-6 d-md-flex align-items-center text-center">
-                                <br>
-                                <h1>87</h1>
-                                <p>Recommendations generated</p>
+                            <div class="card col-lg-3 col-md-5 col-6 d-md-flex align-items-center text-center" id="showPatients">
+                                <br>                               
+                                <h4><strong>Click to Generate Vaccine Preference</strong></h4>
+                                
 
                             </div>
                         </div>
@@ -327,6 +328,52 @@
     </div>
 </div>
 
+<div class="modal fade" id="patients">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Create Vaccine Preference</h4>
+            </div>
+            <div class="modal-body">
+               <form method="post"> 
+                        <div class="form-group row">
+                            <div class="col-4">
+                                <label asp-for="vax" style="color:black">Select Preferred Vaccine Brand</label>
+                            </div>
+
+                            <div class="col-6">
+                                <select asp-for="vax" class="form-control">
+                                    @foreach(var vax in Model.Vaccines){
+                                        <option value = "@vax.vaccineID">@vax.vaccineName</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                             <div class="col-4">
+                                <label asp-for="budget" style="color:black">Select Budget</label>
+                             </div>
+
+                            <div class="col-6">
+                                <input class="px7" input type="range" asp-for="budget" value="0" min="0" max="@Model.maxVax" oninput="this.nextElementSibling.value = 'Php ' + this.value">
+                                <output>Php 0</output>                       
+                            </div>
+                        </div>
+                    
+
+                         <div class="form-group row">
+                                <div class="col-3 offset-4">
+                                    <input type="submit" value="Create Vaccine Preference" class="btn btn-primary btn-sm text-white" />
+                                </div>
+                         </div>
+                    </form>
+                <input type="button" class="btn btn-secondary" id="hidePatients" value="Hide" />
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
     initializeMap();
     getLocation();
@@ -340,21 +387,9 @@
     </script>
 }
 
+                
+                   
+                
 
 
-
-                    <form method="post">
-                        
-                        <p>Preferred Vaccine Brand</p>
-                        <select asp-for="vax">
-                            @foreach(var vax in Model.Vaccines){
-                                <option value = "@vax.vaccineID">@vax.vaccineName</option>
-                            }
-                        </select>
-                        <br />
-                        <br />
-                        <p>Budget</p>
-                        <input type="range" asp-for="budget" value="0" min="0" max="@Model.maxVax" oninput="this.nextElementSibling.value = 'Php ' + this.value">
-                        <output>Php 0</output>
-                        <input type="submit" value="Create Vaccine Preference" class="btn btn-pill text-white btn-block btn-primary">
-                    </form>
+       

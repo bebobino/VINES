@@ -95,6 +95,7 @@ namespace VINES.Pages
             ShowNext = (PageNo < TotalPages) ? true : false;
             Vaccines = db.vaccines.Include("disease").ToList();
             Institutions = db.Institutions.ToList();
+            Diseases = db.Diseases.ToList();
             Help help = new Help();
             Debug.WriteLine("test");
             help.checkIP();

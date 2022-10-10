@@ -3,13 +3,79 @@
 @using Microsoft.AspNetCore.Authorization
 @inject IAuthorizationService AuthorizationService
 @{
+    ViewData["Title"] = "Vaccine Recommendations";
 }
-@foreach(var x in Model.inst)
-{
-    <p>@x.vaccine.vaccineName</p>
-    <p>@x.institution.institutionName</p>
-    <p>@x.institution.institutionType.institutionType</p>
-    <p>Php @x.price</p>
-    <br />
 
-}
+
+<div class="blog-page area-padding">
+
+    <h1 style="font-size: x-large;"><b>Recommended Vaccines</b></h1>
+    <div class="row">
+        <!-- End single blog -->
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="single-blog">
+                <div class="blog-text">
+                    <form method="post">
+                        <div class="scroll-auto">
+                            @if (Model.inst.Count() > 0)
+                                {
+                            <table class="table table-striped table-hover">                              
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                                No.
+                                            </th>
+                                            <th>
+                                                Vaccine
+                                            </th>
+                                            <th>
+                                                Institution
+                                            </th>
+                                            <th>
+                                                Institution Type
+                                            </th>
+                                            <th>
+                                                Price
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    @{
+                                        var i = 1;
+                                    }
+                                    @foreach (var x in Model.inst)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @i
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(m => x.vaccine.vaccineName)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(m => x.institution.institutionName)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(m => x.institution.institutionType.institutionType)
+                                            </td>
+                                            <td>
+                                                &#8369; @Html.DisplayFor(m => x.price)
+                                            </td>
+
+                                        </tr>
+                                        i++;
+                                    }
+                                </table>
+                            }
+                            else
+                            {
+                                <p>There are no Institutions offering your vaccine preferences.</p>
+                            }
+                        </div>
+                     <a asp-page="/patientLanding" class="btn btn-success btn-sm text-white">Back to Index</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -65,10 +65,10 @@
 
                                 </div>
 
-                                <div class="card col-lg-3 col-md-5 col-6 d-md-flex align-items-center text-center">
+                                <div class="card col-lg-3 col-md-5 col-6 d-md-flex align-items-center text-center" id="showPatients">
                                     <br>
-                                    <h1>87</h1>
-                                    <p>Recommendations generated</p>
+                                    <h1>@Model.Diseases.Count</h1>
+                                    <p>Diseases in database</p>
 
                                 </div>
 
@@ -311,6 +311,54 @@
                     else
                     {
                         <p>No Vaccines yet.</p>
+                    }
+                    <br>
+                    <input type="button" class="btn btn-secondary" id="hideInstitutions" value="Hide" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+        <div class="modal fade" id="patients">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Diseases in database</h4>
+                </div>
+                <div class="modal-body">
+                    @if (Model.Diseases.Count() > 0)
+                    {
+                        <table class="table table-striped border">
+                            <tr class="table-secondary">
+                                <th>
+                                    No.
+                                </th>
+                                <th>
+                                    Diseases Name
+                                </th>
+
+                            </tr>
+                            @{
+                                var ic = 1;
+                            }
+                            @foreach (var D in Model.Diseases)
+                            {
+                                <tr>
+                                    <td>
+                                        @ic
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(m => D.diseaseName)
+                                    </td>
+
+                                </tr>
+                                ic++;
+                            }
+                        </table>
+                    }
+                    else
+                    {
+                        <p>No Diseases yet.</p>
                     }
                     <br>
                     <input type="button" class="btn btn-secondary" id="hideInstitutions" value="Hide" />

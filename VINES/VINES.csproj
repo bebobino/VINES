@@ -16,10 +16,12 @@
     <Content Remove="wwwroot\assets\css\About.css" />
     <Content Remove="wwwroot\assets\css\pricing.css" />
     <Content Remove="wwwroot\assets\css\privacy.css" />
+    <Content Remove="wwwroot\assets\css\slider.css" />
     <Content Remove="wwwroot\assets\css\team.css" />
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="wwwroot\assets\css\slider.css" />
     <None Include="wwwroot\assets\css\team.css" />
     <None Include="wwwroot\assets\css\about.css" />
     <None Include="wwwroot\assets\css\privacy.css" />
