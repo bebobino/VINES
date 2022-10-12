@@ -88,7 +88,8 @@ namespace VINES.Pages
                 ModelState.AddModelError("Error", "ERROR: Image must be .jpg/.jpeg/.png/.gif file.");
                 Debug.WriteLine("bobo");
             }
-            return RedirectToPage("/Index");
+            OnGet();
+            return Page();
         }
 
         public async Task<IActionResult> OnPostCheckout(double total, int id)
