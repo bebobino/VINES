@@ -1,7 +1,9 @@
 ﻿@page
 @model VINES.Pages.Status.IndexModel
+@using VINES.Processes;
 @{
     ViewData["Title"] = "User Status";
+    Help help = new Help();
 }
 <div class="blog-page area-padding">
     <h2 class="text-primary">User Status</h2>
@@ -34,7 +36,7 @@
                                 <input type="hidden" class="userID" asp-for="@Model.users[i].userID" />
                             </td>
                             <td>
-                                <label type="text" class="email" asp-for="@Model.users[i].email" readonly>@Model.users[i].email</label>
+                                <label type="text" class="email" asp-for="@Model.users[i].email" readonly>@help.Decrypt(Model.users[i].email)</label>
                             </td>
                             <td>
                                 <label type="text" class="role" asp-for="@Model.users[i].role.role" readonly>@Model.users[i].role.role</label>
