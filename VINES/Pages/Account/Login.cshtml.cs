@@ -40,13 +40,12 @@ namespace VINES.Pages.Account
         }
 
 
-
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
             returnUrl ??= Url.Content("~/patientLanding");
-
             if (ModelState.IsValid)
             {
+                ModelState.Clear();
                 var help = new Help();
                 var user = Db.Users.Where(f => f.email == help.Encrypt(Input.email)).FirstOrDefault();
                 if (user == null)

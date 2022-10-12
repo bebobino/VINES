@@ -81,9 +81,11 @@ namespace VINES.Pages
                 _db.advertisements.Add(Ad);
                 await _db.SaveChangesAsync();
                 Debug.WriteLine("tama ka");
+                ModelState.AddModelError("Success", "SUCCESS: You have now added your advertisement.");
             }
             else
             {
+                ModelState.AddModelError("Error", "ERROR: Image must be .jpg/.jpeg/.png/.gif file.");
                 Debug.WriteLine("bobo");
             }
             return RedirectToPage("/Index");

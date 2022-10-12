@@ -91,6 +91,8 @@
                             <div class="blog-text">
 
                                 <form method="post" enctype="multipart/form-data">
+                                    @Html.ValidationMessage("Error", new { @style="color:red" })
+                                    @Html.ValidationMessage("Success", new { @style="color:green" })
                                     <div class="scroll-auto">
 
                                         <table class="table table-striped border">

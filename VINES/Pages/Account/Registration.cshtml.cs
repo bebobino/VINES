@@ -102,10 +102,10 @@ namespace VINES.Pages.Account
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
             returnUrl ??= Url.Content("~/");
-
+            var help  = new Help();
             if (ModelState.IsValid)
             {
-                var user = Db.Users.Where(f => f.email == Input.email).FirstOrDefault();
+                var user = Db.Users.Where(f => f.email == help.Encrypt(Input.email)).FirstOrDefault();
                 if (user != null)
                 {
                     ModelState.AddModelError("Error", "ERROR: Email already being used.");
@@ -113,7 +113,7 @@ namespace VINES.Pages.Account
                 else
                 {
                     ModelState.AddModelError("Success", "SUCCESS: User created.");
-                    var help = new Help();
+                    
                     user = new User
                     {
                         firstName = help.Encrypt(Input.firstName),
@@ -147,7 +147,7 @@ namespace VINES.Pages.Account
                     await Db.SaveChangesAsync();
 
                     help.sendEmail(Input.email, "Account Confirmation", "Here is your authentication link: " + AppSettings.Site.Url + "Account/RegisterConfirmation/?key1=" + user.userID +"&key2=" + user.email);
-                    return RedirectToPage("/Account/Login");
+                    return Page();
 
                 }
             }
