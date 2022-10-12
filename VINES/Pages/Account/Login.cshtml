@@ -53,8 +53,10 @@
                 </div>
                 <form id="account" method="post">
                     @Html.ValidationMessage("Error", new { @style="color:red" })
+                    
                   <div class="form-group first">
                     <label asp-for="Input.email" style="color:black">Email</label>
+                                            <br />
                     <input type="text" asp-for="Input.email" class="form-control">
                     <span asp-validation-for="Input.email" class="text-danger"></span>
 

@@ -274,7 +274,7 @@
                     <h4 class="modal-title">Institutions in database</h4>
                 </div>
                 <div class="modal-body">
-                    @if (Model.Vaccines.Count() > 0)
+                    @if (Model.Institutions.Count() > 0)
                     {
                         <table class="table table-striped border">
                             <tr class="table-secondary">
@@ -284,33 +284,27 @@
                                 <th>
                                     Name
                                 </th>
-                                <th>
-                                    Vaccine For
-                                </th>
                             </tr>
                             @{
-                                var ib = 1;
+                                var ia = 1;
                             }
-                            @foreach (var vaccines in Model.Vaccines)
+                            @foreach (var institution in Model.Institutions)
                             {
                                 <tr>
                                     <td>
-                                        @ib
+                                        @ia
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(m => vaccines.vaccineName)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(m => vaccines.disease.diseaseName)
+                                        @Html.DisplayFor(m => institution.institutionName)
                                     </td>
                                 </tr>
-                                ib++;
+                                ia++;
                             }
                         </table>
                     }
                     else
                     {
-                        <p>No Vaccines yet.</p>
+                        <p>No institutions yet</p>
                     }
                     <br>
                     <input type="button" class="btn btn-secondary" id="hideInstitutions" value="Hide" />

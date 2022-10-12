@@ -46,6 +46,7 @@
                     @Html.ValidationMessage("Error", new { @style="color:red" })
                   <div class="form-group first">
                     <label asp-for="Input.email" style="color:black">Email</label>
+                                        <br />
                     <input type="text" asp-for="Input.email" class="form-control">
                     <span asp-validation-for="Input.email" class="text-danger"></span>
 
@@ -61,7 +62,6 @@
                       <input type="checkbox" checked="checked"/>
                       <div class="control__indicator"></div>
                     </label>
-                      <span class="ml-auto"><a class="" asp-page="/Account/ForgotPassword" style="color:black">Forgot Password</a></span> 
                   </div>
 
                   <input type="submit" value="Log In" class="btn btn-pill text-white btn-block btn-primary">

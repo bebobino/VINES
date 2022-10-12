@@ -8,6 +8,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using VINES.Data;
 using VINES.Models;
+using VINES.Processes;
+
 namespace VINES.Pages
 {
     [Authorize("AdminOnly")]
@@ -31,6 +33,8 @@ namespace VINES.Pages
             db = _db;
         }
 
+       
+
         public void OnGet()
         {
             advertisers = db.advertisers.ToList();
@@ -42,6 +46,8 @@ namespace VINES.Pages
             disease = db.Diseases.ToList();
             Sources = db.sources.ToList();
             Users = db.Users.ToList();
+
+       
         }
        
     }
