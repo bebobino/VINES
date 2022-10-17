@@ -46,6 +46,8 @@
                   <p class="mb-4" style="color:black">Enter Details</p>
                 </div>
                 <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                    @Html.ValidationMessage("Error", new { @style = "color:red" })
+                    @Html.ValidationMessage("Success", new { @style = "color:green" })
                     <div class="form-group last mb-4">
                     <label asp-for="Input.institution" style="color:black">Institution</label>
                     <br />

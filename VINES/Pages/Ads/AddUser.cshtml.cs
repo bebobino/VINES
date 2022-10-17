@@ -104,6 +104,7 @@ namespace VINES.Pages.Ads
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
             returnUrl ??= Url.Content("~/");
+            var help = new Help();
 
             if (ModelState.IsValid)
             {
@@ -114,20 +115,26 @@ namespace VINES.Pages.Ads
                 }
                 else
                 {
-                    var help = new Help();
-                    user = new User { firstName = Input.firstName, 
-                        middleName = Input.middleName, 
-                        lastName = Input.lastName, 
-                        genderID = Input.gender, 
-                        dateOfBirth = Input.dateOfBirth, 
-                        email = Input.email, 
-                        password = help.Hash(Input.password), 
-                        contactNumber = Input.contactNumber, 
-                        roleID = 2, isBlocked = false, 
-                        isLocked = false, emailAuth = true, 
-                        dateRegistered = DateTime.Now, 
-                        lastModified = DateTime.Now, 
-                        failedAttempts = 0};
+                    ModelState.AddModelError("Success", "SUCCESS: User created.");
+                    
+                    user = new User
+                    {
+                        firstName = help.Encrypt(Input.firstName),
+                        middleName = help.Encrypt(Input.middleName),
+                        lastName = help.Encrypt(Input.lastName),
+                        genderID = Input.gender,
+                        dateOfBirth = Input.dateOfBirth,
+                        email = help.Encrypt(Input.email),
+                        password = help.Encrypt(Input.password),
+                        contactNumber = help.Encrypt(Input.contactNumber),
+                        roleID = 2,
+                        isBlocked = false,
+                        isLocked = false,
+                        emailAuth = false,
+                        dateRegistered = DateTime.Now,
+                        lastModified = DateTime.Now,
+                        failedAttempts = 0
+                    };
                     Db.Users.Add(user);
                     await Db.SaveChangesAsync();
                     var ad = new Advertisers
@@ -137,7 +144,8 @@ namespace VINES.Pages.Ads
                     };
                     Db.advertisers.Add(ad);
                     await Db.SaveChangesAsync();
-                    return RedirectToPage("/Index");
+                    help.sendEmail(Input.email, "Account Confirmation", "Here is your authentication link: " + AppSettings.Site.Url + "Account/RegisterConfirmation/?key1=" + user.userID + "&key2=" + user.email);
+                    return Page();
                 }
             }
             return Page();
