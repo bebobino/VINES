@@ -36,7 +36,7 @@
                     </form>
                 }
             }
-            <div class="blog-page area-padding">
+            <div class="px-2">
                 <h1 style="font-size: x-large;"><b>Dashboard</b></h1>
 
                 <section id="counts" class="counts section-bg">
@@ -65,71 +65,77 @@
 
                             </div>
                             @if (Model.patient.isSubscribed)
-                                {
-                            <div class="card col-lg-3 col-md-5 col-6 d-md-flex align-items-center text-center" id="showPatients">
-                                <br>
-                                
+                            {
+                                <div class="card col-lg-3 col-md-5 col-6 d-md-flex align-items-center text-center" id="showPatients">
+                                    <br>
+
                                     <h1>@Model.bookedWeb.Count</h1>
                                     <p>Bookmarks saved</p>
-                                
-                                
-                            </div>
-                                }
-                                else{
-                                    <div class="card col-lg-3 col-md-5 col-6 d-md-flex align-items-center text-center" onclick="    location.href = '/Subscribe';">
+
+
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="card col-lg-3 col-md-5 col-6 d-md-flex align-items-center text-center" onclick="    location.href = '/Subscribe';">
                                     <br>
-                                
+
                                     <h1>Subscribe</h1>
                                     <p>To access bookmarks</p>
-                                
-                                
-                                    </div>
 
-                                }
+
+                                </div>
+
+                            }
                         </div>
                     </div>
                 </section>
             </div>
 
-            @if (Model.patient.isSubscribed)
-            {
-                <h1>Vax pref</h1>
-                <form method="post"> 
-                        <div class="form-group row">
-                            <div class="col-4">
-                                <label asp-for="vax" style="color:black">Select Preferred Vaccine Brand</label>
+          <div class="px-2">
+              <div class="px-2">
+                @if (Model.patient.isSubscribed)
+                {
+                    <h1 style="font-size: x-large;"><b>Vaccine Preferences</b></h1>
+                    <div class="border container" style="padding:30px;">
+                        <form method="post">
+                            <div class="form-group row">
+                                <div class="col-4">
+                                    <label asp-for="vax" style="color:black">Select Preferred Vaccine Brand</label>
+                                </div>
+
+                                <div class="col-6">
+                                    <select asp-for="vax" class="form-control">
+                                        @foreach (var vax in Model.Vaccines)
+                                        {
+                                            <option value="@vax.vaccineID">@vax.vaccineName</option>
+                                        }
+                                    </select>
+                                </div>
                             </div>
 
-                            <div class="col-6">
-                                <select asp-for="vax" class="form-control">
-                                    @foreach(var vax in Model.Vaccines){
-                                        <option value = "@vax.vaccineID">@vax.vaccineName</option>
-                                    }
-                                </select>
+                            <div class="form-group row">
+                                <div class="col-4">
+                                    <label asp-for="budget" style="color:black">Select Budget</label>
+                                </div>
+
+                                <div class="col-6">
+                                    <input class="px7" input type="range" asp-for="budget" value="0" min="0" max="@Model.maxVax" oninput="this.nextElementSibling.value = 'Php ' + this.value">
+                                    <output>Php 0</output>
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="form-group row">
-                             <div class="col-4">
-                                <label asp-for="budget" style="color:black">Select Budget</label>
-                             </div>
 
-                            <div class="col-6">
-                                <input class="px7" input type="range" asp-for="budget" value="0" min="0" max="@Model.maxVax" oninput="this.nextElementSibling.value = 'Php ' + this.value">
-                                <output>Php 0</output>                       
-                            </div>
-                        </div>
-                    
-
-                         <div class="form-group row">
+                            <div class="form-group row">
                                 <div class="col-3 offset-4">
                                     <input type="submit" value="Create Vaccine Preference" class="btn btn-primary btn-sm text-white" />
                                 </div>
-                         </div>
-                    </form>
-            }
-            <br />
-            <br />
+                            </div>
+                        </form>
+                    </div>
+                }
+           </div>
+           </div>
 
 
 
@@ -156,62 +162,59 @@
                         </li>
                     </ul>
                     <br />
-                    <br />
 
                     <!-- Pagination -->
                     <form asp-page-handler="book" method="post">
-                        <br />
                         @if (Model.patient.isSubscribed)
                         {
-
-
-                            <input type="submit" class="btn-success" value="Update Bookmarks"/>
+                            <input type="submit" class="btn btn-success btn-sm text-white" value="Update Bookmarks" />
                         }
                         <br />
                         <table>
-                            <input hidden asp-for="@Model.url"value="@Model.url" />
-                    @for(int i = 0;i<Model.Book.Count; i++)
-                    {
-                                
-
-
-                                    <input hidden asp-for="@Model.Book[i].web.postID"value="@Model.Book[i].web.postID" />
+                            <br />
+                            <label asp-for="@Model.url" class="control-label" hidden>URL#</label>
+                            <input hidden asp-for="@Model.url" value="@Model.url" />
+                            @for (int i = 0; i < Model.Book.Count; i++)
+                            {
+                                <label asp-for="@Model.Book[i].web.postID" class="control-label" hidden>Bookmark#</label>
+                                <input type="text" hidden asp-for="@Model.Book[i].web.postID" value="@Model.Book[i].web.postID" />
 
                                 <tr>
                                     <td>
 
                                         @if (Model.patient.isSubscribed)
                                         {
-                                            <input asp-for="@Model.Book[i].isChecked"/>
+                                            <label asp-for="@Model.Book[i].isChecked" class="control-label" hidden>Bookmark#</label>
+                                            <input type="checkbox" asp-for="@Model.Book[i].isChecked" />
                                         }
                                     </td>
                                     <td>
-                        <div class="col-md-12 col-sm-12 col-xs-12">
-                            <div class="single-blog">
-                                <div class="blog-text">
-                                    <h5>
-                                         <a href="@Model.Book[i].web.webURL">@Model.Book[i].web.pageTitle</a>
-                                    </h5>
-                                    <div class="blog-meta">
-                                        <span class="date-type">
-                                            <i class="bi bi-calendar"></i>@Model.Book[i].web.uploadDate
-                                        </span>
-                                    </div>
-                                    <p>
-                                        @Model.Book[i].web.summary
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        </td>
-                        </tr>
-                    }
-                    </table>
-                    <br />
-                    <br />
+                                        <div class="col-md-12 col-sm-12 col-xs-12">
+                                            <div class="single-blog">
+                                                <div class="blog-text">
+                                                    <h5>
+                                                        <a href="@Model.Book[i].web.webURL">@Model.Book[i].web.pageTitle</a>
+                                                    </h5>
+                                                    <div class="blog-meta">
+                                                        <span class="date-type">
+                                                            <i class="bi bi-calendar"></i>@Model.Book[i].web.uploadDate
+                                                        </span>
+                                                    </div>
+                                                    <p>
+                                                        @Model.Book[i].web.summary
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        </table>
+                        <br />
+                        <br />
                     </form>
                     <!-- Pagination -->
-                    
+
                     <ul class="pagination">
                         <li class="page-item @(!Model.ShowPrevious? "disabled":"")">
                             <a asp-page="/patientLanding" asp-route-p="@(Model.PageNo -1)" class="page-link"> &#8249; </a>
@@ -415,13 +418,45 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Create Vaccine Preference</h4>
+                <h4 class="modal-title">Bookmarked Pages</h4>
             </div>
             <div class="modal-body">
-               @foreach(var book in Model.bookedWeb)
+               @* @foreach (var book in Model.bookedWeb)
                 {
                     <a href="@book.webURL">@book.pageTitle</a>
                     <br />
+                }*@
+                 @if (Model.bookedWeb.Count() > 0)
+                {
+                    <table class="table table-striped border">
+                        <tr class="table-secondary">
+                            <th>
+                                No.
+                            </th>
+                            <th>
+                                Article Title
+                            </th>
+                        </tr>
+                        @{
+                            var iv = 1;
+                        }
+                        @foreach (var book in Model.bookedWeb)
+                        {
+                            <tr>
+                                <td>
+                                    @iv.
+                                </td>
+                                <td>
+                                    <a href="@book.webURL">@book.pageTitle</a>
+                                </td>
+                            </tr>
+                            iv++;
+                        }
+                    </table>
+                }
+                else
+                {
+                    <p>No Bookmarks yet.</p>
                 }
                 <input type="button" class="btn btn-secondary" id="hidePatients" value="Hide" />
             </div>
@@ -445,4 +480,3 @@
 
 
 
-       
