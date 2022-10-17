@@ -22,9 +22,8 @@ namespace VINES.Pages
 
 
 
+        public List<WebPages> bookedWeb { get; set; } = new List<WebPages>();
         [BindProperty(SupportsGet = true)]
-        
-
         public List<CommunityPost> CommunityPosts { get; set; }
         public List<WebPages> WebPages { get; set; }
         public List<Vaccines> Vaccines { get; set; }
@@ -40,11 +39,16 @@ namespace VINES.Pages
         public int vax { get; set; }
         [BindProperty]
         public decimal budget { get; set; }
+        [BindProperty]
+        public string url { get; set; }
 
 
         //Ads
         [BindProperty]
         public List<Advertisement> ads { get; set; }
+
+        [BindProperty]
+        public List<bookies> Book { get; set; }
         public int rnd { get; set; }
         public Random rando = new Random(DateTime.Now.Millisecond);
 
@@ -55,6 +59,12 @@ namespace VINES.Pages
         public int Count { get; set; }
         public int PageSize { get; set; }
         public int TotalPages { get; set; }
+
+        public class bookies
+        {
+            public WebPages web { get; set; }
+            public Boolean isChecked { get; set; }
+        }
         
 
 
@@ -65,11 +75,22 @@ namespace VINES.Pages
         }
         public void OnGet(int p = 1 , int s = 5)
         {
+            var location = new Uri($"{Request.Scheme}://{Request.Host}{Request.Path}{Request.QueryString}");
+
+            url = location.AbsoluteUri;
+            Debug.WriteLine(url);
+            Book = new List<bookies>();
             try
             {
+                
                 var uid = User.FindFirstValue(ClaimTypes.NameIdentifier);
                 int x = int.Parse(uid);
                 patient = db.Patients.Where(p => p.userID == x).FirstOrDefault();
+                var bookMarks = db.bookmarks.Where(b => b.patientID == patient.patientID).ToList();
+                foreach(var b in bookMarks)
+                {
+                    bookedWeb.Add(db.WebPages.Where(a => a.postID == b.postID).FirstOrDefault());
+                }
                 maxVax = decimal.Parse(db.InstitutionVaccines.Max(i => i.price).ToString());
             }catch(Exception)
             {
@@ -84,6 +105,22 @@ namespace VINES.Pages
             Sources = db.sources.ToList();
             CommunityPosts = db.CommunityPosts.ToList();
             WebPages = db.WebPages.OrderByDescending(webpage => webpage.uploadDate).Skip((p - 1) * s).Take(s).ToList();
+
+            foreach (var web in WebPages)
+            {
+                var b = false;
+                if(db.bookmarks.Where(b => b.postID == web.postID && b.patientID == patient.patientID).FirstOrDefault() != null)
+                {
+                    b = true;
+                }
+                Book.Add(new bookies
+                {
+                    web = web,
+                    isChecked = b
+                });
+            }
+
+
             Count = db.WebPages.Count();
             PageSize = s;
             TotalPages = (int)Math.Ceiling(decimal.Divide(Count, PageSize));
@@ -104,6 +141,43 @@ namespace VINES.Pages
             Debug.WriteLine(vax);
             Debug.WriteLine(budget);
             return Redirect("/Patient/Preference?vax="+vax+"&budget="+budget);
+        }
+
+        public async Task<IActionResult> OnPostBook()
+        {
+            var uid = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            int x = int.Parse(uid);
+            patient = db.Patients.Where(p => p.userID == x).FirstOrDefault();
+            Debug.WriteLine("Eto malupet");
+            Debug.WriteLine("Post books: " + Book.Count);
+            foreach(var book in Book)
+            {
+
+                if (book.isChecked && db.bookmarks.Where(b => b.postID == book.web.postID && b.patientID == patient.patientID).FirstOrDefault() == null)
+                {
+                    Debug.WriteLine("Added");
+                    var mark = new Bookmarks
+                    {
+                        postID = book.web.postID,
+                        patientID = patient.patientID,
+                    };
+                    db.bookmarks.Add(mark);
+                    await db.SaveChangesAsync();
+                }
+                if (!book.isChecked && db.bookmarks.Where(b => b.postID == book.web.postID && b.patientID == patient.patientID).FirstOrDefault() != null)
+                {
+                    Debug.WriteLine("Deleted");
+                    var mark = db.bookmarks.Where(b => b.postID == book.web.postID && b.patientID == patient.patientID).FirstOrDefault();
+                    db.bookmarks.Remove(mark);
+                    await db.SaveChangesAsync();
+                }
+
+
+
+
+            }
+            
+            return Redirect(url);
         }
 
 
