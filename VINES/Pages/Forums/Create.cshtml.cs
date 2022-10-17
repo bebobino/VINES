@@ -30,7 +30,7 @@ namespace VINES.Pages.Forums
             int idd = int.Parse(id);
         }
 
-        public async Task<IActionResult> OnPost(int catID, string content, int pID)
+        public async Task<IActionResult> OnPost(string title, int catID, string content, int pID)
         {
             var id = User.FindFirstValue(ClaimTypes.NameIdentifier);
             int idd = int.Parse(id);
@@ -46,6 +46,7 @@ namespace VINES.Pages.Forums
             {
 
                 userID = idd,
+                forumTitle = title,
                 forumCategoryID = catID,
                 forumContent = content,
                 dateAdded = DateTime.Now,

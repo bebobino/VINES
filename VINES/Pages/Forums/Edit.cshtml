@@ -18,6 +18,12 @@
                     <input type="hidden" asp-for="ForumPost.forumPostID" />
 
                     <div class="form-group">
+                        <label asp-for="ForumPost.forumTitle" class="control-label">Title</label>
+                        <input asp-for="ForumPost.forumTitle" class="form-control" />
+                        <span asp-validation-for="ForumPost.forumTitle" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
                         <label asp-for="ForumPost.forumCategory" class="control-label">Forum Category</label>
                         <select asp-for="ForumPost.forumCategoryID" name="catID" class="form-control">
                             @foreach (var category in Model.categories)

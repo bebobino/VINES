@@ -22,6 +22,9 @@
                                 <th>
                                     No.
                                 </th>
+                                <th>
+                                    Title
+                                </th>
 
                                 <th>
                                     Category
@@ -42,6 +45,7 @@
                                     <td>
                                         @i
                                     </td>
+                                    <td><a asp-page="Details" asp-route-id="@forum.forumPostID">@Html.DisplayFor(m => forum.forumTitle)</a></td>
                                     <td>
                                         @Html.DisplayFor(m => forum.forumContent)
                                     </td>
@@ -59,9 +63,7 @@
                                         <div class="px-3">
                                             <a asp-page="Edit" asp-route-id="@forum.forumPostID" class="btn btn-success btn-sm text-white">Edit</a>
                                         </div>
-                                        <div class="px-3">
-                                            <a asp-page="Details" asp-route-id="@forum.forumPostID" class="btn btn-warning btn-sm text-white">Details</a>
-                                        </div>
+                                            
                                     </td>
                                 </tr>
                                 i++;

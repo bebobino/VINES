@@ -116,7 +116,7 @@
                     <br />
                     <br />
                     
-                    <input type="date" class="form-control" asp-for="Input.dateOfBirth">
+                    <input type="date" class="form-control" asp-for="Input.dateOfBirth" max="@DateTime.Today.ToString("yyyy'-'MM'-'dd")" required >
                
                   </div>
                   <div class="form-group first">
