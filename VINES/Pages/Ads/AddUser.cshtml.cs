@@ -108,10 +108,10 @@ namespace VINES.Pages.Ads
 
             if (ModelState.IsValid)
             {
-                var user = Db.Users.Where(f => f.email == Input.email).FirstOrDefault();
+                var user = Db.Users.Where(f => f.email == help.Encrypt(Input.email)).FirstOrDefault();
                 if (user != null)
                 {
-                    ModelState.AddModelError(string.Empty, Input.email + "Already Exists");
+                    ModelState.AddModelError("Error", "ERROR: Email already being used.");
                 }
                 else
                 {
