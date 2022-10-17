@@ -64,6 +64,7 @@
                   </div>
                   <div class="form-group last mb-4">
                     <label asp-for="Input.password" style="color:black">Password</label>
+                                <br />
                     <input type="password" asp-for="Input.password" class="form-control" id="password" value="">
                     <span asp-validation-for="Input.password" class="text-danger"></span>
                   </div>
@@ -77,6 +78,17 @@
                   </div>
 
                   <input type="submit" value="Log In" class="btn btn-pill text-white btn-block btn-primary">
+
+                   <span class="d-block text-center my-4 text-muted"> or sign in with</span>
+                  
+                  <div class="social-login text-center">
+                    <a asp-page="/Account/extFacebook" class="facebook">
+                      <span class="icon-facebook mr-2"></span> 
+                    </a>
+                    <a href="/Account/extGoogle" class="google">
+                      <span class="icon-google mr-2"></span> 
+                    </a>
+                  </div>
 
          
                   
