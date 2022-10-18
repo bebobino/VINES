@@ -15,7 +15,7 @@
     <form method="post">  
         <div class="form-group row">
             <div class="col-4">
-                <label asp-for="forumPost.forumTitle"></label>
+                <label asp-for="forumPost.forumTitle">Forum Title</label>
             </div>
             <div class="col-6">
                 <input asp-for="forumPost.forumTitle" class="form-control" name="title" required />
@@ -23,7 +23,7 @@
         </div>  
          <div class="form-group row">  
             <div class="col-4">  
-                <label asp-for="forumPost.forumCategory"></label>  
+                <label asp-for="forumPost.forumCategory">Forum Category</label>  
             </div>  
             <div class="col-6">  
                 <select asp-for="forumPost.forumCategoryID" name="catID">
@@ -37,7 +37,7 @@
   
         <div class="form-group row">  
             <div class="col-4">  
-                <label asp-for="forumPost.forumContent"></label>  
+                <label asp-for="forumPost.forumContent">Forum Content</label>  
             </div>
             <div class="col-6">  
                 <textarea asp-for="forumPost.forumContent" class="form-control" name="content" required></textarea>

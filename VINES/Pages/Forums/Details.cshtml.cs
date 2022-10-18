@@ -57,10 +57,16 @@ namespace VINES.Pages.Forums
 
             forumpost = fp;
 
+            users = _context.Users.ToList();
+            foreach (var x in users)
+            {
+                x.email = help.Decrypt(x.email);
+            }
             comments = _context.ForumComments.Where(c => c.forumPostID == fp.forumPostID).ToList();
 
             return Page();
         }
+
 
         public async Task<IActionResult> OnPost(string comment, int? id)
         {

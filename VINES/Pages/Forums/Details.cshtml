@@ -9,51 +9,47 @@
 @if ((await AuthorizationService.AuthorizeAsync(User, "PatientOnly")).Succeeded)
 {
     <div class="blog-page area-padding">
-        <h4 class="text-primary">Details</h4>
+        <div class="border container" style="padding:30px;">
+        <h4 class="text-primary"> @Html.DisplayFor(m => m.forumpost.forumCategory.forumCategory) >> @Html.DisplayFor(m => m.forumpost.forumTitle)  </h4>
+        <br>
+        @Html.DisplayFor(m => m.forumpost.user.email)
+        <br>
+        <br>
+        @Html.DisplayFor(m => m.forumpost.dateAdded)
+
         <hr />
+        <div class="px-2">
         <div class="row">
             <div class="col-md-4">
                     <input type="hidden" asp-for="forumpost.forumPostID" />
 
-                    <div class="form-group">
-                        <label asp-for="forumpost.forumTitle" class="control-label">Title: </label>
-                        <br />
-                        @Html.DisplayFor(m => m.forumpost.forumTitle)
-                    </div>
+                    
+    
+                       
+                        
+                       
+                 
+                        <br/>
+                        <br/>
 
+                        <div class="form-group">
+                        @Html.DisplayFor(m => m.forumpost.forumContent) 
+                        </div>
+                        
+                        <br/>
+                        <br/>
+                  
+                        
+                   
                     <div class="form-group">
-                        <label asp-for="forumpost.forumCategory" class="control-label">Category: </label>
-                        <br />
-                        @Html.DisplayFor(m => m.forumpost.forumCategory.forumCategory)
-                    </div>
-
-                    <div class="form-group">
-                        <label asp-for="forumpost.forumContent" class="control-label">Content: </label>
-                        <br />
-                        @Html.DisplayFor(m => m.forumpost.forumContent)
+                        
                     </div>
             </div>
         </div>
-
-        <div class="border container" style="padding:30px;">
-            <form method="post">
-                <div class="form-group row">
-                    <div class="col-4">
-                        <label>Add a comment</label>
-                    </div>
-                    <div class="col-6">
-                        <input asp-for="comment.comment" class="form-control" name="comment" required />
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <div class="col-3 offset-4">
-                        <input type="submit" value="Create" class="btn btn-primary btn-sm text-white" />
-                    </div>
-                </div>
-            </form>
         </div>
-
-        <div>
+        </div>
+        <br>
+         <div>
             @if (Model.comments.Count() > 0)
             {
                 <table class="table table-striped border">
@@ -69,7 +65,7 @@
                     {
                         <tr>
                             <td>
-                                @Html.DisplayFor(m => com.userID)
+                                @Html.DisplayFor(m => com.user.email)
                             </td>
                             <td>
                                 @Html.DisplayFor(m => com.comment)
@@ -83,6 +79,29 @@
                 <p>No comments yet</p>
             }
         </div>
+        </div>
+        
+        <br>
+        <br>
+        <div class="px-2">
+        <div class="border container" style="padding:30px;">
+            <form method="post">
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="comment.comment">Add a comment</label>
+                    </div>
+                    <div class="col-6">
+                        <input type="text" asp-for="comment.comment" class="form-control" name="comment" required />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-3 offset-4">
+                        <input type="submit" value="Create" class="btn btn-primary btn-sm text-white" />
+                    </div>
+                </div>
+            </form>
+        </div>
+       
 
         <div class="px-2">
             <div class="col-3">
